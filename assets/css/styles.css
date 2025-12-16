@@ -384,6 +384,12 @@ a {
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: var(--shadow-soft);
 
+  h3 {
+    display: inline-block;
+    margin:0;
+    vertical-align: top;
+  }
+
   .star {
     color: oklch(0.795 0.184 86.047);
   }
