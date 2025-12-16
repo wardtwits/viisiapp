@@ -185,6 +185,58 @@ a {
   transform: rotate(-2deg);
 }
 
+.phone-floating-card {
+  position: absolute;
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  width: 190px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.phone-floating-card strong {
+  display: block;
+  font-size: 1.4rem;
+  margin-top: 0.4rem;
+}
+
+.phone-floating-card p {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--viisi-muted);
+}
+
+.card-streak {
+  top: 30px;
+  right: 0;
+  z-index: 5;
+}
+
+.card-archive {
+  bottom: 93px;
+  left: -20px;
+  z-index: 5;
+}
+
+.pill {
+  display: inline-flex;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pill-green {
+  background: rgba(60, 179, 113, 0.15);
+  color: var(--viisi-green-dark);
+}
+
+.pill-orange {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--viisi-red-dark);
+}
+
 .glow {
   position: absolute;
   width: 320px;
@@ -391,6 +443,10 @@ a {
     padding: 1.25rem;
     margin-top: 1rem;
     box-shadow: var(--shadow-soft);
+  }
+
+  .phone-floating-card {
+    display: none;
   }
 }
 
