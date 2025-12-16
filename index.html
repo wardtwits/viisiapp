@@ -71,23 +71,27 @@
       <div class="phone-showcase" aria-hidden="true">
         <div class="glow"></div>
         <div class="phone-floating-card card-streak">
-          <div class="pill pill-green">🔥 Daily streak</div>
-          <strong>27 days</strong>
-          <p>Keep the chain alive for bonus themes.</p>
+          <div class="pill pill-green"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy" aria-hidden="true" data-replit-metadata="client/src/pages/home.tsx:124:20" data-component-name="Trophy"><path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978"></path><path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978"></path><path d="M18 9h1.5a1 1 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"></path><path d="M6 9H4.5a1 1 0 0 1 0-5H6"></path></svg></div>          
+          <strong>Daily Streak</strong>
+          <p>Keep your win streak alive!</p>
         </div>
         <div class="phone-floating-card card-archive">
-          <div class="pill pill-orange">📚 Archive</div>
-          <strong>180 puzzles</strong>
-          <p>Replay any game from the past 6 months.</p>
+          <div class="pill pill-orange"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true" data-replit-metadata="client/src/pages/home.tsx:137:20" data-component-name="Calendar"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></div>
+          <strong>Archive</strong>
+          <p>Replay past puzzles anytime.</p>
         </div>
         <div class="phone-shell">
           <div class="phone-notch"></div>
           <div class="phone-inner">
             <header style="display:flex;justify-content:space-between;align-items:center;">
               <strong style="color:var(--viisi-red);font-size:1.1rem;">Viisi</strong>
-              <span style="font-size:0.9rem;color:var(--viisi-muted);">Mon · Dec 15</span>
+              <div class="phone-toolbar">
+                <span class="phone-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings" aria-hidden="true" data-replit-metadata="client/src/components/landing/GameDemo.tsx:22:12" data-component-name="Settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+                <span class="phone-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-question-mark" aria-hidden="true" data-replit-metadata="client/src/components/landing/GameDemo.tsx:25:12" data-component-name="HelpCircle"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></span>
+              </div>
             </header>
 
+            <p class="date">MONDAY, DECEMBER 15, 2025</p>
             <p style="font-weight:700;color:var(--viisi-text);margin-top:0.8rem;">
               Find 5 words with today's letters
             </p>
@@ -122,22 +126,17 @@
               <div class="game-cell"></div>
               <div class="game-cell"></div>
             </div>
-            <div style="display:flex;gap:0.8rem;">
-              <div style="flex:1;">
-                <small style="color:var(--viisi-muted);text-transform:uppercase;font-weight:700;">Streak</small>
-                <p style="margin:0;font-size:1.5rem;font-weight:800;">27 days 🔥</p>
-              </div>
-              <div style="flex:1;">
-                <small style="color:var(--viisi-muted);text-transform:uppercase;font-weight:700;">Solve rate</small>
-                <p style="margin:0;font-size:1.5rem;font-weight:800;">94%</p>
-              </div>
-            </div>
+
             <div class="letter-tiles">
               <span>R</span>
               <span>C</span>
               <span>E</span>
               <span>N</span>
               <span>A</span>
+            </div>
+            <div class="letter-tiles">
+              <span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-cw" aria-hidden="true" data-replit-metadata="client/src/components/landing/GameDemo.tsx:79:16" data-component-name="RotateCw"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg></span>
+              <span class="black"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x" aria-hidden="true" data-replit-metadata="client/src/components/landing/GameDemo.tsx:82:16" data-component-name="X"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></span>
             </div>
           </div>
         </div>
