@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to play Viisi</title>
+  <meta name="description" content="Learn how to master the five-letter puzzle and keep your streak alive." />
+  <link rel="icon" href="https://fav.farm/\U0001F525" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script defer src="assets/js/main.js"></script>
+</head>
+
+<body>
+  <header class="container">
+    <nav class="nav" aria-label="Primary">
+      <a class="logo" href="/">
+        <span class="logo-mark">V</span>
+        Viisi
+      </a>
+      <button class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
+        aria-label="Toggle navigation">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <div class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#reviews">Reviews</a>
+        <a href="index.html#download">Download</a>
+      </div>
+      <a class="btn btn-primary" href="index.html">Back home</a>
+    </nav>
+    <div class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#download">Download</a>
+      <a class="btn btn-primary" style="width:100%; justify-content:center;" href="index.html">Back home</a>
+    </div>
+  </header>
+
+  <main class="container" style="padding-bottom:4rem;">
+    <section class="hero" style="grid-template-columns:1fr;">
+      <div>
+        <div class="badge">Master the daily challenge</div>
+        <h1 style="font-size:clamp(2.3rem,4vw,3.8rem);">
+          How to play Viisi
+        </h1>
+        <p>
+          Viisi is a mindful daily puzzle. You receive five letters and must craft five different words using all of
+          them. Every player worldwide solves the same board each day, so your streak is part of a shared ritual.
+        </p>
+      </div>
+    </section>
+
+    <section class="stats" style="margin-top:0;">
+      <div class="section-title" style="margin-bottom:1.5rem;">
+        <h2>The basics</h2>
+        <p>Simple rules keep Viisi approachable while still offering satisfying depth.</p>
+      </div>
+      <ol style="margin:0;padding-left:1.25rem;color:var(--viisi-text);display:grid;gap:0.75rem;">
+        <li>Use <strong>every letter</strong> once per word.</li>
+        <li>Words must be in the official Viisi dictionary—no abbreviations or names.</li>
+        <li>Lock in each row of five words to progress to the next set.</li>
+        <li>Leaving the game mid-row clears the partially typed words. Commit before you wander!</li>
+      </ol>
+    </section>
+
+    <section class="stats" style="margin-top:3rem;">
+      <div class="section-title" style="margin-bottom:1.5rem;">
+        <h2>Helpful tools</h2>
+        <p>Use these options if you feel stuck—your stats will note when hints are involved.</p>
+      </div>
+      <div class="features-grid" style="gap:1.5rem;">
+        <article class="feature-card">
+          <h3>Hints</h3>
+          <p>Find three words and the hint button lights up. Tap it to reveal two letters from your next solution.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Reveal</h3>
+          <p>Ready to surrender? Reveal uncovers every answer in the current puzzle. Use sparingly—it resets your streak.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Reset</h3>
+          <p>Need a fresh start without losing stats? Reset clears the current puzzle but keeps your progress history.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="stats" style="margin-top:3rem;">
+      <div class="section-title" style="margin-bottom:1.5rem;">
+        <h2>Archive & Stats</h2>
+        <p>Relive your favorite puzzles, share streak screenshots, and celebrate milestones.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <strong>Archive</strong>
+          <span>Scroll back through 6 months of games. Perfect for rainy afternoons.</span>
+        </div>
+        <div class="stat">
+          <strong>All Wins</strong>
+          <span>Total completed boards across regular and archive play.</span>
+        </div>
+        <div class="stat">
+          <strong>Solve %</strong>
+          <span>How often you complete the daily challenge before midnight.</span>
+        </div>
+        <div class="stat">
+          <strong>Hints</strong>
+          <span>Count of hint-assisted wins. Aim to keep it low!</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo">
+        <span class="logo-mark">V</span>
+        Viisi
+      </div>
+      <div class="footer-links">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#reviews">Reviews</a>
+        <a href="index.html#download">Download</a>
+      </div>
+      <small>© <span id="year"></span> Viisi Games</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

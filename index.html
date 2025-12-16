@@ -1,186 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Privacy Policy – Viisi</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      --bg: #f7f7f5;
-      --text: #222222;
-      --accent: #333333;
-      --muted: #666666;
-      --card: #ffffff;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                   system-ui, -sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .page {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 32px 16px 48px;
-    }
-
-    @media (min-width: 768px) {
-      .page {
-        padding: 48px 24px 64px;
-      }
-    }
-
-    .card {
-      background: var(--card);
-      padding: 32px 24px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-      border: 1px solid #e4e4e0;
-    }
-
-    h1, h2 {
-      font-weight: 600;
-      color: var(--accent);
-      margin-top: 0;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .subtitle {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-      margin-top: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      margin: 0.4rem 0 0.8rem;
-    }
-
-    ul {
-      padding-left: 1.3rem;
-      margin-top: 0.3rem;
-      margin-bottom: 0.8rem;
-    }
-
-    li {
-      margin-bottom: 0.3rem;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-    }
-
-    a:hover {
-      text-decoration-thickness: 2px;
-    }
-
-    .footer-note {
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viisi — Daily five-letter puzzle</title>
+  <meta name="description" content="Viisi is a calming five-letter word puzzle with fresh letters each day." />
+  <link rel="icon" href="https://fav.farm/\U0001F525" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script defer src="assets/js/main.js"></script>
 </head>
+
 <body>
-  <div class="page">
-    <div class="card">
-      <h1>Privacy Policy for Viisi</h1>
-      <div class="subtitle">Last Updated: January 2025</div>
-
-      <h2>Overview</h2>
-      <p>
-        Viisi respects your privacy. This app does <strong>not</strong> collect,
-        store, transmit, or share any personal data. Viisi is designed to be a
-        simple, offline, privacy-first game experience.
-      </p>
-
-      <h2>Information We Do Not Collect</h2>
-      <p>Viisi does <strong>not</strong> collect or process any of the following:</p>
-      <ul>
-        <li>Personal information (such as your name, email address, phone number, or contact details)</li>
-        <li>Gameplay data or scores</li>
-        <li>Device identifiers</li>
-        <li>Location data</li>
-        <li>Usage analytics or performance metrics</li>
-        <li>Advertising data or tracking profiles</li>
-        <li>Cookies or similar tracking technologies</li>
-        <li>Payment or financial information</li>
-      </ul>
-      <p>
-        No data is sent to or stored on external servers because the app does not
-        transmit any user information.
-      </p>
-
-      <h2>Third-Party Services</h2>
-      <p>
-        Viisi does <strong>not</strong> integrate any third-party services that
-        collect user data, including but not limited to:
-      </p>
-      <ul>
-        <li>Analytics platforms</li>
-        <li>Advertising networks</li>
-        <li>Social login or sharing services</li>
-        <li>Cloud storage or remote databases</li>
-        <li>Crash reporting or diagnostics services</li>
-      </ul>
-      <p>
-        All game logic runs locally on your device.
-      </p>
-
-      <h2>Children&rsquo;s Privacy</h2>
-      <p>
-        Because Viisi does not collect any personal information, it is suitable
-        for users of all ages, including children under the age of 13.
-      </p>
-
-      <h2>Data Security</h2>
-      <p>
-        Since Viisi does not collect or transmit any data, no personal
-        information is stored or at risk of unauthorized access, loss, or misuse.
-      </p>
-
-      <h2>Changes to This Policy</h2>
-      <p>
-        If Viisi ever introduces optional features that require the collection or
-        processing of data, this privacy policy will be updated to describe those
-        changes, and a new version will be published at this page before such
-        changes take effect.
-      </p>
-
-      <h2>Contact</h2>
-      <p>
-        If you have any questions about this privacy policy or how Viisi
-        operates, you may contact the developer at:
-      </p>
-      <p>
-        <a href="mailto:support@viisi.app">Support@ViiSi.app</a>
-      </p>
-
-      <p class="footer-note">
-        By using Viisi, you acknowledge that you have read and understood this
-        Privacy Policy.
-      </p>
+  <header class="container">
+    <nav class="nav" aria-label="Primary">
+      <a class="logo" href="/">
+        <span class="logo-mark">V</span>
+        Viisi
+      </a>
+      <button class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
+        aria-label="Toggle navigation">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="how-to-play.html">How to play</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+      <a class="btn btn-primary" href="#download">Download</a>
+    </nav>
+    <div class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false">
+      <a href="#features">Features</a>
+      <a href="how-to-play.html">How to play</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#download" class="btn btn-primary" style="width:100%; justify-content:center;">Download</a>
     </div>
-  </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div>
+        <div class="badge">
+          <span aria-hidden="true">✨</span>
+          Word puzzle of the year 2025
+        </div>
+        <h1>
+          Five letters.<br />
+          <span>Five words.</span><br />
+          <span>One puzzle.</span>
+        </h1>
+        <p>
+          Challenge your vocabulary against calming visuals and soft tactile feedback.
+          Everyone gets the same five letters each morning—can you find every word?
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" id="download" href="https://example.com">
+            <span aria-hidden="true">⬇</span>
+            Download Viisi
+          </a>
+          <a class="btn btn-ghost" href="how-to-play.html">How to play</a>
+        </div>
+      </div>
+      <div class="phone-showcase" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <header style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="color:var(--viisi-red);font-size:1.1rem;">Viisi</strong>
+              <span style="font-size:0.9rem;color:var(--viisi-muted);">Mon · Dec 15</span>
+            </header>
+            <p style="font-weight:700;color:var(--viisi-text);margin-top:0.8rem;">
+              Can you find 5 hidden words?
+            </p>
+            <div class="game-grid">
+              <div class="game-cell active">C</div>
+              <div class="game-cell active">R</div>
+              <div class="game-cell active">A</div>
+              <div class="game-cell active">N</div>
+              <div class="game-cell active">E</div>
+
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+              <div class="game-cell"></div>
+            </div>
+            <div style="display:flex;gap:0.8rem;">
+              <div style="flex:1;">
+                <small style="color:var(--viisi-muted);text-transform:uppercase;font-weight:700;">Streak</small>
+                <p style="margin:0;font-size:1.5rem;font-weight:800;">27 days 🔥</p>
+              </div>
+              <div style="flex:1;">
+                <small style="color:var(--viisi-muted);text-transform:uppercase;font-weight:700;">Solve rate</small>
+                <p style="margin:0;font-size:1.5rem;font-weight:800;">94%</p>
+              </div>
+            </div>
+            <div class="letter-tiles">
+              <span>R</span>
+              <span>C</span>
+              <span>E</span>
+              <span>N</span>
+              <span>A</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="container" style="padding:3rem 0 1rem;">
+      <div class="section-title">
+        <h2>Designed for mindful breaks</h2>
+        <p>Simple, satisfying gameplay with stats to keep you motivated without the noise of ads or popups.</p>
+      </div>
+      <div class="features-grid">
+        <article class="feature-card">
+          <span aria-hidden="true">📅</span>
+          <h3>Daily letters</h3>
+          <p>Every morning delivers a brand new combination of five letters shared with the whole community.</p>
+        </article>
+        <article class="feature-card">
+          <span aria-hidden="true">📈</span>
+          <h3>Progress tracking</h3>
+          <p>See solve rate, streaks, hints used, and revisit any past puzzle in the archive.</p>
+        </article>
+        <article class="feature-card">
+          <span aria-hidden="true">💡</span>
+          <h3>Smart hints</h3>
+          <p>Unlock subtle nudges after three correct words. We never spoil the surprise unless you ask.</p>
+        </article>
+        <article class="feature-card">
+          <span aria-hidden="true">🌙</span>
+          <h3>Focus friendly</h3>
+          <p>No ads, no timers—just gentle animations, subtle sound, and the joy of discovery.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="reviews" class="container stats">
+      <div>
+        <div class="badge">Loved by players everywhere</div>
+        <h2 style="font-size:clamp(2rem,3.5vw,3rem);margin-top:1rem;">A cozy ritual for language lovers</h2>
+        <p style="color:var(--viisi-muted);max-width:560px;">
+          "Viisi is the first puzzle I open every morning. The letters feel tactile and the UI keeps me in the flow."
+          — Sienna R.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <strong>4.9★</strong>
+          <span>Average App Store rating</span>
+        </div>
+        <div class="stat">
+          <strong>2M+</strong>
+          <span>Puzzles solved last month</span>
+        </div>
+        <div class="stat">
+          <strong>180</strong>
+          <span>Archive games to replay</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo">
+        <span class="logo-mark">V</span>
+        Viisi
+      </div>
+      <div class="footer-links">
+        <a href="how-to-play.html">Guide</a>
+        <a href="#features">Features</a>
+        <a href="#download">Download</a>
+      </div>
+      <small>© <span id="year"></span> Viisi Games</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
+
 </html>
