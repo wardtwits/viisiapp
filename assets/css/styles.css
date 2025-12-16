@@ -172,6 +172,17 @@ a {
   max-width: 520px;
 }
 
+.hero-logo {
+  width: 110px;
+  display: block;
+  margin: 1.25rem 0 0.5rem;
+  border-radius: 24px;
+  padding: 0.75rem;
+  background: white;
+  border: 1px solid rgba(249, 113, 113, 0.2);
+  box-shadow: 0 18px 40px rgba(249, 113, 113, 0.25);
+}
+
 .phone-shell .date {
   color:gray;
   font-size: .7rem;
@@ -372,6 +383,16 @@ a {
   padding: 1.75rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: var(--shadow-soft);
+
+  .star {
+    color: oklch(0.795 0.184 86.047);
+  }
+  .trophy {
+    color: var(--viisi-green);
+  }
+  .calendar {
+    color: var(--viisi-red2);
+  }
 }
 
 .feature-card h3 {
