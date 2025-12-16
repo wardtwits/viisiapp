@@ -182,6 +182,7 @@ a {
   position: relative;
   display: grid;
   place-items: center;
+  transform: rotate(-2deg);
 }
 
 .glow {
@@ -406,4 +407,64 @@ a {
     flex-direction: column;
     text-align: center;
   }
+}
+
+.policy-wrapper {
+  padding: 3rem 0 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.policy-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  max-width: 760px;
+  width: 100%;
+}
+
+.policy-card h1,
+.policy-card h2 {
+  margin-top: 0;
+  color: var(--viisi-text);
+}
+
+.policy-card h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.policy-card .subtitle {
+  color: var(--viisi-muted);
+  margin-bottom: 1.5rem;
+}
+
+.policy-card p {
+  margin: 0.4rem 0 0.9rem;
+}
+
+.policy-card ul {
+  padding-left: 1.25rem;
+  margin: 0.4rem 0 1rem;
+}
+
+.policy-card li {
+  margin-bottom: 0.3rem;
+}
+
+.policy-card a {
+  color: var(--viisi-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.policy-card a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.policy-card .footer-note {
+  font-size: 0.9rem;
+  color: var(--viisi-muted);
+  margin-top: 1.5rem;
 }
