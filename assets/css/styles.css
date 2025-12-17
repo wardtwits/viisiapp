@@ -106,6 +106,7 @@ a {
   padding: 0.85rem 1.8rem;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1.1rem;
 }
 
 .btn:focus-visible {
@@ -123,10 +124,25 @@ a {
   transform: translateY(-2px);
 }
 
+.appleDownload button {
+  width:49%;
+  height: 60px;
+  background-image: url('../images/appleDownload.svg');;
+  background-repeat: no-repeat;
+  background-size:100%;
+  border: none;
+}
+
 .btn-ghost {
-  background: white;
+  background:white;
   color: var(--viisi-text);
   border: 2px solid rgba(31, 41, 55, 0.1);
+  border-radius:8px;
+}
+.btn-ghost.apple {
+    padding: 0.42rem 0.6rem;
+    font-size: 1.1rem;
+    margin-top:-2px;
 }
 
 .hero {
@@ -135,6 +151,10 @@ a {
   gap: 3rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
+}
+
+.hero .challenge {
+  font-size: 1.4rem;
 }
 
 .badge {
@@ -196,6 +216,9 @@ a {
   gap: 1rem;
   margin-top: 2rem;
 }
+.hero-cta.apple {
+  flex-direction: row;
+}
 
 .phone-showcase {
   position: relative;
@@ -209,7 +232,7 @@ a {
   background: white;
   border-radius: var(--radius-sm);
   padding: 1rem;
-  width: 190px;
+  width: 165px;
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -227,14 +250,14 @@ a {
 }
 
 .card-streak {
-  transform: rotate(2deg);
+  transform: rotate(0deg);
   top: 60px;
   right: 44px;
   z-index: 5;
 }
 
 .card-archive {
-    transform: rotate(-1deg);
+    transform: rotate(0deg);
   bottom: 93px;
   left: 40px;
   z-index: 5;
@@ -341,8 +364,8 @@ a {
 }
 
 .letter-tiles span {
-  width: 42px;
-  height: 52px;
+  width: 45px;
+  height: 45px;
   border-radius: 12px;
   display: grid;
   place-items: center;
@@ -402,7 +425,6 @@ a {
 }
 
 .feature-card h3 {
-  margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
 
