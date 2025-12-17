@@ -310,6 +310,7 @@ a {
   background: #111827;
   padding: 16px;
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.4);
+  height:600px;
 }
 
 .phone-notch {
@@ -329,7 +330,7 @@ a {
   border-radius: 32px;
   overflow: hidden;
   padding: 1.2rem;
-  min-height: 520px;
+  min-height: 568px;
 }
 
 .game-grid {
@@ -355,6 +356,15 @@ a {
   border-color: var(--viisi-green);
   color: white;
 }
+.game-grid.shade {
+  margin-top:10px;
+ gap: 0.15rem;
+}
+.game-grid.shade .game-cell {
+  background: var(--viisi-red2);
+  box-shadow: inset 1px -5px 5px 0px var(--viisi-red-dark);
+ color: white;
+}
 
 .letter-tiles {
   display: flex;
@@ -364,8 +374,8 @@ a {
 }
 
 .letter-tiles span {
-  width: 45px;
-  height: 45px;
+  width: 2.8rem;
+  height: 2.8rem;
   border-radius: 12px;
   display: grid;
   place-items: center;
@@ -523,6 +533,13 @@ a {
 }
 
 @media (max-width: 640px) {
+  .phone-inner  {
+    min-height:520px;
+  }
+  .phone-shell {
+    height:auto;
+  }
+
   .hero-cta {
     flex-direction: column;
   }
