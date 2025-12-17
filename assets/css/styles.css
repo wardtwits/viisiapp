@@ -250,14 +250,14 @@ a {
 }
 
 .card-streak {
-  transform: rotate(0deg);
+  transform: rotate(1deg);
   top: 60px;
   right: 44px;
   z-index: 5;
 }
 
 .card-archive {
-    transform: rotate(0deg);
+    transform: rotate(2deg);
   bottom: 93px;
   left: 40px;
   z-index: 5;
