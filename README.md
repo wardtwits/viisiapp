@@ -1,4 +1,4 @@
-# Viisi Marketing Site
+# Viisi Site
 
 A lightweight, fully static marketing site for the Viisi word puzzle. Everything renders with plain HTML, CSS, and a couple of lines of vanilla JavaScript so the pages can be hosted anywhere (including GitHub Pages) without a Node/Express backend.
 
