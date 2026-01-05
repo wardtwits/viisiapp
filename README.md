@@ -1,6 +1,7 @@
 # Viisi Marketing Site
 
-A lightweight, fully static marketing site for the Viisi word puzzle. Everything renders with plain HTML, CSS, and a couple of lines of vanilla JavaScript so the pages can be hosted anywhere (including GitHub Pages) without a Node/Express backend.
+This is a simple site I created with AI.  I needed a site fast and I wanted to see what AI was capable of.  It did a nice job on the surface, but the code itself is.. well AI code! This is not an exmaple of how I would code as a developer, I plan to tear this down and code a fresh site when I have time.
+Goal: A lightweight, fully static marketing site for the Viisi word puzzle. Everything renders with plain HTML, CSS, and a couple of lines of vanilla JavaScript so the pages can be hosted anywhere (including GitHub Pages) without a Node/Express backend.
 
 ## What's inside?
 
