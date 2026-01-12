@@ -64,6 +64,11 @@ a {
   font-size: 1.35rem;
 }
 
+.hover:hover {
+  transform: rotate(3deg);
+}
+
+
 .logo-mark {
   width: 42px;
   height: 42px;

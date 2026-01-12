@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Viisi-inspired warm cream palette */
+    --background: 28 50% 95%;
+    --foreground: 220 30% 20%;
+
+    --card: 160 50% 55%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 28 50% 95%;
+    --popover-foreground: 220 30% 20%;
+
+    /* Coral/Salmon accent - the signature Viisi color */
+    --primary: 355 75% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 28 40% 90%;
+    --secondary-foreground: 220 30% 20%;
+
+    --muted: 28 30% 88%;
+    --muted-foreground: 220 15% 45%;
+
+    /* Teal/Green for cards and accents */
+    --accent: 160 50% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 355 75% 65%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 28 30% 85%;
+    --input: 28 30% 85%;
+    --ring: 355 75% 65%;
+
+    --radius: 1rem;
+
+    /* Badge specific colors - darker teal for badge icons */
+    --badge-bg: 160 35% 42%;
+    --badge-text: 0 0% 100%;
+
+    --sidebar-background: 28 50% 95%;
+    --sidebar-foreground: 220 30% 20%;
+    --sidebar-primary: 355 75% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 50% 55%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 28 30% 85%;
+    --sidebar-ring: 355 75% 65%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
