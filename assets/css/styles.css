@@ -161,6 +161,9 @@ a {
 .hero .challenge {
   font-size: 1.4rem;
 }
+.hero .challenge.android {
+  font-size: 1rem;
+}
 
 .badge {
   display: inline-flex;
@@ -221,7 +224,7 @@ a {
   gap: 1rem;
   margin-top: 2rem;
 }
-.hero-cta .store-badge {
+.store-badge {
   height: 40px;
   width: auto;
 }
