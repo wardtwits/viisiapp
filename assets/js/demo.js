@@ -260,7 +260,7 @@
 
     if (!validWordSet.has(guess)) {
       state.invalidFlash = true;
-      setMessage(`"${guess}" is not in the Viisi dictionary for this puzzle.`, "error");
+      setMessage(`"${guess}" is an invalid word.`, "error");
       render();
 
       clearTimeout(flashTimeoutId);
@@ -273,7 +273,7 @@
     }
 
     if (state.completedWords.includes(guess)) {
-      setMessage(`"${guess}" was already found. Try a different anagram.`, "error");
+      setMessage(`"${guess}" was already found.`, "error");
       clearCurrentAttempt();
       render();
       return;

@@ -95,6 +95,7 @@
   min-height: 1.5rem;
   color: var(--viisi-muted);
   font-weight: 700;
+  padding: 10px 0;
 }
 
 .demo-message.is-error {
@@ -102,7 +103,7 @@
 }
 
 .demo-message.is-success {
-  color: #166534;
+  color: var(--viisi-muted)
 }
 
 .demo-hint {
@@ -111,7 +112,23 @@
   color: #7f1d1d;
   border-radius: 10px;
   padding: 0.65rem 0.8rem;
+ 
 }
+
+x.hint-row{
+  display:flex;
+  justify-content:flex-end; /* right align under the grid */
+  margin-top:10px;
+}
+
+#hintBtn{
+  display:block;
+  margin-left:auto; /* pushes it to the right */
+  margin-top:10px;
+  width:200px;
+}
+
+
 
 .demo-keys {
   display: grid;
@@ -139,19 +156,37 @@
   box-shadow: none;
 }
 
-.letter-tiles span {
+.letter-tiles button {
   font-size:1rem;
   color: green;
   background: var(--viisi-green);
 }
 
-.letter-tiles span.delete {color:#fff; background: gray}
-.letter-tiles span.shuffle {color:#fff; background:var(--viisi-green);}
+.letter-tiles button {
+  width:50px; height:50px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: inset 0 -4px rgba(0, 0, 0, 0.16);
+}
+
+.letter-tiles button.delete {
+  color:#fff; 
+  background: gray;
+}
+
+
+.letter-tiles button.shuffle {
+  color:#fff; 
+  background:var(--viisi-green); 
+}
 
 .demo-controls {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+  place-content: center;
 }
 
 .demo-controls .btn {
@@ -159,7 +194,7 @@
   padding: 0.65rem 1rem;
 }
 
-.demo-controls .btn:disabled {
+.demo-controls button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }

@@ -77,6 +77,7 @@
           <strong id="hintCount">0</strong>
         </div>
       </div>
+      
 
       <div class="phone-showcase" aria-hidden="true">
         <div class="phone-shell">
@@ -115,18 +116,22 @@
             </section>
             <div id="board" class="demo-board" aria-label="Puzzle board" role="grid"></div>
 
+         <a id="hintBtn" href="#" class="btn btn-ghost" type="button">Hint</a>
+           
             <div id="message" class="demo-message" role="status" aria-live="polite"></div>
 
             <div id="hintBox" class="demo-hint" hidden>
               <strong>Hint:</strong>
               <span id="hintText"></span>
             </div>
+  
 
             <div id="keyboard" class="demo-keys" aria-label="Letter keyboard"></div>
     <div class="demo-controls">
+       
             <!-- Shuffle Button -->
             <div class="letter-tiles">
-              <span class="shuffle">
+              <button class="shuffle" id="shuffleBtn">
                 <svg viewBox="0 0 24 24" class="w-6 h-6 shuffleIcon" width="20" height="20" aria-hidden="true">
                   <path d="M16 4h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -138,26 +143,25 @@
                     stroke-linejoin="round" />
                   <path d="M4 8h2l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" />
-                </svg></span>
-
-              <span class="delete text-slate-700">
+                </svg></button>
+              <!-- Delete button -->
+              <button id="deleteBtn" class="delete">
                 <svg viewBox="0 0 24 24" class="deleteIcon h-5 w-5" width="30" height="30" aria-hidden="true">
                   <path
                     d="M9.2 5H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9.2a2 2 0 0 1-1.6-.8L2.6 13a2 2 0 0 1 0-2l5-5.2A2 2 0 0 1 9.2 5Z"
                     fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
                   <path d="M12 9l6 6M18 9l-6 6" fill="none" stroke="currentColor" stroke-width="1"
                     stroke-linecap="round" />
-                </svg></span>
+                </svg></button>
             </div>
 
-            <button id="hintBtn" class="btn btn-ghost" type="button">
-              Hint
-            </button>
-            <button id="resetBtn" class="btn btn-ghost" type="button">
+
+            <button id="resetBtn" class="btn btn-ghost hide" type="button">
               Reset
             </button>
           </div>
         </div>
+ 
 
           <!-- end phone-inner -->
         </div>
