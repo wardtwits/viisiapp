@@ -1,5 +1,5 @@
 (() => {
-  const STORAGE_KEY = "viisi.web.demo.v2";
+  const STORAGE_KEY = "viisi.web.demo.v3";
   const REQUIRED_WORDS = 5;
 
   const PUZZLE = {
@@ -40,6 +40,12 @@
 
   if (!elements.board || !elements.keyboard) {
     return;
+  }
+
+  // Keep hint hidden on first paint even if markup/cache is stale.
+  if (elements.hintBtn) {
+    elements.hintBtn.hidden = true;
+    elements.hintBtn.style.display = "none";
   }
 
   const initialState = {
@@ -233,7 +239,10 @@
       elements.shuffleBtn.disabled = state.isWon || state.invalidFlash;
     }
     if (elements.hintBtn) {
-      elements.hintBtn.disabled = !canUseHint() || state.invalidFlash;
+      const showHintButton = state.completedWords.length >= 3 && !state.isWon;
+      elements.hintBtn.hidden = !showHintButton;
+      elements.hintBtn.style.display = showHintButton ? "" : "none";
+      elements.hintBtn.disabled = !showHintButton || !canUseHint() || state.invalidFlash;
     }
   }
 
