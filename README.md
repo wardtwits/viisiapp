@@ -10,9 +10,12 @@ Goal:A lightweight, fully static marketing site for the Viisi word puzzle. Every
 ├── assets
 │   ├── css/styles.css     # Shared design language + responsive layout
 │   ├── js/main.js         # Simple mobile menu toggle
+│   ├── css/demo.css       # Styles for the playable browser demo
+│   └── js/demo.js         # One-puzzle Viisi demo logic (no backend)
 │   └── images/            # Optional marketing screenshots
 ├── index.html             # Landing page (features, hero, stats, footer)
 ├── how-to-play.html       # Standalone guide
+├── demo.html              # Playable one-game web demo
 └── README.md
 ```
 
