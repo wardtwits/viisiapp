@@ -13,6 +13,10 @@
   font-size: clamp(2.1rem, 4vw, 3.2rem);
 }
 
+.demo-hero h1 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
 
 .demo-shell {
   background: #fff;
@@ -106,6 +110,15 @@
   color: var(--viisi-muted)
 }
 
+#resetBtn {
+  background: #c7b6a6;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.8rem;
+  opacity:0.9;
+}
+
 .demo-hint {
   border-left: 4px solid var(--viisi-red);
   background: #fff5f6;
@@ -128,6 +141,10 @@ margin-right:-15px;
   text-align: right;
 }
 
+.tip {
+  font-size: 0.8rem;
+  color: var(--viisi-red);
+}
 
 
 .demo-keys {
@@ -150,7 +167,7 @@ margin-right:-15px;
 }
 
 .demo-key:disabled {
-  background: #fad0e3;
+  background: var(--viisi-red-disabled);
   color: #fff;
   cursor: not-allowed;
   box-shadow: none;
@@ -237,10 +254,16 @@ margin-right:-15px;
 .phone-shell {
   position: relative;
   width: min(380px, 70vw);
-  min-height: 700px
+  height: min(680px, 70vw);
+  height: 730px;
 }
-X.phone-inner {
-  min-height: 675px;
+.phone-inner {
+  height: min(650px, 70vw);
+  height: 700px;
+}
+
+.demo-word-bank {
+  max-width: 500px;
 }
 
 section.header h2 {
@@ -248,13 +271,22 @@ section.header h2 {
   font-size: clamp(1rem, 3vw, 1.2rem);
 }
 
-xheader {padding-bottom: 25px;}
-#hintBtn {padding-bottom: 15px;}
+#hintBtn {margin-bottom: 35px;}
 
 
-@media (max-width: 640px) {
+@media (max-width: 414px) {
   .demo-board,
   .demo-keys {
     max-width: 100%;
   }
+
+  #hintBtn {margin-bottom: 0;}
+
+.phone-inner {
+    height: 500px;
+  }
+
+.phone-shell {
+  height: 620px;
+}
 }

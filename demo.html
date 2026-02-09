@@ -51,28 +51,24 @@
       <div>
         <div class="badge">Web Demo (single puzzle)</div>
         <h1>Play Viisi in your browser</h1>
-        <p>
-          Try a demo of Viisi right here on our site.<br />
-          Build five-letter anagrams and find five distinct valid words to
-          win.
-        </p>
+
       </div>
     </section>
 
     <section class="demo-shell" aria-labelledby="demo-title">
       <div class="demo-header">
-        <h2 class="demo-title">Find 5 words with today's letters</h2>
         <p>
-          Letters: <strong>S L E A T</strong> · Find any 5 valid anagrams.
+          Build five-letter anagrams and find five distinct valid words to
+          win. <br><span class="tip">Tip: 2 Hints are available once you've found 3 valid words.</span>
         </p>
       </div>
 
       <div class="demo-meta ">
-        <div class="demo-stat">
+        <div class="demo-stat hide">
           <span class="demo-stat-label">Found</span>
           <strong id="foundCount">0 / 5</strong>
         </div>
-        <div class="demo-stat">
+        <div class="demo-stat hide">
           <span class="demo-stat-label">Hints Used</span>
           <strong id="hintCount">0</strong>
         </div>
@@ -88,27 +84,12 @@
                   justify-content: space-between;
                   align-items: center;
                 ">
-              <strong style="color: var(--viisi-red); font-size: 1.1rem">Viisi</strong>
+              <strong style="color: var(--viisi-red); font-size: 1.5rem">Viisi</strong>
               <div class="phone-toolbar">
-                <span class="phone-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-settings" aria-hidden="true"
-                    data-replit-metadata="client/src/components/landing/GameDemo.tsx:22:12"
-                    data-component-name="Settings">
-                    <path
-                      d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915">
-                    </path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg></span>
-                <span class="phone-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-circle-question-mark" aria-hidden="true"
-                    data-replit-metadata="client/src/components/landing/GameDemo.tsx:25:12"
-                    data-component-name="HelpCircle">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                    <path d="M12 17h.01"></path>
-                  </svg></span>
+                <button id="resetBtn" class="btn" type="button">
+              Reset
+            </button>
+      
               </div>
             </header>
             <section class="header">
@@ -150,10 +131,6 @@
                 </svg></button>
             </div>
 
-
-            <button id="resetBtn" class="btn btn-ghost" type="button">
-              Reset
-            </button>
           </div>
         </div>
  
@@ -170,8 +147,8 @@
       </div>
 
       <details class="demo-word-bank ">
-        <summary>Show demo dictionary</summary>
-        <p>This demo puzzle accepts these words:</p>
+        <summary>Reveal the Solution</summary>
+        <p>Any of these words would be accepted:</p>
         <p id="wordBank" class="word-bank-list"></p>
       </details>
     </section>

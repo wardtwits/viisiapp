@@ -1,5 +1,6 @@
 (() => {
   const STORAGE_KEY = "viisi.web.demo.v3";
+  const LEGACY_STORAGE_KEYS = ["viisi.web.demo.v1", "viisi.web.demo.v2"];
   const REQUIRED_WORDS = 5;
 
   const PUZZLE = {
@@ -63,6 +64,29 @@
 
   let state = loadState();
   let flashTimeoutId = null;
+
+  function clearAllDemoStorage() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      for (const legacyKey of LEGACY_STORAGE_KEYS) {
+        localStorage.removeItem(legacyKey);
+      }
+
+      // Clear any future demo versions too.
+      const keysToRemove = [];
+      for (let i = 0; i < localStorage.length; i += 1) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith("viisi.web.demo.")) {
+          keysToRemove.push(key);
+        }
+      }
+      for (const key of keysToRemove) {
+        localStorage.removeItem(key);
+      }
+    } catch {
+      // Ignore storage failures and continue with in-memory reset.
+    }
+  }
 
   function normalizeLoadedState(parsed) {
     const normalized = { ...initialState };
@@ -455,12 +479,17 @@
 
   function resetGame() {
     clearTimeout(flashTimeoutId);
+    flashTimeoutId = null;
+    clearAllDemoStorage();
+
     state = {
       ...initialState,
       displayLetters: [...PUZZLE.letters],
-      lastMessage: "New demo run started.",
     };
     render();
+
+    // Hard-reset UX: always return to first-load state.
+    window.location.reload();
   }
 
   function firstUnusedIndexForLetter(letter) {
@@ -508,7 +537,11 @@
     elements.hintBtn.addEventListener("click", useHint);
   }
   if (elements.resetBtn) {
-    elements.resetBtn.addEventListener("click", resetGame);
+    elements.resetBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      resetGame();
+    });
   }
   document.addEventListener("keydown", handleKeydown);
 
