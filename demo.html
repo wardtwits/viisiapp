@@ -13,7 +13,7 @@
   <script defer src="assets/js/demo.js"></script>
 </head>
 
-<body>
+<body class="demo">
   <header class="container">
     <nav class="nav" aria-label="Primary">
       <a class="logo" href="index.html">
@@ -35,7 +35,8 @@
         <a href="how-to-play.html">How to play</a>
         <a href="privacy.html">Privacy</a>
       </div>
-      <a class="btn btn-primary" href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
+      <a class="btn btn-primary"
+        href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
     </nav>
     <div class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false">
       <a href="index.html">Home</a>
@@ -51,19 +52,19 @@
         <div class="badge">Web Demo (single puzzle)</div>
         <h1>Play Viisi in your browser</h1>
         <p>
-          This is a lightweight, fully static demo of one Viisi game. It follows the core loop:
-          build five-letter anagrams and find five distinct valid words to win.
+          Try a demo of Viisi right here on our site.<br>
+          Build five-letter anagrams and find five distinct valid words to win.
         </p>
       </div>
     </section>
 
     <section class="demo-shell" aria-labelledby="demo-title">
       <div class="demo-header">
-        <h2 id="demo-title">Demo Puzzle</h2>
+        <h2 class="demo-title">Find 5 words with today's letters</h2>
         <p>Letters: <strong>S L E A T</strong> · Find any 5 valid anagrams.</p>
       </div>
 
-      <div class="demo-meta">
+      <div class="demo-meta hide">
         <div class="demo-stat">
           <span class="demo-stat-label">Found</span>
           <strong id="foundCount">0 / 5</strong>
@@ -74,34 +75,91 @@
         </div>
       </div>
 
-      <div id="board" class="demo-board" aria-label="Puzzle board" role="grid"></div>
+      <div class="phone-showcase" aria-hidden="true">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <header style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="color:var(--viisi-red);font-size:1.1rem;">Viisi</strong>
+              <div class="phone-toolbar">
+                <span class="phone-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-settings" aria-hidden="true"
+                    data-replit-metadata="client/src/components/landing/GameDemo.tsx:22:12"
+                    data-component-name="Settings">
+                    <path
+                      d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915">
+                    </path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg></span>
+                <span class="phone-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-circle-question-mark" aria-hidden="true"
+                    data-replit-metadata="client/src/components/landing/GameDemo.tsx:25:12"
+                    data-component-name="HelpCircle">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <path d="M12 17h.01"></path>
+                  </svg></span>
+              </div>
+            </header>
+            <section class="header">
+              <h2>Find 5 words with today's letters</h2>
+            </section>
+            <div id="board" class="demo-board" aria-label="Puzzle board" role="grid"></div>
 
-      <div id="message" class="demo-message" role="status" aria-live="polite"></div>
+            <div id="message" class="demo-message" role="status" aria-live="polite"></div>
 
-      <div id="hintBox" class="demo-hint" hidden>
-        <strong>Hint:</strong>
-        <span id="hintText"></span>
-      </div>
+            <div id="hintBox" class="demo-hint" hidden>
+              <strong>Hint:</strong>
+              <span id="hintText"></span>
+            </div>
 
-      <div id="keyboard" class="demo-keys" aria-label="Letter keyboard"></div>
+            <div id="keyboard" class="demo-keys" aria-label="Letter keyboard"></div>
 
-      <div class="demo-controls">
-        <button id="shuffleBtn" class="btn btn-ghost" type="button">Shuffle</button>
-        <button id="deleteBtn" class="btn btn-ghost" type="button">Delete</button>
-        <button id="hintBtn" class="btn btn-ghost" type="button">Hint</button>
-        <button id="resetBtn" class="btn btn-ghost" type="button">Reset</button>
-      </div>
+            <!-- Shuffle Button -->
+            <div class="letter-tiles">
+              <span class="shuffle">
+                <svg viewBox="0 0 24 24" class="w-6 h-6 shuffleIcon" width="20" height="20" aria-hidden="true">
+                  <path d="M16 4h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M20 4l-5 5-2 2-1 1-3 3-3 3H4" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M16 20h4v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M20 20l-5-5-1-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M4 8h2l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg></span>
 
-      <div>
-        <h3 class="demo-subtitle">Found Words</h3>
-        <div id="foundWords" class="found-words" aria-live="polite"></div>
-      </div>
+              <span class="delete text-slate-700">
+                <svg viewBox="0 0 24 24" class="deleteIcon h-5 w-5" width="30" height="30" aria-hidden="true">
+                  <path
+                    d="M9.2 5H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9.2a2 2 0 0 1-1.6-.8L2.6 13a2 2 0 0 1 0-2l5-5.2A2 2 0 0 1 9.2 5Z"
+                    fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
+                  <path d="M12 9l6 6M18 9l-6 6" fill="none" stroke="currentColor" stroke-width="1"
+                    stroke-linecap="round" />
+                </svg></span>
+            </div>
+            </div>
 
-      <details class="demo-word-bank">
-        <summary>Show demo dictionary</summary>
-        <p>This demo puzzle accepts these words:</p>
-        <p id="wordBank" class="word-bank-list"></p>
-      </details>
+
+
+            <button id="hintBtn" class="btn btn-ghost" type="button">Hint</button>
+            <button id="resetBtn" class="btn btn-ghost" type="button">Reset</button>
+
+
+            <div>
+              <h3 class="demo-subtitle">Found Words</h3>
+              <div id="foundWords" class="found-words" aria-live="polite"></div>
+            </div>
+
+            <details class="demo-word-bank hide">
+              <summary>Show demo dictionary</summary>
+              <p>This demo puzzle accepts these words:</p>
+              <p id="wordBank" class="word-bank-list"></p>
+            </details>
     </section>
   </main>
 
@@ -126,4 +184,5 @@
   </script>
 </body>
 
+</html>
 </html>
