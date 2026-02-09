@@ -1,5 +1,5 @@
 (() => {
-  const STORAGE_KEY = "viisi.web.demo.v1";
+  const STORAGE_KEY = "viisi.web.demo.v2";
   const REQUIRED_WORDS = 5;
 
   const PUZZLE = {
@@ -58,28 +58,85 @@
   let state = loadState();
   let flashTimeoutId = null;
 
+  function normalizeLoadedState(parsed) {
+    const normalized = { ...initialState };
+
+    if (Array.isArray(parsed.displayLetters) && parsed.displayLetters.length === 5) {
+      normalized.displayLetters = parsed.displayLetters
+        .map((letter) => String(letter).slice(0, 1).toUpperCase())
+        .filter((letter) => /^[A-Z]$/.test(letter));
+      if (normalized.displayLetters.length !== 5) {
+        normalized.displayLetters = [...PUZZLE.letters];
+      }
+    }
+
+    if (Array.isArray(parsed.completedWords)) {
+      const uniqueValidWords = [];
+      for (const word of parsed.completedWords) {
+        const candidate = String(word).toUpperCase();
+        if (validWordSet.has(candidate) && !uniqueValidWords.includes(candidate)) {
+          uniqueValidWords.push(candidate);
+        }
+        if (uniqueValidWords.length === REQUIRED_WORDS) {
+          break;
+        }
+      }
+      normalized.completedWords = uniqueValidWords;
+    }
+
+    if (typeof parsed.currentWord === "string") {
+      const candidate = parsed.currentWord.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 5);
+      normalized.currentWord = candidate;
+    }
+
+    if (Array.isArray(parsed.currentIndices)) {
+      const candidate = parsed.currentIndices
+        .map((index) => Number(index))
+        .filter((index) => Number.isInteger(index) && index >= 0 && index < 5);
+      const unique = [...new Set(candidate)];
+      normalized.currentIndices = unique.slice(0, 5);
+    }
+
+    if (
+      normalized.currentWord.length !== normalized.currentIndices.length ||
+      normalized.currentWord.length + normalized.completedWords.length > REQUIRED_WORDS
+    ) {
+      normalized.currentWord = "";
+      normalized.currentIndices = [];
+    }
+
+    if (typeof parsed.hintUses === "number") {
+      normalized.hintUses = Math.max(0, Math.min(2, Math.floor(parsed.hintUses)));
+    }
+
+    if (typeof parsed.hintMessage === "string") {
+      normalized.hintMessage = parsed.hintMessage.slice(0, 120);
+    }
+
+    if (typeof parsed.lastMessage === "string") {
+      normalized.lastMessage = parsed.lastMessage.slice(0, 160);
+    }
+
+    if (parsed.lastTone === "error" || parsed.lastTone === "success" || parsed.lastTone === "neutral") {
+      normalized.lastTone = parsed.lastTone;
+    }
+
+    normalized.isWon = normalized.completedWords.length >= REQUIRED_WORDS;
+    if (normalized.isWon) {
+      normalized.currentWord = "";
+      normalized.currentIndices = [];
+    }
+
+    return normalized;
+  }
+
   function loadState() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return { ...initialState };
       const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed.displayLetters) || parsed.displayLetters.length !== 5) {
-        return { ...initialState };
-      }
-      if (!Array.isArray(parsed.completedWords) || parsed.completedWords.length > REQUIRED_WORDS) {
-        return { ...initialState };
-      }
-      if (typeof parsed.currentWord !== "string" || parsed.currentWord.length > 5) {
-        return { ...initialState };
-      }
-      if (!Array.isArray(parsed.currentIndices) || parsed.currentIndices.length > 5) {
-        return { ...initialState };
-      }
-      return {
-        ...initialState,
-        ...parsed,
-        invalidFlash: false,
-      };
+      const normalized = normalizeLoadedState(parsed);
+      return { ...normalized, invalidFlash: false };
     } catch {
       return { ...initialState };
     }
@@ -156,6 +213,7 @@
   }
 
   function renderKeyboard() {
+    if (!elements.keyboard) return;
     elements.keyboard.innerHTML = "";
 
     state.displayLetters.forEach((letter, index) => {
@@ -168,42 +226,60 @@
       elements.keyboard.appendChild(key);
     });
 
-    elements.deleteBtn.disabled = state.currentWord.length === 0 || state.isWon || state.invalidFlash;
-    elements.shuffleBtn.disabled = state.isWon || state.invalidFlash;
-    elements.hintBtn.disabled = !canUseHint() || state.invalidFlash;
+    if (elements.deleteBtn) {
+      elements.deleteBtn.disabled = state.currentWord.length === 0 || state.isWon || state.invalidFlash;
+    }
+    if (elements.shuffleBtn) {
+      elements.shuffleBtn.disabled = state.isWon || state.invalidFlash;
+    }
+    if (elements.hintBtn) {
+      elements.hintBtn.disabled = !canUseHint() || state.invalidFlash;
+    }
   }
 
   function renderMeta() {
-    elements.foundCount.textContent = `${state.completedWords.length} / ${REQUIRED_WORDS}`;
-    elements.hintCount.textContent = String(state.hintUses);
-
-    elements.foundWords.innerHTML = "";
-    state.completedWords.forEach((word) => {
-      const chip = document.createElement("span");
-      chip.className = "found-word";
-      chip.textContent = word;
-      elements.foundWords.appendChild(chip);
-    });
-
-    elements.message.textContent = state.lastMessage;
-    elements.message.classList.remove("is-error", "is-success");
-    if (state.lastTone === "error") {
-      elements.message.classList.add("is-error");
-    } else if (state.lastTone === "success") {
-      elements.message.classList.add("is-success");
+    if (elements.foundCount) {
+      elements.foundCount.textContent = `${state.completedWords.length} / ${REQUIRED_WORDS}`;
+    }
+    if (elements.hintCount) {
+      elements.hintCount.textContent = String(state.hintUses);
     }
 
-    if (state.hintMessage) {
-      elements.hintBox.hidden = false;
-      elements.hintText.textContent = state.hintMessage;
-    } else {
-      elements.hintBox.hidden = true;
-      elements.hintText.textContent = "";
+    if (elements.foundWords) {
+      elements.foundWords.innerHTML = "";
+      state.completedWords.forEach((word) => {
+        const chip = document.createElement("span");
+        chip.className = "found-word";
+        chip.textContent = word;
+        elements.foundWords.appendChild(chip);
+      });
+    }
+
+    if (elements.message) {
+      elements.message.textContent = state.lastMessage;
+      elements.message.classList.remove("is-error", "is-success");
+      if (state.lastTone === "error") {
+        elements.message.classList.add("is-error");
+      } else if (state.lastTone === "success") {
+        elements.message.classList.add("is-success");
+      }
+    }
+
+    if (elements.hintBox && elements.hintText) {
+      if (state.hintMessage) {
+        elements.hintBox.hidden = false;
+        elements.hintText.textContent = state.hintMessage;
+      } else {
+        elements.hintBox.hidden = true;
+        elements.hintText.textContent = "";
+      }
     }
   }
 
   function renderWordBank() {
-    elements.wordBank.textContent = PUZZLE.validWords.join(" · ");
+    if (elements.wordBank) {
+      elements.wordBank.textContent = PUZZLE.validWords.join(" · ");
+    }
   }
 
   function render() {
@@ -256,7 +332,13 @@
   }
 
   function validateAttempt() {
-    const guess = state.currentWord;
+    const guess = state.currentWord.toUpperCase();
+    if (guess.length !== 5) {
+      setMessage("Word must be 5 letters.", "error");
+      clearCurrentAttempt();
+      render();
+      return;
+    }
 
     if (!validWordSet.has(guess)) {
       state.invalidFlash = true;
@@ -278,6 +360,14 @@
       render();
       return;
     }
+
+    console.log("[Viisi Demo] valid submission", {
+      guess,
+      completedBefore: state.completedWords.length,
+      completedWords: [...state.completedWords],
+      displayLetters: [...state.displayLetters],
+      currentIndices: [...state.currentIndices],
+    });
 
     state.completedWords.push(guess);
     clearCurrentAttempt();
@@ -302,13 +392,55 @@
     const remaining = PUZZLE.validWords.filter((word) => !state.completedWords.includes(word));
     if (remaining.length === 0) return;
 
-    const target = remaining[0];
-    const revealCount = state.hintUses === 0 ? 2 : 3;
-    const hintWord = `${target.slice(0, revealCount)}${"_".repeat(5 - revealCount)}`;
+    const groupsByPrefix = new Map();
+    for (const word of remaining) {
+      const prefix = word.slice(0, 2);
+      if (!groupsByPrefix.has(prefix)) {
+        groupsByPrefix.set(prefix, []);
+      }
+      groupsByPrefix.get(prefix).push(word);
+    }
+
+    let bestPrefix = null;
+    let bestGroup = [];
+    for (const [prefix, words] of groupsByPrefix.entries()) {
+      if (words.length > bestGroup.length) {
+        bestPrefix = prefix;
+        bestGroup = words;
+      }
+    }
+    if (!bestPrefix || bestGroup.length === 0) return;
+
+    const prefixLength = 2;
+    const prefix = bestPrefix;
+    const nextIndices = [];
+
+    // Hint behavior mirrors Viisi: clear in-progress row before applying hint tiles.
+    clearCurrentAttempt();
+
+    for (let i = 0; i < prefix.length; i += 1) {
+      const letter = prefix[i];
+      let indexForLetter = null;
+      for (let keyIndex = 0; keyIndex < state.displayLetters.length; keyIndex += 1) {
+        if (state.displayLetters[keyIndex] === letter && !nextIndices.includes(keyIndex)) {
+          indexForLetter = keyIndex;
+          break;
+        }
+      }
+      if (indexForLetter === null) {
+        setMessage("Hint could not be applied. Try shuffling and retry.", "error");
+        render();
+        return;
+      }
+      nextIndices.push(indexForLetter);
+    }
+
+    state.currentWord = prefix;
+    state.currentIndices = nextIndices;
 
     state.hintUses += 1;
-    state.hintMessage = `Try: ${hintWord}`;
-    setMessage(`Hint ${state.hintUses} unlocked.`, "success");
+    state.hintMessage = `Hint applied: ${prefix}${"_".repeat(5 - prefixLength)} (${bestGroup.length} possible word${bestGroup.length === 1 ? "" : "s"})`;
+    setMessage(`Hint ${state.hintUses} applied. First two tiles filled.`, "success");
     render();
   }
 
@@ -357,10 +489,18 @@
     }
   }
 
-  elements.shuffleBtn.addEventListener("click", shuffleLetters);
-  elements.deleteBtn.addEventListener("click", deleteLetter);
-  elements.hintBtn.addEventListener("click", useHint);
-  elements.resetBtn.addEventListener("click", resetGame);
+  if (elements.shuffleBtn) {
+    elements.shuffleBtn.addEventListener("click", shuffleLetters);
+  }
+  if (elements.deleteBtn) {
+    elements.deleteBtn.addEventListener("click", deleteLetter);
+  }
+  if (elements.hintBtn) {
+    elements.hintBtn.addEventListener("click", useHint);
+  }
+  if (elements.resetBtn) {
+    elements.resetBtn.addEventListener("click", resetGame);
+  }
   document.addEventListener("keydown", handleKeydown);
 
   renderWordBank();
