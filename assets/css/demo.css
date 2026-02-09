@@ -124,8 +124,8 @@ x.hint-row{
 #hintBtn{
   display:block;
   margin-left:auto; /* pushes it to the right */
-  margin-top:10px;
-  width:200px;
+margin-right:-15px;
+  text-align: right;
 }
 
 
@@ -237,10 +237,10 @@ x.hint-row{
 .phone-shell {
   position: relative;
   width: min(380px, 70vw);
-  min-height: 680px
+  min-height: 700px
 }
 X.phone-inner {
-  min-height: 668px;
+  min-height: 675px;
 }
 
 section.header h2 {
@@ -249,7 +249,7 @@ section.header h2 {
 }
 
 xheader {padding-bottom: 25px;}
-.demo-board {padding-bottom: 25px;}
+#hintBtn {padding-bottom: 15px;}
 
 
 @media (max-width: 640px) {
