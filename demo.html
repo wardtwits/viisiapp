@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Viisi Web Demo</title>
   <meta name="description" content="Play a simple one-puzzle Viisi demo in your browser. No app install required." />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/demo.css" />
   <script defer src="assets/js/main.js"></script>
   <script defer src="assets/js/demo.js"></script>
 </head>
 
-<body class="demo">
+<body class="">
   <header class="container">
     <nav class="nav" aria-label="Primary">
       <a class="logo" href="index.html">
@@ -52,8 +52,9 @@
         <div class="badge">Web Demo (single puzzle)</div>
         <h1>Play Viisi in your browser</h1>
         <p>
-          Try a demo of Viisi right here on our site.<br>
-          Build five-letter anagrams and find five distinct valid words to win.
+          Try a demo of Viisi right here on our site.<br />
+          Build five-letter anagrams and find five distinct valid words to
+          win.
         </p>
       </div>
     </section>
@@ -61,10 +62,12 @@
     <section class="demo-shell" aria-labelledby="demo-title">
       <div class="demo-header">
         <h2 class="demo-title">Find 5 words with today's letters</h2>
-        <p>Letters: <strong>S L E A T</strong> · Find any 5 valid anagrams.</p>
+        <p>
+          Letters: <strong>S L E A T</strong> · Find any 5 valid anagrams.
+        </p>
       </div>
 
-      <div class="demo-meta hide">
+      <div class="demo-meta ">
         <div class="demo-stat">
           <span class="demo-stat-label">Found</span>
           <strong id="foundCount">0 / 5</strong>
@@ -79,8 +82,12 @@
         <div class="phone-shell">
           <div class="phone-notch"></div>
           <div class="phone-inner">
-            <header style="display:flex;justify-content:space-between;align-items:center;">
-              <strong style="color:var(--viisi-red);font-size:1.1rem;">Viisi</strong>
+            <header style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                ">
+              <strong style="color: var(--viisi-red); font-size: 1.1rem">Viisi</strong>
               <div class="phone-toolbar">
                 <span class="phone-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -116,7 +123,7 @@
             </div>
 
             <div id="keyboard" class="demo-keys" aria-label="Letter keyboard"></div>
-
+    <div class="demo-controls">
             <!-- Shuffle Button -->
             <div class="letter-tiles">
               <span class="shuffle">
@@ -142,24 +149,32 @@
                     stroke-linecap="round" />
                 </svg></span>
             </div>
-            </div>
 
+            <button id="hintBtn" class="btn btn-ghost" type="button">
+              Hint
+            </button>
+            <button id="resetBtn" class="btn btn-ghost" type="button">
+              Reset
+            </button>
+          </div>
+        </div>
 
+          <!-- end phone-inner -->
+        </div>
+        <!-- end phone-shell -->
+      </div>
+      <!-- end phone-showcase -->
 
-            <button id="hintBtn" class="btn btn-ghost" type="button">Hint</button>
-            <button id="resetBtn" class="btn btn-ghost" type="button">Reset</button>
+      <div class="">
+        <h3 class="demo-subtitle">Found Words</h3>
+        <div id="foundWords" class="found-words" aria-live="polite"></div>
+      </div>
 
-
-            <div>
-              <h3 class="demo-subtitle">Found Words</h3>
-              <div id="foundWords" class="found-words" aria-live="polite"></div>
-            </div>
-
-            <details class="demo-word-bank hide">
-              <summary>Show demo dictionary</summary>
-              <p>This demo puzzle accepts these words:</p>
-              <p id="wordBank" class="word-bank-list"></p>
-            </details>
+      <details class="demo-word-bank ">
+        <summary>Show demo dictionary</summary>
+        <p>This demo puzzle accepts these words:</p>
+        <p id="wordBank" class="word-bank-list"></p>
+      </details>
     </section>
   </main>
 
@@ -184,5 +199,4 @@
   </script>
 </body>
 
-</html>
 </html>
