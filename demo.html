@@ -75,6 +75,7 @@
       </div>
 
 
+      
       <div class="phone-showcase" aria-hidden="true">
         <div class="phone-shell">
           <div class="phone-notch"></div>
@@ -132,6 +133,33 @@
             </div>
 
           </div>
+
+          <section id="winOverlay" class="win-overlay" aria-hidden="true" hidden>
+            <div class="win-backdrop"></div>
+            <div class="win-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+              <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+              <h3 id="winTitle">You Win!</h3>
+              <p class="win-copy">You found all five valid words.</p>
+              <div class="win-stats">
+                <div class="win-stat">
+                  <span>Time</span>
+                  <strong id="winTime">00:00</strong>
+                </div>
+                <div class="win-stat">
+                  <span>Words</span>
+                  <strong id="winGuesses">5</strong>
+                </div>
+                <div class="win-stat">
+                  <span>Hints</span>
+                  <strong id="winStreak">0</strong>
+                </div>
+              </div>
+              <div class="win-actions">
+                <button id="winReplayBtn" class="btn" type="button">Replay Confetti</button>
+                <button id="winCloseBtn" class="btn btn-primary" type="button">Close</button>
+              </div>
+            </div>
+          </section>
         </div>
  
 

@@ -2,6 +2,7 @@
   const STORAGE_KEY = "viisi.web.demo.v3";
   const LEGACY_STORAGE_KEYS = ["viisi.web.demo.v1", "viisi.web.demo.v2"];
   const REQUIRED_WORDS = 5;
+  const animationShell = document.querySelector(".phone-shell, .demo-shell");
 
   const PUZZLE = {
     letters: ["S", "L", "E", "A", "T"],
@@ -64,6 +65,7 @@
 
   let state = loadState();
   let flashTimeoutId = null;
+  const gameStartTime = Date.now();
 
   function clearAllDemoStorage() {
     try {
@@ -86,6 +88,14 @@
     } catch {
       // Ignore storage failures and continue with in-memory reset.
     }
+  }
+
+  function triggerWinAnimation() {
+    if (!animationShell) return;
+    animationShell.classList.remove("win");
+    void animationShell.offsetWidth; // restart animation
+    animationShell.classList.add("win");
+    setTimeout(() => animationShell.classList.remove("win"), 1300);
   }
 
   function normalizeLoadedState(parsed) {
@@ -194,6 +204,13 @@
   function setMessage(text, tone = "neutral") {
     state.lastMessage = text;
     state.lastTone = tone;
+  }
+
+  function formatElapsedTime(milliseconds) {
+    const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    return `${minutes}:${seconds}`;
   }
 
   function currentRowIndex() {
@@ -407,7 +424,13 @@
 
     if (state.completedWords.length >= REQUIRED_WORDS) {
       state.isWon = true;
+      triggerWinAnimation();
       setMessage("You solved the demo. Nice run.", "success");
+      showWin({
+        time: formatElapsedTime(Date.now() - gameStartTime),
+        guesses: String(state.completedWords.length),
+        streak: String(state.hintUses),
+      });
     } else {
       setMessage(`Nice. ${REQUIRED_WORDS - state.completedWords.length} more to win.`, "success");
     }
@@ -545,6 +568,127 @@
   }
   document.addEventListener("keydown", handleKeydown);
 
+  const overlay = document.getElementById("winOverlay");
+  const confettiLayer = document.getElementById("confettiLayer");
+  const winTime = document.getElementById("winTime");
+  const winGuesses = document.getElementById("winGuesses");
+  const winStreak = document.getElementById("winStreak");
+  const winCloseBtn = document.getElementById("winCloseBtn");
+  const winReplayBtn = document.getElementById("winReplayBtn");
+
+  function showWin({ time = "01:42", guesses = "2", streak = "5🔥" } = {}) {
+    if (!overlay) return;
+    if (winTime) winTime.textContent = time;
+    if (winGuesses) winGuesses.textContent = guesses;
+    if (winStreak) winStreak.textContent = streak;
+
+    overlay.hidden = false;
+    overlay.setAttribute("aria-hidden", "false");
+    overlay.classList.add("is-open");
+
+    // kick open animation
+    requestAnimationFrame(() => {
+      overlay.classList.add("win-open");
+      spawnConfetti(90);
+    });
+
+    // Esc closes
+    window.addEventListener("keydown", escClose, { once: true });
+  }
+
+  function hideWin() {
+    if (!overlay) return;
+    overlay.classList.remove("win-open");
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    // let transition finish
+    setTimeout(() => {
+      overlay.hidden = true;
+      if (confettiLayer) confettiLayer.innerHTML = "";
+    }, 220);
+  }
+
+  function replayWin() {
+    if (!overlay) return;
+    if (!confettiLayer) return;
+    confettiLayer.innerHTML = "";
+    overlay.classList.remove("win-open");
+    requestAnimationFrame(() => {
+      overlay.classList.add("win-open");
+      spawnConfetti(90);
+    });
+  }
+
+  function escClose(e) {
+    if (e.key === "Escape") hideWin();
+    else window.addEventListener("keydown", escClose, { once: true });
+  }
+
+  // Win animation
+
+  function spawnConfetti(count = 80) {
+    if (!confettiLayer) return;
+    const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (prefersReduced) return;
+
+    const colors = [
+      "#10b981", // emerald
+      "#f59e0b", // amber
+      "#f43f5e", // rose
+      "#3b82f6", // blue
+      "#a78bfa", // violet
+      "#22c55e"  // green
+    ];
+
+    const w = confettiLayer.clientWidth || 520;
+
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement("div");
+      el.className = "confetti";
+      el.style.left = Math.random() * w + "px";
+      el.style.background = colors[(Math.random() * colors.length) | 0];
+
+      const x0 = (Math.random() * 40 - 20).toFixed(1) + "px";
+      const x1 = (Math.random() * 220 - 110).toFixed(1) + "px";
+      const rot = (Math.random() * 720 - 360).toFixed(0) + "deg";
+      const dur = (Math.random() * 700 + 800).toFixed(0) + "ms";
+
+      el.style.setProperty("--x0", x0);
+      el.style.setProperty("--x1", x1);
+      el.style.setProperty("--rot", rot);
+      el.style.setProperty("--dur", dur);
+
+      // stagger
+      el.style.animationDelay = (Math.random() * 180).toFixed(0) + "ms";
+
+      confettiLayer.appendChild(el);
+
+      // cleanup
+      el.addEventListener("animationend", () => el.remove(), { once: true });
+    }
+  }
+
+  // Expose globally
+  window.showWin = showWin;
+  window.hideWin = hideWin;
+  window.replayWin = replayWin;
+
+  if (winCloseBtn) {
+    winCloseBtn.addEventListener("click", hideWin);
+  }
+  if (winReplayBtn) {
+    winReplayBtn.addEventListener("click", replayWin);
+  }
+  if (overlay) {
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay || event.target.classList.contains("win-backdrop")) {
+        hideWin();
+      }
+    });
+  }
+
+  // win animation ends here
+  
   renderWordBank();
   render();
 })();
