@@ -1,5 +1,8 @@
 .hide {display: none !important;}
-.invisible { visibility: hidden;} !important;}
+.invisible { visibility: hidden !important;}
+  .mobile {display:none !important;}
+  //.desktop {display:block;}
+
 
 .demo-main {
   padding-bottom: 4rem;
@@ -474,12 +477,81 @@ section.header h2 {
 
 
 @media (max-width: 414px) {
+  .mobile {display:block !important;}
+  .desktop {display:none !important;}
+
+  .demo-word-bank {
+    padding:15px;
+  }
+
+  .demo-cell {
+    font-size: 1.5rem;
+  }
+
+  #resetBtn {
+    position: absolute;
+    top: 25px;
+  }
+
+  .head-bar { display:none;}
+
+  .slogan {
+    color: var(--viisi-red);
+        font-size:1.1rem;
+    font-weight:bold;
+    span {
+      color: var(--viisi-green);
+    }
+  }
+
+  .mobile-menu-button {
+    position: absolute;
+    top: 14px;
+    right: -28px;
+  }
+  .download.btn,
+  #resetBtn {
+    padding: 0.45rem 1.1rem;
+    position: absolute;
+    top: 18px;
+    right: 31px;
+  }
+
+  header.container {
+    display:inherit;
+    margin:0 !important;
+    padding: 2px 10px;
+  }
+
+  .container.demo-desktop {
+    margin-top:0;
+  }
+
+  .demo-desktop {
+    color: var(--viisi-bg) !important;
+    background: var(--viisi-bg) !important;
+    border-color: var(--viisi-bg) !important;
+    filter:none;
+  }
+  .gradient.demo-desktop {
+    background:none;
+    width:350px;
+    border:0;
+
+  }
+ .demo-board {
+  width: 95%;
+ }
+  .demo-keys {
+    width: 85%;
+    margin: 0 auto;
+  }
   .demo-board,
   .demo-keys {
     max-width: 100%;
   }
 
-  #hintBtn {margin-bottom: 0;}
+  #hintBtn {margin-bottom: 0; color: #000; padding: 1px 36px;}
 
 .phone-shell {
   width: min(380px, 70vw);
