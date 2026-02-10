@@ -405,7 +405,7 @@ a {
 
 .section-title {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
 
 .section-title h2 {
@@ -459,7 +459,7 @@ a {
   background: white;
   padding: 2.5rem;
   display: grid;
-  gap: 2.5rem;
+  gap: 0.5rem;
   box-shadow: var(--shadow-soft);
 }
 
@@ -549,7 +549,7 @@ a {
 
 @media (max-width: 640px) {
   .phone-inner  {
-    min-height:590px;
+    min-height:520px;
   }
   .phone-shell {
     height:auto;
@@ -560,7 +560,7 @@ a {
   }
 
   .stats {
-    padding: 1.75rem;
+    padding: 0 1.75rem;
   }
 
   .footer-content {

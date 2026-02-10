@@ -575,6 +575,7 @@
   const winStreak = document.getElementById("winStreak");
   const winCloseBtn = document.getElementById("winCloseBtn");
   const winReplayBtn = document.getElementById("winReplayBtn");
+  let confettiBurstTimeoutId = null;
 
   function showWin({ time = "01:42", guesses = "2", streak = "5🔥" } = {}) {
     if (!overlay) return;
@@ -589,8 +590,10 @@
     // kick open animation
     requestAnimationFrame(() => {
       overlay.classList.add("win-open");
-      spawnConfetti(90);
+      spawnConfetti(95);
     });
+    clearTimeout(confettiBurstTimeoutId);
+    confettiBurstTimeoutId = window.setTimeout(() => spawnConfetti(60), 220);
 
     // Esc closes
     window.addEventListener("keydown", escClose, { once: true });
@@ -601,6 +604,8 @@
     overlay.classList.remove("win-open");
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
+    clearTimeout(confettiBurstTimeoutId);
+    confettiBurstTimeoutId = null;
     // let transition finish
     setTimeout(() => {
       overlay.hidden = true;
@@ -615,8 +620,10 @@
     overlay.classList.remove("win-open");
     requestAnimationFrame(() => {
       overlay.classList.add("win-open");
-      spawnConfetti(90);
+      spawnConfetti(95);
     });
+    clearTimeout(confettiBurstTimeoutId);
+    confettiBurstTimeoutId = window.setTimeout(() => spawnConfetti(60), 220);
   }
 
   function escClose(e) {
@@ -639,27 +646,50 @@
       "#a78bfa", // violet
       "#22c55e"  // green
     ];
+    const shapes = ["confetti--chip", "confetti--ribbon", "confetti--dot"];
 
     const w = confettiLayer.clientWidth || 520;
+    const h = confettiLayer.clientHeight || 460;
 
     for (let i = 0; i < count; i++) {
       const el = document.createElement("div");
       el.className = "confetti";
       el.style.left = Math.random() * w + "px";
       el.style.background = colors[(Math.random() * colors.length) | 0];
+      el.classList.add(shapes[(Math.random() * shapes.length) | 0]);
 
-      const x0 = (Math.random() * 40 - 20).toFixed(1) + "px";
-      const x1 = (Math.random() * 220 - 110).toFixed(1) + "px";
-      const rot = (Math.random() * 720 - 360).toFixed(0) + "deg";
-      const dur = (Math.random() * 700 + 800).toFixed(0) + "ms";
+      const width = (Math.random() * 8 + 6).toFixed(1) + "px";
+      const height = (Math.random() * 12 + 8).toFixed(1) + "px";
+      const radius = (Math.random() * 5 + 1).toFixed(1) + "px";
 
+      const x0 = (Math.random() * 70 - 35).toFixed(1) + "px";
+      const xBurst = (Math.random() * 240 - 120).toFixed(1) + "px";
+      const xMid = (Math.random() * 340 - 170).toFixed(1) + "px";
+      const x1 = (Math.random() * 460 - 230).toFixed(1) + "px";
+      const rise = `-${(Math.random() * 125 + 40).toFixed(1)}px`;
+      const drop = `${(h + Math.random() * 140 + 70).toFixed(1)}px`;
+      const sway = (Math.random() * 12 + 6).toFixed(1) + "px";
+      const rot = (Math.random() * 1320 - 660).toFixed(0) + "deg";
+      const dur = (Math.random() * 900 + 1000).toFixed(0) + "ms";
+      const swayDur = (Math.random() * 120 + 110).toFixed(0) + "ms";
+
+      el.style.setProperty("--w", width);
+      el.style.setProperty("--h", height);
+      el.style.setProperty("--radius", radius);
       el.style.setProperty("--x0", x0);
+      el.style.setProperty("--xBurst", xBurst);
+      el.style.setProperty("--xMid", xMid);
       el.style.setProperty("--x1", x1);
+      el.style.setProperty("--rise", rise);
+      el.style.setProperty("--drop", drop);
+      el.style.setProperty("--sway", sway);
       el.style.setProperty("--rot", rot);
       el.style.setProperty("--dur", dur);
+      el.style.setProperty("--swayDur", swayDur);
 
       // stagger
-      el.style.animationDelay = (Math.random() * 180).toFixed(0) + "ms";
+      const waveDelay = (i / Math.max(1, count)) * 220;
+      el.style.animationDelay = `${(Math.random() * 120 + waveDelay).toFixed(0)}ms, 0ms`;
 
       confettiLayer.appendChild(el);
 
