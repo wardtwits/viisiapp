@@ -46,8 +46,11 @@
 
   // Keep hint hidden on first paint even if markup/cache is stale.
   if (elements.hintBtn) {
-    elements.hintBtn.hidden = true;
-    elements.hintBtn.style.display = "none";
+
+        elements.hintBtn.classList.add("invisible");
+  
+    // elements.hintBtn.hidden = true;
+    // elements.hintBtn.style.display = "none";
   }
 
   const initialState = {
@@ -281,9 +284,15 @@
     }
     if (elements.hintBtn) {
       const showHintButton = state.completedWords.length >= 3 && !state.isWon;
-      elements.hintBtn.hidden = !showHintButton;
-      elements.hintBtn.style.display = showHintButton ? "" : "none";
-      elements.hintBtn.disabled = !showHintButton || !canUseHint() || state.invalidFlash;
+      //elements.hintBtn.hidden = !showHintButton;
+      if (showHintButton) {
+        elements.hintBtn.classList.remove("invisible");
+      } else {
+        elements.hintBtn.classList.add("invisible");
+      }
+      
+      //elements.hintBtn.style.display = showHintButton ? "" : "none";
+      //elements.hintBtn.disabled = !showHintButton || !canUseHint() || state.invalidFlash;
     }
   }
 
