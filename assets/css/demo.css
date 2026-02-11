@@ -568,3 +568,152 @@ section.header h2 {
 
 }
  
+/* Mobile app-like demo: remove marketing chrome and phone frame */
+@media (max-width: 768px) {
+  .mobile {
+    display: none !important;
+  }
+
+  .desktop,
+  .desktop.hide {
+    display: block !important;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  body > header.container,
+  body > footer.footer {
+    display: none !important;
+  }
+
+  .demo-main,
+  main.container.demo-main {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .demo-main > .demo-hero,
+  .demo-main > .demo-header,
+  .demo-main > .demo-meta,
+  .demo-main > .demo-word-bank,
+  .demo-main > .hide,
+  .desktop .demo-hero,
+  .desktop .demo-header,
+  .desktop .demo-meta,
+  .desktop .demo-word-bank,
+  .desktop .demo-subtitle,
+  .desktop #foundWords {
+    display: none !important;
+  }
+
+  .phone-showcase,
+  .phone-showcase.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    transform: none;
+    display: block;
+  }
+
+  .phone-shell,
+  .phone,
+  .gradient,
+  .gradient.demo-desktop {
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: none !important;
+    background: var(--viisi-bg);
+  }
+
+  .phone-notch,
+  .head-bar,
+  .btn-switch {
+    display: none !important;
+  }
+
+  .phone-inner,
+  .gradient.demo-desktop {
+    min-height: 100dvh;
+    height: 100dvh;
+    border-radius: 0 !important;
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    padding-right: max(0.8rem, env(safe-area-inset-right));
+    padding-bottom: max(0.8rem, env(safe-area-inset-bottom));
+    padding-left: max(0.8rem, env(safe-area-inset-left));
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: stretch;
+  }
+
+  .phone-inner > header,
+  .gradient.demo-desktop > header {
+    margin: 0;
+  }
+
+  .phone-inner section.header {
+    margin: 0;
+  }
+
+  .phone-inner section.header h2,
+  .slogan {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  #resetBtn {
+    position: static;
+  }
+
+  .demo-board,
+  .demo-keys {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .demo-board {
+    gap: 0.35rem;
+  }
+
+  .demo-keys {
+    gap: 0.45rem;
+  }
+
+  .demo-cell,
+  .demo-key {
+    border-radius: 10px;
+  }
+
+  #hintBtn {
+    margin: 0;
+    padding: 0.15rem 0;
+  }
+
+  .demo-message {
+    min-height: 1.2rem;
+    margin: 0;
+    padding: 0.2rem 0;
+  }
+
+  .demo-controls {
+    margin-top: auto;
+    padding-bottom: max(0.15rem, env(safe-area-inset-bottom));
+  }
+
+  .letter-tiles {
+    margin-top: 0.4rem;
+  }
+}
