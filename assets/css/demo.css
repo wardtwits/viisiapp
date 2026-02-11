@@ -1,5 +1,7 @@
 .hide {display: none !important;}
 .invisible { visibility: hidden !important;}
+  .mobile {display:none !important;}
+  //.desktop {display:block;}
 
 
 .demo-main {
@@ -475,116 +477,94 @@ section.header h2 {
 
 
 @media (max-width: 414px) {
-    /** ***** MOBILE  ****/
+  .mobile {display:block !important;}
+  .desktop {display:none !important;}
 
-    /* Hide on Mobile */
-    .hideMobile {display:none}
+  .demo-word-bank {
+    padding:15px;
+  }
 
-    main {
-      width: 99%;
-      padding: 4px;
-      max-width: 600px;
-      overflow: hidden;
-    }
+  .demo-cell {
+    font-size: 1.5rem;
+  }
 
-    .phoneLogo {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: var(--viisi-red);
-        font-size: 1.5rem;
-    }
+  #resetBtn {
+    position: absolute;
+    top: 25px;
+  }
 
-    .demo-board {
-        width: 95%;
-        max-width: 100%;
-    }
-    .demo-keys {
-        width: 85%;
-        margin: 0 auto;
-        max-width: 100%;
-    }
+  .head-bar { display:none;}
 
-    .phone-showcase {
-        margin-top:0;
-        width: 100%;
-    }
-
-    .phone-shell {
-        margin-top:0;
-        width:340px;
-        padding: 5px;
-    }
-
-    .phone-inner {
-      height: min(680px, 70vw);
-      height: 600px;
-      width: 315px;
-    }
-
-    .gradient.demo-desktop {
-        background:none;
-        width:350px;
-        border:0;
-    }
-
-    #hintBtn {
-        margin-bottom: 0; 
-        color: #000; 
-        padding: 1px 36px;
-    }
-
-    #resetBtn {
-        background: #c7b6a6;
-        color: #fff;
-        border-radius: 8px;
-        padding: 10px;
-        font-size: 0.8rem;
-        opacity:0.9;
-        position: absolute;
-        top: 25px;
-    }
-
-    .phoneLogo {
-        color: var(--viisi-red);
-            font-size:1.1rem;
-            font-weight:bold;
-        span {
-            color: var(--viisi-green);
-        }
-    }
-
-    .demo-word-bank {
-        padding:15px;
-    }
-
-    .demo-cell {
-        font-size: 1.5rem;
-    }
-
-    .win-card {
-      width: min(290px, 100%);
-    }
-
-    .gameSlogan {
+  .slogan {
+    color: var(--viisi-red);
+        font-size:1.1rem;
+    font-weight:bold;
+    span {
       color: var(--viisi-green);
-      font-size:1rem;
     }
+  }
 
+  .mobile-menu-button {
+    position: absolute;
+    top: 14px;
+    right: -28px;
+  }
+  .download.btn,
+  #resetBtn {
+    padding: 0.45rem 1.1rem;
+    position: absolute;
+    top: 18px;
+    right: 31px;
+  }
 
-    /******** MENU  */
+  header.container {
+    display:inherit;
+    margin:0 !important;
+    padding: 2px 10px;
+  }
 
-      .mobile-menu-button {
-        position: absolute;
-        top: 14px;
-        right: -28px;
-      }
+  .container.demo-desktop {
+    margin-top:0;
+  }
 
-    .download.btn,
-    #resetBtn {
-        padding: 0.45rem 1.1rem;
-        position: absolute;
-        top: 18px;
-        right: 31px;
-    }
+  .demo-desktop {
+    color: var(--viisi-bg) !important;
+    background: var(--viisi-bg) !important;
+    border-color: var(--viisi-bg) !important;
+    filter:none;
+  }
+  .gradient.demo-desktop {
+    background:none;
+    width:350px;
+    border:0;
+
+  }
+ .demo-board {
+  width: 95%;
+ }
+  .demo-keys {
+    width: 85%;
+    margin: 0 auto;
+  }
+  .demo-board,
+  .demo-keys {
+    max-width: 100%;
+  }
+
+  #hintBtn {margin-bottom: 0; color: #000; padding: 1px 36px;}
+
+.phone-shell {
+  width: min(380px, 70vw);
+  height: min(710px, 70vw);
+  height: 630px;
 }
+.phone-inner {
+  height: min(680px, 70vw);
+  height: 600px;
+}
+.win-card {
+  width: min(290px, 100%);
+}
+
+}
+ 
