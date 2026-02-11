@@ -1,0 +1,106 @@
+
+
+
+
+
+
+
+/** ***** MOBILE  ****/
+
+/* Hide on Mobile */
+.hideMobile {display:none}
+
+.phoneLogo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--viisi-red);
+    font-size: 1.5rem;
+}
+
+.demo-board {
+    width: 95%;
+    max-width: 100%;
+}
+.demo-keys {
+    width: 85%;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.phone-showcase {
+    margin-top:0;
+}
+
+.phone-shell {
+    margin-top:0;
+    width: min(380px, 70vw);
+    height: min(710px, 70vw);
+    height: 630px;
+}
+
+.phone-inner {
+  height: min(680px, 70vw);
+  height: 600px;
+}
+
+.gradient.demo-desktop {
+    background:none;
+    width:350px;
+    border:0;
+}
+
+#hintBtn {
+    margin-bottom: 0; 
+    color: #000; 
+    padding: 1px 36px;
+}
+
+#resetBtn {
+    background: #c7b6a6;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.8rem;
+    opacity:0.9;
+    position: absolute;
+    top: 25px;
+}
+
+.phoneLogo {
+    color: var(--viisi-red);
+        font-size:1.1rem;
+        font-weight:bold;
+    span {
+        color: var(--viisi-green);
+    }
+}
+
+.demo-word-bank {
+    padding:15px;
+}
+
+.demo-cell {
+    font-size: 1.5rem;
+}
+
+.win-card {
+  width: min(290px, 100%);
+}
+
+
+/******** MENU  */
+
+  .mobile-menu-button {
+    position: absolute;
+    top: 14px;
+    right: -28px;
+  }
+
+.download.btn,
+#resetBtn {
+    padding: 0.45rem 1.1rem;
+    position: absolute;
+    top: 18px;
+    right: 31px;
+}

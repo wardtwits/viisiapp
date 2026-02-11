@@ -1,0 +1,156 @@
+
+    <!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viisi Web Demo</title>
+  <meta name="description" content="Play a simple one-puzzle Viisi demo in your browser. No app install required." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/demo.css" />
+  <script defer src="assets/js/main.js"></script>
+  <script defer src="assets/js/demo.js"></script>
+</head>
+
+<div class="demo-header hide">
+        <div class="badge">Web Demo (single puzzle)</div>
+        <p>
+          Build five-letter anagrams and find five distinct valid words to
+          win. <br><span class="tip">Tip: 2 Hints are available once you've found 3 valid words.</span>
+        </p>
+</div>
+  </header>
+
+        <!-- phone -->
+        <!-- component -->
+        <div class="container phone-showcase" aria-hidden="true">
+          <div class="phone phone-inner demo-desktop"></div>
+          <div class="gradient demo-desktop">
+            <header style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                ">
+         
+              
+                <button id="resetBtn" class="btn" type="button">
+              Reset
+            </button>
+               
+            </header>
+
+            <p class="slogan">Viisi <span>Demo</span></p>
+            <div id="board" class="demo-board" aria-label="Puzzle board" role="grid"></div>
+            <a id="hintBtn" class="btn invisible">Hint</a>
+
+            <div id="message" class="demo-message" role="status" aria-live="polite"></div>
+
+            <div id="keyboard" class="demo-keys" aria-label="Letter keyboard"></div>
+          <div class="demo-controls">
+            <!-- Shuffle Button -->
+            <div class="letter-tiles">
+              <button class="shuffle" id="shuffleBtn">
+                <svg viewBox="0 0 24 24" class="w-6 h-6 shuffleIcon" width="20" height="20" aria-hidden="true">
+                  <path d="M16 4h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M20 4l-5 5-2 2-1 1-3 3-3 3H4" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M16 20h4v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M20 20l-5-5-1-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M4 8h2l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg></button>
+              <!-- Delete button -->
+              <button id="deleteBtn" class="delete">
+                <svg viewBox="0 0 24 24" class="deleteIcon h-5 w-5" width="30" height="30" aria-hidden="true">
+                  <path
+                    d="M9.2 5H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9.2a2 2 0 0 1-1.6-.8L2.6 13a2 2 0 0 1 0-2l5-5.2A2 2 0 0 1 9.2 5Z"
+                    fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
+                  <path d="M12 9l6 6M18 9l-6 6" fill="none" stroke="currentColor" stroke-width="1"
+                    stroke-linecap="round" />
+                </svg></button>
+            </div>
+            </div>
+          </div>
+          <div class="head-bar demo-desktop"></div>
+          <div class="btn-switch hide demo-desktop"></div>
+          <!-- win animation -->
+          <section id="winOverlay" class="win-overlay" aria-hidden="true" hidden>
+            <div class="win-backdrop"></div>
+            <div class="win-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+              <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+              <h3 id="winTitle">You Win!</h3>
+              <p class="win-copy">You found all five valid words.</p>
+              <div class="win-stats">
+                <div class="win-stat">
+                  <span>Time</span>
+                  <strong id="winTime">00:00</strong>
+                </div>
+                <div class="win-stat">
+                  <span>Words</span>
+                  <strong id="winGuesses">5</strong>
+                </div>
+                <div class="win-stat">
+                  <span>Hints</span>
+                  <strong id="winStreak">0</strong>
+                </div>
+              </div>
+              <div class="win-actions">
+                <button id="winReplayBtn" class="btn" type="button">Replay Confetti</button>
+                <button id="winCloseBtn" class="btn btn-primary" type="button">Close</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+       
+
+            
+ 
+
+
+ 
+
+ 
+
+          <!-- end phone-inner -->
+        </div>
+        <!-- end phone-shell -->
+      </div>
+      <!-- end phone-showcase -->
+
+   
+
+      <details class="demo-word-bank">
+        <summary>Reveal the Solution</summary>
+        <p>Any of these words would be accepted:</p>
+        <p id="wordBank" class="word-bank-list"></p>
+      </details>
+  
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo">
+        <span class="logo-mark">V</span>
+        Viisi
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="how-to-play.html">How to play</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <small>© <span id="year"></span> Viisi Games</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
