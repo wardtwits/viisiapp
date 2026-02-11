@@ -1,8 +1,9 @@
 .hide {display: none !important;}
 .invisible { visibility: hidden !important;}
   .mobile {display:none !important;}
-  //.desktop {display:block;}
+  .desktop {display:block;}
 
+  .touch-manipulation { touch-action: manipulation; }
 
 .demo-main {
   padding-bottom: 4rem;
@@ -21,6 +22,11 @@
   font-size: clamp(1.5rem, 4vw, 2.2rem);
 }
 
+.viisi {
+  font-weight: bold;
+  color: var(--viisi-red); 
+  font-size: 1.5rem;
+}
 
 .demo-shell {
   background: #fff;
@@ -488,9 +494,12 @@ section.header h2 {
     font-size: 1.5rem;
   }
 
-  #resetBtn {
+  .phone-toolbar {
     position: absolute;
-    top: 25px;
+    top: 537px;
+    left: 5px;
+    width: 78px;
+    height: 29px;
   }
 
   .head-bar { display:none;}
@@ -573,6 +582,11 @@ section.header h2 {
   .mobile {
     display: none !important;
   }
+
+    .find5,
+    .viisi {
+      display:none;
+    }
 
   .desktop,
   .desktop.hide {
@@ -737,7 +751,7 @@ section.header h2 {
   }
 
   .demo-controls {
-    margin-top: auto;
+    margin-top: 0;
     padding-bottom: max(0.15rem, env(safe-area-inset-bottom));
   }
 
