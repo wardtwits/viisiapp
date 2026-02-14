@@ -3,7 +3,20 @@
   .mobile {display:none !important;}
   .desktop {display:block;}
 
-  .touch-manipulation { touch-action: manipulation; }
+.touch-manipulation,
+.touch-manipulation .demo-main,
+.touch-manipulation .phone-showcase,
+.touch-manipulation .phone-shell,
+.touch-manipulation .phone-inner,
+.touch-manipulation .gradient,
+.touch-manipulation .demo-board,
+.touch-manipulation .demo-keys,
+.touch-manipulation .demo-cell,
+.touch-manipulation .demo-key,
+.touch-manipulation button,
+.touch-manipulation a {
+  touch-action: manipulation;
+}
 
 .demo-main {
   padding-bottom: 4rem;

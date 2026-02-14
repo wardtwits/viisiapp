@@ -53,6 +53,52 @@
     // elements.hintBtn.style.display = "none";
   }
 
+  function installIOSDoubleTapZoomGuard() {
+    const isIOS =
+      /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
+      (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
+
+    if (!isIOS) return;
+
+    const gameSurface = document.querySelector(".demo-main");
+    if (!gameSurface) return;
+
+    let lastTapTime = 0;
+    let lastTapX = 0;
+    let lastTapY = 0;
+
+    gameSurface.addEventListener(
+      "touchend",
+      (event) => {
+        if (event.changedTouches.length !== 1) return;
+
+        const touch = event.changedTouches[0];
+        const now = event.timeStamp;
+        const movedTooFar =
+          Math.abs(touch.clientX - lastTapX) > 24 || Math.abs(touch.clientY - lastTapY) > 24;
+        const isDoubleTap = now - lastTapTime < 320 && !movedTooFar;
+
+        if (isDoubleTap) {
+          event.preventDefault();
+
+          if (event.target instanceof Element) {
+            const interactiveTarget = event.target.closest("button, a, [role='button']");
+            if (interactiveTarget instanceof HTMLElement) {
+              interactiveTarget.click();
+            }
+          }
+        }
+
+        lastTapTime = now;
+        lastTapX = touch.clientX;
+        lastTapY = touch.clientY;
+      },
+      { passive: false }
+    );
+  }
+
+  installIOSDoubleTapZoomGuard();
+
   const initialState = {
     displayLetters: [...PUZZLE.letters],
     completedWords: [],
