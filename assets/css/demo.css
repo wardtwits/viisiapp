@@ -129,6 +129,16 @@
   opacity:0.9;
 }
 
+.demo-reset-nav {
+  display: none;
+  background: #c7b6a6;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
 .demo-hint {
   border-left: 4px solid var(--viisi-red);
   background: #fff5f6;
@@ -167,8 +177,8 @@ margin-right:-15px;
 .demo-key {
   border: none;
   border-radius: 12px;
-  aspect-ratio: 1.00;
-  font-size: 1.5rem;
+  aspect-ratio: 1.30;
+  font-size: 1.7rem;
   font-weight: 800;
   background: var(--viisi-red);
   color: #fff;
@@ -623,7 +633,13 @@ section.header h2 {
     position: static;
     right: auto;
     top: auto;
+    margin-left: 0.45rem;
+  }
+
+  body > header.container .demo-reset-nav {
+    display: inline-flex;
     margin-left: auto;
+    min-height: 44px;
   }
 
   body > header.container .btn.btn-primary {
@@ -703,6 +719,10 @@ section.header h2 {
   .phone-inner > header,
   .gradient.demo-desktop > header {
     margin: 0;
+  }
+
+  .desktop .phone-toolbar {
+    display: none;
   }
 
   .phone-inner section.header {

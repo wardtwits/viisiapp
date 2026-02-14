@@ -37,7 +37,7 @@
     shuffleBtn: document.getElementById("shuffleBtn"),
     deleteBtn: document.getElementById("deleteBtn"),
     hintBtn: document.getElementById("hintBtn"),
-    resetBtn: document.getElementById("resetBtn"),
+    resetButtons: document.querySelectorAll("[data-reset-button], #resetBtn"),
   };
 
   if (!elements.board || !elements.keyboard) {
@@ -568,8 +568,8 @@
   if (elements.hintBtn) {
     elements.hintBtn.addEventListener("click", useHint);
   }
-  if (elements.resetBtn) {
-    elements.resetBtn.addEventListener("click", (event) => {
+  for (const resetButton of elements.resetButtons) {
+    resetButton.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
       resetGame();
