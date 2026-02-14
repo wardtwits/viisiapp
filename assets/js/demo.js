@@ -411,6 +411,28 @@
     state.currentIndices = [];
   }
 
+  function remapCurrentIndicesToShuffledLetters() {
+    if (state.currentWord.length === 0) return true;
+
+    const nextIndices = [];
+    for (const letter of state.currentWord) {
+      let nextIndex = null;
+      for (let i = 0; i < state.displayLetters.length; i += 1) {
+        if (state.displayLetters[i] === letter && !nextIndices.includes(i)) {
+          nextIndex = i;
+          break;
+        }
+      }
+      if (nextIndex === null) {
+        return false;
+      }
+      nextIndices.push(nextIndex);
+    }
+
+    state.currentIndices = nextIndices;
+    return true;
+  }
+
   function deleteLetter() {
     if (state.currentWord.length === 0 || state.isWon || state.invalidFlash) return;
     state.currentWord = state.currentWord.slice(0, -1);
@@ -419,20 +441,57 @@
     render();
   }
 
+  function getShuffledLettersAvoidingSolutions(letters) {
+    const original = [...letters];
+    const originalOrder = original.join("");
+    const maxAttempts = 40;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      const candidate = [...original];
+      for (let i = candidate.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [candidate[i], candidate[j]] = [candidate[j], candidate[i]];
+      }
+
+      const candidateOrder = candidate.join("");
+      if (candidateOrder === originalOrder) continue;
+      if (validWordSet.has(candidateOrder)) continue;
+      return candidate;
+    }
+
+    // Deterministic fallback if random attempts were exhausted.
+    for (let shift = 1; shift < original.length; shift += 1) {
+      const candidate = original.slice(shift).concat(original.slice(0, shift));
+      const candidateOrder = candidate.join("");
+      if (candidateOrder === originalOrder) continue;
+      if (validWordSet.has(candidateOrder)) continue;
+      return candidate;
+    }
+
+    return original;
+  }
+
   function shuffleLetters() {
     if (state.isWon || state.invalidFlash) return;
-    if (state.currentWord.length > 0) {
-      setMessage("Finish or clear the current row before shuffling.", "error");
+    const hasCurrentAttempt = state.currentWord.length > 0;
+    const shuffled = getShuffledLettersAvoidingSolutions(state.displayLetters);
+    const didChangeOrder = shuffled.join("") !== state.displayLetters.join("");
+    state.displayLetters = shuffled;
+
+    if (!remapCurrentIndicesToShuffledLetters()) {
+      clearCurrentAttempt();
+      setMessage("Letters shuffled. Current row was reset.", "error");
       render();
       return;
     }
 
-    for (let i = state.displayLetters.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [state.displayLetters[i], state.displayLetters[j]] = [state.displayLetters[j], state.displayLetters[i]];
+    if (!didChangeOrder) {
+      setMessage("Letters could not be shuffled right now.", "error");
+      render();
+      return;
     }
 
-    setMessage("Letters shuffled.");
+    setMessage(hasCurrentAttempt ? "Letters shuffled. Keep building your word." : "Letters shuffled.");
     render();
   }
 
