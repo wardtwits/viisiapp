@@ -364,12 +364,13 @@ a {
   border: 2px solid #e5e7eb;
   font-size: 1.1rem;
   color: var(--viisi-text);
+  background-color: #fff;
 }
 
 .game-cell.active {
   background: var(--viisi-green);
   border-color: var(--viisi-green);
-  color: white;
+  color:var(--viisi-green-dark);
 }
 .game-grid.shade {
   margin-top:10px;
@@ -398,6 +399,9 @@ a {
   color: white;
   font-weight: 700;
   box-shadow: inset 0 -4px rgba(0, 0, 0, 0.12);
+}
+.letter-tiles .shuffle {
+  background: var(--viisi-green);
 }
 .letter-tiles .black {
   background: gray;
