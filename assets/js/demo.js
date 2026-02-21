@@ -105,6 +105,7 @@
     currentWord: "",
     currentIndices: [],
     hintUses: 0,
+    hintRowsUsed: [],
     hintMessage: "",
     lastMessage: "Build a 5-letter word using each tile once.",
     lastTone: "neutral",
@@ -198,6 +199,22 @@
       normalized.hintUses = Math.max(0, Math.min(2, Math.floor(parsed.hintUses)));
     }
 
+    if (Array.isArray(parsed.hintRowsUsed)) {
+      const uniqueRows = [];
+      for (const row of parsed.hintRowsUsed) {
+        const candidate = Number(row);
+        if (
+          Number.isInteger(candidate) &&
+          candidate >= 0 &&
+          candidate < REQUIRED_WORDS &&
+          !uniqueRows.includes(candidate)
+        ) {
+          uniqueRows.push(candidate);
+        }
+      }
+      normalized.hintRowsUsed = uniqueRows;
+    }
+
     if (typeof parsed.hintMessage === "string") {
       normalized.hintMessage = parsed.hintMessage.slice(0, 120);
     }
@@ -238,6 +255,7 @@
       currentWord: state.currentWord,
       currentIndices: state.currentIndices,
       hintUses: state.hintUses,
+      hintRowsUsed: state.hintRowsUsed,
       hintMessage: state.hintMessage,
       lastMessage: state.lastMessage,
       lastTone: state.lastTone,
@@ -329,16 +347,15 @@
       elements.shuffleBtn.disabled = state.isWon || state.invalidFlash;
     }
     if (elements.hintBtn) {
-      const showHintButton = state.completedWords.length >= 3 && !state.isWon;
-      //elements.hintBtn.hidden = !showHintButton;
+      const showHintButton = state.completedWords.length >= 3 && !state.isWon && state.hintUses < 2;
+      const hintAvailable = canUseHint() && !state.invalidFlash;
       if (showHintButton) {
         elements.hintBtn.classList.remove("invisible");
       } else {
         elements.hintBtn.classList.add("invisible");
       }
-      
-      //elements.hintBtn.style.display = showHintButton ? "" : "none";
-      //elements.hintBtn.disabled = !showHintButton || !canUseHint() || state.invalidFlash;
+      elements.hintBtn.classList.toggle("is-disabled", showHintButton && !hintAvailable);
+      elements.hintBtn.setAttribute("aria-disabled", String(showHintButton && !hintAvailable));
     }
   }
 
@@ -553,11 +570,31 @@
   }
 
   function canUseHint() {
-    return state.completedWords.length >= 3 && state.hintUses < 2 && !state.isWon;
+    const row = currentRowIndex();
+    const rowSupportsHint = row >= 3 && row < REQUIRED_WORDS;
+    return rowSupportsHint && state.hintUses < 2 && !state.isWon && !state.hintRowsUsed.includes(row);
   }
 
   function useHint() {
-    if (!canUseHint() || state.invalidFlash) return;
+    if (state.invalidFlash) {
+      setMessage("Finish the current row reset, then try hint again.", "error");
+      render();
+      return;
+    }
+
+    if (!canUseHint()) {
+      if (state.hintUses >= 2) {
+        setMessage("No hints remaining for this demo run.", "error");
+      } else if (state.completedWords.length < 3) {
+        setMessage("Hints unlock after you find 3 words.", "error");
+      } else if (state.hintRowsUsed.includes(currentRowIndex())) {
+        setMessage("Hint already used on this row.", "error");
+      } else {
+        setMessage("Hint is not available right now.", "error");
+      }
+      render();
+      return;
+    }
 
     const remaining = PUZZLE.validWords.filter((word) => !state.completedWords.includes(word));
     if (remaining.length === 0) return;
@@ -608,6 +645,10 @@
     state.currentWord = prefix;
     state.currentIndices = nextIndices;
 
+    const hintedRow = currentRowIndex();
+    if (!state.hintRowsUsed.includes(hintedRow)) {
+      state.hintRowsUsed.push(hintedRow);
+    }
     state.hintUses += 1;
     state.hintMessage = `Hint applied: ${prefix}${"_".repeat(5 - prefixLength)} (${bestGroup.length} possible word${bestGroup.length === 1 ? "" : "s"})`;
     setMessage(`Hint ${state.hintUses} applied. First two tiles filled.`, "success");
