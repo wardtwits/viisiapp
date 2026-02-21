@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /mobile.html
+Disallow: /desk.html.html
+
+Sitemap: https://viisi.app/sitemap.xml
