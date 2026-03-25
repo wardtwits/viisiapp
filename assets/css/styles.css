@@ -295,6 +295,10 @@ a {
   color: var(--viisi-green-dark);
 }
 
+.link-red {
+  color: var(--viisi-red-dark);
+}
+
 .pill-orange {
   background: rgba(248, 113, 113, 0.15);
   color: var(--viisi-red-dark);
@@ -415,6 +419,7 @@ a {
 .section-title {
   text-align: center;
   margin-bottom: 0;
+  
 }
 
 .section-title h2 {
@@ -423,7 +428,7 @@ a {
 }
 
 .section-title p {
-  max-width: 540px;
+  max-width: 88%;
   margin: 0 auto;
   color: var(--viisi-muted);
 }
@@ -466,7 +471,7 @@ a {
   margin-top: 4rem;
   border-radius: var(--radius-lg);
   background: white;
-  padding: 2.5rem;
+  padding: 1.5rem;
   display: grid;
   gap: 0.5rem;
   box-shadow: var(--shadow-soft);
