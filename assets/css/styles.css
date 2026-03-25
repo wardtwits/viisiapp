@@ -189,6 +189,10 @@ a {
   font-weight: 800;
 }
 
+.hero h1.alternative {
+  font-size: clamp(2.00rem, 5vw, 3.0rem);
+}
+
 .hero h1 span {
   color: var(--viisi-green);
 }

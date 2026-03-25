@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wordle Alternative: Play Viisi | Better Daily Word Puzzle</title>
+  <meta name="description" content="Looking for a better Wordle alternative? Try Viisi—the ad-free, privacy-first daily puzzle that challenges you with 5 words, not 1 guess. Download on iOS." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://viisi.app/wordle-alternative/" />
+
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Viisi" />
+  <meta property="og:title" content="Wordle Alternative: Try Viisi | Better Daily Word Puzzle" />
+  <meta property="og:description" content="Ad-free, privacy-first daily word puzzle. Find 5 words instead of 1 guess. Viisi is a smarter Wordle alternative for iPhone." />
+  <meta property="og:url" content="https://viisi.app/wordle-alternative/" />
+  <meta property="og:image" content="https://viisi.app/assets/images/full-site.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wordle Alternative: Try Viisi" />
+  <meta name="twitter:description" content="Better than Wordle. Ad-free, privacy-first daily word puzzle with 5 words per game." />
+  <meta name="twitter:image" content="https://viisi.app/assets/images/full-site.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wordle Alternative: Try Viisi",
+    "description": "A comprehensive comparison between Wordle and Viisi—why Viisi is the better daily word puzzle experience.",
+    "image": "https://viisi.app/assets/images/full-site.png",
+    "datePublished": "2026-03-25",
+    "author": {
+      "@type": "Organization",
+      "name": "Viisi Games"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Viisi Games",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://viisi.app/favicon.svg"
+      }
+    }
+  }
+  </script>
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    .comparison-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .comparison-card {
+      background: var(--viisi-card);
+      border: 2px solid var(--viisi-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .comparison-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--viisi-text);
+    }
+
+    .card-content {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .card-row {
+      display: grid;
+      gap: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--viisi-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .viisi-highlight {
+      color: var(--viisi-green);
+      font-weight: 700;
+    }
+
+    .wordle-note {
+      color: var(--viisi-red);
+      font-weight: 600;
+    }
+
+    .detail-section {
+      margin: 4rem 0;
+      padding: 2.5rem;
+      background: var(--viisi-card);
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--viisi-border);
+    }
+
+    .detail-section h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--viisi-text);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .detail-section p {
+      margin: 1rem 0;
+      line-height: 1.7;
+      color: var(--viisi-text);
+    }
+
+    .detail-section p:first-of-type {
+      margin-top: 0;
+    }
+
+    .highlight-text {
+      background: linear-gradient(120deg, rgba(0, 186, 139, 0.15), rgba(0, 186, 139, 0.05));
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 2rem;
+    }
+
+    .cta-section .btn {
+      font-size: 1.1rem;
+      padding: 1rem 2.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--viisi-green);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-alt {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0 0 1rem 0;
+    }
+
+    .hero-alt p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--viisi-muted);
+      max-width: 600px;
+    }
+  </style>
+  <script defer src="../assets/js/main.js"></script>
+</head>
+
+<body>
+  <header class="container">
+    <nav class="nav" aria-label="Primary">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">V</span>
+        Viisi
+      </a>
+      <button class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
+        aria-label="Toggle navigation">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#features">Features</a>
+        <a href="../demo.html">Play Demo</a>
+        <a href="../how-to-play.html">How to Play</a>
+        <a href="../privacy.html">Privacy</a>
+      </div>
+      <a class="btn btn-primary" href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
+    </nav>
+    <div class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../demo.html">Play Demo</a>
+      <a href="../how-to-play.html">How to Play</a>
+      <a href="../privacy.html">Privacy</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero hero-alt">
+      <div>
+        <div class="badge">
+          <span aria-hidden="true">🎮</span>
+          A smarter daily word challenge
+        </div>
+        <h1 class="alternative">A Fresh Alternative to Wordle: Try Viisi</h1>
+        <p>Same daily ritual, five times better. Viisi offers the puzzle depth and privacy that Wordle abandoned. No ads. No data collection. Just pure word puzzle joy.</p>
+        <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+          <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=Wordle&mt=8" class="btn btn-primary">Download Viisi</a>
+          <a href="../demo.html" class="btn btn-ghost">Play Demo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Comparison Cards -->
+    <section style="margin: 4rem 0;">
+      <h2 style="text-align: center; margin-bottom: 3rem; font-size: clamp(1.75rem, 3vw, 2.2rem);">Why Viisi Wins</h2>
+      
+      <div class="comparison-cards">
+        <!-- Experience Quality -->
+        <div class="comparison-card">
+          <div class="card-icon">🛡️</div>
+          <h3 class="card-title">Experience Quality</h3>
+          <div class="card-content">
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ Ad-free forever</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ Privacy-first, no tracking</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ Owned by NYT, data collection</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ Paywalls & premium features</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gameplay Depth -->
+        <div class="comparison-card">
+          <div class="card-icon">🧩</div>
+          <h3 class="card-title">Gameplay Depth</h3>
+          <div class="card-content">
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ 5 words per puzzle</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ Anagrams (strategic)</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ 1 guess per day</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ Letter logic (repetitive)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Availability & Freedom -->
+        <div class="comparison-card">
+          <div class="card-icon">♾️</div>
+          <h3 class="card-title">Availability & Freedom</h3>
+          <div class="card-content">
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ Unlimited daily plays</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ Play full archive anytime</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ One puzzle per 24 hours</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ Limited puzzle archive access</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Difficulty & Variety -->
+        <div class="comparison-card">
+          <div class="card-icon">⚖️</div>
+          <h3 class="card-title">Difficulty & Variety</h3>
+          <div class="card-content">
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ Consistent challenge</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Viisi</span>
+              <span class="viisi-highlight">✓ Vocabulary expansion</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ Luck-dependent guessing</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Wordle</span>
+              <span class="wordle-note">✗ Limited word variety</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Sections -->
+    
+    <!-- Experience Quality Detail -->
+    <section class="detail-section">
+      <h2>🛡️ Experience Quality: Ad-Free & Private</h2>
+      <p>Viisi is a <span class="highlight-text">completely ad-free experience</span>. There are no banners, no pop-ups, no trackers, and no data collection. Your puzzle is yours alone.</p>
+      <p>Wordle, now owned by The New York Times, collects user data and has introduced premium features behind paywalls. Each puzzle feel burdened by corporate interests. With Viisi, you get a clean, mindful experience that respects your privacy and time.</p>
+      <p>When you open Viisi, you know exactly what you're getting: a daily puzzle, well-crafted gameplay, and nothing else. No distractions. No algorithms. Just the puzzle.</p>
+    </section>
+
+    <!-- Gameplay Depth Detail -->
+    <section class="detail-section">
+      <h2>🧩 Gameplay Depth: 5 Words vs. 1 Guess</h2>
+      <p>Wordle gives you 6 guesses to find one 5-letter word. It's simple but shallow. Viisi challenges you to find <span class="highlight-text">five different 5-letter words</span> from a shared set of letters—an entirely different puzzle type.</p>
+      <p>This isn't just "more Wordle." It's a fundamentally richer experience. You're thinking about anagrams instead of letter positions. You're discovering vocabulary instead of guessing letter combinations. Each word you find opens new possibilities for the next, creating actual strategic depth.</p>
+      <p>Wordle's appeal faded for many players because the mechanic repeats daily. Viisi stays engaging because the complexity deepens the more you play. You'll find yourself looking for obscure words, learning definitions, and actually expanding your vocabulary.</p>
+    </section>
+
+    <!-- Availability & Freedom Detail -->
+    <section class="detail-section">
+      <h2>♾️ Availability & Freedom: Play Anytime, Anywhere</h2>
+      <p>Wordle's "one puzzle per day" model was novel once, but it becomes frustrating when you want more engagement. Viisi lets you play <span class="highlight-text">as many daily puzzles as you want</span>, and you can revisit the entire puzzle archive anytime you wish.</p>
+      <p>This means you're never waiting for tomorrow's puzzle. You're never locked out. You're never at the mercy of Wordle's daily schedule. With Viisi, the game adapts to your life, not the other way around.</p>
+      <p>Love a particular puzzle? Play it again. Want to catch up on old puzzles? The archive is there. This freedom transforms the game from a daily obligation into a genuine choice—play when you want, as much as you want.</p>
+    </section>
+
+    <!-- Difficulty & Variety Detail -->
+    <section class="detail-section">
+      <h2>⚖️ Difficulty & Variety: Consistent Challenge</h2>
+      <p>Wordle's difficulty is largely determined by luck. Some days are trivially easy; others feel impossible. Players have complained that daily Wordle puzzles have become either too easy or frustratingly hard, mostly due to the limited word pool.</p>
+      <p><span class="highlight-text">Viisi maintains a consistent challenge level</span> across all puzzles. Every day is thoughtfully designed to be solvable yet rewarding. You won't feel cheated by an unguessable word or bored by an obvious one.</p>
+      <p>Additionally, finding five words from one letter set naturally creates vocabulary diversity. You'll encounter words you didn't know existed, look up their definitions, and learn. Wordle's word repetition can feel stale after a few months. Viisi's anagram nature keeps every puzzle feeling fresh.</p>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2 style="margin-bottom: 1.5rem;">Ready for a Better Word Game?</h2>
+      <p style="margin-bottom: 1.5rem; color: var(--viisi-muted);">Join thousands of players discovering the joy of solving five words a day.</p>
+      <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=Wordle&mt=8" class="btn btn-primary">Download Viisi on iOS</a>
+      <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--viisi-muted);">Or <a href="../demo.html" style="color: var(--viisi-green); font-weight: 600;">play a free web demo</a> right now.</p>
+    </section>
+
+    <!-- FAQ Optional -->
+    <section style="margin-top: 4rem;">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Quick Questions</h2>
+      <div style="display: grid; gap: 1.5rem; max-width: 700px; margin: 0 auto;">
+        <details style="background: var(--viisi-card); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; border: 2px solid var(--viisi-border);">
+          <summary style="font-weight: 700; cursor: pointer; color: var(--viisi-text);">Is Viisi really free?</summary>
+          <p style="margin-top: 1rem; color: var(--viisi-muted);">Yes. Viisi is completely free with no in-app purchases, ads, or hidden costs. Download it and play forever.</p>
+        </details>
+        <details style="background: var(--viisi-card); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; border: 2px solid var(--viisi-border);">
+          <summary style="font-weight: 700; cursor: pointer; color: var(--viisi-text);">Can I play on Android?</summary>
+          <p style="margin-top: 1rem; color: var(--viisi-muted);">Viisi is currently available on iOS. You can play the web demo on any browser.</p>
+        </details>
+        <details style="background: var(--viisi-card); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; border: 2px solid var(--viisi-border);">
+          <summary style="font-weight: 700; cursor: pointer; color: var(--viisi-text);">What if I get stuck?</summary>
+          <p style="margin-top: 1rem; color: var(--viisi-muted);">Viisi provides hint system that unlocks after you've found 3 words. You're never truly stuck—just strategic.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer style="margin-top: 4rem; padding: 2rem 0; text-align: center; border-top: 2px solid var(--viisi-border); color: var(--viisi-muted); font-size: 0.9rem;">
+    <p>&copy; 2026 Viisi Games. Made with care for word lovers everywhere.</p>
+    <p><a href="../privacy.html" style="color: var(--viisi-muted); text-decoration: underline;">Privacy</a></p>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelectorAll('[data-menu-button]').forEach(button => {
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', !isExpanded);
+        document.querySelectorAll('[data-mobile-nav]').forEach(nav => {
+          nav.setAttribute('data-open', !isExpanded);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
