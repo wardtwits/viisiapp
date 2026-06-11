@@ -270,8 +270,8 @@ a {
 
 .card-streak {
   transform: rotate(1deg);
-  top: 60px;
-  right: 44px;
+  top: 82px;
+  right: -18px;
   z-index: 5;
 }
 
@@ -354,6 +354,291 @@ a {
   overflow: hidden;
   padding: 1.2rem;
   min-height: 568px;
+}
+
+.viisi-demo {
+  position: relative;
+  height: 568px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: var(--viisi-bg);
+  color: var(--viisi-text);
+}
+
+.viisi-demo-screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--viisi-bg);
+}
+
+.viisi-demo-screen.is-active {
+  display: block;
+  animation: viisi-demo-fade-up 0.28s ease-out both;
+}
+
+.viisi-demo-home {
+  padding: 2.25rem 1rem 1rem;
+}
+
+.viisi-demo-header,
+.viisi-demo-brand,
+.viisi-demo-icons,
+.viisi-demo-row,
+.viisi-demo-archive {
+  display: flex;
+  align-items: center;
+}
+
+.viisi-demo-header {
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.viisi-demo-brand {
+  gap: 0.65rem;
+}
+
+.viisi-demo-brand strong {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.viisi-demo-mark {
+  display: grid;
+  place-items: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  border-radius: 0.75rem;
+  background: var(--viisi-red);
+  color: white;
+  font-size: 1.45rem;
+  font-style: italic;
+  font-weight: 900;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.viisi-demo-icons {
+  gap: 0.65rem;
+  color: var(--viisi-red);
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.viisi-demo-streak {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1.05rem;
+  background: color-mix(in srgb, #aaa5d2 82%, transparent);
+}
+
+.viisi-demo-streak h3 {
+  margin: 0 0 0.45rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.viisi-demo-streak div {
+  display: grid;
+  grid-template-columns: 2.1rem 1fr auto;
+  gap: 0.25rem;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.viisi-demo-streak em {
+  color: rgba(10, 25, 46, 0.55);
+  font-style: normal;
+}
+
+.viisi-demo-trophy {
+  position: absolute;
+  top: -0.9rem;
+  right: 0.9rem;
+  font-size: 1.8rem;
+}
+
+.viisi-demo-card {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 1.05rem;
+  background: #121f43;
+  color: white;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.viisi-demo-card > span:first-child {
+  display: block;
+  padding-top: 0.8rem;
+  font-weight: 800;
+}
+
+.viisi-demo-letters {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.75rem 0;
+}
+
+.viisi-demo-letters b {
+  display: grid;
+  place-items: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  border-radius: 0.65rem;
+  background: var(--viisi-red);
+  font-size: 1.25rem;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.viisi-demo-play-label {
+  display: block;
+  padding-bottom: 0.8rem;
+  color: var(--viisi-green);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.viisi-demo-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0.55rem 0.65rem;
+  background: var(--viisi-red);
+  color: #121f43;
+}
+
+.viisi-demo-stats b,
+.viisi-demo-stats small {
+  display: block;
+}
+
+.viisi-demo-stats b {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.viisi-demo-stats small {
+  margin-top: 0.15rem;
+  font-size: 0.55rem;
+  line-height: 1.1;
+}
+
+.viisi-demo-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0.8rem 0;
+}
+
+.viisi-demo-dots span,
+.viisi-demo-dots i {
+  height: 0.25rem;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--viisi-red) 28%, transparent);
+}
+
+.viisi-demo-dots span {
+  width: 1.25rem;
+  background: var(--viisi-red);
+}
+
+.viisi-demo-dots i {
+  width: 0.7rem;
+}
+
+.viisi-demo-row,
+.viisi-demo-archive {
+  border-radius: 1.05rem;
+  background: #121f43;
+}
+
+.viisi-demo-row {
+  gap: 0.7rem;
+  margin-bottom: 0.65rem;
+  padding: 0.75rem 1rem;
+}
+
+.viisi-demo-row > b {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  flex: 0 0 auto;
+  border-radius: 0.65rem;
+  background: #bff6d6;
+  color: var(--viisi-green);
+  font-size: 1.45rem;
+}
+
+.viisi-demo-row span {
+  flex: 1;
+}
+
+.viisi-demo-row strong,
+.viisi-demo-row small {
+  display: block;
+}
+
+.viisi-demo-row strong {
+  color: var(--viisi-red);
+  font-size: 0.85rem;
+}
+
+.viisi-demo-row small {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+}
+
+.viisi-demo-row i {
+  position: relative;
+  width: 2.5rem;
+  height: 1.35rem;
+  border-radius: 99px;
+  background: var(--viisi-green);
+}
+
+.viisi-demo-row i::after {
+  content: "";
+  position: absolute;
+  top: 0.15rem;
+  right: 0.15rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  background: white;
+}
+
+.viisi-demo-archive {
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  color: var(--viisi-green);
+}
+
+.viisi-demo-game canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  user-select: none;
+}
+
+@keyframes viisi-demo-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .game-grid {
@@ -563,11 +848,16 @@ a {
 }
 
 @media (max-width: 640px) {
+  .phone-showcase {
+    transform: none;
+  }
+
   .phone-inner  {
     min-height:520px;
   }
   .phone-shell {
     height:auto;
+    width: min(320px, calc(100vw - 4rem));
   }
 
   .hero-cta {
