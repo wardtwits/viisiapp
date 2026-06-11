@@ -930,6 +930,10 @@ a {
     flex-direction: column;
     text-align: center;
   }
+
+  .footer-links {
+    display: none;
+  }
 }
 
 .policy-wrapper {
