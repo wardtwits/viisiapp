@@ -32,6 +32,56 @@ body {
   line-height: 1.5;
   min-height: 100vh;
 }
+/* video */
+.video-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.65rem 0.35rem 0.4rem;
+  border-radius: 999px;
+  background: #fffaf3;
+  color: #0a192e;
+  border: 1px solid rgba(251, 70, 85, 0.22);
+  box-shadow: 0 8px 22px rgba(251, 70, 85, 0.16);
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.video-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: #fb4655;
+  color: white;
+  transform: rotate(-3deg);
+  box-shadow: inset 0 -3px rgba(0, 0, 0, 0.12);
+}
+
+.video-icon svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  margin-left: 1px;
+}
+
+.video-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(251, 70, 85, 0.22);
+}
+.section-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+}
+/* end video */
 
 img {
   display: block;

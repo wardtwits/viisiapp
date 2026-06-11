@@ -207,6 +207,30 @@
     ctx.stroke();
   }
 
+  function drawViisiLogo(x, y) {
+    const markSize = 40.8;
+    const radius = 12;
+    const gap = 10.4;
+
+    ctx.fillStyle = colors.shadow;
+    roundRect(x, y + 4, markSize, markSize, radius);
+    ctx.fill();
+
+    ctx.fillStyle = colors.red;
+    roundRect(x, y, markSize, markSize, radius);
+    ctx.fill();
+
+    ctx.fillStyle = colors.white;
+    ctx.font = "italic 900 23px Nunito, system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("v", x + markSize / 2, y + markSize / 2 + 1);
+
+    ctx.fillStyle = colors.text;
+    ctx.font = "900 22px Nunito, system-ui, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("Viisi", x + markSize + gap, y + markSize / 2);
+  }
+
   function drawControl(x, y, size, fill, glyph, onTap) {
     ctx.fillStyle = colors.shadow;
     roundRect(x, y + 3, size, size, 10);
@@ -283,7 +307,7 @@
 
     const pad = width * 0.05;
     const headerY = height * 0.065;
-    drawBackArrow(pad + 6, headerY);
+    drawViisiLogo(pad, headerY - 20);
 
     ctx.fillStyle = colors.greenDark;
     ctx.font = "800 11px Nunito, system-ui, sans-serif";
