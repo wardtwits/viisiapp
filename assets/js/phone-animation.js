@@ -307,12 +307,13 @@
 
     const pad = width * 0.05;
     const headerY = height * 0.065;
+    const compactHeader = width < 310;
     drawViisiLogo(pad, headerY - 20);
 
     ctx.fillStyle = colors.greenDark;
     ctx.font = "800 11px Nunito, system-ui, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("WED, JUN 10", width / 2, headerY);
+    ctx.fillText("WED, JUN 10", width / 2, compactHeader ? headerY + 32 : headerY);
 
     const rightX = width - pad - 46;
     ctx.fillStyle = colors.red;
@@ -336,7 +337,7 @@
     ctx.font = "900 11px Nunito, system-ui";
     ctx.fillText("?", rightX + 10, headerY + 1);
 
-    const expertY = height * 0.13;
+    const expertY = compactHeader ? height * 0.18 : height * 0.13;
     const expertText = "Expert Mode";
     ctx.font = "900 17px Nunito, system-ui";
     const expertTextWidth = ctx.measureText(expertText).width;
@@ -355,7 +356,7 @@
     ctx.textAlign = "left";
     ctx.fillText(expertText, expertGroupX + expertIcon + expertGap, expertY);
 
-    const gridTop = height * 0.19;
+    const gridTop = compactHeader ? height * 0.24 : height * 0.19;
     const gridBottom = height * 0.62;
     const gap = 6;
     const cell = Math.min(

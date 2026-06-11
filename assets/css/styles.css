@@ -872,6 +872,22 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .phone-showcase {
+    transform: none;
+    margin-top: 1rem;
+  }
+
+  .phone-shell {
+    width: min(320px, calc(100vw - 4rem));
+    height: auto;
+    aspect-ratio: 8 / 15;
+    padding: clamp(10px, 3vw, 16px);
+  }
+
+  .viisi-demo {
+    height: 100%;
+  }
+
   .nav-links {
     display: none;
   }
@@ -898,16 +914,8 @@ a {
 }
 
 @media (max-width: 640px) {
-  .phone-showcase {
-    transform: none;
-  }
-
   .phone-inner  {
     min-height:520px;
-  }
-  .phone-shell {
-    height:auto;
-    width: min(320px, calc(100vw - 4rem));
   }
 
   .hero-cta {
