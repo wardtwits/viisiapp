@@ -418,7 +418,7 @@ a {
 .viisi-demo-screen {
   position: absolute;
   inset: 0;
-  display: none;
+  //display: none;
   background: var(--viisi-bg);
 }
 
