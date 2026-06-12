@@ -533,7 +533,7 @@ margin-right:-15px;
 @keyframes confetti-fall {
   0% {
     transform: translate3d(var(--x0, 0px), 0, 0) rotate(0) scale(0.8);
-    opacity: 0;
+    opacity: 1;
   }
   12% {
     opacity: 1;
