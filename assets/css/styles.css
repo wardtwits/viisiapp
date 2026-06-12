@@ -39,39 +39,39 @@ body {
   gap: 0.45rem;
   padding: 0.35rem 0.65rem 0.35rem 0.4rem;
   border-radius: 999px;
-  background: #fffaf3;
-  color: #0a192e;
-  border: 1px solid rgba(251, 70, 85, 0.22);
-  box-shadow: 0 8px 22px rgba(251, 70, 85, 0.16);
+  background: none;// #fffaf3;
+  color: white;
+  border: none; //1px solid rgba(251, 70, 85, 0.22);
+  box-shadow: none;//0 8px 22px rgba(251, 70, 85, 0.16);
   font-family: "Nunito", system-ui, sans-serif;
   font-weight: 800;
   font-size: 0.85rem;
   text-decoration: none;
+  white-space: nowrap;
 }
 
+.watch {float:left;}
+
 .video-icon {
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   border-radius: 9px;
   display: grid;
   place-items: center;
   background: #fb4655;
   color: white;
-  transform: rotate(-3deg);
+  transform: rotate(-5deg);
   box-shadow: inset 0 -3px rgba(0, 0, 0, 0.12);
 }
 
 .video-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 35px;
+  height: 35px;
   fill: currentColor;
   margin-left: 1px;
 }
 
-.video-pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(251, 70, 85, 0.22);
-}
+
 .section-heading {
 
   display: flex;
@@ -754,11 +754,11 @@ a {
 .section-title {
   text-align: center;
   margin-bottom: 0;
-  
 }
 
 .section-title h2 {
   font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-top:0;
   margin-bottom: 0.5rem;
 }
 
@@ -776,6 +776,7 @@ a {
 
 .feature-card {
   background: white;
+  color: var(--viisi-text);
   border-radius: var(--radius-sm);
   padding: 1.75rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -805,7 +806,8 @@ a {
 .stats {
   margin-top: 4rem;
   border-radius: var(--radius-lg);
-  background: white;
+  background: var(--viisi-text);
+  color:white;
   padding: 1.5rem;
   display: grid;
   gap: 0.5rem;
@@ -835,6 +837,11 @@ a {
   color: rgba(255, 255, 255, 0.85);
   padding: 2.5rem 0;
   margin-top: 4rem;
+  position: relative;
+}
+
+.footer-back-top {
+  display: none;
 }
 
 .footer-content {
@@ -933,6 +940,20 @@ a {
 
   .footer-links {
     display: none;
+  }
+
+  .footer {
+    padding-top: 3.75rem;
+  }
+
+  .footer-back-top {
+    display: inline-flex;
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 800;
+    font-size: 0.95rem;
   }
 }
 
