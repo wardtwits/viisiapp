@@ -5,6 +5,8 @@
   const gameScreen = document.getElementById("viisi-demo-game");
   const playButton = document.getElementById("viisi-demo-play");
   const canvas = document.getElementById("viisi-demo-canvas");
+  const pageLogo = document.querySelector(".logo");
+  const pageLogoMark = document.querySelector(".logo-mark");
 
   if (!homeScreen || !gameScreen || !playButton || !canvas) return;
 
@@ -208,25 +210,36 @@
   }
 
   function drawViisiLogo(x, y) {
-    const markSize = 40.8;
-    const radius = 12;
-    const gap = 10.4;
+    const logoStyle = pageLogo ? getComputedStyle(pageLogo) : null;
+    const markStyle = pageLogoMark ? getComputedStyle(pageLogoMark) : null;
+    const markSize = markStyle ? Number.parseFloat(markStyle.width) : 42;
+    const radius = markStyle ? Number.parseFloat(markStyle.borderRadius) : 14;
+    const gap = logoStyle ? Number.parseFloat(logoStyle.gap) : 9.6;
+    const markFont = markStyle
+      ? `${markStyle.fontStyle} ${markStyle.fontWeight} ${markStyle.fontSize} ${markStyle.fontFamily}`
+      : "700 20px Nunito, system-ui, sans-serif";
+    const wordFont = logoStyle
+      ? `${logoStyle.fontStyle} ${logoStyle.fontWeight} ${logoStyle.fontSize} ${logoStyle.fontFamily}`
+      : "800 21.6px Nunito, system-ui, sans-serif";
 
-    ctx.fillStyle = colors.shadow;
-    roundRect(x, y + 4, markSize, markSize, radius);
-    ctx.fill();
-
+    ctx.save();
+    ctx.shadowColor = "rgba(249, 113, 113, 0.25)";
+    ctx.shadowBlur = 25;
+    ctx.shadowOffsetY = 10;
+    ctx.translate(x + markSize / 2, y + markSize / 2);
+    ctx.rotate((3 * Math.PI) / 180);
     ctx.fillStyle = colors.red;
-    roundRect(x, y, markSize, markSize, radius);
+    roundRect(-markSize / 2, -markSize / 2, markSize, markSize, radius);
     ctx.fill();
-
+    ctx.shadowColor = "transparent";
     ctx.fillStyle = colors.white;
-    ctx.font = "italic 900 23px Nunito, system-ui, sans-serif";
+    ctx.font = markFont;
     ctx.textAlign = "center";
-    ctx.fillText("v", x + markSize / 2, y + markSize / 2 + 1);
+    ctx.fillText(pageLogoMark?.textContent?.trim() || "V", 0, 1);
+    ctx.restore();
 
     ctx.fillStyle = colors.text;
-    ctx.font = "900 22px Nunito, system-ui, sans-serif";
+    ctx.font = wordFont;
     ctx.textAlign = "left";
     ctx.fillText("Viisi", x + markSize + gap, y + markSize / 2);
   }
