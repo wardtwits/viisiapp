@@ -898,6 +898,17 @@ a {
     height: auto;
   }
 
+  .phone-showcase,
+  .phone-shell,
+  .viisi-demo {
+    touch-action: pan-y;
+  }
+
+  .viisi-demo-game canvas {
+    pointer-events: none;
+    touch-action: pan-y;
+  }
+
   .nav-links {
     display: none;
   }
