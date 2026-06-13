@@ -885,14 +885,17 @@ a {
   }
 
   .phone-shell {
+    --phone-padding: clamp(10px, 3vw, 16px);
     width: min(320px, calc(100vw - 4rem));
     height: auto;
     aspect-ratio: 8 / 15;
-    padding: clamp(10px, 3vw, 16px);
+    padding: var(--phone-padding);
   }
 
   .viisi-demo {
-    height: 100%;
+    position: absolute;
+    inset: var(--phone-padding);
+    height: auto;
   }
 
   .nav-links {
