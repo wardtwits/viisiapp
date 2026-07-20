@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viisi QR Code</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #111;
+      color: white;
+    }
+
+    .wrap {
+      text-align: center;
+    }
+
+    #qrcode {
+      margin: 24px auto;
+      padding: 16px;
+      background: white;
+      display: inline-block;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Download Viisi</h1>
+    <div id="qrcode"></div>
+    <p>Scan to download</p>
+  </div>
+
+  <script>
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://viisi.app/download",
+      width: 220,
+      height: 220
+    });
+  </script>
+</body>
+</html>
