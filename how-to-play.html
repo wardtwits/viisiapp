@@ -91,10 +91,12 @@
       <ol style="margin:0;padding-left:1.25rem;display:grid;gap:0.75rem;">
         <li>Use <strong>every letter</strong> once per word.</li>
         <li>Words must be in the official Viisi dictionary—no abbreviations or names.</li>
-        <li>Lock in each row of five words to progress to the next set.</li>
+        <li>Each row holds one word. Lock it in to move to the next row—five locked rows wins the day.</li>
         <li>Leaving the game mid-row clears the partially typed words. Commit before you wander!</li>
+        <li>Some puzzles hide <strong>bonus words</strong>. Find one and its tiles turn gold for extra points.</li>
         <li>Level-up your vocabulary!  After you win a game click the words to reveal definitions.</li>
         <li>Hungry for more games?  Go to the archive and play games in the past.</li>
+        <li>A new puzzle unlocks every day at <strong>06:00 UTC</strong>, the same board for every player worldwide.</li>
       </ol>
     </section>
 
@@ -107,18 +109,70 @@
         <article class="feature-card hover">
           <span aria-hidden="true">💡</span>
           <h3 class="trophy">Hints</h3>
-          <p>Find three words and the hint button lights up. Tap it to reveal two letters from your next solution.</p>
+          <p>Lock in three words and the hint button lights up. Tap it to clear your current row and prefill two letters
+            of a solution. Two hints per puzzle, 10 points each, and a hint never points at a bonus word.</p>
         </article>
         <article class="feature-card hover">
           <span aria-hidden="true">🔍</span>
           <h3 class="trophy">Reveal</h3>
-          <p>Ready to surrender? Reveal uncovers every answer in the current puzzle. Use sparingly—it resets your streak.</p>
+          <p>Ready to surrender? Reveal uncovers every answer in the current puzzle. There is no undo—the day counts as
+            played but not solved, so your streak ends.</p>
         </article>
         <article class="feature-card hover">
           <span aria-hidden="true">♻️</span>
           <h3 class="trophy">Reset</h3>
-          <p>Need a fresh start without losing stats? Reset clears the current puzzle but keeps your progress history.</p>
+          <p>Replay any puzzle from a clean board. Your original score, time, and stats are frozen and never change—a
+            replay is just for fun.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="stats" style="margin-top:3rem;">
+      <div class="section-title" style="margin-bottom:1.5rem;">
+        <h2>Expert Mode</h2>
+        <p>Turn it on in Settings when the daily board stops fighting back. It becomes the default for new games.</p>
+      </div>
+      <div class="features-grid" style="gap:1.5rem;">
+        <article class="feature-card hover">
+          <span aria-hidden="true">⚡️</span>
+          <h3 class="trophy">No hints</h3>
+          <p>Hints are switched off entirely. It is you, five letters, and the dictionary.</p>
+        </article>
+        <article class="feature-card hover">
+          <span aria-hidden="true">❌</span>
+          <h3 class="trophy">Three strikes</h3>
+          <p>Three invalid submissions end the game. Think before you lock in a word.</p>
+        </article>
+        <article class="feature-card hover">
+          <span aria-hidden="true">🔒</span>
+          <h3 class="trophy">Locked in</h3>
+          <p>A puzzle keeps the mode it started in, so switching the setting never changes a game already in progress.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="stats" style="margin-top:3rem;">
+      <div class="section-title" style="margin-bottom:1.5rem;">
+        <h2>Scoring</h2>
+        <p>Every win is scored. Your score drives your performance stats and the celebration screen breakdown.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <strong>100 points</strong>
+          <span>Base score for a Classic Mode win.</span>
+        </div>
+        <div class="stat">
+          <strong>130 points</strong>
+          <span>Base score for an Expert Mode win.</span>
+        </div>
+        <div class="stat">
+          <strong>+25 per bonus word</strong>
+          <span>Each Special Word you submit adds 25 points. Hints will never hand you one.</span>
+        </div>
+        <div class="stat">
+          <strong>-10 per hint</strong>
+          <span>Each hinted row costs 10 points. Skip both for a clean sheet.</span>
+        </div>
       </div>
     </section>
 
@@ -140,8 +194,8 @@
         </article>
         <article class="feature-card hover">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class=" trophy lucide lucide-target w-7 h-7 text-badge-text mb-1"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-          <h3 class="trophy">Hard Mode</h3>
-          <p>Win today's puzzle without using a hint.</p>
+          <h3 class="trophy">Hint-Free</h3>
+          <p>Win a daily puzzle without using a single hint.</p>
         </article>
         <article class="feature-card hover">
        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="trophy lucide lucide-zap w-7 h-7 text-badge-text mb-1"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
@@ -155,7 +209,8 @@
     <section class="stats" style="margin-top:3rem;">
       <div class="section-title" style="margin-bottom:1.5rem;">
         <h2>Archive & Stats</h2>
-        <p>Relive your favorite puzzles, share streak screenshots, and celebrate milestones.</p>
+        <p>Relive your favorite puzzles, share streak screenshots, and celebrate milestones. Progress syncs across
+          your devices with the same Apple ID.</p>
       </div>
       <div class="stats-grid">
         <div class="stat">
@@ -163,20 +218,28 @@
           <span>Scroll back through past games. Perfect for rainy afternoons.</span>
         </div>
         <div class="stat">
-          <strong>All Wins</strong>
-          <span>Total completed boards across regular and archive play.</span>
+          <strong>Score</strong>
+          <span>Your lifetime points across every win.</span>
         </div>
         <div class="stat">
-          <strong>Solve %</strong>
-          <span>How often you complete the daily challenge before midnight.</span>
+          <strong>Wins</strong>
+          <span>Total puzzles solved across daily and archive play.</span>
         </div>
         <div class="stat">
-          <strong>Hints</strong>
-          <span>Count of hint-assisted wins. Aim to keep it low!</span>
+          <strong>Win Rate</strong>
+          <span>Share of the puzzles you finished that ended in a solve.</span>
         </div>
         <div class="stat">
           <strong>Streak</strong>
-          <span>Keep your daily win streak alive!</span>
+          <span>Consecutive daily wins. Archive catch-ups don't extend it.</span>
+        </div>
+        <div class="stat">
+          <strong>Performance</strong>
+          <span>Classic and Expert breakdowns, fastest and average solve times, and hints used.</span>
+        </div>
+        <div class="stat">
+          <strong>Leaderboards</strong>
+          <span>Game Center rankings for fastest hint-free win, longest daily streak, total wins, and total hint-free wins.</span>
         </div>
       </div>
     </section>
