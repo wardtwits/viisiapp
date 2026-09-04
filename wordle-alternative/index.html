@@ -269,8 +269,10 @@
       justify-content: flex-start;
       gap: 1rem;
       flex-wrap: wrap;
+    }
 
-      > .mb30 {margin-bottom:30px;}
+    .hero-intro-row .mb30 {
+      margin-bottom: 30px;
     }
 
     .hero-intro-row p {
@@ -334,8 +336,9 @@
       <div class="nav-links">
         <a href="../index.html">Home</a>
         <a href="../index.html#features">Features</a>
-        <a href="../demo.html">Play Demo</a>
         <a href="../how-to-play.html">How to Play</a>
+        <a href="../score.html">Scoring</a>
+        <a href="../demo.html">Play Demo</a>
         <a href="../privacy.html">Privacy</a>
       </div>
       <a class="btn btn-primary" href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
@@ -343,8 +346,9 @@
     <div class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false">
       <a href="../index.html">Home</a>
       <a href="../index.html#features">Features</a>
-      <a href="../demo.html">Play Demo</a>
       <a href="../how-to-play.html">How to Play</a>
+      <a href="../score.html">Scoring</a>
+      <a href="../demo.html">Play Demo</a>
       <a href="../privacy.html">Privacy</a>
     </div>
   </header>
@@ -371,7 +375,7 @@
         <!-- Experience Quality -->
         <div class="comparison-card">
           <div class="card-header">
-            <div class="card-icon">🛡️</div>
+            <div class="card-icon" aria-hidden="true">🛡️</div>
             <h3 class="card-title">Experience Quality</h3>
           </div>
           <div class="card-content">
@@ -395,7 +399,7 @@
         <!-- Gameplay Depth -->
         <div class="comparison-card">
           <div class="card-header">
-            <div class="card-icon">🧩</div>
+            <div class="card-icon" aria-hidden="true">🧩</div>
             <h3 class="card-title">Gameplay Depth</h3>
           </div>
           <div class="card-content">
@@ -419,7 +423,7 @@
         <!-- Availability & Freedom -->
         <div class="comparison-card">
           <div class="card-header">
-            <div class="card-icon">♾️</div>
+            <div class="card-icon" aria-hidden="true">♾️</div>
             <h3 class="card-title">Availability & Freedom</h3>
           </div>
           <div class="card-content">
@@ -443,7 +447,7 @@
         <!-- Difficulty & Variety -->
         <div class="comparison-card">
           <div class="card-header">
-            <div class="card-icon">⚖️</div>
+            <div class="card-icon" aria-hidden="true">⚖️</div>
             <h3 class="card-title">Difficulty & Variety</h3>
           </div>
           <div class="card-content">
@@ -530,16 +534,7 @@
 
 
   <script>
-    // Mobile menu toggle
-    document.querySelectorAll('[data-menu-button]').forEach(button => {
-      button.addEventListener('click', () => {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', !isExpanded);
-        document.querySelectorAll('[data-mobile-nav]').forEach(nav => {
-          nav.setAttribute('data-open', !isExpanded);
-        });
-      });
-    });
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
 
