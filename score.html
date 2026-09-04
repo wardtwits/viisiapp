@@ -231,8 +231,13 @@
       </div>
       <div class="score-formula">
         <div class="term">
-          <b>Base win</b>
-          <span>100 Classic · 130 Expert</span>
+          <b>20 pts</b>
+          <span>per word, credited as you go</span>
+        </div>
+        <div class="op" aria-hidden="true">+</div>
+        <div class="term">
+          <b>+20</b>
+          <span>for finishing all 5 (+30 more in Expert)</span>
         </div>
         <div class="op" aria-hidden="true">+</div>
         <div class="term">
@@ -251,36 +256,42 @@
         </div>
       </div>
       <p class="score-note">
-        Only a legitimate win scores. If you reveal the solution, or fail out of Expert Mode, the puzzle is worth
-        <strong>0 points</strong> — and a score can never go negative, so heavy hint use floors at zero rather than
-        digging a hole.
+        Points are progressive: every word you legitimately complete is credited immediately, so a reveal or an Expert
+        fail-out no longer wipes the board — you keep the points for every word you'd already locked in, plus any
+        bonus words found, minus hints. You just forfeit the completion bonus for not finishing all five. And a score
+        can never go negative, so heavy hint use floors at zero rather than digging a hole.
       </p>
     </section>
 
-    <!-- BASE SCORE -->
+    <!-- WORDS & COMPLETION -->
     <section class="stats" style="margin-top:3rem;">
       <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Base Score</h2>
-        <p>The points a completed board is worth before bonuses and penalties. The mode is locked to the puzzle when
-          you start it, so changing the setting mid-game never changes the base.</p>
+        <h2>Words &amp; Completion</h2>
+        <p>How much your words are worth, whether you finish the puzzle or not. The mode is locked to the puzzle when
+          you start it, so changing the setting mid-game never changes what a word or a completion is worth.</p>
       </div>
       <div class="stats-grid">
         <div class="stat">
-          <strong>100 points</strong>
-          <span>Classic Mode win. Hints are available, mistakes are free.</span>
+          <strong>20 points per word</strong>
+          <span>Credited the instant you lock in a correct word — before you've finished the puzzle.</span>
         </div>
         <div class="stat">
-          <strong>130 points</strong>
-          <span>Expert Mode win. No hints at all, and three invalid submissions end the game.</span>
+          <strong>120 points</strong>
+          <span>A full Classic win: five completed words (100) plus the +20 completion bonus.</span>
         </div>
         <div class="stat">
-          <strong>0 points</strong>
-          <span>Reveal, an Expert fail-out, or any board that was never legitimately completed.</span>
+          <strong>150 points</strong>
+          <span>A full Expert win: the same 120, plus an extra +30 for finishing in Expert Mode.</span>
+        </div>
+        <div class="stat">
+          <strong>Partial credit</strong>
+          <span>Reveal, or fail out of Expert Mode, and you keep the words you'd already completed — only the
+            completion bonus is lost.</span>
         </div>
       </div>
       <p class="score-note">
-        The Expert premium arrived with scoring version 2. Wins saved under version 1 keep the 100-point base they were
-        frozen with — Viisi never rewrites a result that has already been recorded.
+        Progressive per-word scoring arrived with scoring version 3. Wins saved under version 1 or 2 keep the flat
+        100/130 base they were frozen with — Viisi never rewrites a result that has already been recorded.
       </p>
     </section>
 
@@ -342,7 +353,8 @@
           <thead>
             <tr>
               <th scope="col">Result</th>
-              <th scope="col">Base</th>
+              <th scope="col">Words</th>
+              <th scope="col">Completion</th>
               <th scope="col">Bonus words</th>
               <th scope="col">Hints</th>
               <th scope="col">Score</th>
@@ -352,50 +364,65 @@
             <tr>
               <td>Classic win, no hints, no bonus</td>
               <td class="num">100</td>
+              <td class="num">+20</td>
               <td class="num">0</td>
               <td class="num">0</td>
-              <td class="num total">100</td>
+              <td class="num total">120</td>
             </tr>
             <tr>
               <td>Classic win, one bonus word</td>
               <td class="num">100</td>
+              <td class="num">+20</td>
               <td class="num">+25</td>
               <td class="num">0</td>
-              <td class="num total">125</td>
+              <td class="num total">145</td>
             </tr>
             <tr>
               <td>Classic win, two hints, one bonus word</td>
               <td class="num">100</td>
+              <td class="num">+20</td>
               <td class="num">+25</td>
               <td class="num">−20</td>
-              <td class="num total">105</td>
+              <td class="num total">125</td>
             </tr>
             <tr>
               <td>Expert win, no bonus</td>
-              <td class="num">130</td>
+              <td class="num">100</td>
+              <td class="num">+50</td>
               <td class="num">0</td>
               <td class="num">0</td>
-              <td class="num total">130</td>
+              <td class="num total">150</td>
             </tr>
             <tr>
               <td>Expert win, two bonus words</td>
-              <td class="num">130</td>
+              <td class="num">100</td>
+              <td class="num">+50</td>
               <td class="num">+50</td>
               <td class="num">0</td>
-              <td class="num total">180</td>
+              <td class="num total">200</td>
             </tr>
             <tr>
               <td>Perfect Expert board (five bonus words)</td>
-              <td class="num">130</td>
+              <td class="num">100</td>
+              <td class="num">+50</td>
               <td class="num">+125</td>
               <td class="num">0</td>
-              <td class="num total">255</td>
+              <td class="num total">275</td>
             </tr>
             <tr>
-              <td>Solution revealed, or Expert fail-out</td>
-              <td class="num">—</td>
-              <td class="num">—</td>
-              <td class="num">—</td>
+              <td>Reveal or fail-out after 3 words locked in</td>
+              <td class="num">60</td>
+              <td class="num">0</td>
+              <td class="num">0</td>
+              <td class="num">0</td>
+              <td class="num total">60</td>
+            </tr>
+            <tr>
+              <td>Reveal or fail-out before completing a word</td>
+              <td class="num">0</td>
+              <td class="num">0</td>
+              <td class="num">0</td>
+              <td class="num">0</td>
               <td class="num total">0</td>
             </tr>
           </tbody>
@@ -415,22 +442,23 @@
         <p>The card on the win screen shows the same components the score was built from — never a re-estimate.</p>
       </div>
       <div class="score-card" role="img"
-        aria-label="Example score card: Game Win 100 points, Hints Used 1 minus 10 points, Bonus Words Found 1 plus 25 points, Score 115 points, Solve Time 04 minutes 12 seconds.">
-        <div class="row"><span>Game Win:</span> <span>100 points</span></div>
-        <div class="row"><span>Hints Used 1:</span> <span class="neg">-10 points</span></div>
+        aria-label="Example score card: 5 Words 100 points, Solve Bonus 20 points, Bonus Words Found 1 plus 25 points, Hints Used 1 minus 10 points, Score 135 points, Solve Time 04 minutes 12 seconds.">
+        <div class="row"><span>5 Words:</span> <span>100 points</span></div>
+        <div class="row"><span>Solve Bonus:</span> <span>20 points</span></div>
         <div class="row"><span>Bonus Words Found 1:</span> <span>25 points</span></div>
-        <div class="row grand"><span>Score:</span> <span>115 points!</span></div>
+        <div class="row"><span>Hints Used 1:</span> <span class="neg">-10 points</span></div>
+        <div class="row grand"><span>Score:</span> <span>135 points!</span></div>
         <div class="row time"><span>Solve Time:</span> <span>04m12s</span></div>
       </div>
       <div class="stats-grid" style="margin-top:2rem;">
         <div class="stat">
-          <strong>Flawless Solve!</strong>
-          <span>A clean run outranks the mode name: Classic earns it with zero hints, Expert with zero invalid
-            guesses.</span>
+          <strong>Words line</strong>
+          <span>Always shown — 20 points for every word you completed, whether or not you finished all five.</span>
         </div>
         <div class="stat">
-          <strong>Game Win / Expert Win</strong>
-          <span>The ordinary win line, shown when the run was not flawless.</span>
+          <strong>Solve Bonus / Expert Win</strong>
+          <span>Appear only when you finish all 5 words: +20 for completing, plus +30 more if you finished in Expert
+            Mode.</span>
         </div>
         <div class="stat">
           <strong>Hints / Bonus lines</strong>
