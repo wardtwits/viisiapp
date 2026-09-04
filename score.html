@@ -326,114 +326,18 @@
     <!-- HINT PENALTY -->
     <section class="stats" style="margin-top:3rem;">
       <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>The Hint Penalty</h2>
-        <p>Hints cost 10 points each. Here is exactly when that charge lands.</p>
-      </div>
-      <ul class="rule-list">
-        <li><strong>Charged per row, not per tile.</strong> A hint prefills two letters of one row; that is one 10-point
-          charge no matter how many tiles it fills.</li>
+        <h2>Game Hints</h2>
+    <ul class="rule-list"></ul>
+        <li>After 3 valid words are found you have a hint available to use for the 4th and 5th word.</li>
+        <li>Each hint costs 10 points and it reveals the first 2 tiles (letters) of the new row.</li>
         <li><strong>Two hints, maximum.</strong> The hint button only unlocks once three rows are locked in, which
           leaves rows four and five — so a Classic game can lose at most 20 points to hints.</li>
-        <li><strong>You only pay if you use it.</strong> The charge sticks only when the hinted letters survive into the
-          word you actually submit. Type over the prefill with a different word and the row is not marked as hinted.</li>
-        <li><strong>Expert Mode charges nothing</strong>, because hints are switched off entirely.</li>
+        <li>Hints are not available in <strong class="highlight"><class="mint">⚡️</class> Expert Mode</strong></li>
         <li><strong>Hints cost you the Hint-Free badge</strong> and the hint-free leaderboards, but they do not cost you
-          the win, the streak, or a One Shot.</li>
+          the win, the streak, or a One Shot badge.</li>
       </ul>
     </section>
 
-    <!-- WORKED EXAMPLES -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Worked Examples</h2>
-        <p>The same arithmetic, run across the results you are most likely to see.</p>
-      </div>
-      <div class="score-table-wrap">
-        <table class="score-table">
-          <thead>
-            <tr>
-              <th scope="col">Result</th>
-              <th scope="col">Words</th>
-              <th scope="col">Completion</th>
-              <th scope="col">Bonus words</th>
-              <th scope="col">Hints</th>
-              <th scope="col">Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Classic win, no hints, no bonus</td>
-              <td class="num">100</td>
-              <td class="num">+20</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num total">120</td>
-            </tr>
-            <tr>
-              <td>Classic win, one bonus word</td>
-              <td class="num">100</td>
-              <td class="num">+20</td>
-              <td class="num">+25</td>
-              <td class="num">0</td>
-              <td class="num total">145</td>
-            </tr>
-            <tr>
-              <td>Classic win, two hints, one bonus word</td>
-              <td class="num">100</td>
-              <td class="num">+20</td>
-              <td class="num">+25</td>
-              <td class="num">−20</td>
-              <td class="num total">125</td>
-            </tr>
-            <tr>
-              <td>Expert win, no bonus</td>
-              <td class="num">100</td>
-              <td class="num">+50</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num total">150</td>
-            </tr>
-            <tr>
-              <td>Expert win, two bonus words</td>
-              <td class="num">100</td>
-              <td class="num">+50</td>
-              <td class="num">+50</td>
-              <td class="num">0</td>
-              <td class="num total">200</td>
-            </tr>
-            <tr>
-              <td>Perfect Expert board (five bonus words)</td>
-              <td class="num">100</td>
-              <td class="num">+50</td>
-              <td class="num">+125</td>
-              <td class="num">0</td>
-              <td class="num total">275</td>
-            </tr>
-            <tr>
-              <td>Reveal or fail-out after 3 words locked in</td>
-              <td class="num">60</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num total">60</td>
-            </tr>
-            <tr>
-              <td>Reveal or fail-out before completing a word</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num total">0</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="score-note">
-        A <strong>perfect score</strong> is your score matching the highest total that particular board could produce —
-        the base for your mode plus every Special Word it contains. Hit it for the first time and the win screen calls
-        it out.
-      </p>
-    </section>
 
     <!-- THE SCORE CARD -->
     <section class="stats" style="margin-top:3rem;">
@@ -522,45 +426,6 @@
       </ul>
     </section>
 
-    <!-- LIFETIME STATS -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>What Your Score Feeds</h2>
-        <p>How individual results roll up into the numbers on your Stats screen.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat">
-          <strong>Total Score</strong>
-          <span>The sum of every frozen per-game score across daily and archive play.</span>
-        </div>
-        <div class="stat">
-          <strong>Wins</strong>
-          <span>Every puzzle legitimately completed without revealing the solution.</span>
-        </div>
-        <div class="stat">
-          <strong>Win Rate</strong>
-          <span>Wins as a share of resolved attempts only. A puzzle you have merely started is neither a win nor a loss
-            and does not drag the rate down.</span>
-        </div>
-        <div class="stat">
-          <strong>Streak</strong>
-          <span>Consecutive daily wins, counted in UTC. Only a puzzle solved on its own day extends it — archive
-            catch-ups do not.</span>
-        </div>
-        <div class="stat">
-          <strong>Hint-Free Wins</strong>
-          <span>Legitimate wins that used zero hints. Every Expert win qualifies automatically.</span>
-        </div>
-        <div class="stat">
-          <strong>Performance</strong>
-          <span>Classic and Expert splits: puzzles played, wins, win rate, average and fastest solve times.</span>
-        </div>
-      </div>
-      <p class="score-note">
-        A new puzzle unlocks every day at <strong>06:00 UTC</strong>, and days are counted in UTC everywhere — so your
-        streak works the same wherever you are and however far you travel.
-      </p>
-    </section>
 
     <!-- ACHIEVEMENTS -->
     <section class="stats" style="margin-top:3rem;">
@@ -627,18 +492,6 @@
       </div>
     </section>
 
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title">
-        <h2>Go chase a perfect board</h2>
-        <p>Five letters, five words, one score a day — same puzzle for everyone on the planet.</p>
-      </div>
-      <div class="hero-cta" style="justify-content:center;">
-        <a class="btn btn-primary"
-          href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download Viisi</a>
-        <a class="btn btn-ghost apple" href="how-to-play.html">How to play</a>
-      </div>
-    </section>
-  </main>
 
   <footer class="footer">
     <a class="footer-back-top" href="#">^ Back to Top</a>

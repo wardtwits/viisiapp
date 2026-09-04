@@ -136,6 +136,13 @@ a {
   box-shadow: 0 10px 25px rgba(249, 113, 113, 0.25);
 }
 
+.highlight {
+  color: var(--viisi-red);
+}
+.mint {
+  color: var(--viisi-green);
+}
+
 .nav-links {
   display: flex;
   align-items: center;
