@@ -2,6 +2,12 @@
   const STORAGE_KEY = "viisi.web.demo.v3";
   const LEGACY_STORAGE_KEYS = ["viisi.web.demo.v1", "viisi.web.demo.v2"];
   const REQUIRED_WORDS = 5;
+  const POINTS_PER_WORD = 20;
+  const COMPLETION_BONUS = 20;
+  const HINT_PENALTY = 10;
+  const prefersReducedMotion = Boolean(
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const animationShell = document.querySelector(".phone-shell, .demo-shell");
 
   const PUZZLE = {
@@ -24,6 +30,21 @@
 
   const validWordSet = new Set(PUZZLE.validWords);
 
+  const DEFINITIONS = {
+    LEAST: "Smallest in amount, degree, or importance.",
+    LEATS: "(plural of Leat) Artificial channels that carry water to a mill.",
+    SALET: "A light medieval helmet with a brim.",
+    SETAL: "Having or relating to bristles (setae).",
+    SLATE: "A fine-grained rock that splits into thin plates, used for roofing.",
+    STALE: "No longer fresh; lacking freshness or novelty.",
+    STEAL: "To take something without permission or right.",
+    STELA: "An upright stone slab, often inscribed, used as a marker.",
+    TAELS: "(plural of Tael) Traditional Chinese units of weight or money.",
+    TALES: "(plural of Tale) Stories or narratives.",
+    TEALS: "(plural of Teal) Small freshwater ducks.",
+    TESLA: "A unit of magnetic flux density.",
+  };
+
   const elements = {
     board: document.getElementById("board"),
     keyboard: document.getElementById("keyboard"),
@@ -38,6 +59,7 @@
     deleteBtn: document.getElementById("deleteBtn"),
     hintBtn: document.getElementById("hintBtn"),
     resetButtons: document.querySelectorAll("[data-reset-button], #resetBtn"),
+    liveScore: document.getElementById("liveScore"),
   };
 
   if (!elements.board || !elements.keyboard) {
@@ -115,6 +137,11 @@
 
   let state = loadState();
   let flashTimeoutId = null;
+  let submitTimeoutId = null;
+  let winDelayTimeoutId = null;
+  let pendingSubmit = false; // a full row is waiting for its tile to land before validating
+  let lockingRow = -1; // row that just locked in, so renderBoard can pop it once
+  const arrivingCells = new Set(); // "row:col" cells hidden while a tile flies in
   const gameStartTime = Date.now();
 
   function clearAllDemoStorage() {
@@ -280,6 +307,11 @@
     return `${minutes}:${seconds}`;
   }
 
+  function currentScore() {
+    const base = state.completedWords.length * POINTS_PER_WORD + (state.isWon ? COMPLETION_BONUS : 0);
+    return Math.max(0, base - state.hintUses * HINT_PENALTY);
+  }
+
   function currentRowIndex() {
     return Math.min(state.completedWords.length, REQUIRED_WORDS - 1);
   }
@@ -317,13 +349,29 @@
           cell.classList.add("is-invalid");
         }
 
+        if (row === lockingRow) {
+          cell.classList.add("is-locking");
+          cell.style.animationDelay = `${col * 70}ms`;
+        }
+
+        if (arrivingCells.has(`${row}:${col}`)) {
+          cell.classList.add("is-arriving");
+        }
+
         elements.board.appendChild(cell);
       }
     }
+    lockingRow = -1;
   }
 
   function canUseIndex(index) {
-    return !state.currentIndices.includes(index) && state.currentWord.length < 5 && !state.isWon && !state.invalidFlash;
+    return (
+      !state.currentIndices.includes(index) &&
+      state.currentWord.length < 5 &&
+      !state.isWon &&
+      !state.invalidFlash &&
+      !pendingSubmit
+    );
   }
 
   function renderKeyboard() {
@@ -341,14 +389,15 @@
     });
 
     if (elements.deleteBtn) {
-      elements.deleteBtn.disabled = state.currentWord.length === 0 || state.isWon || state.invalidFlash;
+      elements.deleteBtn.disabled =
+        state.currentWord.length === 0 || state.isWon || state.invalidFlash || pendingSubmit;
     }
     if (elements.shuffleBtn) {
-      elements.shuffleBtn.disabled = state.isWon || state.invalidFlash;
+      elements.shuffleBtn.disabled = state.isWon || state.invalidFlash || pendingSubmit;
     }
     if (elements.hintBtn) {
       const showHintButton = state.completedWords.length >= 3 && !state.isWon && state.hintUses < 2;
-      const hintAvailable = canUseHint() && !state.invalidFlash;
+      const hintAvailable = canUseHint() && !state.invalidFlash && !pendingSubmit;
       if (showHintButton) {
         elements.hintBtn.classList.remove("invisible");
       } else {
@@ -375,6 +424,10 @@
         chip.textContent = word;
         elements.foundWords.appendChild(chip);
       });
+    }
+
+    if (elements.liveScore) {
+      elements.liveScore.textContent = String(currentScore());
     }
 
     if (elements.message) {
@@ -411,15 +464,84 @@
     persistState();
   }
 
+  function flyTile(fromRect, row, col, letter) {
+    const key = `${row}:${col}`;
+    const finish = () => {
+      arrivingCells.delete(key);
+      const cell = elements.board.children[row * 5 + col];
+      if (cell) {
+        cell.classList.remove("is-arriving");
+        cell.classList.add("is-landed");
+      }
+    };
+    const cell = elements.board.children[row * 5 + col];
+    if (!cell || typeof cell.animate !== "function") {
+      finish();
+      return;
+    }
+
+    const to = cell.getBoundingClientRect();
+    const tile = document.createElement("div");
+    tile.className = "flying-tile";
+    tile.textContent = letter;
+    tile.style.left = `${fromRect.left}px`;
+    tile.style.top = `${fromRect.top}px`;
+    tile.style.width = `${fromRect.width}px`;
+    tile.style.height = `${fromRect.height}px`;
+    document.body.appendChild(tile);
+
+    const dx = to.left - fromRect.left;
+    const dy = to.top - fromRect.top;
+    const sx = to.width / fromRect.width;
+    const sy = to.height / fromRect.height;
+    const animation = tile.animate(
+      [
+        { transform: "translate(0, 0) scale(1, 1)" },
+        {
+          transform: `translate(${dx * 0.5}px, ${dy * 0.5 - 18}px) scale(${(1 + sx) / 2}, ${(1 + sy) / 2})`,
+          offset: 0.5,
+        },
+        { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
+      ],
+      { duration: 260, easing: "cubic-bezier(0.3, 0.7, 0.3, 1)", fill: "forwards" }
+    );
+    const done = () => {
+      tile.remove();
+      finish();
+    };
+    animation.addEventListener("finish", done, { once: true });
+    animation.addEventListener("cancel", done, { once: true });
+  }
+
   function addLetter(index) {
     if (!canUseIndex(index)) return;
-    state.currentWord += state.displayLetters[index];
+
+    const row = state.completedWords.length;
+    const col = state.currentWord.length;
+    const letter = state.displayLetters[index];
+    const keyEl = elements.keyboard.children[index];
+    const fromRect = keyEl ? keyEl.getBoundingClientRect() : null;
+    const animate = !prefersReducedMotion && Boolean(fromRect);
+
+    state.currentWord += letter;
     state.currentIndices.push(index);
     setMessage("Keep going.");
-    render();
 
-    if (state.currentWord.length === 5) {
-      validateAttempt();
+    const isFull = state.currentWord.length === 5;
+    if (isFull) pendingSubmit = true;
+    if (animate) arrivingCells.add(`${row}:${col}`);
+    render();
+    if (animate) flyTile(fromRect, row, col, letter);
+
+    if (isFull) {
+      clearTimeout(submitTimeoutId);
+      submitTimeoutId = window.setTimeout(
+        () => {
+          pendingSubmit = false;
+          validateAttempt();
+        },
+        prefersReducedMotion ? 0 : 340
+      );
     }
   }
 
@@ -451,7 +573,7 @@
   }
 
   function deleteLetter() {
-    if (state.currentWord.length === 0 || state.isWon || state.invalidFlash) return;
+    if (state.currentWord.length === 0 || state.isWon || state.invalidFlash || pendingSubmit) return;
     state.currentWord = state.currentWord.slice(0, -1);
     state.currentIndices.pop();
     setMessage("Letter removed.");
@@ -489,7 +611,7 @@
   }
 
   function shuffleLetters() {
-    if (state.isWon || state.invalidFlash) return;
+    if (state.isWon || state.invalidFlash || pendingSubmit) return;
     const hasCurrentAttempt = state.currentWord.length > 0;
     const shuffled = getShuffledLettersAvoidingSolutions(state.displayLetters);
     const didChangeOrder = shuffled.join("") !== state.displayLetters.join("");
@@ -542,26 +664,22 @@
       return;
     }
 
-    console.log("[Viisi Demo] valid submission", {
-      guess,
-      completedBefore: state.completedWords.length,
-      completedWords: [...state.completedWords],
-      displayLetters: [...state.displayLetters],
-      currentIndices: [...state.currentIndices],
-    });
-
     state.completedWords.push(guess);
+    lockingRow = state.completedWords.length - 1;
     clearCurrentAttempt();
 
     if (state.completedWords.length >= REQUIRED_WORDS) {
       state.isWon = true;
       triggerWinAnimation();
       setMessage("You solved the demo. Nice run.", "success");
-      showWin({
+      const result = {
         time: formatElapsedTime(Date.now() - gameStartTime),
-        guesses: String(state.completedWords.length),
-        streak: String(state.hintUses),
-      });
+        score: currentScore(),
+        hints: state.hintUses,
+        words: [...state.completedWords],
+      };
+      clearTimeout(winDelayTimeoutId);
+      winDelayTimeoutId = window.setTimeout(() => showWin(result), prefersReducedMotion ? 0 : 750);
     } else {
       setMessage(`Nice. ${REQUIRED_WORDS - state.completedWords.length} more to win.`, "success");
     }
@@ -576,6 +694,7 @@
   }
 
   function useHint() {
+    if (pendingSubmit) return;
     if (state.invalidFlash) {
       setMessage("Finish the current row reset, then try hint again.", "error");
       render();
@@ -657,6 +776,8 @@
 
   function resetGame() {
     clearTimeout(flashTimeoutId);
+    clearTimeout(submitTimeoutId);
+    clearTimeout(winDelayTimeoutId);
     flashTimeoutId = null;
     clearAllDemoStorage();
 
@@ -681,7 +802,7 @@
   }
 
   function handleKeydown(event) {
-    if (event.defaultPrevented || state.isWon || state.invalidFlash) return;
+    if (event.defaultPrevented || state.isWon || state.invalidFlash || pendingSubmit) return;
     const key = event.key.toUpperCase();
 
     if (key === "BACKSPACE") {
@@ -726,17 +847,62 @@
   const overlay = document.getElementById("winOverlay");
   const confettiLayer = document.getElementById("confettiLayer");
   const winTime = document.getElementById("winTime");
-  const winGuesses = document.getElementById("winGuesses");
+  const winScore = document.getElementById("winScore");
+  const winDate = document.getElementById("winDate");
+  const winWords = document.getElementById("winWords");
   const winStreak = document.getElementById("winStreak");
   const winCloseBtn = document.getElementById("winCloseBtn");
   const winReplayBtn = document.getElementById("winReplayBtn");
   let confettiBurstTimeoutId = null;
 
-  function showWin({ time = "01:42", guesses = "2", streak = "5🔥" } = {}) {
+  let scoreFrameId = 0;
+
+  function animateScore(target) {
+    if (!winScore) return;
+    cancelAnimationFrame(scoreFrameId);
+    if (prefersReducedMotion) {
+      winScore.textContent = String(target);
+      return;
+    }
+
+    const startAt = performance.now() + 350;
+    const duration = 900;
+    winScore.textContent = "0";
+    const tick = (now) => {
+      const progress = Math.min(1, Math.max(0, (now - startAt) / duration));
+      winScore.textContent = String(Math.round(target * (1 - Math.pow(1 - progress, 3))));
+      if (progress < 1) scoreFrameId = requestAnimationFrame(tick);
+    };
+    scoreFrameId = requestAnimationFrame(tick);
+  }
+
+  function showWin({ time = "00:00", score = 0, hints = 0, words = [] } = {}) {
     if (!overlay) return;
     if (winTime) winTime.textContent = time;
-    if (winGuesses) winGuesses.textContent = guesses;
-    if (winStreak) winStreak.textContent = streak;
+    if (winStreak) {
+      winStreak.textContent = hints > 0 ? `-${hints * HINT_PENALTY}` : "0";
+      winStreak.classList.toggle("is-negative", hints > 0);
+    }
+    if (winDate) {
+      winDate.textContent = new Date()
+        .toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })
+        .toUpperCase();
+    }
+    if (winWords) {
+      winWords.innerHTML = "";
+      words.forEach((word) => {
+        const item = document.createElement("li");
+        const title = document.createElement("strong");
+        title.textContent = word;
+        const meaning = document.createElement("span");
+        meaning.textContent = DEFINITIONS[word] || "";
+        item.append(title, meaning);
+        winWords.appendChild(item);
+      });
+    }
+    animateScore(score);
+    const card = overlay.querySelector(".win-card");
+    if (card) card.scrollTop = 0;
 
     overlay.hidden = false;
     overlay.setAttribute("aria-hidden", "false");
@@ -749,6 +915,8 @@
     });
     clearTimeout(confettiBurstTimeoutId);
     confettiBurstTimeoutId = window.setTimeout(() => spawnConfetti(60), 220);
+
+    if (winCloseBtn) winCloseBtn.focus({ preventScroll: true });
 
     // Esc closes
     window.addEventListener("keydown", escClose, { once: true });

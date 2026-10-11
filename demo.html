@@ -19,10 +19,10 @@
   <meta name="twitter:description" content="Try the Viisi anagram word puzzle demo in your browser." />
   <meta name="twitter:image" content="https://viisi.app/assets/images/mobile-site.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261011-fresh-look" />
-  <link rel="stylesheet" href="assets/css/demo.css?v=20261011-fresh-look" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261011-light-theme" />
+  <link rel="stylesheet" href="assets/css/demo.css?v=20261011-light-theme" />
   <script defer src="assets/js/main.js"></script>
-  <script defer src="assets/js/demo.js"></script>
+  <script defer src="assets/js/demo.js?v=20261011-light-theme"></script>
   <style>
     .video-pill {
   display: inline-flex;
@@ -146,6 +146,10 @@
                       align-items: center;
                     ">
                   <span class="viisi">Viisi</span>
+                  <span class="demo-crown" title="Score">
+                    <svg viewBox="0 0 24 16" width="22" height="15" aria-hidden="true"><path d="M1 15V3l6 5.5L12 1l5 7.5L23 3v12z" fill="currentColor"/></svg>
+                    <b id="liveScore">0</b>
+                  </span>
                   <div class="phone-toolbar">
               <button id="resetBtn" class="btn" type="button" data-reset-button>
                   Reset
@@ -158,7 +162,7 @@
                 </section>
                 <div id="board" class="demo-board" aria-label="Puzzle board" role="grid"></div>
 
-                <a id="hintBtn" class="btn invisible">Hint</a>
+                <button id="hintBtn" class="btn invisible" type="button">Hint</button>
               
                 <div id="message" class="demo-message" role="status" aria-live="polite"></div>
       
@@ -197,28 +201,31 @@
               <section id="winOverlay" class="win-overlay" aria-hidden="true" hidden>
                 <div class="win-backdrop"></div>
                 <div class="win-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
-                  <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
-                  <h3 id="winTitle">You Win!</h3>
-                  <p class="win-copy">You found all five valid words.</p>
+                  <h3 id="winTitle" class="sr-only">You Win! You found all five valid words.</h3>
+                  <button id="winCloseBtn" class="win-close" type="button" aria-label="Close results">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+                  </button>
+                  <div class="win-score-wrap" aria-hidden="true">
+                    <i class="sparkle sparkle--a"></i><i class="sparkle sparkle--b"></i><i class="sparkle sparkle--c"></i>
+                    <div id="winScore" class="win-score">0</div>
+                  </div>
+                  <p class="win-label">Score</p>
+                  <p id="winDate" class="win-date"></p>
                   <div class="win-stats">
                     <div class="win-stat">
                       <span>Time</span>
                       <strong id="winTime">00:00</strong>
                     </div>
                     <div class="win-stat">
-                      <span>Words</span>
-                      <strong id="winGuesses">5</strong>
-                    </div>
-                    <div class="win-stat">
                       <span>Hints</span>
                       <strong id="winStreak">0</strong>
                     </div>
                   </div>
-                  <div class="win-actions">
-                    <button id="winReplayBtn" class="btn" type="button">Replay Confetti</button>
-                    <button id="winCloseBtn" class="btn btn-primary" type="button">Close</button>
-                  </div>
+                  <p class="win-note">10 points off for each hint used</p>
+                  <h4 class="win-words-title">Words found</h4>
+                  <ul id="winWords" class="win-words"></ul>
                 </div>
+                <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
               </section>
             </div>
     

@@ -34,28 +34,106 @@
   };
   const demoSolveOrder = ["STARE", "TEARS", "RATES", "ASTER", "TARES"];
 
-  const colors = {
+  // Dark and light follow the visitor's browser setting (prefers-color-scheme).
+  const darkColors = {
     bgTop: "#1b2147",
     bgBottom: "#10142b",
-    panel: "#383f6b",
-    panelLight: "#474b78",
     text: "#ffffff",
     muted: "#b9bcd6",
+    title: "#54d1b4",
+    date: "#54d1b4",
+    status: "#ffffff",
+    cellText: "#ffffff",
     red: "#fb4655",
     redEdge: "#b81f33",
     redDim: "rgba(251, 70, 85, 0.18)",
-    scoreRed: "#ee5660",
+    rackDimText: "rgba(255, 255, 255, 0.22)",
     teal: "#54d1b4",
-    green: "#00ba8b",
-    greenEdge: "#067a5c",
     gold: "#f6b13c",
+    lock: "#00ba8b",
+    lockEdge: "#067a5c",
+    shuffle: "#00ba8b",
+    delete: "#7b819f",
+    disabled: "#5b6180",
+    ctrlShadow: "rgba(0, 0, 0, 0.35)",
     cellEmpty: "rgba(255, 255, 255, 0.05)",
     cellLine: "rgba(255, 255, 255, 0.16)",
     cellActive: "rgba(84, 209, 180, 0.1)",
     cellPlaced: "rgba(0, 186, 139, 0.24)",
-    disabled: "#5b6180",
-    delete: "#7b819f",
+    overlay: "8, 10, 24",
+    decor: false,
   };
+
+  const lightColors = {
+    bgTop: "#ffffff",
+    bgBottom: "#f1f1f7",
+    text: "#2d3156",
+    muted: "#6f7390",
+    title: "#2d3156",
+    date: "#2d3156",
+    status: "#2d3156",
+    cellText: "#2d3156",
+    red: "#ea5560",
+    redEdge: "#c23c48",
+    redDim: "rgba(234, 85, 96, 0.16)",
+    rackDimText: "rgba(234, 85, 96, 0.5)",
+    teal: "#4fc4a8",
+    gold: "#e9a825",
+    lock: "#5cc9ae",
+    lockEdge: "#3da58c",
+    shuffle: "#5ccbb0",
+    delete: "#9d9da6",
+    disabled: "#cfcfd8",
+    ctrlShadow: "rgba(45, 49, 86, 0.18)",
+    cellEmpty: "#f3f3f6",
+    cellLine: "#e3e3ea",
+    cellActive: "#ffffff",
+    cellPlaced: "rgba(92, 201, 174, 0.22)",
+    overlay: "45, 49, 86",
+    decor: true,
+  };
+
+  // The results sheet is the same navy panel in both themes.
+  const sheet = {
+    panel: "#383f6b",
+    panelLight: "#474b78",
+    text: "#ffffff",
+    muted: "#b9bcd6",
+    teal: "#54d1b4",
+    scoreRed: "#ee5660",
+  };
+
+  const schemeQuery =
+    typeof window.matchMedia === "function"
+      ? window.matchMedia("(prefers-color-scheme: light)")
+      : null;
+  let colors = schemeQuery && schemeQuery.matches ? lightColors : darkColors;
+  if (schemeQuery) {
+    const onSchemeChange = (event) => {
+      colors = event.matches ? lightColors : darkColors;
+    };
+    if (typeof schemeQuery.addEventListener === "function") {
+      schemeQuery.addEventListener("change", onSchemeChange);
+    } else if (typeof schemeQuery.addListener === "function") {
+      schemeQuery.addListener(onSchemeChange);
+    }
+  }
+
+  // Faint floating letter tiles behind the board in the light theme.
+  const decorTiles = [
+    { x: 0.03, y: 0.12, s: 46, r: -0.35, l: "W", c: "#bfeadc" },
+    { x: 0.9, y: 0.07, s: 42, r: 0.2, l: "U", c: "#f7d0d4" },
+    { x: 0.47, y: 0.19, s: 26, r: 0.5, l: "V", c: "#dadbe4" },
+    { x: 0.95, y: 0.3, s: 50, r: 0.15, l: "R", c: "#dadbe4" },
+    { x: 0.0, y: 0.42, s: 48, r: -0.1, l: "D", c: "#fbe3c3" },
+    { x: 0.92, y: 0.53, s: 48, r: 0.5, l: "T", c: "#cfd9f5" },
+    { x: 0.0, y: 0.6, s: 44, r: 0.2, l: "R", c: "#f7d0d4" },
+    { x: 1.0, y: 0.86, s: 50, r: -0.2, l: "M", c: "#dadbe4" },
+    { x: 0.1, y: 0.94, s: 42, r: 0.3, l: "Z", c: "#cfd9f5" },
+    { x: 0.7, y: 0.91, s: 40, r: -0.3, l: "A", c: "#fbe3c3" },
+    { x: 0.45, y: 0.975, s: 34, r: 0.2, l: "L", c: "#bfeadc" },
+    { x: 0.9, y: 0.975, s: 52, r: -0.1, l: "Y", c: "#f7d0d4" },
+  ];
 
   const today = new Date();
   const shortDate = today
@@ -275,7 +353,7 @@
   }
 
   function spawnConfetti(now) {
-    const palette = [colors.red, colors.teal, colors.gold, colors.green, "#7d8cff", colors.text];
+    const palette = ["#fb4655", "#54d1b4", "#f6b13c", "#00ba8b", "#7d8cff", "#ffffff"];
     confetti = [];
     for (let i = 0; i < 70; i += 1) {
       const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.9;
@@ -429,7 +507,7 @@
   }
 
   function drawControl(x, y, size, fill, glyph, onTap) {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
+    ctx.fillStyle = colors.ctrlShadow;
     roundRect(x, y + 3, size, size, 10);
     ctx.fill();
     ctx.fillStyle = fill;
@@ -440,7 +518,7 @@
   }
 
   function drawShuffleGlyph(cx, cy) {
-    ctx.strokeStyle = colors.text;
+    ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2.5;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -468,7 +546,7 @@
   }
 
   function drawDeleteGlyph(cx, cy) {
-    ctx.strokeStyle = colors.text;
+    ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2.2;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -507,6 +585,27 @@
 
   // ---- scenes ----------------------------------------------------------
 
+  function drawDecor() {
+    const scale = width / 288;
+    ctx.save();
+    ctx.globalAlpha = 0.55;
+    ctx.textAlign = "center";
+    decorTiles.forEach((tile) => {
+      const size = tile.s * scale;
+      ctx.save();
+      ctx.translate(tile.x * width, tile.y * height);
+      ctx.rotate(tile.r);
+      ctx.fillStyle = tile.c;
+      roundRect(-size / 2, -size / 2, size, size, size * 0.26);
+      ctx.fill();
+      ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+      ctx.font = font(800, Math.round(size * 0.5));
+      ctx.fillText(tile.l, 0, 1);
+      ctx.restore();
+    });
+    ctx.restore();
+  }
+
   function drawBoard(now) {
     const pad = width * 0.05;
     const headerY = height * 0.065;
@@ -519,7 +618,7 @@
     }
 
     ctx.textAlign = "center";
-    ctx.fillStyle = colors.teal;
+    ctx.fillStyle = colors.date;
     ctx.font = font(800, 11);
     ctx.fillText(shortDate, width / 2, headerY);
 
@@ -547,7 +646,7 @@
 
     // Mode title + running score.
     const modeY = height * 0.125;
-    ctx.fillStyle = colors.teal;
+    ctx.fillStyle = colors.title;
     ctx.font = font(800, 16);
     ctx.fillText("Classic Mode", width / 2, modeY);
 
@@ -607,8 +706,8 @@
           ctx.save();
           ctx.translate(pos.x + cell / 2, pos.y + cell / 2);
           ctx.scale(scale, scale);
-          drawTileFace(-cell / 2, -cell / 2, cell - 1, colors.green, colors.greenEdge, radius);
-          ctx.fillStyle = colors.text;
+          drawTileFace(-cell / 2, -cell / 2, cell - 1, colors.lock, colors.lockEdge, radius);
+          ctx.fillStyle = "#ffffff";
           ctx.font = font(900, Math.round(cell * 0.5));
           ctx.textAlign = "center";
           ctx.fillText(entry.word[c], 0, 1);
@@ -646,7 +745,7 @@
         roundRect(pos.x + 1 + shakeX, pos.y + 1, cell - 2, cell - 2, radius);
         ctx.fill();
         ctx.stroke();
-        ctx.fillStyle = colors.text;
+        ctx.fillStyle = colors.cellText;
         ctx.font = font(900, Math.round(cell * 0.5));
         ctx.textAlign = "center";
         ctx.fillText(tile.letter, pos.x + cell / 2 + shakeX, pos.y + cell / 2 + 1);
@@ -656,7 +755,7 @@
     // Status line.
     const statusP = clamp01((now - status.start) / 300);
     ctx.globalAlpha = statusP;
-    ctx.fillStyle = colors.text;
+    ctx.fillStyle = colors.status;
     ctx.font = font(700, 12);
     ctx.textAlign = "center";
     ctx.fillText(status.text, width / 2, statusY + (1 - statusP) * 6);
@@ -684,7 +783,7 @@
       } else {
         drawTileFace(-rackTile / 2, -rackTile / 2, rackTile, colors.red, colors.redEdge, 10);
       }
-      ctx.fillStyle = placed ? "rgba(255, 255, 255, 0.22)" : colors.text;
+      ctx.fillStyle = placed ? colors.rackDimText : "#ffffff";
       ctx.font = font(900, Math.round(rackTile * 0.45));
       ctx.textAlign = "center";
       ctx.fillText(tile.letter, 0, 1);
@@ -711,7 +810,7 @@
       const x = lerp(from.x, pos.x, p);
       const y = lerp(from.y, pos.y, p) - Math.sin(p * Math.PI) * 14;
       drawTileFace(x, y, size, colors.red, colors.redEdge, Math.max(8, size * 0.24));
-      ctx.fillStyle = colors.text;
+      ctx.fillStyle = "#ffffff";
       ctx.font = font(900, Math.round(size * 0.48));
       ctx.textAlign = "center";
       ctx.fillText(tile.letter, x + size / 2, y + size / 2 + 1);
@@ -723,7 +822,7 @@
     const ctrlGap = 10;
     const ctrlX = width / 2 - ctrlSize - ctrlGap / 2;
     const hasLetters = tiles.some((tile) => tile.col !== -1);
-    drawControl(ctrlX, ctrlY, ctrlSize, colors.green, drawShuffleGlyph, () => {
+    drawControl(ctrlX, ctrlY, ctrlSize, colors.shuffle, drawShuffleGlyph, () => {
       stopDemo();
       shuffle();
     });
@@ -749,7 +848,7 @@
     const inP = reduceMotion ? 1 : easeOutCubic(clamp01(t / 500));
     const slide = reduceMotion ? closeT * height : (1 - inP) * height + closeT * height;
 
-    ctx.fillStyle = `rgba(8, 10, 24, ${0.6 * inP * (1 - closeT)})`;
+    ctx.fillStyle = `rgba(${colors.overlay}, ${0.55 * inP * (1 - closeT)})`;
     ctx.fillRect(0, 0, width, height);
 
     const sheetX = 10;
@@ -761,18 +860,18 @@
     ctx.save();
     ctx.translate(sheetX, sheetTop);
 
-    ctx.fillStyle = colors.panel;
+    ctx.fillStyle = sheet.panel;
     roundRect(0, 0, sheetW, height - restTop + 30, 26);
     ctx.fill();
 
     // Close button.
     const closeCx = sheetW - 26;
     const closeCy = 26;
-    ctx.fillStyle = colors.scoreRed;
+    ctx.fillStyle = sheet.scoreRed;
     ctx.beginPath();
     ctx.arc(closeCx, closeCy, 15, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = colors.text;
+    ctx.strokeStyle = sheet.text;
     ctx.lineWidth = 3;
     ctx.lineCap = "round";
     ctx.beginPath();
@@ -797,7 +896,7 @@
     // Score count-up with sparkles.
     const countP = reduceMotion ? 1 : easeOutCubic(clamp01((t - 350) / 900));
     ctx.textAlign = "center";
-    ctx.fillStyle = colors.scoreRed;
+    ctx.fillStyle = sheet.scoreRed;
     ctx.font = font(900, Math.round(sheetW * 0.2));
     ctx.fillText(String(Math.round(results.score * countP)), sheetW / 2, 66);
 
@@ -806,7 +905,7 @@
     drawSparkle(sheetW * 0.17, 62, 10, twinkle(1.7));
     drawSparkle(sheetW * 0.2, 44, 5, twinkle(3.1));
 
-    ctx.fillStyle = colors.muted;
+    ctx.fillStyle = sheet.muted;
     ctx.font = font(800, 15);
     ctx.fillText("SCORE", sheetW / 2, 112);
     ctx.font = font(800, 12);
@@ -817,27 +916,27 @@
     const tileW = (sheetW - inset * 2 - tileGap) / 2;
     const statY = 154;
     [
-      { value: formatTime(results.elapsed), label: "TIME", color: colors.teal, x: inset },
-      { value: "0", label: "HINTS", color: colors.teal, x: inset + tileW + tileGap },
+      { value: formatTime(results.elapsed), label: "TIME", color: sheet.teal, x: inset },
+      { value: "0", label: "HINTS", color: sheet.teal, x: inset + tileW + tileGap },
     ].forEach((stat) => {
-      ctx.fillStyle = colors.panelLight;
+      ctx.fillStyle = sheet.panelLight;
       roundRect(stat.x, statY, tileW, 58, 16);
       ctx.fill();
       ctx.fillStyle = stat.color;
       ctx.font = font(800, 22);
       ctx.fillText(stat.value, stat.x + tileW / 2, statY + 25);
-      ctx.fillStyle = colors.muted;
+      ctx.fillStyle = sheet.muted;
       ctx.font = font(700, 11);
       ctx.fillText(stat.label, stat.x + tileW / 2, statY + 46);
     });
 
-    ctx.fillStyle = colors.muted;
+    ctx.fillStyle = sheet.muted;
     ctx.font = font(600, 11);
     ctx.fillText("10 points off for each hint used", sheetW / 2, 232);
 
     // Words found list, clipped and slowly auto-scrolling.
     ctx.textAlign = "left";
-    ctx.fillStyle = colors.muted;
+    ctx.fillStyle = sheet.muted;
     ctx.font = font(800, 12);
     ctx.fillText("WORDS FOUND", inset, 258);
 
@@ -861,13 +960,13 @@
     ctx.clip();
     let y = listTop - scroll;
     cards.forEach((card) => {
-      ctx.fillStyle = colors.panelLight;
+      ctx.fillStyle = sheet.panelLight;
       roundRect(inset, y, listW, card.h, 14);
       ctx.fill();
-      ctx.fillStyle = colors.teal;
+      ctx.fillStyle = sheet.teal;
       ctx.font = font(800, 15);
       ctx.fillText(card.word, inset + cardPad, y + cardPad + 6);
-      ctx.fillStyle = colors.text;
+      ctx.fillStyle = sheet.text;
       ctx.font = font(600, 11.5);
       card.lines.forEach((line, i) => {
         ctx.fillText(line, inset + cardPad, y + cardPad + 26 + i * 15);
@@ -917,6 +1016,7 @@
     ctx.fillRect(0, 0, width, height);
     hits = [];
     ctx.textBaseline = "middle";
+    if (colors.decor) drawDecor();
 
     drawBoard(now);
     if (phase === "results") drawResults(now);
