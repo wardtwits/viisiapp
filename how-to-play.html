@@ -19,8 +19,85 @@
   <meta name="twitter:description" content="Rules and tips for Viisi, the daily anagram puzzle game on iOS." />
   <meta name="twitter:image" content="https://viisi.app/assets/images/full-site.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261011-fresh-look" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261011-red-buttons" />
   <script defer src="assets/js/main.js"></script>
+  <style>
+    /* Compact layout for the guide: tighter panels, steps in two columns. */
+    .howto section.stats {
+      margin-top: 1.25rem;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .howto .section-title {
+      margin-bottom: 1rem;
+    }
+
+    .howto .section-title h2 {
+      margin-bottom: 0.25rem;
+      font-size: clamp(1.5rem, 3vw, 1.9rem);
+    }
+
+    .howto .video-pill {
+      margin-bottom: 0.75rem;
+    }
+
+    .howto-steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem 2.5rem;
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .howto .compact-cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 1000px) {
+      .howto .compact-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .howto .compact-cards .feature-card {
+      padding: 1rem 1.1rem;
+    }
+
+    .howto .compact-cards .feature-card p {
+      margin: 0.4rem 0 0;
+      font-size: 0.95rem;
+    }
+
+    .howto .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem 1.25rem;
+    }
+
+    .howto .stats-grid--three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .howto-note {
+      margin: 1rem 0 0;
+    }
+
+    .howto-subhead {
+      margin: 1.5rem 0 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+      .howto section.stats {
+        padding: 1rem;
+      }
+
+      .howto-steps,
+      .howto .stats-grid--three {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -59,7 +136,7 @@
     </div>
   </header>
 
-  <main class="container" style="padding-bottom:4rem;">
+  <main class="container howto" style="padding-bottom:2.5rem;">
     <section class="hero" style="grid-template-columns:1fr;">
       <div>
         <div class="badge">Master the daily challenge</div>
@@ -74,85 +151,82 @@
       </div>
     </section>
 
-    <section class="stats" style="margin-top:0;">
-    <a class="video-pill" href="https://youtube.com/shorts/w7KIiffU7Uw?feature=share" aria-label="Watch demo video" target="_blank" rel="noopener">
-    <span class="video-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24">
-        <path d="M9 7.5v9l7-4.5-7-4.5Z" />
-      </svg>
-    </span>
-      <span>Watch Demo</span>
-    </a>
+    <section class="stats">
+      <a class="video-pill" href="https://youtube.com/shorts/w7KIiffU7Uw?feature=share" aria-label="Watch demo video" target="_blank" rel="noopener">
+        <span class="video-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 7.5v9l7-4.5-7-4.5Z" />
+          </svg>
+        </span>
+        <span>Watch Demo</span>
+      </a>
 
       <div class="section-title">
         <h2>The Basics</h2>
         <p>Simple rules keep Viisi approachable while still offering satisfying depth.</p>
       </div>
-      <ol style="margin:0;padding-left:1.25rem;display:grid;gap:0.75rem;">
+      <ol class="howto-steps">
         <li>Use <strong>every letter</strong> once per word.</li>
         <li>Words must be in the official Viisi dictionary—no abbreviations or names.</li>
-        <li>Each row holds one word. Lock it in to move to the next row—five locked rows wins the day.</li>
-        <li>Leaving the game mid-row clears the partially typed words. Commit before you wander!</li>
+        <li>Each row holds one word. Lock it in to move to the next row—five locked rows wins the day. Leaving mid-row clears the words you've typed, so commit before you wander!</li>
         <li>Some puzzles hide <strong>bonus words</strong>. Find one and its tiles turn gold for extra points.</li>
-        <li>Level-up your vocabulary!  After you win a game click the words to reveal definitions.</li>
-        <li>Hungry for more games?  Go to the archive and play games in the past.</li>
         <li>A new puzzle unlocks every day at <strong>06:00 UTC</strong>, the same board for every player worldwide.</li>
+        <li>Level up your vocabulary! After you win, tap the words to reveal their definitions.</li>
       </ol>
     </section>
 
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
+    <section class="stats">
+      <div class="section-title">
         <h2>Helpful Tools</h2>
-        <p>Use these options if you feel stuck—your stats will note when hints are involved.</p>
+        <p>Use these options if you feel stuck—your stats will note when hints are involved. Want more puzzles? The archive has every past day.</p>
       </div>
-      <div class="features-grid" style="gap:1.5rem;">
+      <div class="features-grid compact-cards">
         <article class="feature-card hover">
           <span aria-hidden="true">💡</span>
           <h3 class="trophy">Hints</h3>
-          <p>Lock in three words and the hint button lights up. Tap it to clear your current row and prefill two letters
-            of a solution. Two hints per puzzle, 10 points each, and a hint never points at a bonus word.</p>
+          <p>Lock in three words and the hint button lights up. Tap it to prefill two letters of a solution. Two hints per puzzle, 10 points each, and never a bonus word.</p>
         </article>
         <article class="feature-card hover">
           <span aria-hidden="true">🔍</span>
           <h3 class="trophy">Reveal</h3>
-          <p>Ready to surrender? Reveal uncovers every answer in the current puzzle. There is no undo—the day counts as
-            played but not solved, so it won't extend your streak and the streak ends at the next puzzle rollover.</p>
+          <p>Uncovers every answer. There is no undo—the day counts as played but not solved, so your streak ends at the next puzzle rollover.</p>
         </article>
         <article class="feature-card hover">
           <span aria-hidden="true">♻️</span>
           <h3 class="trophy">Reset</h3>
-          <p>Replay any puzzle from a clean board. Your original score, time, and stats are frozen and never change—a
-            replay is just for fun.</p>
+          <p>Replay any puzzle from a clean board. Your original score, time, and stats stay frozen—a replay is just for fun.</p>
+        </article>
+        <article class="feature-card hover">
+          <span aria-hidden="true">🗂️</span>
+          <h3 class="trophy">Archive</h3>
+          <p>Scroll back through past games and play the ones you missed. Perfect for rainy afternoons—but archive catch-ups don't extend your streak.</p>
         </article>
       </div>
     </section>
 
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
+    <section class="stats">
+      <div class="section-title">
         <h2>Expert Mode</h2>
         <p>Turn it on in Settings when the daily board stops fighting back. It becomes the default for new games.</p>
       </div>
-      <div class="features-grid" style="gap:1.5rem;">
-        <article class="feature-card hover">
-          <span aria-hidden="true">⚡️</span>
-          <h3 class="trophy">No hints</h3>
-          <p>Hints are switched off entirely. It is you, five letters, and the dictionary.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">❌</span>
-          <h3 class="trophy">Three strikes</h3>
-          <p>Three invalid submissions end the game. Think before you lock in a word.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🔒</span>
-          <h3 class="trophy">Locked in</h3>
-          <p>A puzzle keeps the mode it started in, so switching the setting never changes a game already in progress.</p>
-        </article>
+      <div class="stats-grid">
+        <div class="stat">
+          <strong>⚡️ No hints</strong>
+          <span>Hints are switched off entirely. It is you, five letters, and the dictionary.</span>
+        </div>
+        <div class="stat">
+          <strong>❌ Three strikes</strong>
+          <span>Three invalid submissions end the game. Think before you lock in a word.</span>
+        </div>
+        <div class="stat">
+          <strong>🔒 Locked in</strong>
+          <span>A puzzle keeps the mode it started in, so switching the setting never changes a game in progress.</span>
+        </div>
       </div>
     </section>
 
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
+    <section class="stats">
+      <div class="section-title">
         <h2>Scoring</h2>
         <p>Every win is scored. Your score drives your performance stats and the celebration screen breakdown. <a href="score.html">See the full scoring breakdown</a>.</p>
       </div>
@@ -174,15 +248,15 @@
           <span>Each hinted row costs 10 points. Skip both for a clean sheet.</span>
         </div>
       </div>
-      <p style="margin-top:1.25rem;">Reveal the solution or fail out of Expert Mode and you keep the points for every word you'd already completed—only the completion bonus is lost.</p>
+      <p class="howto-note">Reveal the solution or fail out of Expert Mode and you keep the points for every word you'd already completed—only the completion bonus is lost.</p>
     </section>
 
-   <section class="stats" style="margin-top:3rem;">
-     <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Badges</h2>
-        <p>Badges are your Viisi bragging rights. Trophies that prove you're on a roll. Stack wins, keep your streak alive, and chase "perfect runs" to light them up on your Home screen.</p>
+    <section class="stats">
+      <div class="section-title">
+        <h2>Badges &amp; Stats</h2>
+        <p>Badges are your Viisi bragging rights. Stack wins, keep your streak alive, and chase "perfect runs" to light them up on your Home screen. Progress syncs across your devices with the same Apple ID.</p>
       </div>
-      <div class="features-grid" style="gap:1.5rem;">
+      <div class="features-grid compact-cards">
         <article class="feature-card hover">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="trophy lucide lucide-flame w-7 h-7 text-badge-text mb-1"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
           <h3 class="trophy">5 Streak</h3>
@@ -205,22 +279,11 @@
           <p>Solve a puzzle on your very first attempt—without leaving the game board. No resets or reveals.</p>
         </article>
       </div>
-    </section>
-
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Archive & Stats</h2>
-        <p>Relive your favorite puzzles, share streak screenshots, and celebrate milestones. Progress syncs across
-          your devices with the same Apple ID.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat">
-          <strong>Archive</strong>
-          <span>Scroll back through past games. Perfect for rainy afternoons.</span>
-        </div>
+      <h3 class="howto-subhead">Your stats</h3>
+      <div class="stats-grid stats-grid--three">
         <div class="stat">
           <strong>Score</strong>
-          <span>Your lifetime points, including partial points from puzzles that ended in a reveal or Expert fail-out.</span>
+          <span>Your lifetime points, including partial points from reveals or Expert fail-outs.</span>
         </div>
         <div class="stat">
           <strong>Wins</strong>

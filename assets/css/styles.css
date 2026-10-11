@@ -194,7 +194,7 @@ a {
 }
 
 .btn-primary {
-  background: var(--viisi-red-dark);
+  background: var(--viisi-red);
   color: white;
   box-shadow: 0 10px 30px rgba(251, 70, 85, 0.35);
 }
@@ -225,9 +225,9 @@ a {
 }
 
 .hero {
-  padding: 3rem 0 4rem;
+  padding: 2rem 0 2.5rem;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
 }
@@ -898,7 +898,7 @@ a {
   border-top: 1px solid var(--site-line);
   color: rgba(255, 255, 255, 0.85);
   padding: 2.5rem 0;
-  margin-top: 4rem;
+  margin-top: 2.5rem;
   position: relative;
 }
 
@@ -1181,7 +1181,7 @@ a {
 }
  */
 
-/* ---- Fresh look: neon rings, showcase gallery, content panels ---- */
+/* ---- Fresh look: neon rings, content panels ---- */
 
 .hero > .phone-showcase::before,
 .hero > .phone-showcase .glow::after {
@@ -1210,7 +1210,7 @@ a {
 
 .content-block,
 .seo-callout {
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: clamp(1.5rem, 3vw, 2.25rem);
   border: 1px solid var(--site-line);
   border-radius: var(--radius-lg);
@@ -1242,53 +1242,21 @@ a {
     url("../images/marketing/viisi-v3-ribbons.jpg") center 38% / cover no-repeat;
 }
 
-.showcase {
-  padding: 1rem 0 0;
+/* "What kind of word game" panel: phone art lives at its right edge. */
+.content-block.intro {
+  min-height: 360px;
+  padding-right: min(38%, 440px);
+  overflow: hidden;
+  background:
+    url("../images/marketing/viisi-phone-art.png") right 1.5rem center / auto calc(100% - 1.5rem) no-repeat,
+    var(--site-glass);
 }
 
-.showcase-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.25rem;
-}
-
-.showcase-grid li:nth-child(even) {
-  transform: translateY(1.5rem);
-}
-
-.showcase-grid img {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--site-line);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
-}
-
-.showcase + .content-block {
-  margin-top: 4rem;
+.content-block.intro h2 {
+  margin-top: 0;
 }
 
 @media (max-width: 900px) {
-  .showcase-grid {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    padding-bottom: 1rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .showcase-grid li,
-  .showcase-grid li:nth-child(even) {
-    flex: 0 0 min(64vw, 260px);
-    scroll-snap-align: center;
-    transform: none;
-  }
-
   .hero > .phone-showcase::before {
     width: 340px;
     height: 200px;
@@ -1299,8 +1267,33 @@ a {
     width: 340px;
     height: 200px;
   }
+}
 
-  .showcase + .content-block {
-    margin-top: 2rem;
+@media (max-width: 700px) {
+  .content-block.intro {
+    min-height: 0;
+    padding-right: clamp(1.5rem, 3vw, 2.25rem);
+    padding-bottom: 215px;
+    background-position: center bottom 0.5rem, 0 0;
+    background-size: auto 195px, auto;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .feature-card {
+    padding: 0.85rem;
+  }
+
+  .feature-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .feature-card p {
+    margin-bottom: 0;
+    font-size: 0.88rem;
+    line-height: 1.4;
   }
 }

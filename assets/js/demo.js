@@ -1,6 +1,6 @@
 (() => {
-  const STORAGE_KEY = "viisi.web.demo.v3";
-  const LEGACY_STORAGE_KEYS = ["viisi.web.demo.v1", "viisi.web.demo.v2"];
+  const STORAGE_KEY = "viisi.web.demo.v4";
+  const LEGACY_STORAGE_KEYS = ["viisi.web.demo.v1", "viisi.web.demo.v2", "viisi.web.demo.v3"];
   const REQUIRED_WORDS = 5;
   const POINTS_PER_WORD = 20;
   const COMPLETION_BONUS = 20;
@@ -11,39 +11,25 @@
   const animationShell = document.querySelector(".phone-shell, .demo-shell");
 
   const PUZZLE = {
-    letters: ["S", "L", "E", "A", "T"],
+    letters: ["E", "A", "S", "T", "R"],
     validWords: [
-      "LEAST",
-      "LEATS",
-      "SALET",
-      "SETAL",
-      "SLATE",
-      "STALE",
-      "STEAL",
-      "STELA",
-      "TAELS",
-      "TALES",
-      "TEALS",
-      "TESLA",
+      "STARE",
+      "TEARS",
+      "RATES",
+      "ASTER",
+      "TARES"
     ],
   };
 
   const validWordSet = new Set(PUZZLE.validWords);
 
   const DEFINITIONS = {
-    LEAST: "Smallest in amount, degree, or importance.",
-    LEATS: "(plural of Leat) Artificial channels that carry water to a mill.",
-    SALET: "A light medieval helmet with a brim.",
-    SETAL: "Having or relating to bristles (setae).",
-    SLATE: "A fine-grained rock that splits into thin plates, used for roofing.",
-    STALE: "No longer fresh; lacking freshness or novelty.",
-    STEAL: "To take something without permission or right.",
-    STELA: "An upright stone slab, often inscribed, used as a marker.",
-    TAELS: "(plural of Tael) Traditional Chinese units of weight or money.",
-    TALES: "(plural of Tale) Stories or narratives.",
-    TEALS: "(plural of Teal) Small freshwater ducks.",
-    TESLA: "A unit of magnetic flux density.",
-  };
+    STARE: "To look fixedly with the eyes wide open.",
+    TEARS: "(plural of Tear) Drops of salty fluid from the eyes.",
+    RATES: "(plural of Rate) Measures of speed or frequency.",
+    ASTER: "A plant with daisy-like flowers.",
+    TARES: "(plural of Tare) The weight of a container, deducted from the total."
+    };
 
   const elements = {
     board: document.getElementById("board"),
@@ -182,7 +168,10 @@
       normalized.displayLetters = parsed.displayLetters
         .map((letter) => String(letter).slice(0, 1).toUpperCase())
         .filter((letter) => /^[A-Z]$/.test(letter));
-      if (normalized.displayLetters.length !== 5) {
+      // Saved letters must be a shuffle of today's puzzle letters.
+      const sameLetters =
+        [...normalized.displayLetters].sort().join("") === [...PUZZLE.letters].sort().join("");
+      if (normalized.displayLetters.length !== 5 || !sameLetters) {
         normalized.displayLetters = [...PUZZLE.letters];
       }
     }
