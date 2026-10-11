@@ -4,22 +4,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wordle Alternative: Play Viisi | Better Daily Word Puzzle</title>
-  <meta name="description" content="Looking for a better Wordle alternative? Try Viisi—the ad-free, privacy-first daily puzzle that challenges you with 5 words, not 1 guess. Download on iOS." />
+  <title>Wordle Alternative: Play Viisi | Daily Anagram Word Puzzle</title>
+  <meta name="description" content="Looking for a Wordle alternative? Viisi is a daily anagram game: find five words from one shared set of letters. No ads on iPhone, free to download." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://viisi.app/wordle-alternative/" />
 
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Viisi" />
-  <meta property="og:title" content="Wordle Alternative: Try Viisi | Better Daily Word Puzzle" />
-  <meta property="og:description" content="Ad-free, privacy-first daily word puzzle. Find 5 words instead of 1 guess. Viisi is a smarter Wordle alternative for iPhone." />
+  <meta property="og:title" content="Wordle Alternative: Try Viisi | Daily Anagram Word Game" />
+  <meta property="og:description" content="A daily five-letter anagram game for iPhone. Find five words from one shared set of letters—no ads, no account, free to download." />
   <meta property="og:url" content="https://viisi.app/wordle-alternative/" />
   <meta property="og:image" content="https://viisi.app/assets/images/full-site.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Wordle Alternative: Try Viisi" />
-  <meta name="twitter:description" content="Better than Wordle. Ad-free, privacy-first daily word puzzle with 5 words per game." />
+  <meta name="twitter:description" content="A Wordle alternative: find five words from one set of letters every day. No ads on iPhone." />
   <meta name="twitter:image" content="https://viisi.app/assets/images/full-site.png" />
 
   <script type="application/ld+json">
@@ -27,7 +27,7 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "Wordle Alternative: Try Viisi",
-    "description": "A comprehensive comparison between Wordle and Viisi—why Viisi is the better daily word puzzle experience.",
+    "description": "How Viisi compares with Wordle: a daily anagram word game where you find five words from one shared set of letters.",
     "image": "https://viisi.app/assets/images/full-site.png",
     "datePublished": "2026-03-25",
     "author": {
@@ -48,268 +48,212 @@
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/css/styles.css?v=20261011-red-buttons" />
   <style>
-    .comparison-section {
-      margin: 0 0 1rem;
-    }
-
-    .comparison-cards {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
-      max-width: 1080px;
-      margin: 1rem auto;
-      align-items: stretch;
-    }
-
-    .comparison-card {
-      background:
-        linear-gradient(180deg, #fffdf9, #fffaf3);
-      border: 2px solid var(--viisi-border);
-      border-radius: 28px;
-      padding: 1.4rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      min-height: 100%;
-      box-shadow: 0 18px 42px rgba(10, 25, 46, 0.05);
-    }
-
-    .comparison-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      min-width: 0;
-    }
-
-    .card-icon {
-      font-size: 2.4rem;
-      line-height: 1;
-      flex: 0 0 auto;
-    }
-
-    .card-title {
-      margin: 0;
-      font-size: clamp(1.3rem, 2vw, 1.85rem);
-      font-weight: 800;
-      color: var(--viisi-text);
-      line-height: 1.1;
-      text-wrap: balance;
-    }
-
-    .card-content {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.95rem;
-    }
-
-    .card-panel {
-      min-width: 0;
-      padding: 1rem;
-      border-radius: 20px;
-      border: 1px solid rgba(10, 25, 46, 0.06);
-      background: rgba(255, 255, 255, 0.82);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
-    }
-
-    .card-panel--viisi {
-      background: linear-gradient(180deg, rgba(0, 186, 139, 0.12), rgba(255, 255, 255, 0.92));
-    }
-
-    .card-panel--wordle {
-      background: linear-gradient(180deg, rgba(251, 70, 85, 0.12), rgba(255, 255, 255, 0.92));
-    }
-
-    .card-panel-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--viisi-text);
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .card-panel--viisi .card-panel-label {
-      color: var(--viisi-green-dark);
-    }
-
-    .card-panel--wordle .card-panel-label {
-      color: var(--viisi-red-dark);
-    }
-
-    .card-points {
-      list-style: none;
-      margin: 0.85rem 0 0;
+    /* Comparison page: one table, a few cards, a short FAQ. Uses site tokens. */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
       padding: 0;
-      display: grid;
-      gap: 0.7rem;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
-    .card-points li {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.55rem;
-      align-items: start;
-      font-size: 1rem;
-      line-height: 1.32;
-      font-weight: 700;
-      color: var(--viisi-text);
-      min-width: 0;
+    .wa-hero {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.5rem 0 1rem;
     }
 
-    .card-points li::before {
-      font-weight: 800;
-      line-height: 1;
-      transform: translateY(0.1rem);
+    .wa-hero p {
+      max-width: 62ch;
+      font-size: 1.1rem;
     }
 
-    .card-panel--viisi .card-points li::before {
-      content: "✓";
-      color: var(--viisi-green);
+    .wa-hero .hero-cta {
+      margin-top: 1.25rem;
     }
 
-    .card-panel--wordle .card-points li {
-      color: #d94a56;
+    .wa-section {
+      margin-top: 3rem;
     }
 
-    .card-panel--wordle .card-points li::before {
-      content: "✕";
-      color: var(--viisi-red);
-    }
-
-    .detail-section {
-      margin: 4rem 0;
-      padding: 2.5rem;
-      background: var(--viisi-card);
-      border-radius: var(--radius-lg);
-      border: 2px solid var(--viisi-border);
-    }
-
-    .detail-section h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      color: var(--viisi-text);
+    .wa-section > h2 {
+      margin: 0 0 0.35rem;
       font-size: clamp(1.5rem, 3vw, 2rem);
     }
 
-    .detail-section p {
-      margin: 1rem 0;
-      line-height: 1.7;
-      color: var(--viisi-text);
+    .wa-lede {
+      margin: 0 0 1.25rem;
+      color: var(--site-muted);
     }
 
-    .detail-section p:first-of-type {
+    .compare-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--site-line);
+      border-radius: var(--radius-lg);
+      background: var(--site-glass);
+    }
+
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .compare th,
+    .compare td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--site-line);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+
+    .compare tbody tr:last-child > * {
+      border-bottom: 0;
+    }
+
+    .compare thead th {
+      padding-top: 1rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--site-muted);
+    }
+
+    .compare thead th.is-viisi {
+      color: var(--neon-teal);
+    }
+
+    .compare tbody th {
+      width: 22%;
+      font-weight: 800;
+      color: var(--site-text);
+    }
+
+    .compare td {
+      width: 39%;
+      color: var(--site-muted);
+    }
+
+    .compare td.is-viisi {
+      background: rgba(46, 242, 208, 0.07);
+      color: var(--site-text);
+      font-weight: 600;
+    }
+
+    .compare-note {
+      margin: 0.75rem 0 0;
+      font-size: 0.85rem;
+      color: var(--site-muted);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .why-card {
+      padding: 1.4rem 1.5rem;
+      border: 1px solid var(--site-line);
+      border-radius: var(--radius-lg);
+      background: var(--site-glass);
+    }
+
+    .why-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .why-card p {
+      margin: 0 0 0.6rem;
+      color: var(--site-muted);
+    }
+
+    .why-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .why-card strong {
+      color: var(--site-text);
+    }
+
+    .wa-cta {
+      margin-top: 3rem;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--site-line);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(60% 120% at 85% 0%, rgba(46, 242, 208, 0.16), transparent 70%),
+        radial-gradient(50% 120% at 10% 100%, rgba(255, 79, 184, 0.14), transparent 70%),
+        var(--site-glass);
+      text-align: center;
+    }
+
+    .wa-cta h2 {
+      margin: 0 0 0.4rem;
+    }
+
+    .wa-cta p {
+      margin: 0 0 1.25rem;
+      color: var(--site-muted);
+    }
+
+    .wa-cta .hero-cta {
+      justify-content: center;
       margin-top: 0;
     }
 
-    .highlight-text {
-      background: linear-gradient(120deg, rgba(0, 186, 139, 0.15), rgba(0, 186, 139, 0.05));
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      font-weight: 600;
+    .faq-list {
+      display: grid;
+      gap: 0.75rem;
+      max-width: 760px;
     }
 
-    .cta-section {
-      text-align: center;
-      margin: 3rem 0;
-      padding: 2rem;
-    }
-
-    .cta-section .btn {
-      font-size: 1.1rem;
-      padding: 1rem 2.5rem;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--viisi-green);
-      color: white;
-      padding: 0.5rem 1rem;
+    .faq-list details {
+      border: 1px solid var(--site-line);
       border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+      background: var(--site-glass);
     }
 
-    .hero-alt {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      padding: 1rem 0;
+    .faq-list summary {
+      padding: 1rem 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin: 0 0 1rem 0;
+    .faq-list summary:focus-visible {
+      outline: 3px solid rgba(46, 242, 208, 0.6);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
     }
 
-    .hero-alt p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: var(--site-muted);
-      max-width: 600px;
-    }
-
-    .hero-intro-row {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-intro-row .mb30 {
-      margin-bottom: 30px;
-    }
-
-    .hero-intro-row p {
-      flex: 0 1 620px;
+    .faq-list details p {
       margin: 0;
+      padding: 0 1.25rem 1.1rem;
+      color: var(--site-muted);
     }
 
-    .hero-intro-row .btn {
-      flex: 0 0 auto;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 980px) {
-      .comparison-cards {
-        grid-template-columns: 1fr;
-        max-width: 720px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .comparison-card {
-        padding: 1.1rem;
+    @media (max-width: 700px) {
+      .wa-section {
+        margin-top: 2.25rem;
       }
 
-      .hero-intro-row {
-        align-items: flex-start;
+      .compare th,
+      .compare td {
+        padding: 0.7rem 0.65rem;
+        font-size: 0.9rem;
       }
 
-      .card-header {
-        align-items: flex-start;
+      .compare tbody th {
+        width: 26%;
       }
 
-      .card-title {
-        font-size: 1.35rem;
-      }
-
-      .card-content {
+      .why-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -353,189 +297,148 @@
     </div>
   </header>
 
-  <main class="container">
-    <!-- Hero Section -->
-    <section class="hero hero-alt">
+  <main class="container" style="padding-bottom:1rem;">
+    <section class="hero wa-hero">
       <div>
         <div class="badge">
           <span aria-hidden="true">🎮</span>
-          A smarter daily word challenge
+          A different kind of daily word game
         </div>
         <h1 class="alternative">A Fresh Alternative to Wordle: Try <span class="link-red">Viisi</span></h1>
-        <div class="hero-intro-row">
-          <p>Same daily ritual, five times better. Viisi offers the puzzle depth and privacy that Wordle abandoned. No ads. No data collection. Just pure word puzzle joy.</p>
-          <a href="../demo.html" class="btn btn-ghost mb30">Play Demo</a>
+        <p>
+          Love the daily ritual of Wordle? Viisi keeps it—one new puzzle every day—but asks for
+          five words instead of one, with no ads and no account on iPhone.
+        </p>
+        <div class="hero-cta apple">
+          <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=Wordle&mt=8" class="appleDownload">
+            <img src="../assets/images/appleDownload.svg" alt="Download on the App Store" />
+          </a>
+          <a href="../demo.html" class="btn btn-ghost apple">Play the web demo</a>
         </div>
       </div>
     </section>
 
-    <!-- Quick Comparison Cards -->
-    <section class="comparison-section">
-      <div class="comparison-cards">
-        <!-- Experience Quality -->
-        <div class="comparison-card">
-          <div class="card-header">
-            <div class="card-icon" aria-hidden="true">🛡️</div>
-            <h3 class="card-title">Experience Quality</h3>
-          </div>
-          <div class="card-content">
-            <div class="card-panel card-panel--viisi">
-              <span class="card-panel-label">Viisi</span>
-              <ul class="card-points">
-                <li>Ad-free forever</li>
-                <li>Privacy-first, no tracking</li>
-              </ul>
-            </div>
-            <div class="card-panel card-panel--wordle">
-              <span class="card-panel-label">Wordle</span>
-              <ul class="card-points">
-                <li>Owned by NYT, data collection</li>
-                <li>Paywalls and premium features</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <section class="wa-section" aria-labelledby="compare-title">
+      <h2 id="compare-title">Viisi vs. Wordle at a glance</h2>
+      <p class="wa-lede">Both are daily five-letter word games. Here's where they differ.</p>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Feature</span></th>
+              <th scope="col" class="is-viisi">Viisi</th>
+              <th scope="col">Wordle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">What you solve</th>
+              <td class="is-viisi">Five different words from one shared set of five letters</td>
+              <td>One hidden five-letter word in six guesses</td>
+            </tr>
+            <tr>
+              <th scope="row">New puzzles</th>
+              <td class="is-viisi">One every day, the same board for every player</td>
+              <td>One every day, the same word for every player</td>
+            </tr>
+            <tr>
+              <th scope="row">Archive</th>
+              <td class="is-viisi">Every past puzzle, playable any time</td>
+              <td>Included with an NYT Games subscription</td>
+            </tr>
+            <tr>
+              <th scope="row">Challenge</th>
+              <td class="is-viisi">Classic mode with hints, or Expert Mode with no hints and three strikes</td>
+              <td>Hard Mode</td>
+            </tr>
+            <tr>
+              <th scope="row">Ads &amp; data</th>
+              <td class="is-viisi">No ads on iPhone, no account needed, and we don't collect or sell your data</td>
+              <td>Run by The New York Times; its advertising and data practices apply</td>
+            </tr>
+            <tr>
+              <th scope="row">Cost</th>
+              <td class="is-viisi">Free to download</td>
+              <td>The daily puzzle is free</td>
+            </tr>
+            <tr>
+              <th scope="row">Progress</th>
+              <td class="is-viisi">Points, streaks, badges, and Game Center leaderboards</td>
+              <td>Streaks and win statistics</td>
+            </tr>
+            <tr>
+              <th scope="row">Where to play</th>
+              <td class="is-viisi">iPhone (Android coming soon) and a free web demo</td>
+              <td>Web and the NYT Games app</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="compare-note">Wordle details reflect The New York Times' published information as of October 2026 and may change.</p>
+    </section>
 
-        <!-- Gameplay Depth -->
-        <div class="comparison-card">
-          <div class="card-header">
-            <div class="card-icon" aria-hidden="true">🧩</div>
-            <h3 class="card-title">Gameplay Depth</h3>
-          </div>
-          <div class="card-content">
-            <div class="card-panel card-panel--viisi">
-              <span class="card-panel-label">Viisi</span>
-              <ul class="card-points">
-                <li>5 words per puzzle</li>
-                <li>Anagrams with strategic depth</li>
-              </ul>
-            </div>
-            <div class="card-panel card-panel--wordle">
-              <span class="card-panel-label">Wordle</span>
-              <ul class="card-points">
-                <li>1 guess per day</li>
-                <li>Letter logic feels repetitive</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Availability & Freedom -->
-        <div class="comparison-card">
-          <div class="card-header">
-            <div class="card-icon" aria-hidden="true">♾️</div>
-            <h3 class="card-title">Availability & Freedom</h3>
-          </div>
-          <div class="card-content">
-            <div class="card-panel card-panel--viisi">
-              <span class="card-panel-label">Viisi</span>
-              <ul class="card-points">
-                <li>Unlimited daily plays</li>
-                <li>Play the full archive anytime</li>
-              </ul>
-            </div>
-            <div class="card-panel card-panel--wordle">
-              <span class="card-panel-label">Wordle</span>
-              <ul class="card-points">
-                <li>One puzzle per 24 hours</li>
-                <li>Limited archive access</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Difficulty & Variety -->
-        <div class="comparison-card">
-          <div class="card-header">
-            <div class="card-icon" aria-hidden="true">⚖️</div>
-            <h3 class="card-title">Difficulty & Variety</h3>
-          </div>
-          <div class="card-content">
-            <div class="card-panel card-panel--viisi">
-              <span class="card-panel-label">Viisi</span>
-              <ul class="card-points">
-                <li>Consistent challenge</li>
-                <li>Vocabulary expansion</li>
-              </ul>
-            </div>
-            <div class="card-panel card-panel--wordle">
-              <span class="card-panel-label">Wordle</span>
-              <ul class="card-points">
-                <li>Luck-dependent guessing</li>
-                <li>Limited word variety</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <section class="wa-section" aria-labelledby="why-title">
+      <h2 id="why-title">Why players try Viisi</h2>
+      <p class="wa-lede">Same daily habit, a different puzzle.</p>
+      <div class="why-grid">
+        <article class="why-card">
+          <h3><span aria-hidden="true">🧩</span> More to solve</h3>
+          <p>Wordle asks you to find <strong>one</strong> hidden word. Viisi gives you five letters and asks for <strong>five different words</strong> from them, so you're thinking in anagrams rather than letter positions.</p>
+          <p>Want it tougher? Expert Mode turns hints off and ends the game after three invalid submissions.</p>
+        </article>
+        <article class="why-card">
+          <h3><span aria-hidden="true">♾️</span> Play on your schedule</h3>
+          <p>You get one new puzzle a day, plus an archive of every past puzzle. A missed day or a favorite puzzle is always one tap away.</p>
+          <p>Replays start from a clean board and never change your original score, time, or stats.</p>
+        </article>
+        <article class="why-card">
+          <h3><span aria-hidden="true">🛡️</span> Quiet and private</h3>
+          <p>On iPhone, Viisi has no ads and no account to create. We don't collect or sell your data, and the game works offline.</p>
+        </article>
+        <article class="why-card">
+          <h3><span aria-hidden="true">📚</span> Learn as you play</h3>
+          <p>Finding five words from one set of letters introduces words you might not know. After a win, tap any word to see its definition.</p>
+        </article>
       </div>
     </section>
 
-    <!-- Detailed Sections -->
-    
-    <!-- Experience Quality Detail -->
-    <section class="detail-section">
-      <h2>🛡️ Experience Quality: Ad-Free & Private</h2>
-      <p>Viisi is a <span class="highlight-text">completely ad-free experience</span>. There are no banners, no pop-ups, no trackers, and no data collection. Your puzzle is yours alone.</p>
-      <p>Wordle, now owned by The New York Times, collects user data and has introduced premium features behind paywalls. Each puzzle feel burdened by corporate interests. With Viisi, you get a clean, mindful experience that respects your privacy and time.</p>
-      <p>When you open Viisi, you know exactly what you're getting: a daily puzzle, well-crafted gameplay, and nothing else. No distractions. No algorithms. Just the puzzle.</p>
+    <section class="wa-cta">
+      <h2>Ready to try Viisi?</h2>
+      <p>Five letters, five words, one new puzzle every day.</p>
+      <div class="hero-cta apple">
+        <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=Wordle&mt=8" class="appleDownload">
+          <img src="../assets/images/appleDownload.svg" alt="Download Viisi on the App Store" loading="lazy" />
+        </a>
+        <a href="../how-to-play.html" class="btn btn-ghost apple">How to play</a>
+      </div>
     </section>
 
-    <!-- Gameplay Depth Detail -->
-    <section class="detail-section">
-      <h2>🧩 Gameplay Depth: 5 Words vs. 1 Guess</h2>
-      <p>Wordle gives you 6 guesses to find one 5-letter word. It's simple but shallow. Viisi challenges you to find <span class="highlight-text">five different 5-letter words</span> from a shared set of letters—an entirely different puzzle type.</p>
-      <p>This isn't just "more Wordle." It's a fundamentally richer experience. You're thinking about anagrams instead of letter positions. You're discovering vocabulary instead of guessing letter combinations. Each word you find opens new possibilities for the next, creating actual strategic depth.</p>
-      <p>Wordle's appeal faded for many players because the mechanic repeats daily. Viisi stays engaging because the complexity deepens the more you play. You'll find yourself looking for obscure words, learning definitions, and actually expanding your vocabulary.</p>
-    </section>
-
-    <!-- Availability & Freedom Detail -->
-    <section class="detail-section">
-      <h2>♾️ Availability & Freedom: Play Anytime, Anywhere</h2>
-      <p>Wordle's "one puzzle per day" model was novel once, but it becomes frustrating when you want more engagement. Viisi lets you play <span class="highlight-text">as many daily puzzles as you want</span>, and you can revisit the entire puzzle archive anytime you wish.</p>
-      <p>This means you're never waiting for tomorrow's puzzle. You're never locked out. You're never at the mercy of Wordle's daily schedule. With Viisi, the game adapts to your life, not the other way around.</p>
-      <p>Love a particular puzzle? Play it again. Want to catch up on old puzzles? The archive is there. This freedom transforms the game from a daily obligation into a genuine choice—play when you want, as much as you want.</p>
-    </section>
-
-    <!-- Difficulty & Variety Detail -->
-    <section class="detail-section">
-      <h2>⚖️ Difficulty & Variety: Consistent Challenge</h2>
-      <p>Wordle's difficulty is largely determined by luck. Some days are trivially easy; others feel impossible. Players have complained that daily Wordle puzzles have become either too easy or frustratingly hard, mostly due to the limited word pool.</p>
-      <p><span class="highlight-text">Viisi maintains a consistent challenge level</span> across all puzzles. Every day is thoughtfully designed to be solvable yet rewarding. You won't feel cheated by an unguessable word or bored by an obvious one.</p>
-      <p>Additionally, finding five words from one letter set naturally creates vocabulary diversity. You'll encounter words you didn't know existed, look up their definitions, and learn. Wordle's word repetition can feel stale after a few months. Viisi's anagram nature keeps every puzzle feeling fresh.</p>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <h2 style="margin-bottom: 1.5rem;">Ready for a Better Word Game?</h2>
-      <p style="margin-bottom: 1.5rem; color: var(--site-muted);">Join thousands of players discovering the joy of solving five words a day.</p>
-      <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=Wordle&mt=8" class="btn btn-primary">Download Viisi on iOS</a>
-      <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--site-muted);">Or <a href="../demo.html" style="color: var(--viisi-green); font-weight: 600;">play a free web demo</a> right now.</p>
-    </section>
-
-    <!-- FAQ Optional -->
-    <section style="margin-top: 4rem;">
-      <h2 style="text-align: center; margin-bottom: 2rem;">Quick Questions</h2>
-      <div style="display: grid; gap: 1.5rem; max-width: 700px; margin: 0 auto;">
-        <details style="background: var(--viisi-card); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; border: 2px solid var(--viisi-border);">
-          <summary style="font-weight: 700; cursor: pointer; color: var(--viisi-text);">Is Viisi really free?</summary>
-          <p style="margin-top: 1rem; color: var(--viisi-muted);">Yes. Viisi is completely free with no in-app purchases, ads, or hidden costs. Download it and play forever.</p>
+    <section class="wa-section" aria-labelledby="faq-title">
+      <h2 id="faq-title">Quick questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Is Viisi a Wordle clone?</summary>
+          <p>No. Both are daily five-letter word games, but in Viisi you find five different words from one shared set of letters instead of guessing a single hidden word.</p>
         </details>
-        <details style="background: var(--viisi-card); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; border: 2px solid var(--viisi-border);">
-          <summary style="font-weight: 700; cursor: pointer; color: var(--viisi-text);">Can I play on Android?</summary>
-          <p style="margin-top: 1rem; color: var(--viisi-muted);">Viisi is currently available on iOS. You can play the web demo on any browser.</p>
+        <details>
+          <summary>Is Viisi free?</summary>
+          <p>Viisi is free to download, and there are no ads on iPhone.</p>
         </details>
-        <details style="background: var(--viisi-card); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; border: 2px solid var(--viisi-border);">
-          <summary style="font-weight: 700; cursor: pointer; color: var(--viisi-text);">What if I get stuck?</summary>
-          <p style="margin-top: 1rem; color: var(--viisi-muted);">Viisi provides hint system that unlocks after you've found 3 words. You're never truly stuck—just strategic.</p>
+        <details>
+          <summary>Do I need an account?</summary>
+          <p>No. Viisi works without an account and without a connection.</p>
+        </details>
+        <details>
+          <summary>Can I play on Android?</summary>
+          <p>Viisi is currently available on iPhone, with Android coming soon. In the meantime you can <a class="link-red" href="../demo.html">try the web demo</a> in any browser.</p>
+        </details>
+        <details>
+          <summary>What if I get stuck?</summary>
+          <p>In Classic mode, hints unlock after you've found three words. You get two per puzzle, at 10 points each. Expert Mode turns hints off.</p>
         </details>
       </div>
     </section>
   </main>
-
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 
 
   <footer class="footer">
@@ -556,6 +459,9 @@
     </div>
   </footer>
 
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
   <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7b347e7bf73d4f4fab865ed241dbd8d1"}'></script><!-- End Cloudflare Web Analytics -->
 

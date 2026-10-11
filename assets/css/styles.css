@@ -343,14 +343,14 @@ a {
 .card-streak {
   transform: rotate(1deg);
   top: 82px;
-  right: -18px;
+  right: -41px;
   z-index: 1;
 }
 
 .card-archive {
     transform: rotate(2deg);
   bottom: 93px;
-  left: 40px;
+  left: -44px;
   z-index: 1;
 }
 
