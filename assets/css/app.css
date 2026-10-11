@@ -2,7 +2,7 @@
   --badge-bg: var(--viisi-green-dark);
   --badge-text: #ffffff;
   --badge-shadow: 0 16px 32px rgba(44, 138, 90, 0.25);
-  --badge-description: var(--viisi-text);
+  --badge-description: var(--site-text);
   --badge-icon-size: 70px;
   --badge-icon-radius: 18px;
   --badge-icon-gap: 0.25rem;

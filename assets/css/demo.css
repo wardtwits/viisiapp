@@ -83,7 +83,7 @@
 
 .demo-header p {
   margin: 0.25rem 0 0;
-  color: var(--viisi-muted);
+  color: var(--site-muted);
 }
 
 .demo-video {
@@ -94,9 +94,9 @@
   margin: 1.5rem 0 2.5rem;
   padding: clamp(1.25rem, 3vw, 2rem);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(249, 113, 113, 0.16);
-  box-shadow: var(--shadow-soft);
+  background: var(--site-glass);
+  border: 1px solid var(--site-line);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 .demo-video-copy h2 {
@@ -108,7 +108,7 @@
 .demo-video-copy p {
   max-width: 520px;
   margin: 0;
-  color: var(--viisi-muted);
+  color: var(--site-muted);
   font-size: 1.05rem;
 }
 
@@ -343,14 +343,14 @@ margin-right:-15px;
 }
 
 .demo-word-bank {
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--site-line);
   padding-top: 0.8rem;
-  color: var(--viisi-muted);
+  color: var(--site-muted);
 }
 
 .word-bank-list {
   margin: 0;
-  color: var(--viisi-text);
+  color: var(--site-text);
   font-weight: 700;
 }
 

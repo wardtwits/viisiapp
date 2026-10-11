@@ -5,36 +5,83 @@
   const gameScreen = document.getElementById("viisi-demo-game");
   const playButton = document.getElementById("viisi-demo-play");
   const canvas = document.getElementById("viisi-demo-canvas");
-  const pageLogo = document.querySelector(".logo");
-  const pageLogoMark = document.querySelector(".logo-mark");
 
   if (!homeScreen || !gameScreen || !playButton || !canvas) return;
 
   const ctx = canvas.getContext("2d");
-  const initialLetters = ["A", "F", "T", "E", "S"];
+  const reduceMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const FONT = "Nunito, system-ui, -apple-system, sans-serif";
+  const font = (weight, size) => `${weight} ${size}px ${FONT}`;
+
+  // Keep the letters in sync with the "Today" card in index.html.
+  const initialLetters = ["E", "A", "S", "T", "R"];
   const rows = 5;
   const cols = 5;
+  const wordsToWin = 5;
+  const pointsPerWord = 20;
+  const completionBonus = 20;
+
+  const definitions = {
+    STARE: "To look fixedly with the eyes wide open.",
+    TEARS: "(plural of Tear) Drops of salty fluid from the eyes.",
+    RATES: "(plural of Rate) Measures of speed or frequency.",
+    ASTER: "A plant with daisy-like flowers.",
+    TARES: "(plural of Tare) The weight of a container, deducted from the total.",
+    RESAT: "(past tense of Resit) Sat an exam again.",
+  };
+  const demoSolveOrder = ["STARE", "TEARS", "RATES", "ASTER", "TARES"];
 
   const colors = {
-    cream: "#f8efe2",
-    text: "#0a192e",
+    bgTop: "#1b2147",
+    bgBottom: "#10142b",
+    panel: "#383f6b",
+    panelLight: "#474b78",
+    text: "#ffffff",
+    muted: "#b9bcd6",
     red: "#fb4655",
-    redDim: "rgba(251, 70, 85, 0.25)",
-    redText: "rgba(251, 70, 85, 0.4)",
+    redEdge: "#b81f33",
+    redDim: "rgba(251, 70, 85, 0.18)",
+    scoreRed: "#ee5660",
+    teal: "#54d1b4",
     green: "#00ba8b",
-    greenDark: "#2c8a5a",
-    border: "#dfd2bf",
-    empty: "rgba(248, 239, 226, 0.68)",
-    white: "#ffffff",
-    disabled: "#aaa",
-    shadow: "rgba(0, 0, 0, 0.12)",
+    greenEdge: "#067a5c",
+    gold: "#f6b13c",
+    cellEmpty: "rgba(255, 255, 255, 0.05)",
+    cellLine: "rgba(255, 255, 255, 0.16)",
+    cellActive: "rgba(84, 209, 180, 0.1)",
+    cellPlaced: "rgba(0, 186, 139, 0.24)",
+    disabled: "#5b6180",
+    delete: "#7b819f",
   };
 
+  const today = new Date();
+  const shortDate = today
+    .toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })
+    .toUpperCase();
+  const longDate = today
+    .toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })
+    .toUpperCase();
+
+  const defaultStatus = "Build a 5-letter word using each tile once.";
+
   let tiles = createTiles();
-  let status = { text: "Build a 5-letter word using each tile once.", start: performance.now() };
+  let solved = [];
+  let status = { text: defaultStatus, start: performance.now() };
+  let phase = "play"; // "play" | "results"
+  let inputLocked = false;
+  let shakeStart = 0;
+  let results = { start: 0, closing: 0, score: 0, elapsed: 0 };
+  let confetti = [];
+  let puzzleStart = performance.now();
+  let lastFrame = performance.now();
   let hits = [];
   let demoActive = false;
   let demoTimers = [];
+  let submitTimer = 0;
+  let closeTimer = 0;
   let autoStartTimer = 0;
   let width = 0;
   let height = 0;
@@ -44,7 +91,6 @@
     return initialLetters.map((letter, id) => ({
       id,
       letter,
-      row: -1,
       col: -1,
       animStart: 0,
       animType: "none",
@@ -62,26 +108,69 @@
     ctx.closePath();
   }
 
+  const clamp01 = (t) => Math.max(0, Math.min(1, t));
+  const lerp = (a, b, t) => a + (b - a) * t;
+
   function easeOutBack(t) {
     const c1 = 1.70158;
     const c3 = c1 + 1;
     return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
   }
 
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  function formatTime(ms) {
+    const total = Math.max(0, Math.round(ms / 1000));
+    return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
+  }
+
   function setStatus(text) {
     status = { text, start: performance.now() };
   }
 
+  function activeRow() {
+    return solved.length < rows ? solved.length : -1;
+  }
+
+  function placedTiles() {
+    return tiles.filter((item) => item.col !== -1).sort((a, b) => a.col - b.col);
+  }
+
   function resetGame() {
+    clearTimeout(submitTimer);
+    clearTimeout(closeTimer);
     tiles = createTiles();
-    setStatus("Build a 5-letter word using each tile once.");
+    solved = [];
+    phase = "play";
+    inputLocked = false;
+    shakeStart = 0;
+    results = { start: 0, closing: 0, score: 0, elapsed: 0 };
+    confetti = [];
+    puzzleStart = performance.now();
+    setStatus(defaultStatus);
+  }
+
+  function returnTilesToRack(list) {
+    const now = performance.now();
+    list.forEach((tile) => {
+      tile.col = -1;
+      tile.animStart = now;
+      tile.animType = "return";
+    });
   }
 
   function placeTile(id) {
+    if (phase !== "play" || inputLocked) return;
     const tile = tiles.find((item) => item.id === id);
-    if (!tile || tile.row !== -1) return;
+    if (!tile || tile.col !== -1) return;
 
-    const filled = tiles.filter((item) => item.row === 0).map((item) => item.col);
+    const filled = placedTiles().map((item) => item.col);
     let nextCol = -1;
     for (let col = 0; col < cols; col += 1) {
       if (!filled.includes(col)) {
@@ -91,29 +180,31 @@
     }
     if (nextCol === -1) return;
 
-    tile.row = 0;
     tile.col = nextCol;
     tile.animStart = performance.now();
     tile.animType = "drop";
-    setStatus("Build a 5-letter word using each tile once.");
+    setStatus(defaultStatus);
+
+    if (filled.length + 1 === cols) {
+      inputLocked = true;
+      submitTimer = setTimeout(submitRow, reduceMotion ? 0 : 340);
+    }
   }
 
   function removeLast() {
-    const rowTiles = tiles.filter((item) => item.row === 0);
+    if (phase !== "play" || inputLocked) return;
+    const rowTiles = placedTiles();
     if (!rowTiles.length) return;
 
-    const last = rowTiles.reduce((a, b) => (a.col > b.col ? a : b));
-    last.row = -1;
-    last.col = -1;
-    last.animStart = performance.now();
-    last.animType = "return";
+    returnTilesToRack([rowTiles[rowTiles.length - 1]]);
     setStatus("Letter removed.");
   }
 
   function shuffle() {
+    if (phase !== "play" || inputLocked) return;
     const rackIndexes = [];
     tiles.forEach((tile, index) => {
-      if (tile.row === -1) rackIndexes.push(index);
+      if (tile.col === -1) rackIndexes.push(index);
     });
 
     const letters = rackIndexes.map((index) => tiles[index].letter);
@@ -131,6 +222,80 @@
     setStatus("Letters shuffled.");
   }
 
+  function submitRow() {
+    const word = placedTiles().map((tile) => tile.letter).join("");
+    const now = performance.now();
+
+    if (solved.some((entry) => entry.word === word)) {
+      rejectRow("Already found.");
+      return;
+    }
+    if (!definitions[word]) {
+      rejectRow("Not a valid word.");
+      return;
+    }
+
+    solved.push({ word, start: now });
+    returnTilesToRack(tiles);
+    inputLocked = false;
+
+    if (solved.length >= wordsToWin) {
+      winGame(now);
+    } else {
+      setStatus(`Nice! ${wordsToWin - solved.length} more to win.`);
+    }
+  }
+
+  function rejectRow(message) {
+    shakeStart = performance.now();
+    setStatus(message);
+    submitTimer = setTimeout(() => {
+      returnTilesToRack(placedTiles());
+      inputLocked = false;
+    }, reduceMotion ? 0 : 450);
+  }
+
+  function winGame(now) {
+    phase = "results";
+    results = {
+      start: now + (reduceMotion ? 0 : 900),
+      closing: 0,
+      score: solved.length * pointsPerWord + completionBonus,
+      elapsed: now - puzzleStart,
+    };
+    setStatus("Well done!");
+    if (!reduceMotion) spawnConfetti(now);
+  }
+
+  function closeResults() {
+    if (phase !== "results" || results.closing) return;
+    results.closing = performance.now();
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(resetGame, reduceMotion ? 0 : 380);
+  }
+
+  function spawnConfetti(now) {
+    const palette = [colors.red, colors.teal, colors.gold, colors.green, "#7d8cff", colors.text];
+    confetti = [];
+    for (let i = 0; i < 70; i += 1) {
+      const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.9;
+      const speed = 160 + Math.random() * 300;
+      confetti.push({
+        x: width / 2,
+        y: height * 0.38,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        rot: Math.random() * Math.PI * 2,
+        vr: (Math.random() - 0.5) * 12,
+        w: 5 + Math.random() * 4,
+        h: 8 + Math.random() * 6,
+        color: palette[i % palette.length],
+        born: now,
+        life: 1800 + Math.random() * 900,
+      });
+    }
+  }
+
   function stopDemo() {
     demoActive = false;
     demoTimers.forEach(clearTimeout);
@@ -145,24 +310,29 @@
       demoTimers.push(setTimeout(() => demoActive && fn(), ms));
     };
     const placeLetter = (letter) => {
-      const tile = tiles.find((item) => item.row === -1 && item.letter === letter);
+      const tile = tiles.find((item) => item.col === -1 && item.letter === letter);
       if (tile) placeTile(tile.id);
     };
     const cycle = () => {
       if (!demoActive) return;
-      schedule(700, shuffle);
-      schedule(1450, shuffle);
-      schedule(2200, shuffle);
-      schedule(3100, () => placeLetter("F"));
-      schedule(3900, () => placeLetter("E"));
-      schedule(4700, () => placeLetter("A"));
-      schedule(5500, () => placeLetter("S"));
-      schedule(6800, removeLast);
-      schedule(7500, removeLast);
-      schedule(8200, removeLast);
-      schedule(8900, removeLast);
-      schedule(12500, resetGame);
-      schedule(14500, cycle);
+      let t = 700;
+      schedule(t, shuffle);
+      t += 750;
+      schedule(t, shuffle);
+      t += 1000;
+
+      demoSolveOrder.forEach((word) => {
+        word.split("").forEach((letter) => {
+          schedule(t, () => placeLetter(letter));
+          t += 300;
+        });
+        t += 1300; // submit, lock animation, and a beat before the next word
+      });
+
+      t += 900 + 8000; // sheet slides up, count-up, then the word list scrolls
+      schedule(t, closeResults);
+      t += 1800;
+      schedule(t, cycle);
     };
 
     cycle();
@@ -174,6 +344,13 @@
     resetGame();
     resize();
     startDemo();
+  }
+
+  function showHome() {
+    stopDemo();
+    resetGame();
+    gameScreen.classList.remove("is-active");
+    homeScreen.classList.add("is-active");
   }
 
   function startGameFromCard() {
@@ -195,6 +372,8 @@
     canvas.style.height = height + "px";
   }
 
+  // ---- drawing helpers -------------------------------------------------
+
   function drawBackArrow(x, y) {
     ctx.strokeStyle = colors.red;
     ctx.lineWidth = 3;
@@ -209,43 +388,48 @@
     ctx.stroke();
   }
 
-  function drawViisiLogo(x, y) {
-    const logoStyle = pageLogo ? getComputedStyle(pageLogo) : null;
-    const markStyle = pageLogoMark ? getComputedStyle(pageLogoMark) : null;
-    const markSize = markStyle ? Number.parseFloat(markStyle.width) : 42;
-    const radius = markStyle ? Number.parseFloat(markStyle.borderRadius) : 14;
-    const gap = logoStyle ? Number.parseFloat(logoStyle.gap) : 9.6;
-    const markFont = markStyle
-      ? `${markStyle.fontStyle} ${markStyle.fontWeight} ${markStyle.fontSize} ${markStyle.fontFamily}`
-      : "700 20px Nunito, system-ui, sans-serif";
-    const wordFont = logoStyle
-      ? `${logoStyle.fontStyle} ${logoStyle.fontWeight} ${logoStyle.fontSize} ${logoStyle.fontFamily}`
-      : "800 21.6px Nunito, system-ui, sans-serif";
-
-    ctx.save();
-    ctx.shadowColor = "rgba(249, 113, 113, 0.25)";
-    ctx.shadowBlur = 25;
-    ctx.shadowOffsetY = 10;
-    ctx.translate(x + markSize / 2, y + markSize / 2);
-    ctx.rotate((3 * Math.PI) / 180);
-    ctx.fillStyle = colors.red;
-    roundRect(-markSize / 2, -markSize / 2, markSize, markSize, radius);
+  function drawCrown(cx, cy, size) {
+    ctx.fillStyle = colors.gold;
+    ctx.beginPath();
+    ctx.moveTo(cx - size / 2, cy + size * 0.3);
+    ctx.lineTo(cx - size / 2, cy - size * 0.25);
+    ctx.lineTo(cx - size * 0.22, cy + size * 0.02);
+    ctx.lineTo(cx, cy - size * 0.35);
+    ctx.lineTo(cx + size * 0.22, cy + size * 0.02);
+    ctx.lineTo(cx + size / 2, cy - size * 0.25);
+    ctx.lineTo(cx + size / 2, cy + size * 0.3);
+    ctx.closePath();
     ctx.fill();
-    ctx.shadowColor = "transparent";
-    ctx.fillStyle = colors.white;
-    ctx.font = markFont;
-    ctx.textAlign = "center";
-    ctx.fillText(pageLogoMark?.textContent?.trim() || "V", 0, 1);
-    ctx.restore();
+  }
 
-    ctx.fillStyle = colors.text;
-    ctx.font = wordFont;
-    ctx.textAlign = "left";
-    ctx.fillText("Viisi", x + markSize + gap, y + markSize / 2);
+  function drawSparkle(cx, cy, r, alpha) {
+    ctx.save();
+    ctx.globalAlpha *= clamp01(alpha);
+    ctx.fillStyle = colors.gold;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - r);
+    ctx.quadraticCurveTo(cx, cy, cx + r, cy);
+    ctx.quadraticCurveTo(cx, cy, cx, cy + r);
+    ctx.quadraticCurveTo(cx, cy, cx - r, cy);
+    ctx.quadraticCurveTo(cx, cy, cx, cy - r);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawTileFace(x, y, size, fill, edge, radius) {
+    ctx.fillStyle = edge;
+    roundRect(x, y + size * 0.09, size, size, radius);
+    ctx.fill();
+    ctx.fillStyle = fill;
+    roundRect(x, y, size, size, radius);
+    ctx.fill();
+    ctx.fillStyle = "rgba(255, 255, 255, 0.16)";
+    roundRect(x + size * 0.08, y + size * 0.07, size * 0.84, size * 0.32, radius * 0.6);
+    ctx.fill();
   }
 
   function drawControl(x, y, size, fill, glyph, onTap) {
-    ctx.fillStyle = colors.shadow;
+    ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
     roundRect(x, y + 3, size, size, 10);
     ctx.fill();
     ctx.fillStyle = fill;
@@ -256,7 +440,7 @@
   }
 
   function drawShuffleGlyph(cx, cy) {
-    ctx.strokeStyle = colors.white;
+    ctx.strokeStyle = colors.text;
     ctx.lineWidth = 2.5;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -284,7 +468,7 @@
   }
 
   function drawDeleteGlyph(cx, cy) {
-    ctx.strokeStyle = colors.white;
+    ctx.strokeStyle = colors.text;
     ctx.lineWidth = 2.2;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -304,29 +488,40 @@
     ctx.stroke();
   }
 
-  function draw() {
-    if (!gameScreen.classList.contains("is-active") || width < 80 || height < 160) {
-      requestAnimationFrame(draw);
-      return;
-    }
+  function wrapText(text, maxWidth) {
+    const words = text.split(" ");
+    const lines = [];
+    let line = "";
+    words.forEach((word) => {
+      const test = line ? `${line} ${word}` : word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    });
+    if (line) lines.push(line);
+    return lines;
+  }
 
-    const now = performance.now();
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = colors.cream;
-    ctx.fillRect(0, 0, width, height);
-    hits = [];
-    ctx.textBaseline = "middle";
+  // ---- scenes ----------------------------------------------------------
 
+  function drawBoard(now) {
     const pad = width * 0.05;
     const headerY = height * 0.065;
-    const compactHeader = width < 310;
-    drawViisiLogo(pad, headerY - 20);
+    const interactive = phase === "play";
 
-    ctx.fillStyle = colors.greenDark;
-    ctx.font = "800 11px Nunito, system-ui, sans-serif";
+    // Header: back, date, fast-forward + help.
+    drawBackArrow(pad + 2, headerY);
+    if (interactive) {
+      hits.push({ x: pad - 6, y: headerY - 18, w: 40, h: 36, onTap: showHome });
+    }
+
     ctx.textAlign = "center";
-    ctx.fillText("WED, JUN 10", width / 2, compactHeader ? headerY + 32 : headerY);
+    ctx.fillStyle = colors.teal;
+    ctx.font = font(800, 11);
+    ctx.fillText(shortDate, width / 2, headerY);
 
     const rightX = width - pad - 46;
     ctx.fillStyle = colors.red;
@@ -347,30 +542,35 @@
     ctx.beginPath();
     ctx.arc(rightX + 10, headerY, 9, 0, Math.PI * 2);
     ctx.stroke();
-    ctx.font = "900 11px Nunito, system-ui";
+    ctx.font = font(900, 11);
     ctx.fillText("?", rightX + 10, headerY + 1);
 
-    const expertY = compactHeader ? height * 0.18 : height * 0.13;
-    const expertText = "Expert Mode";
-    ctx.font = "900 17px Nunito, system-ui";
-    const expertTextWidth = ctx.measureText(expertText).width;
-    const expertIcon = 22;
-    const expertGap = 10;
-    const expertGroupX = width / 2 - (expertIcon + expertGap + expertTextWidth) / 2;
-    ctx.fillStyle = colors.green;
-    roundRect(expertGroupX, expertY - 11, expertIcon, expertIcon, 6);
-    ctx.fill();
-    ctx.fillStyle = colors.white;
-    ctx.font = "900 15px Nunito, system-ui";
-    ctx.textAlign = "center";
-    ctx.fillText("ϟ", expertGroupX + expertIcon / 2, expertY);
-    ctx.fillStyle = colors.greenDark;
-    ctx.font = "900 17px Nunito, system-ui";
-    ctx.textAlign = "left";
-    ctx.fillText(expertText, expertGroupX + expertIcon + expertGap, expertY);
+    // Mode title + running score.
+    const modeY = height * 0.125;
+    ctx.fillStyle = colors.teal;
+    ctx.font = font(800, 16);
+    ctx.fillText("Classic Mode", width / 2, modeY);
 
-    const gridTop = compactHeader ? height * 0.24 : height * 0.19;
-    const gridBottom = height * 0.62;
+    const liveScore = phase === "results"
+      ? results.score
+      : solved.length * pointsPerWord;
+    ctx.font = font(900, 16);
+    ctx.fillStyle = colors.gold;
+    ctx.textAlign = "right";
+    ctx.fillText(String(liveScore), width - pad, modeY);
+    const scoreW = ctx.measureText(String(liveScore)).width;
+    drawCrown(width - pad - scoreW - 14, modeY - 1, 17);
+
+    if (solved.length === 0) {
+      ctx.textAlign = "center";
+      ctx.fillStyle = colors.muted;
+      ctx.font = font(600, 10);
+      ctx.fillText("Mode locks when the puzzle begins.", width / 2, height * 0.158);
+    }
+
+    // Grid.
+    const gridTop = height * 0.2;
+    const gridBottom = height * 0.64;
     const gap = 6;
     const cell = Math.min(
       (width - 2 * pad - gap * (cols - 1)) / cols,
@@ -383,81 +583,117 @@
       y: gridTop + row * (cell + gap),
     });
 
-    for (let row = 0; row < rows; row += 1) {
-      for (let col = 0; col < cols; col += 1) {
-        const pos = cellPos(row, col);
-        ctx.fillStyle = row === 0 ? colors.white : colors.empty;
-        ctx.strokeStyle = row === 0 ? colors.green : colors.border;
+    // Rack geometry is needed up front so flying tiles know where to start.
+    const rackTile = Math.min(44, (width - 2 * pad - 6 * 4) / 5);
+    const rackGap = 6;
+    const rackTotal = rackTile * 5 + rackGap * 4;
+    const rackX = (width - rackTotal) / 2;
+    const statusY = gridBottom + 22;
+    const rackY = statusY + 26;
+    const rackPos = (index) => ({ x: rackX + index * (rackTile + rackGap), y: rackY });
+
+    const row = activeRow();
+    const shakeP = shakeStart ? clamp01((now - shakeStart) / 400) : 1;
+    const shakeX = shakeP < 1 ? Math.sin(shakeP * Math.PI * 6) * 5 * (1 - shakeP) : 0;
+    const radius = Math.max(8, cell * 0.24);
+
+    for (let r = 0; r < rows; r += 1) {
+      const entry = solved[r];
+      for (let c = 0; c < cols; c += 1) {
+        const pos = cellPos(r, c);
+        if (entry) {
+          const p = clamp01((now - entry.start - c * 70) / 260);
+          const scale = reduceMotion || p <= 0 || p >= 1 ? 1 : 1 + 0.12 * Math.sin(p * Math.PI);
+          ctx.save();
+          ctx.translate(pos.x + cell / 2, pos.y + cell / 2);
+          ctx.scale(scale, scale);
+          drawTileFace(-cell / 2, -cell / 2, cell - 1, colors.green, colors.greenEdge, radius);
+          ctx.fillStyle = colors.text;
+          ctx.font = font(900, Math.round(cell * 0.5));
+          ctx.textAlign = "center";
+          ctx.fillText(entry.word[c], 0, 1);
+          ctx.restore();
+          continue;
+        }
+
+        const isActive = r === row;
+        const dx = isActive ? shakeX : 0;
+        ctx.fillStyle = isActive ? colors.cellActive : colors.cellEmpty;
+        ctx.strokeStyle = isActive ? colors.teal : colors.cellLine;
         ctx.lineWidth = 2;
-        roundRect(pos.x + 1, pos.y + 1, cell - 2, cell - 2, 10);
+        roundRect(pos.x + 1 + dx, pos.y + 1, cell - 2, cell - 2, radius);
         ctx.fill();
         ctx.stroke();
       }
     }
 
-    ctx.font = `900 ${Math.round(cell * 0.5)}px Nunito, system-ui`;
-    ctx.textAlign = "center";
-    ctx.fillStyle = colors.greenDark;
-    tiles.forEach((tile) => {
-      if (tile.row < 0) return;
-      const pos = cellPos(tile.row, tile.col);
-      const scale = tile.animType === "drop"
-        ? easeOutBack(Math.min(1, (now - tile.animStart) / 280))
-        : 1;
-      ctx.save();
-      ctx.translate(pos.x + cell / 2, pos.y + cell / 2);
-      ctx.scale(scale, scale);
-      ctx.fillText(tile.letter, 0, 2);
-      ctx.restore();
-    });
+    // Letters placed in the active row (and the ones still flying in).
+    const flights = [];
+    if (row !== -1) {
+      tiles.forEach((tile) => {
+        if (tile.col === -1) return;
+        const pos = cellPos(row, tile.col);
+        const flightP = tile.animType === "drop" && !reduceMotion
+          ? clamp01((now - tile.animStart) / 260)
+          : 1;
+        if (flightP < 1) {
+          flights.push({ tile, pos, p: easeInOut(flightP) });
+          return;
+        }
+        ctx.fillStyle = colors.cellPlaced;
+        ctx.strokeStyle = colors.teal;
+        ctx.lineWidth = 2;
+        roundRect(pos.x + 1 + shakeX, pos.y + 1, cell - 2, cell - 2, radius);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = colors.text;
+        ctx.font = font(900, Math.round(cell * 0.5));
+        ctx.textAlign = "center";
+        ctx.fillText(tile.letter, pos.x + cell / 2 + shakeX, pos.y + cell / 2 + 1);
+      });
+    }
 
-    const triesY = gridBottom + 18;
-    ctx.fillStyle = colors.red;
-    ctx.font = "800 11px Nunito, system-ui";
-    ctx.fillText("Invalid submissions allowed: 3 • 3 tries left", width / 2, triesY);
-
-    const statusProgress = Math.min(1, (now - status.start) / 300);
-    ctx.globalAlpha = statusProgress;
+    // Status line.
+    const statusP = clamp01((now - status.start) / 300);
+    ctx.globalAlpha = statusP;
     ctx.fillStyle = colors.text;
-    ctx.font = "800 12px Nunito, system-ui";
-    ctx.fillText(status.text, width / 2, triesY + 22 + (1 - statusProgress) * 6);
+    ctx.font = font(700, 12);
+    ctx.textAlign = "center";
+    ctx.fillText(status.text, width / 2, statusY + (1 - statusP) * 6);
     ctx.globalAlpha = 1;
 
-    const rackTile = Math.min(44, (width - 2 * pad - 6 * 4) / 5);
-    const rackGap = 6;
-    const rackTotal = rackTile * 5 + rackGap * 4;
-    const rackX = (width - rackTotal) / 2;
-    const rackY = triesY + 44;
-
+    // Rack.
     tiles.forEach((tile, index) => {
-      const x = rackX + index * (rackTile + rackGap);
-      const placed = tile.row !== -1;
+      const pos = rackPos(index);
+      const placed = tile.col !== -1;
       let dy = 0;
       let scale = 1;
-      if (!placed && tile.animType === "return") {
-        const p = Math.min(1, (now - tile.animStart) / 320);
+      if (!placed && tile.animType === "return" && !reduceMotion) {
+        const p = clamp01((now - tile.animStart) / 320);
         dy = (1 - easeOutBack(p)) * 10;
         scale = 0.85 + easeOutBack(p) * 0.15;
       }
 
       ctx.save();
-      ctx.translate(x + rackTile / 2, rackY + rackTile / 2 + dy);
+      ctx.translate(pos.x + rackTile / 2, pos.y + rackTile / 2 + dy);
       ctx.scale(scale, scale);
-      ctx.fillStyle = colors.shadow;
-      roundRect(-rackTile / 2, -rackTile / 2 + 4, rackTile, rackTile, 10);
-      ctx.fill();
-      ctx.fillStyle = placed ? colors.redDim : colors.red;
-      roundRect(-rackTile / 2, -rackTile / 2, rackTile, rackTile, 10);
-      ctx.fill();
-      ctx.fillStyle = placed ? colors.redText : colors.white;
-      ctx.font = `900 ${Math.round(rackTile * 0.45)}px Nunito, system-ui`;
-      ctx.fillText(tile.letter, 0, 2);
+      if (placed) {
+        ctx.fillStyle = colors.redDim;
+        roundRect(-rackTile / 2, -rackTile / 2, rackTile, rackTile, 10);
+        ctx.fill();
+      } else {
+        drawTileFace(-rackTile / 2, -rackTile / 2, rackTile, colors.red, colors.redEdge, 10);
+      }
+      ctx.fillStyle = placed ? "rgba(255, 255, 255, 0.22)" : colors.text;
+      ctx.font = font(900, Math.round(rackTile * 0.45));
+      ctx.textAlign = "center";
+      ctx.fillText(tile.letter, 0, 1);
       ctx.restore();
 
-      if (!placed) {
+      if (!placed && interactive) {
         hits.push({
-          x,
-          y: rackY,
+          x: pos.x,
+          y: pos.y,
           w: rackTile,
           h: rackTile,
           onTap: () => {
@@ -468,19 +704,223 @@
       }
     });
 
-    const ctrlY = rackY + rackTile + 14;
+    // Tiles in flight sit above everything on the board.
+    flights.forEach(({ tile, pos, p }) => {
+      const from = rackPos(tile.id);
+      const size = lerp(rackTile, cell - 1, p);
+      const x = lerp(from.x, pos.x, p);
+      const y = lerp(from.y, pos.y, p) - Math.sin(p * Math.PI) * 14;
+      drawTileFace(x, y, size, colors.red, colors.redEdge, Math.max(8, size * 0.24));
+      ctx.fillStyle = colors.text;
+      ctx.font = font(900, Math.round(size * 0.48));
+      ctx.textAlign = "center";
+      ctx.fillText(tile.letter, x + size / 2, y + size / 2 + 1);
+    });
+
+    // Controls.
+    const ctrlY = rackY + rackTile + 16;
     const ctrlSize = 38;
     const ctrlGap = 10;
     const ctrlX = width / 2 - ctrlSize - ctrlGap / 2;
-    const hasLetters = tiles.some((tile) => tile.row === 0);
+    const hasLetters = tiles.some((tile) => tile.col !== -1);
     drawControl(ctrlX, ctrlY, ctrlSize, colors.green, drawShuffleGlyph, () => {
       stopDemo();
       shuffle();
     });
-    drawControl(ctrlX + ctrlSize + ctrlGap, ctrlY, ctrlSize, hasLetters ? "#4b5563" : colors.disabled, drawDeleteGlyph, () => {
-      stopDemo();
-      removeLast();
+    drawControl(
+      ctrlX + ctrlSize + ctrlGap,
+      ctrlY,
+      ctrlSize,
+      hasLetters ? colors.delete : colors.disabled,
+      drawDeleteGlyph,
+      () => {
+        stopDemo();
+        removeLast();
+      },
+    );
+    if (!interactive) hits = [];
+  }
+
+  function drawResults(now) {
+    const t = now - results.start;
+    if (t < 0) return;
+
+    const closeT = results.closing ? clamp01((now - results.closing) / 350) : 0;
+    const inP = reduceMotion ? 1 : easeOutCubic(clamp01(t / 500));
+    const slide = reduceMotion ? closeT * height : (1 - inP) * height + closeT * height;
+
+    ctx.fillStyle = `rgba(8, 10, 24, ${0.6 * inP * (1 - closeT)})`;
+    ctx.fillRect(0, 0, width, height);
+
+    const sheetX = 10;
+    const sheetW = width - 20;
+    const restTop = height * 0.035;
+    const sheetTop = restTop + slide;
+    const inset = 14;
+
+    ctx.save();
+    ctx.translate(sheetX, sheetTop);
+
+    ctx.fillStyle = colors.panel;
+    roundRect(0, 0, sheetW, height - restTop + 30, 26);
+    ctx.fill();
+
+    // Close button.
+    const closeCx = sheetW - 26;
+    const closeCy = 26;
+    ctx.fillStyle = colors.scoreRed;
+    ctx.beginPath();
+    ctx.arc(closeCx, closeCy, 15, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = colors.text;
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(closeCx - 5, closeCy - 5);
+    ctx.lineTo(closeCx + 5, closeCy + 5);
+    ctx.moveTo(closeCx + 5, closeCy - 5);
+    ctx.lineTo(closeCx - 5, closeCy + 5);
+    ctx.stroke();
+    if (inP > 0.9 && !closeT) {
+      hits.push({
+        x: sheetX + closeCx - 18,
+        y: sheetTop + closeCy - 18,
+        w: 36,
+        h: 36,
+        onTap: () => {
+          stopDemo();
+          closeResults();
+        },
+      });
+    }
+
+    // Score count-up with sparkles.
+    const countP = reduceMotion ? 1 : easeOutCubic(clamp01((t - 350) / 900));
+    ctx.textAlign = "center";
+    ctx.fillStyle = colors.scoreRed;
+    ctx.font = font(900, Math.round(sheetW * 0.2));
+    ctx.fillText(String(Math.round(results.score * countP)), sheetW / 2, 66);
+
+    const twinkle = (offset) => (reduceMotion ? 1 : 0.55 + 0.45 * Math.sin(now / 260 + offset));
+    drawSparkle(sheetW * 0.79, 52, 13, twinkle(0));
+    drawSparkle(sheetW * 0.17, 62, 10, twinkle(1.7));
+    drawSparkle(sheetW * 0.2, 44, 5, twinkle(3.1));
+
+    ctx.fillStyle = colors.muted;
+    ctx.font = font(800, 15);
+    ctx.fillText("SCORE", sheetW / 2, 112);
+    ctx.font = font(800, 12);
+    ctx.fillText(longDate, sheetW / 2, 134);
+
+    // Time + hints tiles.
+    const tileGap = 12;
+    const tileW = (sheetW - inset * 2 - tileGap) / 2;
+    const statY = 154;
+    [
+      { value: formatTime(results.elapsed), label: "TIME", color: colors.teal, x: inset },
+      { value: "0", label: "HINTS", color: colors.teal, x: inset + tileW + tileGap },
+    ].forEach((stat) => {
+      ctx.fillStyle = colors.panelLight;
+      roundRect(stat.x, statY, tileW, 58, 16);
+      ctx.fill();
+      ctx.fillStyle = stat.color;
+      ctx.font = font(800, 22);
+      ctx.fillText(stat.value, stat.x + tileW / 2, statY + 25);
+      ctx.fillStyle = colors.muted;
+      ctx.font = font(700, 11);
+      ctx.fillText(stat.label, stat.x + tileW / 2, statY + 46);
     });
+
+    ctx.fillStyle = colors.muted;
+    ctx.font = font(600, 11);
+    ctx.fillText("10 points off for each hint used", sheetW / 2, 232);
+
+    // Words found list, clipped and slowly auto-scrolling.
+    ctx.textAlign = "left";
+    ctx.fillStyle = colors.muted;
+    ctx.font = font(800, 12);
+    ctx.fillText("WORDS FOUND", inset, 258);
+
+    const listTop = 272;
+    const listW = sheetW - inset * 2;
+    const cardPad = 12;
+    const cardGap = 8;
+    ctx.font = font(600, 11.5);
+    const cards = solved.map((entry) => {
+      const lines = wrapText(definitions[entry.word] || "", listW - cardPad * 2);
+      return { word: entry.word, lines, h: cardPad + 17 + lines.length * 15 + 6 };
+    });
+    const totalH = cards.reduce((sum, card) => sum + card.h + cardGap, 0);
+    const visibleH = height - restTop - listTop - 6;
+    const maxScroll = Math.max(0, totalH - visibleH);
+    const scroll = reduceMotion ? 0 : Math.min(maxScroll, Math.max(0, (t - 3000) * 0.03));
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(inset, listTop, listW, visibleH);
+    ctx.clip();
+    let y = listTop - scroll;
+    cards.forEach((card) => {
+      ctx.fillStyle = colors.panelLight;
+      roundRect(inset, y, listW, card.h, 14);
+      ctx.fill();
+      ctx.fillStyle = colors.teal;
+      ctx.font = font(800, 15);
+      ctx.fillText(card.word, inset + cardPad, y + cardPad + 6);
+      ctx.fillStyle = colors.text;
+      ctx.font = font(600, 11.5);
+      card.lines.forEach((line, i) => {
+        ctx.fillText(line, inset + cardPad, y + cardPad + 26 + i * 15);
+      });
+      y += card.h + cardGap;
+    });
+    ctx.restore();
+
+    ctx.restore();
+  }
+
+  function drawConfetti(now, dt) {
+    if (!confetti.length) return;
+    confetti = confetti.filter((piece) => now - piece.born < piece.life);
+    confetti.forEach((piece) => {
+      piece.vy += 520 * dt;
+      piece.x += piece.vx * dt;
+      piece.y += piece.vy * dt;
+      piece.rot += piece.vr * dt;
+      const fade = clamp01(1 - (now - piece.born) / piece.life);
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, fade * 2);
+      ctx.translate(piece.x, piece.y);
+      ctx.rotate(piece.rot);
+      ctx.fillStyle = piece.color;
+      ctx.fillRect(-piece.w / 2, -piece.h / 2, piece.w, piece.h);
+      ctx.restore();
+    });
+  }
+
+  function draw() {
+    if (!gameScreen.classList.contains("is-active") || width < 80 || height < 160) {
+      requestAnimationFrame(draw);
+      return;
+    }
+
+    const now = performance.now();
+    const dt = Math.min(0.05, (now - lastFrame) / 1000);
+    lastFrame = now;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+    const bg = ctx.createLinearGradient(0, 0, 0, height);
+    bg.addColorStop(0, colors.bgTop);
+    bg.addColorStop(1, colors.bgBottom);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, width, height);
+    hits = [];
+    ctx.textBaseline = "middle";
+
+    drawBoard(now);
+    if (phase === "results") drawResults(now);
+    drawConfetti(now, dt);
 
     requestAnimationFrame(draw);
   }

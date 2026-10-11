@@ -12,6 +12,16 @@
   --viisi-muted: #6b7280;
   --viisi-card: #fffaf3;
   --viisi-border: #f4d7bf;
+  /* Page chrome (dark neon theme from the v3 marketing mockups). The tokens
+     above stay the light "app/card" palette used on cards and the phone demo. */
+  --site-bg: #070b19;
+  --site-bg-deep: #04060f;
+  --site-text: #eef1ff;
+  --site-muted: #aab3d1;
+  --site-line: rgba(255, 255, 255, 0.1);
+  --site-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  --neon-teal: #2ef2d0;
+  --neon-pink: #ff4fb8;
   --radius-lg: 24px;
   --radius-sm: 12px;
   --shadow-soft: 0 10px 40px rgba(31, 41, 55, 0.08);
@@ -27,8 +37,12 @@ body {
   margin: 0;
   font-family: "Nunito", "Inter", system-ui, -apple-system, BlinkMacSystemFont,
     sans-serif;
-  background: var(--viisi-bg);
-  color: var(--viisi-text);
+  background:
+    radial-gradient(60% 32% at 85% 0%, rgba(46, 242, 208, 0.2), transparent 70%),
+    radial-gradient(50% 30% at 0% 12%, rgba(255, 79, 184, 0.16), transparent 70%),
+    radial-gradient(70% 40% at 50% 100%, rgba(30, 64, 175, 0.25), transparent 70%),
+    var(--site-bg);
+  color: var(--site-text);
   line-height: 1.5;
   min-height: 100vh;
 }
@@ -133,7 +147,7 @@ a {
   background: var(--viisi-red);
   transform: rotate(3deg);
   font-weight: 700;
-  box-shadow: 0 10px 25px rgba(249, 113, 113, 0.25);
+  box-shadow: 0 10px 25px rgba(251, 70, 85, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
 }
 
 .highlight {
@@ -148,7 +162,7 @@ a {
   align-items: center;
   gap: 1.5rem;
   font-weight: 600;
-  color: var(--viisi-muted);
+  color: var(--site-muted);
 }
 
 .nav-links a {
@@ -157,7 +171,7 @@ a {
 
 .nav-links a:hover,
 .nav-links a:focus-visible {
-  color: var(--viisi-red);
+  color: var(--neon-teal);
 }
 
 .btn {
@@ -175,14 +189,14 @@ a {
 }
 
 .btn:focus-visible {
-  outline: 3px solid rgba(249, 113, 113, 0.35);
+  outline: 3px solid rgba(46, 242, 208, 0.6);
   outline-offset: 3px;
 }
 
 .btn-primary {
-  background: var(--viisi-text);
+  background: var(--viisi-red-dark);
   color: white;
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 10px 30px rgba(251, 70, 85, 0.35);
 }
 
 .btn-primary:hover {
@@ -199,9 +213,9 @@ a {
 }
 
 .btn-ghost {
-  background:white;
-  color: var(--viisi-text);
-  border: 2px solid rgba(31, 41, 55, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--site-text);
+  border: 2px solid rgba(255, 255, 255, 0.22);
   border-radius:8px;
 }
 .btn-ghost.apple {
@@ -229,14 +243,14 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(249, 113, 113, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(46, 242, 208, 0.35);
   padding: 0.4rem 1rem;
   border-radius: 999px;
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--viisi-red);
-  box-shadow: 0 10px 30px rgba(249, 113, 113, 0.15);
+  color: var(--site-text);
+  box-shadow: 0 0 24px rgba(46, 242, 208, 0.18);
 }
 
 .hero h1 {
@@ -259,7 +273,7 @@ a {
 }
 
 .hero p {
-  color: var(--viisi-muted);
+  color: var(--site-muted);
   font-size: 0.9rem;
   max-width: 520px;
 }
@@ -305,6 +319,7 @@ a {
 
 .phone-floating-card {
   position: absolute;
+  color: var(--viisi-text);
   background: white;
   border-radius: var(--radius-sm);
   padding: 1rem;
@@ -329,14 +344,14 @@ a {
   transform: rotate(1deg);
   top: 82px;
   right: -18px;
-  z-index: 5;
+  z-index: 1;
 }
 
 .card-archive {
     transform: rotate(2deg);
   bottom: 93px;
   left: 40px;
-  z-index: 5;
+  z-index: 1;
 }
 
 .pill {
@@ -353,7 +368,9 @@ a {
 }
 
 .link-red {
-  color: var(--viisi-red-dark);
+  color: var(--viisi-red2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .pill-orange {
@@ -377,10 +394,11 @@ a {
   height: 320px;
   background: radial-gradient(
     circle,
-    rgba(249, 113, 113, 0.35),
-    transparent 70%
+    rgba(46, 242, 208, 0.32),
+    rgba(255, 79, 184, 0.18) 45%,
+    transparent 72%
   );
-  filter: blur(10px);
+  filter: blur(14px);
 }
 
 .phone-shell {
@@ -389,8 +407,9 @@ a {
   border-radius: 42px;
   background: #111827;
   padding: 16px;
-  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.4);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.08), 0 0 60px rgba(46, 242, 208, 0.18);
   height:600px;
+  z-index: 2;
 }
 
 .phone-notch {
@@ -418,15 +437,15 @@ a {
   height: 568px;
   overflow: hidden;
   border-radius: 32px;
-  background: var(--viisi-bg);
-  color: var(--viisi-text);
+  background: #151a38;
+  color: #fff;
 }
 
 .viisi-demo-screen {
   position: absolute;
   inset: 0;
   display: none;
-  background: var(--viisi-bg);
+  background: linear-gradient(180deg, #1b2147, #10142b);
 }
 
 .viisi-demo-screen.is-active {
@@ -487,7 +506,8 @@ a {
   margin-bottom: 1rem;
   padding: 0.9rem 1rem;
   border-radius: 1.05rem;
-  background: color-mix(in srgb, #aaa5d2 82%, transparent);
+  background: #383f6b;
+  color: #fff;
 }
 
 .viisi-demo-streak h3 {
@@ -523,7 +543,7 @@ a {
   padding: 0;
   border: 0;
   border-radius: 1.05rem;
-  background: #121f43;
+  background: #383f6b;
   color: white;
   font-family: inherit;
   text-align: center;
@@ -550,9 +570,10 @@ a {
   width: 2.55rem;
   height: 2.55rem;
   border-radius: 0.65rem;
-  background: var(--viisi-red);
+  background: #2cc5a5;
+  color: #fff;
   font-size: 1.25rem;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .viisi-demo-play-label {
@@ -568,7 +589,7 @@ a {
   grid-template-columns: repeat(4, 1fr);
   padding: 0.55rem 0.65rem;
   background: var(--viisi-red);
-  color: #121f43;
+  color: #fff;
 }
 
 .viisi-demo-stats b,
@@ -613,7 +634,7 @@ a {
 .viisi-demo-row,
 .viisi-demo-archive {
   border-radius: 1.05rem;
-  background: #121f43;
+  background: #383f6b;
 }
 
 .viisi-demo-row {
@@ -772,7 +793,7 @@ a {
 .section-title p {
   max-width: 88%;
   margin: 0 auto;
-  color: var(--viisi-muted);
+  color: var(--site-muted);
 }
 
 .features-grid {
@@ -782,12 +803,13 @@ a {
 }
 
 .feature-card {
-  background: white;
-  color: var(--viisi-text);
+  background: var(--site-glass);
+  color: var(--site-text);
   border-radius: var(--radius-sm);
   padding: 1.75rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--site-line);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
 
   h3 {
     display: inline-block;
@@ -799,10 +821,14 @@ a {
     color: oklch(0.795 0.184 86.047);
   }
   .trophy {
-    color: var(--viisi-green);
+    color: var(--neon-teal);
   }
   .calendar {
     color: var(--viisi-red2);
+  }
+
+  p {
+    color: var(--site-muted);
   }
 }
 
@@ -840,7 +866,8 @@ a {
 }
 
 .footer {
-  background: var(--viisi-text);
+  background: var(--site-bg-deep);
+  border-top: 1px solid var(--site-line);
   color: rgba(255, 255, 255, 0.85);
   padding: 2.5rem 0;
   margin-top: 4rem;
@@ -868,8 +895,9 @@ a {
 
 .mobile-menu-button {
   display: none;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--site-text);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 12px;
   width: 44px;
   height: 44px;
@@ -928,12 +956,13 @@ a {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background: white;
+    background: #121936;
+    border: 1px solid var(--site-line);
     border-radius: var(--radius-sm);
     padding: 1.25rem;
     margin-top: 1rem;
-    box-shadow: var(--shadow-soft);
-    color: #000;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    color: var(--site-text);
   }
 
   .phone-floating-card {
@@ -985,6 +1014,7 @@ a {
 }
 
 .policy-card {
+  color: var(--viisi-text);
   background: white;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -1122,3 +1152,127 @@ a {
       }
 }
  */
+
+/* ---- Fresh look: neon rings, showcase gallery, content panels ---- */
+
+.hero > .phone-showcase::before,
+.hero > .phone-showcase .glow::after {
+  content: "";
+  position: absolute;
+  width: 440px;
+  height: 250px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero > .phone-showcase::before {
+  border: 3px solid rgba(46, 242, 208, 0.75);
+  box-shadow: 0 0 22px rgba(46, 242, 208, 0.55), inset 0 0 22px rgba(46, 242, 208, 0.25);
+  transform: rotate(-24deg);
+}
+
+.hero > .phone-showcase .glow::after {
+  left: -60px;
+  top: 35px;
+  border: 3px solid rgba(255, 79, 184, 0.7);
+  box-shadow: 0 0 22px rgba(255, 79, 184, 0.5), inset 0 0 22px rgba(255, 79, 184, 0.2);
+  transform: rotate(28deg);
+  filter: blur(0.4px);
+}
+
+.content-block,
+.seo-callout {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--site-line);
+  border-radius: var(--radius-lg);
+  background: var(--site-glass);
+}
+
+.content-block h2,
+.seo-callout h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+}
+
+.content-block p,
+.seo-callout p {
+  margin: 0 0 0.9rem;
+  max-width: 78ch;
+  color: var(--site-muted);
+}
+
+.content-block p:last-child,
+.seo-callout p:last-child {
+  margin-bottom: 0;
+}
+
+.seo-callout {
+  margin-bottom: 1rem;
+  background:
+    linear-gradient(90deg, rgba(7, 11, 25, 0.96) 0%, rgba(7, 11, 25, 0.82) 55%, rgba(7, 11, 25, 0.35) 100%),
+    url("../images/marketing/viisi-v3-ribbons.jpg") center 38% / cover no-repeat;
+}
+
+.showcase {
+  padding: 1rem 0 0;
+}
+
+.showcase-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.showcase-grid li:nth-child(even) {
+  transform: translateY(1.5rem);
+}
+
+.showcase-grid img {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--site-line);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+}
+
+.showcase + .content-block {
+  margin-top: 4rem;
+}
+
+@media (max-width: 900px) {
+  .showcase-grid {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .showcase-grid li,
+  .showcase-grid li:nth-child(even) {
+    flex: 0 0 min(64vw, 260px);
+    scroll-snap-align: center;
+    transform: none;
+  }
+
+  .hero > .phone-showcase::before {
+    width: 340px;
+    height: 200px;
+  }
+
+  .hero > .phone-showcase .glow::after {
+    left: -30px;
+    width: 340px;
+    height: 200px;
+  }
+
+  .showcase + .content-block {
+    margin-top: 2rem;
+  }
+}
