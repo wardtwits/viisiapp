@@ -1242,6 +1242,69 @@ a {
     url("../images/marketing/viisi-v3-ribbons.jpg") center 38% / cover no-repeat;
 }
 
+/* Home page YouTube callout, sits between the hero and the intro panel. */
+.youtube-callout {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+  padding: clamp(1.1rem, 2.5vw, 1.6rem) clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--site-line);
+  border-radius: var(--radius-lg);
+  background: var(--site-glass);
+}
+
+.youtube-callout-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--viisi-red);
+  color: white;
+  transform: rotate(-5deg);
+  box-shadow: inset 0 -3px rgba(0, 0, 0, 0.12);
+}
+
+.youtube-callout-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.youtube-callout h2 {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+}
+
+.youtube-callout p {
+  margin: 0;
+  color: var(--site-muted);
+}
+
+.btn-youtube {
+  flex: none;
+  background: var(--viisi-red);
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(251, 70, 85, 0.35);
+}
+
+.btn-youtube:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 700px) {
+  .youtube-callout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-youtube {
+    align-self: stretch;
+  }
+}
+
 /* "What kind of word game" panel: phone art lives at its right edge. */
 .content-block.intro {
   min-height: 360px;
