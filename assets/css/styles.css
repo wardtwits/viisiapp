@@ -372,16 +372,34 @@ a.appleDownload {
   position: relative;
   display: grid;
   place-items: center;
-  transform: rotate(-2deg);
+}
+
+/* Home hero: the device stays upright and the cards sit beside it, never on
+   top of it (Apple's product image guidelines). */
+.hero > .phone-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.showcase-cards {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: stretch;
+  flex: 0 0 150px;
 }
 
 .phone-floating-card {
-  position: absolute;
+  position: relative;
   color: var(--viisi-text);
   background: white;
   border-radius: var(--radius-sm);
   padding: 1rem;
-  width: 165px;
+  width: 150px;
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -400,16 +418,10 @@ a.appleDownload {
 
 .card-streak {
   transform: rotate(1deg);
-  top: 82px;
-  right: -41px;
-  z-index: 1;
 }
 
 .card-archive {
     transform: rotate(2deg);
-  bottom: 93px;
-  left: -44px;
-  z-index: 1;
 }
 
 .pill {
@@ -482,27 +494,56 @@ a.appleDownload {
   transform: translateX(-50%);
 }
 
-/* Home hero: app screenshots crossfading, one set per color scheme. */
+/* Home hero: app screenshots crossfading inside the iPhone 16 Pro frame, one
+   set per color scheme. The frame image is 1350x2760 with a transparent
+   1206x2622 screen at (72, 69); the insets below are those offsets as
+   percentages. Shown upright, unmodified and with no added shadow, per
+   Apple's product image guidelines. */
 .screenshot-frame {
   position: relative;
-  width: min(300px, 70vw);
-  aspect-ratio: 1170 / 2391;
-  border-radius: 36px;
-  overflow: hidden;
-  background: #151a38;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.08), 0 0 60px rgba(46, 242, 208, 0.18);
   z-index: 2;
+  flex: 0 1 auto;
+  width: min(280px, 70vw);
+  min-width: 0;
+  aspect-ratio: 1350 / 2760;
 }
 
+.screenshot-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../images/iphone-16-pro-frame.png") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.screenshot-screen {
+  position: absolute;
+  inset: 2.5% 5.333%;
+  border-radius: 15.6% / 7.2%;
+  overflow: hidden;
+  background: #222649;
+}
+
+/* The screenshots have no status bar, so the app's own top color fills the
+   strip under the Dynamic Island (13% of the screen width). Below it the
+   strip-less 1170x2391 screenshots fit the remaining screen exactly. The
+   "sheet" screenshots show a modal over a dimmed background. */
 .screenshot-set img {
   position: absolute;
   inset: 0;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
+  padding-top: 13%;
+  background-color: #222649;
   object-fit: cover;
   object-position: top;
   opacity: 0;
   transition: opacity 0.8s ease;
+}
+
+.screenshot-set img.screenshot-sheet {
+  background-color: #121326;
 }
 
 .screenshot-set img.is-active {
@@ -514,8 +555,13 @@ a.appleDownload {
 }
 
 @media (prefers-color-scheme: light) {
-  .screenshot-frame {
-    background: #fafafc;
+  .screenshot-screen,
+  .screenshot-set img {
+    background-color: #fbfbfd;
+  }
+
+  .screenshot-set img.screenshot-sheet {
+    background-color: #c8c8ca;
   }
 
   .screenshot-set-light {
@@ -1113,7 +1159,7 @@ a.appleDownload {
     color: var(--site-text);
   }
 
-  .phone-floating-card {
+  .showcase-cards {
     display: none;
   }
 }
