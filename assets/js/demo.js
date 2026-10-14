@@ -61,52 +61,6 @@
     // elements.hintBtn.style.display = "none";
   }
 
-  function installIOSDoubleTapZoomGuard() {
-    const isIOS =
-      /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
-      (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
-
-    if (!isIOS) return;
-
-    const gameSurface = document.querySelector(".demo-main");
-    if (!gameSurface) return;
-
-    let lastTapTime = 0;
-    let lastTapX = 0;
-    let lastTapY = 0;
-
-    gameSurface.addEventListener(
-      "touchend",
-      (event) => {
-        if (event.changedTouches.length !== 1) return;
-
-        const touch = event.changedTouches[0];
-        const now = event.timeStamp;
-        const movedTooFar =
-          Math.abs(touch.clientX - lastTapX) > 24 || Math.abs(touch.clientY - lastTapY) > 24;
-        const isDoubleTap = now - lastTapTime < 320 && !movedTooFar;
-
-        if (isDoubleTap) {
-          event.preventDefault();
-
-          if (event.target instanceof Element) {
-            const interactiveTarget = event.target.closest("button, a, [role='button']");
-            if (interactiveTarget instanceof HTMLElement) {
-              interactiveTarget.click();
-            }
-          }
-        }
-
-        lastTapTime = now;
-        lastTapX = touch.clientX;
-        lastTapY = touch.clientY;
-      },
-      { passive: false }
-    );
-  }
-
-  installIOSDoubleTapZoomGuard();
-
   const initialState = {
     displayLetters: [...PUZZLE.letters],
     completedWords: [],
@@ -317,13 +271,18 @@
 
   function renderBoard() {
     elements.board.innerHTML = "";
+    const body = document.createElement("tbody");
 
     for (let row = 0; row < REQUIRED_WORDS; row += 1) {
       const word = rowWord(row);
+      const boardRow = document.createElement("tr");
+      boardRow.className = "demo-row";
+      const rowStatus = row < state.completedWords.length ? "accepted" : "not yet completed";
+      boardRow.setAttribute("aria-label", `Word ${row + 1}: ${word || "empty"}, ${rowStatus}`);
       for (let col = 0; col < 5; col += 1) {
-        const cell = document.createElement("div");
+        const cell = document.createElement("td");
         cell.className = "demo-cell";
-        cell.setAttribute("role", "gridcell");
+        cell.setAttribute("aria-label", `Letter ${col + 1}: ${word[col] || "empty"}`);
         cell.textContent = word[col] ?? "";
 
         if (row < state.completedWords.length) {
@@ -347,9 +306,11 @@
           cell.classList.add("is-arriving");
         }
 
-        elements.board.appendChild(cell);
+        boardRow.appendChild(cell);
       }
+      body.appendChild(boardRow);
     }
+    elements.board.appendChild(body);
     lockingRow = -1;
   }
 
@@ -365,16 +326,18 @@
 
   function renderKeyboard() {
     if (!elements.keyboard) return;
-    elements.keyboard.innerHTML = "";
 
     state.displayLetters.forEach((letter, index) => {
-      const key = document.createElement("button");
-      key.type = "button";
-      key.className = "demo-key";
+      let key = elements.keyboard.children[index];
+      if (!key) {
+        key = document.createElement("button");
+        key.type = "button";
+        key.className = "demo-key";
+        key.addEventListener("click", () => addLetter(index));
+        elements.keyboard.appendChild(key);
+      }
       key.textContent = letter;
-      key.disabled = !canUseIndex(index);
-      key.addEventListener("click", () => addLetter(index));
-      elements.keyboard.appendChild(key);
+      key.setAttribute("aria-disabled", String(!canUseIndex(index)));
     });
 
     if (elements.deleteBtn) {
@@ -457,13 +420,13 @@
     const key = `${row}:${col}`;
     const finish = () => {
       arrivingCells.delete(key);
-      const cell = elements.board.children[row * 5 + col];
+      const cell = elements.board.querySelectorAll(".demo-cell")[row * 5 + col];
       if (cell) {
         cell.classList.remove("is-arriving");
         cell.classList.add("is-landed");
       }
     };
-    const cell = elements.board.children[row * 5 + col];
+    const cell = elements.board.querySelectorAll(".demo-cell")[row * 5 + col];
     if (!cell || typeof cell.animate !== "function") {
       finish();
       return;
@@ -472,6 +435,7 @@
     const to = cell.getBoundingClientRect();
     const tile = document.createElement("div");
     tile.className = "flying-tile";
+    tile.setAttribute("aria-hidden", "true");
     tile.textContent = letter;
     tile.style.left = `${fromRect.left}px`;
     tile.style.top = `${fromRect.top}px`;
@@ -514,7 +478,7 @@
 
     state.currentWord += letter;
     state.currentIndices.push(index);
-    setMessage("Keep going.");
+    setMessage(`Current word: ${state.currentWord}.`);
 
     const isFull = state.currentWord.length === 5;
     if (isFull) pendingSubmit = true;
@@ -670,7 +634,7 @@
       clearTimeout(winDelayTimeoutId);
       winDelayTimeoutId = window.setTimeout(() => showWin(result), prefersReducedMotion ? 0 : 750);
     } else {
-      setMessage(`Nice. ${REQUIRED_WORDS - state.completedWords.length} more to win.`, "success");
+      setMessage(`${guess} accepted. ${REQUIRED_WORDS - state.completedWords.length} more to win.`, "success");
     }
 
     render();
@@ -759,7 +723,7 @@
     }
     state.hintUses += 1;
     state.hintMessage = `Hint applied: ${prefix}${"_".repeat(5 - prefixLength)} (${bestGroup.length} possible word${bestGroup.length === 1 ? "" : "s"})`;
-    setMessage(`Hint ${state.hintUses} applied. First two tiles filled.`, "success");
+    setMessage(`Hint ${state.hintUses} applied: ${prefix}. First two tiles filled.`, "success");
     render();
   }
 
@@ -792,6 +756,9 @@
 
   function handleKeydown(event) {
     if (event.defaultPrevented || state.isWon || state.invalidFlash || pendingSubmit) return;
+    if (event.ctrlKey || event.metaKey || event.altKey || event.isComposing) return;
+    if (!(event.target instanceof Element) || !event.target.closest(".demo-main")) return;
+    if (event.target.closest("input, textarea, select, [contenteditable='true']")) return;
     const key = event.key.toUpperCase();
 
     if (key === "BACKSPACE") {
@@ -801,6 +768,8 @@
     }
 
     if (key === " ") {
+      // Keep native Space activation for buttons, links, and disclosure controls.
+      if (event.target.closest("button, a, summary, [role='button']")) return;
       event.preventDefault();
       shuffleLetters();
       return;
@@ -837,6 +806,7 @@
   const confettiLayer = document.getElementById("confettiLayer");
   const winTime = document.getElementById("winTime");
   const winScore = document.getElementById("winScore");
+  const winScoreText = document.getElementById("winScoreText");
   const winDate = document.getElementById("winDate");
   const winWords = document.getElementById("winWords");
   const winStreak = document.getElementById("winStreak");
@@ -845,6 +815,8 @@
   let confettiBurstTimeoutId = null;
 
   let scoreFrameId = 0;
+  let returnFocus = null;
+  const inertSiblings = new Map();
 
   function animateScore(target) {
     if (!winScore) return;
@@ -867,6 +839,8 @@
 
   function showWin({ time = "00:00", score = 0, hints = 0, words = [] } = {}) {
     if (!overlay) return;
+    returnFocus = document.activeElement;
+    if (winScoreText) winScoreText.textContent = `: ${score}`;
     if (winTime) winTime.textContent = time;
     if (winStreak) {
       winStreak.textContent = hints > 0 ? `-${hints * HINT_PENALTY}` : "0";
@@ -897,18 +871,35 @@
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.add("is-open");
 
+    // Keep the results dialog available while making everything behind it inert.
+    let branch = overlay;
+    while (branch.parentElement && branch !== document.body) {
+      for (const sibling of branch.parentElement.children) {
+        if (sibling !== branch) {
+          inertSiblings.set(sibling, sibling.inert);
+          sibling.inert = true;
+        }
+      }
+      branch = branch.parentElement;
+    }
+
     // kick open animation
     requestAnimationFrame(() => {
       overlay.classList.add("win-open");
       spawnConfetti(95);
+      // Scroll after opening so reduced-motion users see the final sheet position.
+      window.setTimeout(() => {
+        if (winCloseBtn && overlay.classList.contains("is-open") && document.activeElement === winCloseBtn) {
+          (card || winCloseBtn).scrollIntoView({ block: "start" });
+        }
+      }, prefersReducedMotion ? 0 : 450);
     });
     clearTimeout(confettiBurstTimeoutId);
     confettiBurstTimeoutId = window.setTimeout(() => spawnConfetti(60), 220);
 
-    if (winCloseBtn) winCloseBtn.focus({ preventScroll: true });
-
-    // Esc closes
-    window.addEventListener("keydown", escClose, { once: true });
+    if (winCloseBtn) {
+      winCloseBtn.focus({ preventScroll: true });
+    }
   }
 
   function hideWin() {
@@ -918,6 +909,13 @@
     overlay.setAttribute("aria-hidden", "true");
     clearTimeout(confettiBurstTimeoutId);
     confettiBurstTimeoutId = null;
+    for (const [element, wasInert] of inertSiblings) element.inert = wasInert;
+    inertSiblings.clear();
+    const focusTarget = returnFocus instanceof HTMLElement && returnFocus.isConnected
+      ? returnFocus
+      : elements.resetButtons[0];
+    if (focusTarget) focusTarget.focus();
+    returnFocus = null;
     // let transition finish
     setTimeout(() => {
       overlay.hidden = true;
@@ -938,10 +936,25 @@
     confettiBurstTimeoutId = window.setTimeout(() => spawnConfetti(60), 220);
   }
 
-  function escClose(e) {
-    if (e.key === "Escape") hideWin();
-    else window.addEventListener("keydown", escClose, { once: true });
-  }
+  document.addEventListener("keydown", (event) => {
+    if (!overlay || !overlay.classList.contains("is-open")) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      hideWin();
+    } else if (event.key === "Tab") {
+      const controls = Array.from(overlay.querySelectorAll("button, a[href], [tabindex='0']"))
+        .filter((control) => !control.disabled && control.getClientRects().length > 0);
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (first && event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (last && !event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
 
   // Win animation
 

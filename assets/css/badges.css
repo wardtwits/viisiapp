@@ -32,6 +32,7 @@
 
 .badge-item {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1.25rem;
 }
@@ -70,7 +71,8 @@
   color: var(--badge-description);
   font-size: 1rem;
   line-height: 1.5;
-  flex: 1;
+  flex: 1 1 10rem;
+  min-width: 0;
 }
 
 @media (max-width: 600px) {

@@ -19,10 +19,10 @@
   <meta name="twitter:description" content="Try the Viisi anagram word puzzle demo in your browser." />
   <meta name="twitter:image" content="https://viisi.app/assets/images/mobile-site.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261011-red-buttons" />
-  <link rel="stylesheet" href="assets/css/demo.css?v=20261011-light-theme" />
-  <script defer src="assets/js/main.js"></script>
-  <script defer src="assets/js/demo.js?v=20261011-stare-letters"></script>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261013-iphone-frame" />
+  <link rel="stylesheet" href="assets/css/demo.css?v=20261013-iphone-frame" />
+  <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
+  <script defer src="assets/js/demo.js?v=20261013-accessibility"></script>
   <style>
     .video-pill {
   display: inline-flex;
@@ -67,6 +67,7 @@
 </head>
 
 <body class="touch-manipulation">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
       
       <header class="container">
@@ -78,9 +79,9 @@
           <button class="btn demo-reset-nav" type="button" data-reset-button>
             Reset
           </button>
-          <button class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
+          <button type="button" class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
             aria-label="Toggle navigation">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="6" x2="21" y2="6" />
               <line x1="3" y1="12" x2="21" y2="12" />
@@ -96,15 +97,15 @@
           <a class="btn btn-primary"
             href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
         </nav>
-        <div class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false">
+        <nav class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false" aria-label="Mobile primary">
           <a href="index.html">Home</a>
           <a href="index.html#features">Features</a>
           <a href="how-to-play.html">How to play</a>
           <a href="privacy.html">Privacy</a>
-        </div>
+        </nav>
       </header>
 <div class="desktop">
-      <main class="container demo-main">
+      <main id="main-content" tabindex="-1" class="container demo-main">
         <section class="hero demo-hero">
           <div>
             <div class="badge">Web Demo (single puzzle)</div>
@@ -115,10 +116,11 @@
 
       
           <div class="demo-header">
-            <p>
+            <p id="demo-instructions">
               Build five-letter anagrams and find five distinct valid words to
               win. <br><span class="tip">Tip: 2 Hints are available once you've found 3 valid words.</span>
             </p>
+            <p class="keyboard-instructions">Use the letter buttons or type letters. Backspace deletes; Space shuffles. Five letters submit your word automatically.</p>
           </div>
 
           <br>
@@ -136,17 +138,18 @@
 
 
           
-          <div class="phone-showcase" aria-hidden="true">
+          <div class="phone-showcase">
             <div class="phone-shell">
               <div class="phone-notch"></div>
               <div class="phone-inner">
-                <header style="
+                <div style="
                       display: flex;
                       justify-content: space-between;
                       align-items: center;
                     ">
                   <span class="viisi">Viisi</span>
                   <span class="demo-crown" title="Score">
+                    <span class="sr-only">Score: </span>
                     <svg viewBox="0 0 24 16" width="22" height="15" aria-hidden="true"><path d="M1 15V3l6 5.5L12 1l5 7.5L23 3v12z" fill="currentColor"/></svg>
                     <b id="liveScore">0</b>
                   </span>
@@ -156,23 +159,23 @@
                 </button>
           
                   </div>
-                </header>
+                </div>
                 <section class="header">
                   <h2 class="find5">Find 5 words with today's letters</h2>
                 </section>
-                <div id="board" class="demo-board" aria-label="Puzzle board" role="grid"></div>
+                <table id="board" class="demo-board" aria-label="Puzzle board" aria-describedby="demo-instructions"></table>
 
                 <button id="hintBtn" class="btn invisible" type="button">Hint</button>
               
                 <div id="message" class="demo-message" role="status" aria-live="polite"></div>
       
 
-                <div id="keyboard" class="demo-keys" aria-label="Letter keyboard"></div>
+                <div id="keyboard" class="demo-keys" role="group" aria-label="Letter keyboard"></div>
         <div class="demo-controls">
           
                 <!-- Shuffle Button -->
                 <div class="letter-tiles">
-                  <button class="shuffle" id="shuffleBtn">
+                  <button class="shuffle" id="shuffleBtn" type="button" aria-label="Shuffle letters">
                     <svg viewBox="0 0 24 24" class="w-6 h-6 shuffleIcon" width="20" height="20" aria-hidden="true">
                       <path d="M16 4h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
@@ -186,7 +189,7 @@
                         stroke-linejoin="round" />
                     </svg></button>
                   <!-- Delete button -->
-                  <button id="deleteBtn" class="delete">
+                  <button id="deleteBtn" class="delete" type="button" aria-label="Delete last letter">
                     <svg viewBox="0 0 24 24" class="deleteIcon h-5 w-5" width="30" height="30" aria-hidden="true">
                       <path
                         d="M9.2 5H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9.2a2 2 0 0 1-1.6-.8L2.6 13a2 2 0 0 1 0-2l5-5.2A2 2 0 0 1 9.2 5Z"
@@ -209,7 +212,7 @@
                     <i class="sparkle sparkle--a"></i><i class="sparkle sparkle--b"></i><i class="sparkle sparkle--c"></i>
                     <div id="winScore" class="win-score">0</div>
                   </div>
-                  <p class="win-label">Score</p>
+                  <p class="win-label">Score<span id="winScoreText" class="sr-only">: 0</span></p>
                   <p id="winDate" class="win-date"></p>
                   <div class="win-stats">
                     <div class="win-stat">
@@ -250,116 +253,7 @@
       </main>
     </div><!-- end desktop -->
 
-    <div class="mobile">
 
-       <div class="demo-header hide">
-        <div class="badge">Web Demo (single puzzle)</div>
-        <p>
-          Build five-letter anagrams and find five distinct valid words to
-          win. <br><span class="tip">Tip: 2 Hints are available once you've found 3 valid words.</span>
-        </p>
-</div>
-  </header>
-
-        <!-- phone -->
-        <!-- component -->
-        <div class="container phone-showcase demo-desktop" aria-hidden="true">
-          <div class="phone phone-inner demo-desktop"></div>
-          <div class="gradient demo-desktop">
-            <header style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                ">
-         
-              
-                <button id="resetBtn" class="btn" type="button" data-reset-button>
-              Reset
-            </button>
-               
-            </header>
-
-            <p class="slogan">Viisi <span>Demo</span></p>
-            <div id="board" class="demo-board" aria-label="Puzzle board" role="grid"></div>
-            <a id="hintBtn" class="btn invisible">Hint</a>
-
-            <div id="message" class="demo-message" role="status" aria-live="polite"></div>
-
-            <div id="keyboard" class="demo-keys" aria-label="Letter keyboard"></div>
-          <div class="demo-controls">
-            <!-- Shuffle Button -->
-            <div class="letter-tiles">
-              <button class="shuffle" id="shuffleBtn">
-                <svg viewBox="0 0 24 24" class="w-6 h-6 shuffleIcon" width="20" height="20" aria-hidden="true">
-                  <path d="M16 4h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                  <path d="M20 4l-5 5-2 2-1 1-3 3-3 3H4" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M16 20h4v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                  <path d="M20 20l-5-5-1-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                  <path d="M4 8h2l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                </svg></button>
-              <!-- Delete button -->
-              <button id="deleteBtn" class="delete">
-                <svg viewBox="0 0 24 24" class="deleteIcon h-5 w-5" width="30" height="30" aria-hidden="true">
-                  <path
-                    d="M9.2 5H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9.2a2 2 0 0 1-1.6-.8L2.6 13a2 2 0 0 1 0-2l5-5.2A2 2 0 0 1 9.2 5Z"
-                    fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
-                  <path d="M12 9l6 6M18 9l-6 6" fill="none" stroke="currentColor" stroke-width="1"
-                    stroke-linecap="round" />
-                </svg></button>
-            </div>
-            </div>
-          </div>
-          <div class="head-bar demo-desktop"></div>
-          <div class="btn-switch hide demo-desktop"></div>
-          <!-- win animation -->
-          <section id="winOverlay" class="win-overlay" aria-hidden="true" hidden>
-            <div class="win-backdrop"></div>
-            <div class="win-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
-              <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
-              <h3 id="winTitle">You Win!</h3>
-              <p class="win-copy">You found all five valid words.</p>
-              <div class="win-stats">
-                <div class="win-stat">
-                  <span>Time</span>
-                  <strong id="winTime">00:00</strong>
-                </div>
-                <div class="win-stat">
-                  <span>Words</span>
-                  <strong id="winGuesses">5</strong>
-                </div>
-                <div class="win-stat">
-                  <span>Hints</span>
-                  <strong id="winStreak">0</strong>
-                </div>
-              </div>
-              <div class="win-actions">
-                <button id="winReplayBtn" class="btn" type="button">Replay Confetti</button>
-                <button id="winCloseBtn" class="btn btn-primary" type="button">Close</button>
-              </div>
-            </div>
-          </section>
-        </div>
-
-       
-
-            
-
-
-   
-
-      <details class="demo-word-bank">
-        <summary>Reveal the Solution</summary>
-        <p>Any of these words would be accepted:</p>
-        <p id="wordBank" class="word-bank-list"></p>
-      </details>
-  
-
-    </div><!-- end mobile -->
 
   <footer class="footer">
     <a class="footer-back-top" href="#">^ Back to Top</a>
@@ -368,13 +262,16 @@
         <span class="logo-mark">V</span>
         Viisi
       </div>
-      <div class="footer-links">
+      <nav class="footer-links" aria-label="Site pages">
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="how-to-play.html">How to play</a>
+        <a href="score.html">Scoring</a>
+        <a href="badges.html">Badges</a>
+        <a href="demo.html">Play Demo</a>
         <a href="privacy.html">Privacy</a>
         <a href="wordle-alternative/index.html">Viisi vs Wordle</a>
-      </div>
+      </nav>
       <small>© <span id="year"></span> Viisi Games</small>
       <p class="footer-legal">
         Apple, the Apple logo, iPhone, and iPad are trademarks of Apple Inc., registered in the U.S. and other countries and regions.

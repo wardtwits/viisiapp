@@ -1,0 +1,3604 @@
+{
+  "target": "WCAG 2.0 A and AA, plus axe best-practice checks",
+  "auditDate": "2026-10-13",
+  "note": "Homepage phone animation excluded at user request; current whole-page markup and overflow findings remain inside that block. Manual review items remain for gradients/images. This is not a conformance certification.",
+  "scans": [
+    {
+      "scenario": "mobile-dark",
+      "page": "index.html",
+      "excludedScope": [
+        ".hero > .phone-showcase"
+      ],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"] > .logo"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span:nth-child(2)"
+            ],
+            [
+              "h1 > span:nth-child(4)"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".btn-ghost"
+            ],
+            [
+              "#youtube-callout-title"
+            ],
+            [
+              ".youtube-callout-text > p"
+            ],
+            [
+              ".content-block > h2"
+            ],
+            [
+              ".content-block > p:nth-child(2)"
+            ],
+            [
+              ".content-block > p:nth-child(3)"
+            ],
+            [
+              ".section-title > h2"
+            ],
+            [
+              ".section-title > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".seo-callout > div > h2"
+            ],
+            [
+              ".seo-callout > div > p"
+            ],
+            [
+              ".link-red"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-dark",
+      "page": "demo.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 38,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "#liveScore"
+            ],
+            [
+              "h2"
+            ],
+            [
+              "#message"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-dark",
+      "page": "how-to-play.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-dark",
+      "page": "score.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 39,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".op[aria-hidden=\"true\"]:nth-child(6)"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".mint"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              "code:nth-child(1)"
+            ],
+            [
+              "code:nth-child(2)"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-dark",
+      "page": "badges.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > div > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-dark",
+      "page": "privacy.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-dark",
+      "page": "wordle-alternative/index.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 40,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"../index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".link-red"
+            ],
+            [
+              "div > p"
+            ],
+            [
+              "div > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#compare-title"
+            ],
+            [
+              "section[aria-labelledby=\"compare-title\"] > .wa-lede"
+            ],
+            [
+              ".is-viisi[scope=\"col\"]"
+            ],
+            [
+              "th[scope=\"col\"]:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(1) > th[scope=\"row\"]"
+            ],
+            [
+              "tbody > tr:nth-child(1) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(1) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(2) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(2) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(2) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(3) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(3) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(3) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(4) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(4) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(4) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(5) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(5) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(5) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(6) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(6) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(6) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(7) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(7) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(7) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(8) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(8) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(8) > td:nth-child(3)"
+            ],
+            [
+              ".compare-note"
+            ],
+            [
+              "#why-title"
+            ],
+            [
+              "section[aria-labelledby=\"why-title\"] > .wa-lede"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(2)"
+            ],
+            [
+              "strong:nth-child(1)"
+            ],
+            [
+              "strong:nth-child(2)"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(2)"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".wa-cta > h2"
+            ],
+            [
+              ".wa-cta > p"
+            ],
+            [
+              ".wa-cta > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#faq-title"
+            ],
+            [
+              "details:nth-child(1) > summary"
+            ],
+            [
+              "details:nth-child(2) > summary"
+            ],
+            [
+              "details:nth-child(3) > summary"
+            ],
+            [
+              "details:nth-child(4) > summary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-dark",
+      "page": "component.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 18,
+      "manualReviewItems": []
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "index.html",
+      "excludedScope": [
+        ".hero > .phone-showcase"
+      ],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"] > .logo"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span:nth-child(2)"
+            ],
+            [
+              "h1 > span:nth-child(4)"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".btn-ghost"
+            ],
+            [
+              "#youtube-callout-title"
+            ],
+            [
+              ".youtube-callout-text > p"
+            ],
+            [
+              ".content-block > h2"
+            ],
+            [
+              ".content-block > p:nth-child(2)"
+            ],
+            [
+              ".content-block > p:nth-child(3)"
+            ],
+            [
+              ".section-title > h2"
+            ],
+            [
+              ".section-title > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".seo-callout > div > h2"
+            ],
+            [
+              ".seo-callout > div > p"
+            ],
+            [
+              ".link-red"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "demo.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 38,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "#liveScore"
+            ],
+            [
+              "h2"
+            ],
+            [
+              "#message"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "how-to-play.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "score.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 39,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".op[aria-hidden=\"true\"]:nth-child(6)"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".mint"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              "code:nth-child(1)"
+            ],
+            [
+              "code:nth-child(2)"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "badges.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > div > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "privacy.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "wordle-alternative/index.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 40,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"../index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".link-red"
+            ],
+            [
+              "div > p"
+            ],
+            [
+              "div > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#compare-title"
+            ],
+            [
+              "section[aria-labelledby=\"compare-title\"] > .wa-lede"
+            ],
+            [
+              ".is-viisi[scope=\"col\"]"
+            ],
+            [
+              "th[scope=\"col\"]:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(1) > th[scope=\"row\"]"
+            ],
+            [
+              "tbody > tr:nth-child(1) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(1) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(2) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(2) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(2) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(3) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(3) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(3) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(4) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(4) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(4) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(5) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(5) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(5) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(6) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(6) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(6) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(7) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(7) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(7) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(8) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(8) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(8) > td:nth-child(3)"
+            ],
+            [
+              ".compare-note"
+            ],
+            [
+              "#why-title"
+            ],
+            [
+              "section[aria-labelledby=\"why-title\"] > .wa-lede"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(2)"
+            ],
+            [
+              "strong:nth-child(1)"
+            ],
+            [
+              "strong:nth-child(2)"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(2)"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".wa-cta > h2"
+            ],
+            [
+              ".wa-cta > p"
+            ],
+            [
+              ".wa-cta > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#faq-title"
+            ],
+            [
+              "details:nth-child(1) > summary"
+            ],
+            [
+              "details:nth-child(2) > summary"
+            ],
+            [
+              "details:nth-child(3) > summary"
+            ],
+            [
+              "details:nth-child(4) > summary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mobile-light-reduced",
+      "page": "component.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 18,
+      "manualReviewItems": []
+    },
+    {
+      "scenario": "text-200",
+      "page": "index.html",
+      "excludedScope": [
+        ".hero > .phone-showcase"
+      ],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"] > .logo"
+            ],
+            [
+              ".logo[href=\"index.html\"] > .logo > .logo-mark"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span:nth-child(2)"
+            ],
+            [
+              "h1 > span:nth-child(4)"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".btn-ghost"
+            ],
+            [
+              "#youtube-callout-title"
+            ],
+            [
+              ".youtube-callout-text > p"
+            ],
+            [
+              ".content-block > h2"
+            ],
+            [
+              ".content-block > p:nth-child(2)"
+            ],
+            [
+              ".content-block > p:nth-child(3)"
+            ],
+            [
+              ".section-title > h2"
+            ],
+            [
+              ".section-title > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".seo-callout > div > h2"
+            ],
+            [
+              ".seo-callout > div > p"
+            ],
+            [
+              ".link-red"
+            ],
+            [
+              ".footer-content > .logo > .logo-mark"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "text-200",
+      "page": "demo.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 38,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"] > .logo-mark"
+            ],
+            [
+              "#liveScore"
+            ],
+            [
+              "h2"
+            ],
+            [
+              "#message"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "text-200",
+      "page": "how-to-play.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".logo[href=\"index.html\"] > .logo-mark"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ],
+            [
+              ".footer-content > .logo > .logo-mark"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "text-200",
+      "page": "score.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 39,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".logo[href=\"index.html\"] > .logo-mark"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".op[aria-hidden=\"true\"]:nth-child(6)"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".mint"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              "code:nth-child(1)"
+            ],
+            [
+              "code:nth-child(2)"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".footer-content > .logo > .logo-mark"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "text-200",
+      "page": "badges.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".logo[href=\"index.html\"] > .logo-mark"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > div > p"
+            ],
+            [
+              "li:nth-child(1) > .badge-icon > .badge-label"
+            ],
+            [
+              "li:nth-child(2) > .badge-icon > .badge-label"
+            ],
+            [
+              "li:nth-child(3) > .badge-icon > .badge-label"
+            ],
+            [
+              "li:nth-child(4) > .badge-icon > .badge-label"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              ".footer-content > .logo > .logo-mark"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "text-200",
+      "page": "privacy.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".logo[href=\"index.html\"] > .logo-mark"
+            ],
+            [
+              ".footer-content > .logo > .logo-mark"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "text-200",
+      "page": "wordle-alternative/index.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 40,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"../index.html\"]"
+            ],
+            [
+              ".logo[href=\"../index.html\"] > .logo-mark"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".link-red"
+            ],
+            [
+              "div > p"
+            ],
+            [
+              "div > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#compare-title"
+            ],
+            [
+              "section[aria-labelledby=\"compare-title\"] > .wa-lede"
+            ],
+            [
+              ".is-viisi[scope=\"col\"]"
+            ],
+            [
+              "th[scope=\"col\"]:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(1) > th[scope=\"row\"]"
+            ],
+            [
+              "tbody > tr:nth-child(1) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(1) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(2) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(2) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(2) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(3) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(3) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(3) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(4) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(4) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(4) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(5) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(5) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(5) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(6) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(6) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(6) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(7) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(7) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(7) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(8) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(8) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(8) > td:nth-child(3)"
+            ],
+            [
+              ".compare-note"
+            ],
+            [
+              "#why-title"
+            ],
+            [
+              "section[aria-labelledby=\"why-title\"] > .wa-lede"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(2)"
+            ],
+            [
+              "strong:nth-child(1)"
+            ],
+            [
+              "strong:nth-child(2)"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(2)"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".wa-cta > h2"
+            ],
+            [
+              ".wa-cta > p"
+            ],
+            [
+              ".wa-cta > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#faq-title"
+            ],
+            [
+              "details:nth-child(1) > summary"
+            ],
+            [
+              "details:nth-child(2) > summary"
+            ],
+            [
+              "details:nth-child(3) > summary"
+            ],
+            [
+              "details:nth-child(4) > summary"
+            ],
+            [
+              ".footer-content > .logo > .logo-mark"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "text-200",
+      "page": "component.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 18,
+      "manualReviewItems": []
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "index.html",
+      "excludedScope": [
+        ".hero > .phone-showcase"
+      ],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"] > .logo"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span:nth-child(2)"
+            ],
+            [
+              "h1 > span:nth-child(4)"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".btn-ghost"
+            ],
+            [
+              "#youtube-callout-title"
+            ],
+            [
+              ".youtube-callout-text > p"
+            ],
+            [
+              ".content-block > h2"
+            ],
+            [
+              ".content-block > p:nth-child(2)"
+            ],
+            [
+              ".content-block > p:nth-child(3)"
+            ],
+            [
+              ".section-title > h2"
+            ],
+            [
+              ".section-title > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".seo-callout > div > h2"
+            ],
+            [
+              ".seo-callout > div > p"
+            ],
+            [
+              ".link-red"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "demo.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 38,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "#liveScore"
+            ],
+            [
+              "h2"
+            ],
+            [
+              "#message"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "how-to-play.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 35,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "score.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 39,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".op[aria-hidden=\"true\"]:nth-child(6)"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".mint"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              "code:nth-child(1)"
+            ],
+            [
+              "code:nth-child(2)"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "badges.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > div > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "privacy.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "wordle-alternative/index.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 40,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"../index.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".link-red"
+            ],
+            [
+              "div > p"
+            ],
+            [
+              "div > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#compare-title"
+            ],
+            [
+              "section[aria-labelledby=\"compare-title\"] > .wa-lede"
+            ],
+            [
+              ".is-viisi[scope=\"col\"]"
+            ],
+            [
+              "th[scope=\"col\"]:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(1) > th[scope=\"row\"]"
+            ],
+            [
+              "tbody > tr:nth-child(1) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(1) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(2) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(2) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(2) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(3) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(3) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(3) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(4) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(4) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(4) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(5) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(5) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(5) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(6) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(6) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(6) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(7) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(7) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(7) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(8) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(8) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(8) > td:nth-child(3)"
+            ],
+            [
+              ".compare-note"
+            ],
+            [
+              "#why-title"
+            ],
+            [
+              "section[aria-labelledby=\"why-title\"] > .wa-lede"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(2)"
+            ],
+            [
+              "strong:nth-child(1)"
+            ],
+            [
+              "strong:nth-child(2)"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(2)"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".wa-cta > h2"
+            ],
+            [
+              ".wa-cta > p"
+            ],
+            [
+              ".wa-cta > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#faq-title"
+            ],
+            [
+              "details:nth-child(1) > summary"
+            ],
+            [
+              "details:nth-child(2) > summary"
+            ],
+            [
+              "details:nth-child(3) > summary"
+            ],
+            [
+              "details:nth-child(4) > summary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "narrow-dark",
+      "page": "component.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 18,
+      "manualReviewItems": []
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "index.html",
+      "excludedScope": [
+        ".hero > .phone-showcase"
+      ],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"] > .logo"
+            ],
+            [
+              ".nav-links > a[href$=\"#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"score.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span:nth-child(2)"
+            ],
+            [
+              "h1 > span:nth-child(4)"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".btn-ghost"
+            ],
+            [
+              "#youtube-callout-title"
+            ],
+            [
+              ".youtube-callout-text > p"
+            ],
+            [
+              ".content-block > h2"
+            ],
+            [
+              ".content-block > p:nth-child(2)"
+            ],
+            [
+              ".content-block > p:nth-child(3)"
+            ],
+            [
+              ".section-title > h2"
+            ],
+            [
+              ".section-title > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".seo-callout > div > h2"
+            ],
+            [
+              ".seo-callout > div > p"
+            ],
+            [
+              ".link-red"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "demo.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 40,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "#demo-instructions"
+            ],
+            [
+              ".tip"
+            ],
+            [
+              ".keyboard-instructions"
+            ],
+            [
+              ".viisi"
+            ],
+            [
+              "#liveScore"
+            ],
+            [
+              "#resetBtn"
+            ],
+            [
+              "h2"
+            ],
+            [
+              "#message"
+            ],
+            [
+              "summary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "how-to-play.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 33,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "score.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 38,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".op[aria-hidden=\"true\"]:nth-child(6)"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".mint"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              "code:nth-child(1)"
+            ],
+            [
+              "code:nth-child(2)"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "badges.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 32,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > div > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "privacy.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 32,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "wordle-alternative/index.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 39,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"../index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"../index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"score.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".link-red"
+            ],
+            [
+              "div > p"
+            ],
+            [
+              "div > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#compare-title"
+            ],
+            [
+              "section[aria-labelledby=\"compare-title\"] > .wa-lede"
+            ],
+            [
+              ".is-viisi[scope=\"col\"]"
+            ],
+            [
+              "th[scope=\"col\"]:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(1) > th[scope=\"row\"]"
+            ],
+            [
+              "tbody > tr:nth-child(1) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(1) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(2) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(2) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(2) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(3) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(3) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(3) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(4) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(4) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(4) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(5) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(5) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(5) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(6) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(6) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(6) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(7) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(7) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(7) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(8) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(8) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(8) > td:nth-child(3)"
+            ],
+            [
+              ".compare-note"
+            ],
+            [
+              "#why-title"
+            ],
+            [
+              "section[aria-labelledby=\"why-title\"] > .wa-lede"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(2)"
+            ],
+            [
+              "strong:nth-child(1)"
+            ],
+            [
+              "strong:nth-child(2)"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(2)"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".wa-cta > h2"
+            ],
+            [
+              ".wa-cta > p"
+            ],
+            [
+              ".wa-cta > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#faq-title"
+            ],
+            [
+              "details:nth-child(1) > summary"
+            ],
+            [
+              "details:nth-child(2) > summary"
+            ],
+            [
+              "details:nth-child(3) > summary"
+            ],
+            [
+              "details:nth-child(4) > summary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-dark",
+      "page": "component.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 18,
+      "manualReviewItems": []
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "index.html",
+      "excludedScope": [
+        ".hero > .phone-showcase"
+      ],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 34,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"] > .logo"
+            ],
+            [
+              ".nav-links > a[href$=\"#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"score.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span:nth-child(2)"
+            ],
+            [
+              "h1 > span:nth-child(4)"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".btn-ghost"
+            ],
+            [
+              "#youtube-callout-title"
+            ],
+            [
+              ".youtube-callout-text > p"
+            ],
+            [
+              ".content-block > h2"
+            ],
+            [
+              ".content-block > p:nth-child(2)"
+            ],
+            [
+              ".content-block > p:nth-child(3)"
+            ],
+            [
+              ".section-title > h2"
+            ],
+            [
+              ".section-title > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".seo-callout > div > h2"
+            ],
+            [
+              ".seo-callout > div > p"
+            ],
+            [
+              ".link-red"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "demo.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 40,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "#demo-instructions"
+            ],
+            [
+              ".tip"
+            ],
+            [
+              ".keyboard-instructions"
+            ],
+            [
+              ".viisi"
+            ],
+            [
+              "#liveScore"
+            ],
+            [
+              "#resetBtn"
+            ],
+            [
+              "h2"
+            ],
+            [
+              "#message"
+            ],
+            [
+              "summary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "how-to-play.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 33,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(3) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > h3"
+            ],
+            [
+              ".stats:nth-child(6) > .features-grid.compact-cards > article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "score.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 38,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".challenge"
+            ],
+            [
+              ".op[aria-hidden=\"true\"]:nth-child(6)"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(4) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".mint"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              "code:nth-child(1)"
+            ],
+            [
+              "code:nth-child(2)"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(7) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(1) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(2) > p"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > h3"
+            ],
+            [
+              ".stats:nth-child(9) > .features-grid > article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "badges.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 32,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > div > p"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "privacy.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 32,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "wordle-alternative/index.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 39,
+      "manualReviewItems": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".logo[href=\"../index.html\"]"
+            ],
+            [
+              ".nav-links > a[href=\"../index.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"index.html#features\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"how-to-play.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"score.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"demo.html\"]"
+            ],
+            [
+              ".nav-links > a[href$=\"privacy.html\"]"
+            ],
+            [
+              ".badge"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".link-red"
+            ],
+            [
+              "div > p"
+            ],
+            [
+              "div > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#compare-title"
+            ],
+            [
+              "section[aria-labelledby=\"compare-title\"] > .wa-lede"
+            ],
+            [
+              ".is-viisi[scope=\"col\"]"
+            ],
+            [
+              "th[scope=\"col\"]:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(1) > th[scope=\"row\"]"
+            ],
+            [
+              "tbody > tr:nth-child(1) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(1) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(2) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(2) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(2) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(3) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(3) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(3) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(4) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(4) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(4) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(5) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(5) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(5) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(6) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(6) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(6) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(7) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(7) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(7) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(8) > th[scope=\"row\"]"
+            ],
+            [
+              "tr:nth-child(8) > .is-viisi"
+            ],
+            [
+              "tr:nth-child(8) > td:nth-child(3)"
+            ],
+            [
+              ".compare-note"
+            ],
+            [
+              "#why-title"
+            ],
+            [
+              "section[aria-labelledby=\"why-title\"] > .wa-lede"
+            ],
+            [
+              "article:nth-child(1) > h3"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(2)"
+            ],
+            [
+              "strong:nth-child(1)"
+            ],
+            [
+              "strong:nth-child(2)"
+            ],
+            [
+              "article:nth-child(1) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > h3"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(2)"
+            ],
+            [
+              "article:nth-child(2) > p:nth-child(3)"
+            ],
+            [
+              "article:nth-child(3) > h3"
+            ],
+            [
+              "article:nth-child(3) > p"
+            ],
+            [
+              "article:nth-child(4) > h3"
+            ],
+            [
+              "article:nth-child(4) > p"
+            ],
+            [
+              ".wa-cta > h2"
+            ],
+            [
+              ".wa-cta > p"
+            ],
+            [
+              ".wa-cta > .hero-cta.apple > .btn-ghost.btn.apple"
+            ],
+            [
+              "#faq-title"
+            ],
+            [
+              "details:nth-child(1) > summary"
+            ],
+            [
+              "details:nth-child(2) > summary"
+            ],
+            [
+              "details:nth-child(3) > summary"
+            ],
+            [
+              "details:nth-child(4) > summary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "desktop-light-reduced",
+      "page": "component.html",
+      "excludedScope": [],
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "passedRules": 18,
+      "manualReviewItems": []
+    }
+  ]
+}
