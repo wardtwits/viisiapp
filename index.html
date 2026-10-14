@@ -68,9 +68,9 @@
   </script>
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261014-iphone-18" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261014-carousel-pause" />
   <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
-  <script defer src="assets/js/screenshot-carousel.js"></script>
+  <script defer src="assets/js/screenshot-carousel.js?v=20261014-pause"></script>
 </head>
 
 <body>
@@ -140,9 +140,9 @@
 
 
       </div>
-      <div class="phone-showcase" aria-hidden="true">
-        <div class="glow"></div>
-        <div class="showcase-cards">
+      <div class="phone-showcase">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="showcase-cards" aria-hidden="true">
           <div class="phone-floating-card card-streak hover">
             <div class="pill pill-green"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy" aria-hidden="true" data-replit-metadata="client/src/pages/home.tsx:124:20" data-component-name="Trophy"><path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978"></path><path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978"></path><path d="M18 9h1.5a1 1 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"></path><path d="M6 9H4.5a1 1 0 0 1 0-5H6"></path></svg></div>
             <strong>Daily Streak</strong>
@@ -154,25 +154,32 @@
             <p>Replay past puzzles anytime.</p>
           </div>
         </div>
-        <div class="screenshot-frame">
-          <div class="screenshot-screen">
-            <div class="screenshot-set screenshot-set-light" data-screenshot-set>
-              <img class="is-active" src="assets/images/screenshots/light1.jpg" alt="" width="1170" height="2391" decoding="async" />
-              <img src="assets/images/screenshots/light2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img src="assets/images/screenshots/light3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img src="assets/images/screenshots/light4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img src="assets/images/screenshots/light5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img class="screenshot-sheet" src="assets/images/screenshots/light6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-            </div>
-            <div class="screenshot-set screenshot-set-dark" data-screenshot-set>
-              <img class="is-active" src="assets/images/screenshots/dark1.jpg" alt="" width="1170" height="2391" decoding="async" />
-              <img src="assets/images/screenshots/dark2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img src="assets/images/screenshots/dark3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img src="assets/images/screenshots/dark4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img src="assets/images/screenshots/dark5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
-              <img class="screenshot-sheet" src="assets/images/screenshots/dark6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+        <div class="screenshot-stage">
+          <div class="screenshot-frame" aria-hidden="true">
+            <div class="screenshot-screen">
+              <div class="screenshot-set screenshot-set-light" data-screenshot-set>
+                <img class="is-active" src="assets/images/screenshots/light1.jpg" alt="" width="1170" height="2391" decoding="async" />
+                <img src="assets/images/screenshots/light2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img src="assets/images/screenshots/light3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img src="assets/images/screenshots/light4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img src="assets/images/screenshots/light5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img class="screenshot-sheet" src="assets/images/screenshots/light6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+              </div>
+              <div class="screenshot-set screenshot-set-dark" data-screenshot-set>
+                <img class="is-active" src="assets/images/screenshots/dark1.jpg" alt="" width="1170" height="2391" decoding="async" />
+                <img src="assets/images/screenshots/dark2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img src="assets/images/screenshots/dark3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img src="assets/images/screenshots/dark4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img src="assets/images/screenshots/dark5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+                <img class="screenshot-sheet" src="assets/images/screenshots/dark6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+              </div>
             </div>
           </div>
+          <button type="button" class="screenshot-toggle" data-screenshot-toggle hidden>
+            <svg class="screenshot-toggle-pause" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+            <svg class="screenshot-toggle-play" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"></path></svg>
+            <span data-screenshot-toggle-label>Pause</span><span class="sr-only"> screenshot slideshow</span>
+          </button>
         </div>
       </div>
     </section>

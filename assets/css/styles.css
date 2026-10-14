@@ -499,12 +499,21 @@ a.appleDownload {
    1206x2622 screen at (72, 69); the insets below are those offsets as
    percentages. Shown upright, unmodified and with no added shadow, per
    Apple's product image guidelines. */
-.screenshot-frame {
+.screenshot-stage {
   position: relative;
   z-index: 2;
+  display: flex;
   flex: 0 1 auto;
-  width: min(280px, 70vw);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
   min-width: 0;
+}
+
+.screenshot-frame {
+  position: relative;
+  width: min(280px, 70vw);
+  max-width: 100%;
   aspect-ratio: 1350 / 2760;
 }
 
@@ -577,6 +586,41 @@ a.appleDownload {
   .screenshot-set img {
     transition: none;
   }
+}
+
+/* Pause/play for the auto-advancing screenshots (WCAG 2.2.2). It sits below
+   the device, not on it. The script reveals it only while it can animate. */
+.screenshot-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--site-line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--site-text);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.screenshot-toggle[hidden] {
+  display: none;
+}
+
+.screenshot-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.screenshot-toggle-play,
+.screenshot-toggle.is-paused .screenshot-toggle-pause {
+  display: none;
+}
+
+.screenshot-toggle.is-paused .screenshot-toggle-play {
+  display: block;
 }
 
 .phone-inner {
