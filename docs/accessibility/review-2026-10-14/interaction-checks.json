@@ -1,0 +1,50 @@
+{
+  "scope": "Chrome, local checkout, dark theme",
+  "viewport": {
+    "width": 320,
+    "height": 800
+  },
+  "keyboard": {
+    "letterInput": true,
+    "backspace": true,
+    "focusPreserved": true,
+    "hintAfterThreeWords": true,
+    "hintAnnouncement": "Hint 1 applied: AS. First two tiles filled."
+  },
+  "win": {
+    "words": [
+      "STARE",
+      "TEARS",
+      "RATES",
+      "ASTER",
+      "TARES"
+    ],
+    "hintUses": 1,
+    "liveScore": 110,
+    "accessibleScore": 110,
+    "focusOnOpen": "winCloseBtn",
+    "nativeTreeExcludesInertBackground": true,
+    "tabWraps": true,
+    "escapeCloses": true,
+    "focusAfterEscape": "BODY",
+    "focusReturnBugReproduction": "Keep focus on Hint while completing fourth and fifth words"
+  },
+  "navigation": {
+    "opens": true,
+    "escapeCloses": true,
+    "focusReturnsToToggle": true
+  },
+  "home": {
+    "skipLinkFocus": "main-content",
+    "viewportWidth": 320,
+    "clientWidth": 305,
+    "documentScrollWidth": 348
+  },
+  "guideLink": {
+    "color": "rgb(170, 179, 209)",
+    "parentColor": "rgb(170, 179, 209)",
+    "decoration": "none",
+    "weight": "400",
+    "parentWeight": "400"
+  }
+}

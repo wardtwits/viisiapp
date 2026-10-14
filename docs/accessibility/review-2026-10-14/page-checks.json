@@ -1,0 +1,1740 @@
+[
+  {
+    "path": "how-to-play.html",
+    "h1": [
+      "How to play Viisi"
+    ],
+    "images": [],
+    "scrollWidth": 1682,
+    "text": [
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "22.4px",
+        "text": "Viisi is a mindful daily puzzle. You receive five letters and must craft five di",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "13.6px",
+        "text": "Watch Demo",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "30.4px",
+        "text": "The Basics",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Simple rules keep Viisi approachable while still offering satisfying depth.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "every letter",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "bonus words",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "06:00 UTC",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "30.4px",
+        "text": "Helpful Tools",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Use these options if you feel stuck—your stats will note when hints are involved",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Hints",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Lock in three words and the hint button lights up. Tap it to prefill two letters",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Reveal",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Uncovers every answer. There is no undo—the day counts as played but not solved,",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Reset",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Replay any puzzle from a clean board. Your original score, time, and stats stay ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Archive",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Scroll back through past games and play the ones you missed. Perfect for rainy a",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "30.4px",
+        "text": "Expert Mode",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Turn it on in Settings when the daily board stops fighting back. It becomes the ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "⚡️ No hints",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "❌ Three strikes",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "🔒 Locked in",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "30.4px",
+        "text": "Scoring",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Every win is scored. Your score drives your performance stats and the celebratio",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "See the full scoring breakdown",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "20 points per word",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "+20 for finishing",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "+25 per bonus word",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "-10 per hint",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Reveal the solution or fail out of Expert Mode and you keep the points for every",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "30.4px",
+        "text": "Badges & Stats",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Badges are your Viisi bragging rights. Stack wins, keep your streak alive, and c",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "5 Streak",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Solve 5 daily puzzles in 5 consecutive days (archive doesn't count).",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "25 Wins",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Reach twenty-five lifetime Viisi victories.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Hint-Free",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Win a puzzle without using a single hint.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "One Shot",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Solve a puzzle on your very first attempt—without leaving the game board. No res",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "17.6px",
+        "text": "Your stats",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Score",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Wins",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Win Rate",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Streak",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Performance",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Leaderboards",
+        "weight": "700"
+      }
+    ],
+    "width": 1697
+  },
+  {
+    "path": "score.html",
+    "h1": [
+      "How Viisi scoring works"
+    ],
+    "images": [],
+    "scrollWidth": 1682,
+    "text": [
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "22.4px",
+        "text": "Win a Viisi puzzle and the game freezes a single authoritative score for that da",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "The Formula",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "One rule scores every win, in both modes. Nothing else adds or subtracts points.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgba(255, 255, 255, 0.8)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "Points are progressive: every word you legitimately complete is credited immedia",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Words & Completion",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "How much your words are worth, whether you finish the puzzle or not. The mode is",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "20 points per word",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "120 points",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "150 points",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Partial credit",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Bonus Words",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Some puzzles hide Special Words. Find one and its tiles flash gold.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "+25 each",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Every Special Word you submit adds 25 points on top of your base score. There is",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Counted once",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "The bonus is awarded per distinct word. Matching is case- and whitespace-insensi",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Never hinted",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "A hint will never prefill a Special Word — not as its first choice and not as a ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Game Hints",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Two hints, maximum.",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(251, 70, 85)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "⚡️ Expert Mode",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Hints cost you the Hint-Free badge",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Reading the Score Card",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "The card on the win screen shows the same components the score was built from — ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Words line",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Solve Bonus / Expert Win",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Hints / Bonus lines",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Solve Time",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgba(255, 255, 255, 0.8)",
+        "decoration": "none",
+        "font": "15.2px",
+        "text": "The breakdown is deliberately strict: it is only drawn when every line can be pr",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Solve Time",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Timing is tracked separately from scoring — it never adds or removes a single po",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Active play only",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "The clock runs while you are on the board and pauses the moment you leave the ga",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Frozen at the win",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Your time stops and locks when the fifth word lands, alongside the score. Shown ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Feeds your stats",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Every timed legitimate win contributes to your average solve time, split by Clas",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Replays Never Overwrite",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Reset a solved puzzle and play it again as many times as you like — the original",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Replayed",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Win-Screen Achievements",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Called out on the result screen the moment you earn them.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "First Perfect Score",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Your first win that hits the maximum a board can give — full base plus every Spe",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Fastest Solve",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "A timed, hint-free win quicker than every earlier hint-free win, in either mode.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "New Longest Streak",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "A daily streak that passes your previous personal best.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "One Shot",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Solved start to finish without leaving the board, backgrounding the app, resetti",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Badges & Leaderboards",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "The milestones your results unlock, and where they get ranked.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "🔥 5 Streak",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "🏆 25 Wins",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "⚡️ Hint-Free",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "🎯 One Shot",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Game Center",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Sync",
+        "weight": "700"
+      }
+    ],
+    "width": 1697
+  },
+  {
+    "path": "badges.html",
+    "h1": [
+      "Viisi Badges"
+    ],
+    "images": [],
+    "scrollWidth": 1682,
+    "text": [
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "14.4px",
+        "text": "Badges are your Viisi bragging rights. Trophies that prove you're on a roll. Sta",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Solve 5 daily puzzles in 5 consecutive days (archive doesn't count).",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Reach twenty-five lifetime Viisi victories.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Win a puzzle without using a single hint.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Solve a puzzle on your very first attempt—without leaving the game board. No res",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Helpful tools",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Use these options if you feel stuck—your stats will note when hints are involved",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Hints",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Find three words and the hint button lights up. Tap it to reveal two letters fro",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Reveal",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Ready to surrender? Reveal uncovers every answer in the current puzzle. Use spar",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Reset",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Need a fresh start without losing stats? Reset clears the board for a replay, bu",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "decoration": "none",
+        "font": "40px",
+        "text": "Archive & Stats",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Relive your favorite puzzles, share streak screenshots, and celebrate milestones",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Archive",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "All Wins",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Win Rate",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Hints",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 186, 139)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Streak",
+        "weight": "700"
+      }
+    ],
+    "width": 1697
+  },
+  {
+    "path": "privacy.html",
+    "h1": [
+      "Privacy Policy for Viisi"
+    ],
+    "images": [],
+    "scrollWidth": 1682,
+    "text": [
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Overview",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Viisi respects your privacy. Viisi is designed to be a simple, offline, privacy-",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "However, some app features (such as optional email feedback and sharing achievem",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "This Privacy Policy applies to Viisi for iOS. No advertising is shown, and Viisi",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Information We Do Not Collect (Core Gameplay)",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "During normal gameplay, Viisi does not require you to provide personal informati",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Viisi does not automatically collect the following during normal offline gamepla",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "All core game logic runs locally on your device.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Optional Features That May Transmit Data",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "iCloud Sync (Optional)",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If iCloud is available on your device, Viisi can sync your game history and badg",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Game Center (Optional)",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If you are signed in to Game Center, Viisi submits leaderboard results (such as ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Feedback / Support Email (Optional)",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If you choose to send feedback using the in-app email composer, your email will ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Viisi does not automatically read your email address or contacts. You are choosi",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "18.72px",
+        "text": "Sharing (Optional)",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If you share a badge/achievement, the content you share (such as an image and a ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Third-Party Services",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Optional features like email and sharing rely on your device’s built-in system s",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Children’s Privacy",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Viisi is suitable for users of all ages. Viisi does not require accounts and doe",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If a child uses the optional email feedback feature, they may transmit personal ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Data Security",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Because Viisi does not use accounts or a backend server for gameplay data, there",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If you email support, the security of that message is handled by your email prov",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Your Choices",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Changes to This Policy",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If Viisi introduces new features that collect or process data (such as accounts ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Contact",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "If you have questions about this policy, you can contact the developer using the",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Support@Viisi.app",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 25, 46)",
+        "decoration": "underline",
+        "font": "16px",
+        "text": "Support@Viisi.app",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(107, 114, 128)",
+        "decoration": "none",
+        "font": "14.4px",
+        "text": "By using Viisi, you acknowledge that you have read and understood this\n        P",
+        "weight": "400"
+      }
+    ],
+    "width": 1697
+  },
+  {
+    "path": "wordle-alternative/index.html",
+    "h1": [
+      "A Fresh Alternative to Wordle: Try Viisi"
+    ],
+    "images": [
+      {
+        "alt": "Download on the App Store",
+        "loaded": true,
+        "src": "../assets/images/black.svg"
+      },
+      {
+        "alt": "Download Viisi on the App Store",
+        "loaded": true,
+        "src": "../assets/images/black.svg"
+      }
+    ],
+    "scrollWidth": 1682,
+    "text": [
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "17.6px",
+        "text": "Love the daily ritual of Wordle? Viisi keeps it—one new puzzle every day—but ask",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(255, 255, 255, 0.08)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "17.6px",
+        "text": "Play the web demo",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "32px",
+        "text": "Viisi vs. Wordle at a glance",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Both are daily five-letter word games. Here's where they differ.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "12.8px",
+        "text": "Feature",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(46, 242, 208)",
+        "decoration": "none",
+        "font": "12.8px",
+        "text": "Viisi",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "12.8px",
+        "text": "Wordle",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "What you solve",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Five different words from one shared set of five letters",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "One hidden five-letter word in six guesses",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "New puzzles",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "One every day, the same board for every player",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "One every day, the same word for every player",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Archive",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Every past puzzle, playable any time",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Included with an NYT Games subscription",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Challenge",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Classic mode with hints, or Expert Mode with no hints and three strikes",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Hard Mode",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Ads & data",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "No ads on iPhone, no account needed, and we don't collect or sell your data",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Run by The New York Times; its advertising and data practices apply",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Cost",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Free to download",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "The daily puzzle is free",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Progress",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Points, streaks, badges, and Game Center leaderboards",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Streaks and win statistics",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Where to play",
+        "weight": "800"
+      },
+      {
+        "bg": "rgba(46, 242, 208, 0.07)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "iPhone and a free web demo",
+        "weight": "600"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Web and the NYT Games app",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "13.6px",
+        "text": "Wordle details reflect The New York Times' published information as of October 2",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "32px",
+        "text": "Why players try Viisi",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Same daily habit, a different puzzle.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "19.2px",
+        "text": "🧩 More to solve",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Wordle asks you to find one hidden word. Viisi gives you five letters and asks f",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "one",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "five different words",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Want it tougher? Expert Mode turns hints off and ends the game after three inval",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "19.2px",
+        "text": "♾️ Play on your schedule",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "You get one new puzzle a day, plus an archive of every past puzzle. A missed day",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Replays start from a clean board and never change your original score, time, or ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "19.2px",
+        "text": "🛡️ Quiet and private",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "On iPhone, Viisi has no ads and no account to create. We don't collect or sell y",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "19.2px",
+        "text": "📚 Learn as you play",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Finding five words from one set of letters introduces words you might not know. ",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "24px",
+        "text": "Ready to try Viisi?",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(170, 179, 209)",
+        "decoration": "none",
+        "font": "16px",
+        "text": "Five letters, five words, one new puzzle every day.",
+        "weight": "400"
+      },
+      {
+        "bg": "rgba(255, 255, 255, 0.08)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "17.6px",
+        "text": "How to play",
+        "weight": "700"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(238, 241, 255)",
+        "decoration": "none",
+        "font": "32px",
+        "text": "Quick questions",
+        "weight": "700"
+      }
+    ],
+    "width": 1697
+  }
+]

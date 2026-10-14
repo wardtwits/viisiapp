@@ -1,0 +1,225 @@
+[
+  {
+    "path": "index.html",
+    "controls": [
+      {
+        "h": 44,
+        "text": "Toggle navigation",
+        "w": 44
+      },
+      {
+        "h": 42,
+        "text": null,
+        "w": 119.6640625
+      },
+      {
+        "h": 44,
+        "text": "How to play",
+        "w": 123.0859375
+      },
+      {
+        "h": 79.984375,
+        "text": "Visit our YouTube channel",
+        "w": 223
+      },
+      {
+        "h": 45.5,
+        "text": "See why Viisi is a strong Word",
+        "w": 184.546875
+      }
+    ],
+    "instructionStyle": null,
+    "overflow": [],
+    "sw": 348,
+    "w": 320
+  },
+  {
+    "path": "how-to-play.html",
+    "controls": [
+      {
+        "h": 44,
+        "text": "Toggle navigation",
+        "w": 44
+      },
+      {
+        "h": 51.1875,
+        "text": "Watch Demo",
+        "w": 233
+      },
+      {
+        "h": 45.5,
+        "text": "See the full scoring breakdown",
+        "w": 155.109375
+      }
+    ],
+    "instructionStyle": null,
+    "overflow": [],
+    "sw": 305,
+    "w": 320
+  },
+  {
+    "path": "score.html",
+    "controls": [
+      {
+        "h": 44,
+        "text": "Toggle navigation",
+        "w": 44
+      }
+    ],
+    "instructionStyle": null,
+    "overflow": [],
+    "sw": 305,
+    "w": 320
+  },
+  {
+    "path": "badges.html",
+    "controls": [
+      {
+        "h": 44,
+        "text": "Toggle navigation",
+        "w": 44
+      }
+    ],
+    "instructionStyle": null,
+    "overflow": [],
+    "sw": 305,
+    "w": 320
+  },
+  {
+    "path": "privacy.html",
+    "controls": [
+      {
+        "h": 44,
+        "text": "Toggle navigation",
+        "w": 44
+      },
+      {
+        "h": 21.5,
+        "text": "Support@Viisi.app",
+        "w": 133.9375
+      }
+    ],
+    "instructionStyle": null,
+    "overflow": [],
+    "sw": 305,
+    "w": 320
+  },
+  {
+    "path": "wordle-alternative/index.html",
+    "controls": [
+      {
+        "h": 44,
+        "text": "Toggle navigation",
+        "w": 44
+      },
+      {
+        "h": 40,
+        "text": null,
+        "w": 119.6640625
+      },
+      {
+        "h": 44,
+        "text": "Play the web demo",
+        "w": 180.8203125
+      },
+      {
+        "h": 40,
+        "text": null,
+        "w": 119.6640625
+      },
+      {
+        "h": 44,
+        "text": "How to play",
+        "w": 123.0859375
+      },
+      {
+        "h": 56,
+        "text": "Is Viisi a Wordle clone?",
+        "w": 263
+      },
+      {
+        "h": 56,
+        "text": "Is Viisi free?",
+        "w": 263
+      },
+      {
+        "h": 56,
+        "text": "Do I need an account?",
+        "w": 263
+      },
+      {
+        "h": 56,
+        "text": "What if I get stuck?",
+        "w": 263
+      }
+    ],
+    "instructionStyle": null,
+    "overflow": [],
+    "sw": 305,
+    "w": 320
+  },
+  {
+    "path": "demo.html",
+    "controls": [
+      {
+        "h": 44,
+        "text": "Reset",
+        "w": 65.6640625
+      },
+      {
+        "h": 44,
+        "text": "Toggle navigation",
+        "w": 44
+      },
+      {
+        "h": 44,
+        "text": "Hint",
+        "w": 66.671875
+      },
+      {
+        "h": 40.796875,
+        "text": "E",
+        "w": 50.125
+      },
+      {
+        "h": 40.796875,
+        "text": "A",
+        "w": 50.125
+      },
+      {
+        "h": 40.796875,
+        "text": "S",
+        "w": 50.125
+      },
+      {
+        "h": 40.796875,
+        "text": "T",
+        "w": 50.125
+      },
+      {
+        "h": 40.796875,
+        "text": "R",
+        "w": 50.125
+      },
+      {
+        "h": 50,
+        "text": "Shuffle letters",
+        "w": 50
+      },
+      {
+        "h": 50,
+        "text": "Delete last letter",
+        "w": 50
+      },
+      {
+        "h": 44,
+        "text": "Close results",
+        "w": 44
+      }
+    ],
+    "instructionStyle": "",
+    "overflow": [],
+    "sw": 305,
+    "w": 320
+  }
+]

@@ -1,0 +1,69 @@
+[
+  {
+    "page": "badges.html",
+    "errors": [
+      "Missing fragment: index.html#reviews",
+      "Missing fragment: index.html#reviews"
+    ],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "component.html",
+    "errors": [],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "demo.html",
+    "errors": [],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "download/index.html",
+    "errors": [],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "how-to-play.html",
+    "errors": [
+      "Missing fragment: index.html#reviews",
+      "Missing fragment: index.html#reviews"
+    ],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "index.html",
+    "errors": [
+      "Missing fragment: #reviews"
+    ],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "privacy.html",
+    "errors": [
+      "Missing fragment: index.html#reviews",
+      "Missing fragment: index.html#reviews"
+    ],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "score.html",
+    "errors": [
+      "Missing fragment: index.html#reviews"
+    ],
+    "missing_alt": [],
+    "duplicate_ids": []
+  },
+  {
+    "page": "wordle-alternative/index.html",
+    "errors": [],
+    "missing_alt": [],
+    "duplicate_ids": []
+  }
+]
