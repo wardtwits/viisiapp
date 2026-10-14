@@ -69,7 +69,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/styles.css?v=20261012-youtube-callout" />
   <script defer src="assets/js/main.js"></script>
-  <script defer src="assets/js/phone-animation.js?v=20261011-light-theme"></script>
+  <script defer src="assets/js/screenshot-carousel.js"></script>
 </head>
 
 <body>
@@ -115,7 +115,7 @@
       <div>
         <div class="badge">
           <span aria-hidden="true">✨</span>
-          No ads.  Privacy-first. (iOS)
+          No ads. No account required. Made for iPhone and iPad.
         </div>
         <h1>
           Five letters.<br />
@@ -128,7 +128,10 @@
         </p>
         <div class="hero-cta apple">
           <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8" class="appleDownload">
-            <img src="assets/images/appleDownload.svg" alt="Download on the App Store" loading="lazy" />
+            <picture>
+              <source srcset="assets/images/white.svg" media="(prefers-color-scheme: dark)" />
+              <img src="assets/images/black.svg" alt="Download on the App Store" loading="lazy" width="120" height="40" />
+            </picture>
           </a>
           <a class="btn btn-ghost apple" href="how-to-play.html">How to play</a>
 </div>
@@ -147,63 +150,22 @@
           <strong>Archive</strong>
           <p>Replay past puzzles anytime.</p>
         </div>
-        <div class="phone-shell">
-          <div class="phone-notch"></div>
-          <div class="viisi-demo" aria-label="Animated Viisi gameplay preview">
-            <section id="viisi-demo-home" class="viisi-demo-screen viisi-demo-home is-active">
-              <header class="viisi-demo-header">
-                <div class="viisi-demo-brand">
-                  <span class="viisi-demo-mark">v</span>
-                  <strong>Viisi</strong>
-                </div>
-                <div class="viisi-demo-icons" aria-hidden="true">
-                  <span>⚙</span>
-                  <span>↗</span>
-                  <span>≡</span>
-                </div>
-              </header>
-
-              <section class="viisi-demo-streak">
-                <h3>Longest Winning Streak</h3>
-                <div><span>#1</span><strong>TobaisFUnki</strong><b>81</b></div>
-                <div><span>#2</span><strong>Rick&Mort</strong><b>10</b></div>
-                <div><span>#3</span><strong>CaptnObious</strong><b>8</b></div>
-                <span class="viisi-demo-trophy" aria-hidden="true">🏆</span>
-              </section>
-
-              <button id="viisi-demo-play" class="viisi-demo-card" type="button">
-                <span>Today</span>
-                <span class="viisi-demo-letters" aria-hidden="true">
-                  <b>E</b><b>A</b><b>S</b><b>T</b><b>R</b>
-                </span>
-                <span class="viisi-demo-play-label">Tap to Play ▶</span>
-                <span class="viisi-demo-stats">
-                  <b>43<small>Wins</small></b>
-                  <b>62%<small>Win Rate</small></b>
-                  <b>27<small>Hints Used</small></b>
-                  <b>0<small>Daily Streak</small></b>
-                </span>
-              </button>
-
-              <div class="viisi-demo-dots" aria-hidden="true">
-                <span></span><i></i><i></i><i></i><i></i><i></i><i></i>
-              </div>
-
-              <section class="viisi-demo-row">
-                <b aria-hidden="true">ϟ</b>
-                <span><strong>EXPERT MODE</strong><small>No hints. No mercy.</small></span>
-                <i></i>
-              </section>
-
-              <section class="viisi-demo-archive">
-                <strong>Game Archive</strong>
-                <span aria-hidden="true">▤</span>
-              </section>
-            </section>
-
-            <section id="viisi-demo-game" class="viisi-demo-screen viisi-demo-game">
-              <canvas id="viisi-demo-canvas"></canvas>
-            </section>
+        <div class="screenshot-frame">
+          <div class="screenshot-set screenshot-set-light" data-screenshot-set>
+            <img class="is-active" src="assets/images/screenshots/light1.jpg" alt="" width="1170" height="2391" decoding="async" />
+            <img src="assets/images/screenshots/light2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/light3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/light4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/light5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/light6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+          </div>
+          <div class="screenshot-set screenshot-set-dark" data-screenshot-set>
+            <img class="is-active" src="assets/images/screenshots/dark1.jpg" alt="" width="1170" height="2391" decoding="async" />
+            <img src="assets/images/screenshots/dark2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/dark3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/dark4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/dark5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
+            <img src="assets/images/screenshots/dark6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" />
           </div>
         </div>
       </div>
@@ -322,6 +284,11 @@
         <a href="wordle-alternative/index.html">Viisi vs Wordle</a>
       </div>
       <small>© <span id="year"></span> Viisi Games</small>
+      <p class="footer-legal">
+        Apple, the Apple logo, iPhone, and iPad are trademarks of Apple Inc., registered in the U.S. and other countries and regions.
+        App Store and iCloud are service marks of Apple Inc., registered in the U.S. and other countries and regions.
+        Other product and company names mentioned herein, such as Game Center and Wordle, may be trademarks of their respective owners.
+      </p>
     </div>
   </footer>
 

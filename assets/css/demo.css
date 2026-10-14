@@ -526,6 +526,55 @@ x.hint-row{
   color: var(--demo-text);
 }
 
+/* Desktop: the demo sits inside a real iPhone 16 Pro frame. The frame image
+   is 1350x2760 with a transparent 1206x2622 screen at (72, 69); the insets
+   below are those offsets as percentages. Mobile keeps the full-screen demo. */
+@media (min-width: 769px) {
+  .phone-shell {
+    width: 400px;
+    height: auto;
+    aspect-ratio: 1350 / 2760;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.55));
+  }
+
+  .phone-shell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../images/iphone-16-pro-frame.png") center / 100% 100% no-repeat;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  .phone-notch {
+    display: none;
+  }
+
+  .phone-inner {
+    position: absolute;
+    inset: 2.5% 5.333%;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    border-radius: 15.6% / 7.2%;
+    overflow: hidden;
+  }
+
+  /* Top padding clears the Dynamic Island. The inner padding is a share of
+     the frame width; the win overlay's is a share of the screen width. */
+  .phone-inner {
+    padding: 13% 1.1rem 1.5rem;
+  }
+
+  .phone-inner > .win-overlay {
+    padding-top: 14%;
+  }
+}
+
 .phone-shell.win {
   animation: shell-win-bounce 650ms ease 1;
 }

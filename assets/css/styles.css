@@ -212,6 +212,21 @@ a {
   border: none;
 }
 
+/* Apple badge guidelines: never shown below 40px tall. Clear space (a quarter
+   of the badge height, 10px) comes from the surrounding .hero-cta gap. */
+a.appleDownload {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.appleDownload img {
+  display: block;
+  height: 40px;
+  min-height: 40px;
+  width: auto;
+  max-width: none;
+}
+
 .btn-ghost {
   background: rgba(255, 255, 255, 0.08);
   color: var(--site-text);
@@ -422,6 +437,57 @@ a {
   top: 8px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/* Home hero: app screenshots crossfading, one set per color scheme. */
+.screenshot-frame {
+  position: relative;
+  width: min(300px, 70vw);
+  aspect-ratio: 1170 / 2391;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #151a38;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.08), 0 0 60px rgba(46, 242, 208, 0.18);
+  z-index: 2;
+}
+
+.screenshot-set img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.screenshot-set img.is-active {
+  opacity: 1;
+}
+
+.screenshot-set-light {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  .screenshot-frame {
+    background: #fafafc;
+  }
+
+  .screenshot-set-light {
+    display: block;
+  }
+
+  .screenshot-set-dark {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screenshot-set img {
+    transition: none;
+  }
 }
 
 .phone-inner {
@@ -919,6 +985,15 @@ a {
   gap: 1.5rem;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
+}
+
+/* Apple trademark credit line, on its own row beneath the copyright. */
+.footer-legal {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--site-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 .mobile-menu-button {
