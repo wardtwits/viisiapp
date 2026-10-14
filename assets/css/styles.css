@@ -494,7 +494,7 @@ a.appleDownload {
   transform: translateX(-50%);
 }
 
-/* Home hero: app screenshots crossfading inside the iPhone 16 Pro frame, one
+/* Home hero: app screenshots crossfading inside the iPhone 18 Pro frame, one
    set per color scheme. The frame image is 1350x2760 with a transparent
    1206x2622 screen at (72, 69); the insets below are those offsets as
    percentages. Shown upright, unmodified and with no added shadow, per
@@ -512,7 +512,7 @@ a.appleDownload {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../images/iphone-16-pro-frame.png") center / 100% 100% no-repeat;
+  background: url("../images/iphone-18-pro-frame.png") center / 100% 100% no-repeat;
   pointer-events: none;
 }
 

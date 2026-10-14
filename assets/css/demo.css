@@ -539,7 +539,7 @@ x.hint-row{
   color: var(--demo-text);
 }
 
-/* Desktop: the demo sits inside a real iPhone 16 Pro frame. The frame image
+/* Desktop: the demo sits inside a real iPhone 18 Pro frame. The frame image
    is 1350x2760 with a transparent 1206x2622 screen at (72, 69); the insets
    below are those offsets as percentages. Mobile keeps the full-screen demo. */
 @media (min-width: 769px) {
@@ -557,7 +557,7 @@ x.hint-row{
     content: "";
     position: absolute;
     inset: 0;
-    background: url("../images/iphone-16-pro-frame.png") center / 100% 100% no-repeat;
+    background: url("../images/iphone-18-pro-frame.png") center / 100% 100% no-repeat;
     pointer-events: none;
     z-index: 50;
   }
