@@ -1,6 +1,6 @@
 # Viisi Marketing Site
 
-You've reached the home of Viisi - the puzzle game currently on iOS and coming soon to Android.
+You've reached the home of Viisi - the puzzle game currently on iOS.
 
 ## What's inside?
 

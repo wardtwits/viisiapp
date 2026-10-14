@@ -235,9 +235,6 @@ a {
 .hero .challenge {
   font-size: 1.4rem;
 }
-.hero .challenge.android {
-  font-size: 1rem;
-}
 
 .badge {
   display: inline-flex;
