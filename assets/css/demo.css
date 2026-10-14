@@ -3,8 +3,8 @@
   --demo-gold: #f6b13c;
   --demo-panel: #383f6b;
   --demo-panel-2: #474b78;
-  --demo-muted: #b9bcd6;
-  --demo-red: #ee5660;
+  --demo-muted: #c4c8e0;
+  --demo-red: #ff7a86;
   --demo-surface: linear-gradient(180deg, #1b2147, #10142b);
 
   /* Phone surface: dark by default, light when the browser asks for it. */
@@ -12,12 +12,13 @@
   --demo-accent: #54d1b4;
   --demo-error: #ff7a86;
   --demo-cell-bg: rgba(255, 255, 255, 0.05);
-  --demo-cell-line: rgba(255, 255, 255, 0.16);
+  --demo-cell-line: rgba(255, 255, 255, 0.4);
   --demo-cell-active: rgba(84, 209, 180, 0.1);
   --demo-cell-placed: rgba(0, 186, 139, 0.24);
   --demo-lock: #00ba8b;
   --demo-invalid-bg: rgba(239, 68, 68, 0.28);
   --demo-key: #fb4655;
+  --demo-tile-text: #0a192e;
   --demo-key-off: rgba(251, 70, 85, 0.18);
   --demo-key-off-text: rgba(255, 255, 255, 0.22);
   --demo-shuffle: #00ba8b;
@@ -31,13 +32,13 @@
 @media (prefers-color-scheme: light) {
   :root {
     --demo-surface: linear-gradient(180deg, #ffffff, #f1f1f7);
-    --demo-teal: #4fc4a8;
-    --demo-gold: #e9a825;
+    --demo-teal: #126d59;
+    --demo-gold: #916000;
     --demo-text: #2d3156;
-    --demo-accent: #178a72;
+    --demo-accent: #126d59;
     --demo-error: #d63447;
     --demo-cell-bg: #f3f3f6;
-    --demo-cell-line: #e3e3ea;
+    --demo-cell-line: #858599;
     --demo-cell-active: #ffffff;
     --demo-cell-placed: rgba(92, 201, 174, 0.22);
     --demo-lock: #5cc9ae;
@@ -46,7 +47,7 @@
     --demo-key-off: rgba(234, 85, 96, 0.16);
     --demo-key-off-text: rgba(234, 85, 96, 0.5);
     --demo-shuffle: #5ccbb0;
-    --demo-delete: #9d9da6;
+    --demo-delete: #6b7280;
     --demo-btn-bg: rgba(45, 49, 86, 0.08);
     --demo-btn-line: rgba(45, 49, 86, 0.2);
     --demo-hint-bg: rgba(79, 196, 168, 0.18);
@@ -223,8 +224,14 @@
   max-width: 420px;
 }
 
+.demo-board tbody,
+.demo-row {
+  display: contents;
+}
+
 .demo-cell {
   width: 100%;
+  min-height: 1.5em;
   aspect-ratio: 1;
   border-radius: 12px;
   border: 2px solid var(--demo-cell-line);
@@ -249,7 +256,7 @@
 .demo-cell.is-complete {
   background: var(--demo-lock);
   border-color: var(--demo-lock);
-  color: #fff;
+  color: var(--demo-tile-text);
   box-shadow: inset 0 -4px rgba(0, 0, 0, 0.22), inset 0 3px rgba(255, 255, 255, 0.18);
 }
 
@@ -284,7 +291,7 @@
   transform-origin: top left;
   border-radius: 12px;
   background: var(--demo-key);
-  color: #fff;
+  color: var(--demo-tile-text);
   font-family: "Nunito", "Inter", system-ui, sans-serif;
   font-size: 1.7rem;
   font-weight: 800;
@@ -408,21 +415,24 @@ x.hint-row{
   border: none;
   border-radius: 12px;
   aspect-ratio: 1.30;
+  min-height: 1.5em;
+  min-width: 0;
+  width: 100%;
   font-family: "Nunito", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 1.7rem;
   font-weight: 800;
   background: var(--demo-key);
-  color: #fff;
+  color: var(--demo-tile-text);
   cursor: pointer;
   box-shadow: inset 0 -5px rgba(0, 0, 0, 0.2), inset 0 3px rgba(255, 255, 255, 0.2);
   transition: transform 0.08s ease;
 }
 
-.demo-key:active:not(:disabled) {
+.demo-key:active:not([aria-disabled="true"]) {
   transform: translateY(2px);
 }
 
-.demo-key:disabled {
+.demo-key[aria-disabled="true"] {
   background: var(--demo-key-off);
   color: var(--demo-key-off-text);
   cursor: not-allowed;
@@ -456,7 +466,7 @@ x.hint-row{
 
 
 .letter-tiles button.shuffle {
-  color:#fff; 
+  color: var(--demo-tile-text);
   background: var(--demo-shuffle);
 }
 
@@ -516,11 +526,14 @@ x.hint-row{
   position: relative;
   width: min(380px, 70vw);
   height: min(710px, 70vw);
-  height: 760px;
+  height: auto;
+  min-height: 760px;
 }
 .phone-inner {
   height: min(680px, 70vw);
-  height: 730px;
+  height: auto;
+  min-height: 730px;
+  overflow: visible;
   position: relative;
   background: var(--viisi-decor) center / cover no-repeat, var(--demo-surface);
   color: var(--demo-text);
@@ -569,7 +582,7 @@ x.hint-row{
   visibility: hidden;
   pointer-events: none;
   z-index: 40;
-  transition: opacity 0.22s ease, visibility 0.22s ease;
+  transition: opacity 0.22s ease;
 }
 
 .win-overlay.is-open {
@@ -597,6 +610,7 @@ x.hint-row{
   overscroll-behavior: contain;
   transform: translateY(100%);
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  scroll-margin-top: 6rem;
 }
 
 .win-overlay.win-open .win-card {
@@ -607,13 +621,13 @@ x.hint-row{
   position: absolute;
   top: 0.85rem;
   right: 0.85rem;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: var(--demo-red);
+  background: var(--viisi-red-dark);
   color: #fff;
   cursor: pointer;
 }
@@ -697,7 +711,7 @@ x.hint-row{
 }
 
 .win-stat strong {
-  color: var(--demo-teal);
+  color: var(--neon-teal);
   font-size: 1.6rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -747,7 +761,7 @@ x.hint-row{
 
 .win-words strong {
   display: block;
-  color: var(--demo-teal);
+  color: var(--neon-teal);
   font-size: 1.05rem;
   font-weight: 800;
 }
@@ -942,7 +956,6 @@ section.header h2 {
     display: none !important;
   }
 
-    .find5,
     .viisi {
       display:none;
     }
@@ -1004,20 +1017,35 @@ section.header h2 {
     padding: 0;
   }
 
-  .demo-main > .demo-hero,
-  .demo-main > .demo-header,
   .demo-main > .demo-video,
   .demo-main > .demo-meta,
   .demo-main > .demo-word-bank,
   .demo-main > .hide,
-  .desktop .demo-hero,
-  .desktop .demo-header,
   .desktop .demo-video,
   .desktop .demo-meta,
   .desktop .demo-word-bank,
   .desktop .demo-subtitle,
   .desktop #foundWords {
     display: none !important;
+  }
+
+  .demo-hero {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .demo-main > .demo-header {
+    padding: 0.75rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .keyboard-instructions {
+    font-size: 0.85rem;
   }
 
   .phone-showcase,
@@ -1037,7 +1065,7 @@ section.header h2 {
     width: 100%;
     max-width: none;
     min-height: 100dvh;
-    height: 100dvh;
+    height: auto;
     margin: 0;
     padding: 0;
     border: 0 !important;
@@ -1056,7 +1084,7 @@ section.header h2 {
   .phone-inner,
   .gradient.demo-desktop {
     min-height: 100dvh;
-    height: 100dvh;
+    height: auto;
     border-radius: 0 !important;
     padding-top: max(0.75rem, env(safe-area-inset-top));
     padding-right: max(0.8rem, env(safe-area-inset-right));

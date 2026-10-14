@@ -18,20 +18,21 @@
   <meta name="twitter:title" content="Privacy Policy – Viisi" />
   <meta name="twitter:description" content="How Viisi handles your data." />
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261011-red-buttons" />
-  <script defer src="assets/js/main.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261013-accessibility" />
+  <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="container">
     <nav class="nav" aria-label="Primary">
       <a class="logo" href="index.html">
         <span class="logo-mark">V</span>
         Viisi
       </a>
-      <button class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
+      <button type="button" class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
         aria-label="Toggle navigation">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="6" x2="21" y2="6" />
           <line x1="3" y1="12" x2="21" y2="12" />
@@ -47,17 +48,17 @@
       </div>
       <a class="btn btn-primary" href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
     </nav>
-    <div class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false">
+    <nav class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false" aria-label="Mobile primary">
          <a href="index.html">Home</a>
       <a href="index.html#features">Features</a>
       <a href="how-to-play.html">How to play</a>
       <a href="demo.html">Play Demo</a>
         <a href="index.html#reviews" style="display:none;">Reviews</a>
    
-    </div>
+    </nav>
   </header>
 
-<main class="container policy-wrapper">
+<main id="main-content" tabindex="-1" class="container policy-wrapper">
   <section class="policy-card">
     <h1>Privacy Policy for Viisi</h1>
     <div class="subtitle">Last Updated: October 2026</div>
@@ -194,13 +195,17 @@
         <span class="logo-mark">V</span>
         Viisi
       </div>
-      <div class="footer-links">
+      <nav class="footer-links" aria-label="Site pages">
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="how-to-play.html">How to play</a>
+        <a href="score.html">Scoring</a>
+        <a href="badges.html">Badges</a>
         <a href="demo.html">Play Demo</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="wordle-alternative/index.html">Viisi vs Wordle</a>
         <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
-      </div>
+      </nav>
       <small>© <span id="year"></span> Viisi Games</small>
     </div>
   </footer>

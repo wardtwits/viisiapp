@@ -3,7 +3,7 @@
 :root {
   --viisi-bg: #f8efe2;
   --viisi-green: #00ba8b;
-  --viisi-green-dark: #2c8a5a;
+  --viisi-green-dark: #24764c;
   --viisi-red: #fb4655;
   --viisi-red2: #f87171;
   --viisi-red-dark: #dc2626;
@@ -45,6 +45,7 @@ body {
   color: var(--site-text);
   line-height: 1.5;
   min-height: 100vh;
+  overflow-wrap: anywhere;
 }
 /* video */
 .video-pill {
@@ -108,6 +109,44 @@ a {
   text-decoration: none;
 }
 
+:focus-visible {
+  outline: 3px solid var(--neon-teal);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--site-bg);
+}
+
+main {
+  scroll-margin-top: 6rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--site-bg);
+  color: var(--site-text);
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .hide {display:none !important;}
 
 .container {
@@ -117,6 +156,7 @@ a {
 
 .nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 0;
@@ -186,6 +226,8 @@ a {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   font-size: 1.1rem;
+  min-height: 44px;
+  max-width: 100%;
 }
 
 .btn:focus-visible {
@@ -194,7 +236,7 @@ a {
 }
 
 .btn-primary {
-  background: var(--viisi-red);
+  background: var(--viisi-red-dark);
   color: white;
   box-shadow: 0 10px 30px rgba(251, 70, 85, 0.35);
 }
@@ -230,6 +272,10 @@ a {
   gap: 2rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
+}
+
+.hero > * {
+  min-width: 0;
 }
 
 .hero .challenge {
@@ -868,13 +914,14 @@ a {
   color:white;
   padding: 1.5rem;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.5rem;
   box-shadow: var(--shadow-soft);
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
   gap: 1.5rem;
 }
 
@@ -916,6 +963,7 @@ a {
   gap: 1.5rem;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
+  flex-wrap: wrap;
 }
 
 .mobile-menu-button {
@@ -1014,7 +1062,8 @@ a {
   }
 
   .footer-links {
-    display: none;
+    display: flex;
+    justify-content: center;
   }
 
   .footer {
@@ -1044,7 +1093,7 @@ a {
   border-radius: var(--radius-lg);
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: var(--shadow-soft);
-  padding: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(24px, 4vw, 48px);
   max-width: 760px;
   width: 100%;
 }
@@ -1235,7 +1284,7 @@ a {
 .seo-callout {
   margin-bottom: 1rem;
   background:
-    linear-gradient(90deg, rgba(7, 11, 25, 0.96) 0%, rgba(7, 11, 25, 0.82) 55%, rgba(7, 11, 25, 0.35) 100%),
+    linear-gradient(90deg, rgba(7, 11, 25, 0.96) 0%, rgba(7, 11, 25, 0.86) 55%, rgba(7, 11, 25, 0.86) 100%),
     url("../images/marketing/viisi-v3-ribbons.jpg") center 38% / cover no-repeat;
 }
 
@@ -1281,7 +1330,7 @@ a {
 
 .btn-youtube {
   flex: none;
-  background: var(--viisi-red);
+  background: var(--viisi-red-dark);
   color: white;
   text-decoration: none;
   box-shadow: 0 10px 30px rgba(251, 70, 85, 0.35);
@@ -1299,6 +1348,22 @@ a {
 
   .btn-youtube {
     align-self: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hover:hover,
+  .btn-primary:hover,
+  .btn-youtube:hover {
+    transform: none;
   }
 }
 
@@ -1339,7 +1404,7 @@ a {
   }
 
   .features-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
     gap: 0.75rem;
   }
 
