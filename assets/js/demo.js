@@ -757,7 +757,7 @@
   function handleKeydown(event) {
     if (event.defaultPrevented || state.isWon || state.invalidFlash || pendingSubmit) return;
     if (event.ctrlKey || event.metaKey || event.altKey || event.isComposing) return;
-    if (!(event.target instanceof Element) || !event.target.closest(".demo-main")) return;
+    if (!(event.target instanceof Element) || !event.target.closest(".phone-inner")) return;
     if (event.target.closest("input, textarea, select, [contenteditable='true']")) return;
     const key = event.key.toUpperCase();
 
@@ -911,10 +911,17 @@
     confettiBurstTimeoutId = null;
     for (const [element, wasInert] of inertSiblings) element.inert = wasInert;
     inertSiblings.clear();
-    const focusTarget = returnFocus instanceof HTMLElement && returnFocus.isConnected
-      ? returnFocus
-      : elements.resetButtons[0];
-    if (focusTarget) focusTarget.focus();
+    const canRestoreFocus = returnFocus instanceof HTMLElement && returnFocus.isConnected && returnFocus.tabIndex >= 0 &&
+      returnFocus.getClientRects().length > 0 && getComputedStyle(returnFocus).visibility !== "hidden" &&
+      !returnFocus.matches(":disabled, [aria-disabled='true']") && !returnFocus.closest("[inert]");
+    const fallback = Array.from(elements.resetButtons).find((button) =>
+      button.getClientRects().length > 0 && getComputedStyle(button).visibility !== "hidden" &&
+      !button.disabled && !button.closest("[inert]")
+    );
+    if (canRestoreFocus) returnFocus.focus();
+    if (!canRestoreFocus || document.activeElement !== returnFocus) {
+      fallback?.focus();
+    }
     returnFocus = null;
     // let transition finish
     setTimeout(() => {

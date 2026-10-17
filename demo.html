@@ -20,9 +20,9 @@
   <meta name="twitter:image" content="https://viisi.app/assets/images/mobile-site.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/styles.css?v=20261014-carousel-pause" />
-  <link rel="stylesheet" href="assets/css/demo.css?v=20261014-iphone-18" />
+  <link rel="stylesheet" href="assets/css/demo.css?v=20261016-game-fidelity" />
   <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
-  <script defer src="assets/js/demo.js?v=20261013-accessibility"></script>
+  <script defer src="assets/js/demo.js?v=20261016-game-accessibility"></script>
   <style>
     .video-pill {
   display: inline-flex;
@@ -120,16 +120,12 @@
               Build five-letter anagrams and find five distinct valid words to
               win. <br><span class="tip">Tip: 2 Hints are available once you've found 3 valid words.</span>
             </p>
-            <p class="keyboard-instructions">Use the letter buttons or type letters. Backspace deletes; Space shuffles. Five letters submit your word automatically.</p>
+            <p id="keyboard-instructions" class="keyboard-instructions">Use the letter buttons, or focus the game to type letters. Backspace deletes; Space shuffles when a button is not focused. Five letters submit your word automatically.</p>
           </div>
 
           <br>
 
           <div class="demo-meta ">
-            <div class="demo-stat hide">
-              <span class="demo-stat-label">Found</span>
-              <strong id="foundCount">0 / 5</strong>
-            </div>
             <div class="demo-stat hide">
               <span class="demo-stat-label">Hints Used</span>
               <strong id="hintCount">0</strong>
@@ -141,33 +137,28 @@
           <div class="phone-showcase">
             <div class="phone-shell">
               <div class="phone-notch"></div>
-              <div class="phone-inner">
-                <div style="
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                    ">
-                  <span class="viisi">Viisi</span>
+              <div class="phone-inner" role="region" aria-label="Viisi Classic Mode demo" aria-describedby="keyboard-instructions" tabindex="0">
+                <div class="game-toolbar">
+                  <a class="game-back" href="index.html">Home</a>
+                  <h2 class="game-mode">Classic Mode</h2>
+                  <div class="phone-toolbar">
+                    <button id="resetBtn" class="btn" type="button" data-reset-button>Reset</button>
+                  </div>
+                </div>
+                <div class="game-progress">
+                  <span class="game-found"><strong id="foundCount">0 / 5</strong> words</span>
                   <span class="demo-crown" title="Score">
                     <span class="sr-only">Score: </span>
                     <svg viewBox="0 0 24 16" width="22" height="15" aria-hidden="true"><path d="M1 15V3l6 5.5L12 1l5 7.5L23 3v12z" fill="currentColor"/></svg>
                     <b id="liveScore">0</b>
                   </span>
-                  <div class="phone-toolbar">
-              <button id="resetBtn" class="btn" type="button" data-reset-button>
-                  Reset
-                </button>
-          
-                  </div>
                 </div>
-                <section class="header">
-                  <h2 class="find5">Find 5 words with today's letters</h2>
-                </section>
                 <table id="board" class="demo-board" aria-label="Puzzle board" aria-describedby="demo-instructions"></table>
 
-                <button id="hintBtn" class="btn invisible" type="button">Hint</button>
-              
-                <div id="message" class="demo-message" role="status" aria-live="polite"></div>
+                <div class="game-feedback">
+                  <div id="message" class="demo-message" role="status" aria-live="polite" aria-atomic="true"></div>
+                  <button id="hintBtn" class="btn invisible" type="button">Hint</button>
+                </div>
       
 
                 <div id="keyboard" class="demo-keys" role="group" aria-label="Letter keyboard"></div>
@@ -204,12 +195,11 @@
               <section id="winOverlay" class="win-overlay" aria-hidden="true" hidden>
                 <div class="win-backdrop"></div>
                 <div class="win-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
-                  <h3 id="winTitle" class="sr-only">You Win! You found all five valid words.</h3>
+                  <h3 id="winTitle" class="win-title">Well Done!<span class="sr-only"> You found all five valid words.</span></h3>
                   <button id="winCloseBtn" class="win-close" type="button" aria-label="Close results">
                     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
                   </button>
                   <div class="win-score-wrap" aria-hidden="true">
-                    <i class="sparkle sparkle--a"></i><i class="sparkle sparkle--b"></i><i class="sparkle sparkle--c"></i>
                     <div id="winScore" class="win-score">0</div>
                   </div>
                   <p class="win-label">Score<span id="winScoreText" class="sr-only">: 0</span></p>
