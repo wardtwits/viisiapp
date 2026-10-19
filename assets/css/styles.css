@@ -281,6 +281,46 @@ a.appleDownload {
     margin-top:-2px;
 }
 
+.version3-callout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--neon-teal);
+  border-left-width: 5px;
+  border-radius: var(--radius-lg);
+  background: var(--site-glass);
+  box-shadow: 0 0 30px rgba(46, 242, 208, 0.12);
+}
+
+.version3-callout > div {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.version3-callout h2 {
+  margin: 0;
+  color: var(--neon-teal);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.version3-callout p {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 700px) {
+  .version3-callout .btn {
+    width: 100%;
+  }
+}
+
 .hero {
   padding: 2rem 0 2.5rem;
   display: grid;
@@ -366,6 +406,75 @@ a.appleDownload {
 }
 .hero-cta.apple {
   flex-direction: row;
+}
+
+.daily-letters {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 1.75rem;
+  padding: 1.25rem;
+  border: 1px solid var(--site-line);
+  border-radius: var(--radius-lg);
+  background: var(--site-glass);
+}
+
+.daily-letters-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.daily-letters h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.daily-letters-preview {
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--site-line);
+  border-radius: 999px;
+  color: var(--site-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.daily-letters-tiles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.35rem, 1.5vw, 0.65rem);
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.daily-letters-tiles li {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--viisi-red);
+  color: var(--viisi-text);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: inset 0 -4px rgba(0, 0, 0, 0.15);
+}
+
+.hero .daily-letters p {
+  margin: 0;
+  color: var(--site-text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.hero .daily-letters .daily-letters-note {
+  margin-top: 0.35rem;
+  color: var(--site-muted);
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 .phone-showcase {
@@ -494,8 +603,8 @@ a.appleDownload {
   transform: translateX(-50%);
 }
 
-/* Home hero: app screenshots crossfading inside the iPhone 18 Pro frame, one
-   set per color scheme. The frame image is 1350x2760 with a transparent
+/* Home hero: app screenshots crossfading inside the iPhone 18 Pro frame.
+   The frame image is 1350x2760 with a transparent
    1206x2622 screen at (72, 69); the insets below are those offsets as
    percentages. Shown upright, unmodified and with no added shadow, per
    Apple's product image guidelines. */
@@ -535,7 +644,7 @@ a.appleDownload {
 
 /* The screenshots have no status bar, so the app's own top color fills the
    strip under the Dynamic Island (13% of the screen width). Below it the
-   strip-less 1170x2391 screenshots fit the remaining screen exactly. The
+   strip-less screenshots fill the remaining screen. The
    "sheet" screenshots show a modal over a dimmed background. */
 .screenshot-set img {
   position: absolute;
@@ -580,6 +689,14 @@ a.appleDownload {
   .screenshot-set-dark {
     display: none;
   }
+}
+
+.screenshot-set-current img {
+  background-color: var(--viisi-bg);
+}
+
+.screenshot-set-current img.screenshot-sheet {
+  background-color: #c8c0b6;
 }
 
 @media (prefers-reduced-motion: reduce) {
