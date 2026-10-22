@@ -5,9 +5,9 @@ const test = require("node:test");
 
 const root = path.join(__dirname, "..");
 const pages = [
-  "index.html", "how-to-play.html", "score.html", "badges.html", "demo.html",
+  "index.html", "how-to-play.html", "score.html", "badges.html",
   "privacy.html", "version3.html", "wordle-alternative/index.html",
-  "download/index.html", "component.html", "index copy.html",
+  "index copy.html",
 ];
 
 function mascotFor(page) {
@@ -31,10 +31,16 @@ for (const page of pages) {
   });
 }
 
-test("each page uses a different cat picture", () => {
-  const sources = pages.map((page) => {
+test("cats perched on dark surfaces use the supplied transparent artwork", () => {
+  for (const page of pages.filter((page) => page !== "privacy.html")) {
     const src = mascotFor(page).match(/\bsrc="([^"]+)"/)[1];
-    return path.resolve(root, path.dirname(page), src);
-  });
-  assert.equal(new Set(sources).size, pages.length);
+    assert.equal(path.basename(src), "puzzle-companion.webp", page);
+  }
 });
+
+for (const page of ["demo.html", "download/index.html", "component.html"]) {
+  test(`${page} omits the mascot where there is no natural resting place`, () => {
+    const html = fs.readFileSync(path.join(root, page), "utf8");
+    assert.doesNotMatch(html, /\bsrc="(?:\.\.\/)?assets\/cat\//);
+  });
+}
