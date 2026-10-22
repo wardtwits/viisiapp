@@ -431,6 +431,16 @@ a.appleDownload {
   gap: 0.5rem 1rem;
 }
 
+/* A quiet companion perched on the card, clear of the letters and phone. */
+.daily-letters-cat {
+  position: absolute;
+  bottom: calc(100% - 0.5rem);
+  right: 0.75rem;
+  width: min(150px, 70%);
+  height: auto;
+  pointer-events: none;
+}
+
 .daily-letters h2 {
   margin: 0;
   font-size: 1rem;
@@ -1257,6 +1267,26 @@ a.appleDownload {
   flex-wrap: wrap;
 }
 
+.footer-brand {
+  display: grid;
+  gap: 1rem;
+}
+
+.footer-signoff {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--site-muted);
+  font-size: 0.8rem;
+}
+
+.footer-signoff img {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+
 /* Apple trademark credit line, on its own row beneath the copyright. */
 .footer-legal {
   flex-basis: 100%;
@@ -1295,6 +1325,7 @@ a.appleDownload {
     flex: 0 1 auto;
     align-self: center;
     margin-bottom: 0;
+    margin-top: 5.5rem;
   }
 
   .phone-showcase {
@@ -1369,6 +1400,10 @@ a.appleDownload {
   .footer-content {
     flex-direction: column;
     text-align: center;
+  }
+
+  .footer-brand {
+    justify-items: center;
   }
 
   .footer-links {
