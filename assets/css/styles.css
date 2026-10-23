@@ -372,6 +372,10 @@ a.appleDownload {
   color: var(--viisi-green);
 }
 
+.hero h1 .hero-five-words {
+  color: #02e0c9;
+}
+
 .hero h1 span:last-child {
   color: var(--viisi-red);
 }
