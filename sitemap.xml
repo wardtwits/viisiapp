@@ -37,6 +37,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://viisi.app/privacy-es.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://viisi.app/component.html</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
