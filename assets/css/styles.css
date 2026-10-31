@@ -658,6 +658,15 @@ a.appleDownload {
   aspect-ratio: 1350 / 2760;
 }
 
+.hero .screenshot-stage {
+  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.38));
+}
+
+.hero .screenshot-frame {
+  width: clamp(230px, 26vw, 335px);
+  transform: rotate(2deg);
+}
+
 .screenshot-frame::after {
   content: "";
   position: absolute;
@@ -1758,7 +1767,7 @@ a.appleDownload {
   padding-right: min(38%, 440px);
   overflow: hidden;
   background:
-    url("../images/marketing/viisi-phone-art.png") right 1.5rem center / auto calc(100% - 1.5rem) no-repeat,
+    url("../images/marketing/viisi-expert-mode.png") right 1.5rem center / auto calc(100% - 1.5rem) no-repeat,
     var(--site-glass);
 }
 
