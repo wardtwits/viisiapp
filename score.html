@@ -4,20 +4,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Viisi Scoring Explained | How Points, Hints &amp; Bonus Words Work</title>
-  <meta name="description" content="A complete breakdown of Viisi scoring: base points for Classic and Expert wins, +25 bonus words, hint penalties, solve time, replays, streaks and stats." />
+  <title>Viisi Scoring Explained | Points, Hints &amp; Special Words</title>
+  <meta name="description" content="A complete breakdown of Viisi scoring: Classic and Expert wins, +25 Special Words, hint penalties, Total Score, replays, streaks, and stats." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://viisi.app/score.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Viisi" />
   <meta property="og:title" content="Viisi Scoring Explained" />
-  <meta property="og:description" content="Exactly how every Viisi win is scored — base points, bonus words, hint penalties, and what counts toward your stats." />
+  <meta property="og:description" content="Exactly how every Viisi win is scored — base points, Special Words, hint penalties, and what counts toward Total Score." />
   <meta property="og:url" content="https://viisi.app/score.html" />
-  <meta property="og:image" content="https://viisi.app/assets/images/full-site.png" />
+  <meta property="og:image" content="https://viisi.app/assets/images/marketing/viisi-v3-light-dark.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Viisi Scoring Explained" />
-  <meta name="twitter:description" content="Base points, bonus words, hint penalties, and how your Viisi stats are calculated." />
-  <meta name="twitter:image" content="https://viisi.app/assets/images/full-site.png" />
+  <meta name="twitter:description" content="Base points, Special Words, hint penalties, and how Viisi Total Score is calculated." />
+  <meta name="twitter:image" content="https://viisi.app/assets/images/marketing/viisi-v3-light-dark.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/styles.css?v=20261021-natural-cats" />
   <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
@@ -244,7 +244,7 @@
         <div class="op" aria-hidden="true">+</div>
         <div class="term">
           <b>+25</b>
-          <span>per bonus word found</span>
+          <span>per Special Word found</span>
         </div>
         <div class="op" aria-hidden="true">−</div>
         <div class="term minus">
@@ -258,10 +258,9 @@
         </div>
       </div>
       <p class="score-note">
-        Points are progressive: every word you legitimately complete is credited immediately, so a reveal or an Expert
-        fail-out won't wipe out your points — you keep the points for every word you've already locked in, plus any
-        bonus words found, minus hints. You just forfeit the completion bonus for not finishing all five. And a score
-        can never go negative, so heavy hint use floors at zero rather than digging a hole.
+        Points are progressive: a reveal or Expert failure does not erase the score shown for that attempt. You keep
+        points for completed words and Special Words, minus hints, but lose the completion bonus. Scores never fall
+        below zero. Points displayed for an unsuccessful attempt do not add to Total Score.
       </p>
     </section>
 
@@ -286,37 +285,49 @@
           <span>A full Expert win: the same 120, plus an extra +30 for finishing in Expert Mode.</span>
         </div>
         <div class="stat">
-          <strong>Partial credit</strong>
-          <span>Reveal, or fail out of Expert Mode, and you keep the words you'd already completed — only the
-            completion bonus is lost.</span>
+          <strong>Unsuccessful attempts</strong>
+          <span>Completed-word points may still be displayed after a reveal or Expert failure, but they do not add to Total Score.</span>
         </div>
       </div>
     </section>
 
-    <!-- BONUS WORDS -->
+    <!-- TOTAL SCORE -->
     <section class="stats" style="margin-top:3rem;">
       <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Bonus Words</h2>
+        <h2>What Counts Toward Total Score</h2>
+        <p>Total Score counts eligible original wins once per puzzle. Practice attempts never rewrite it.</p>
+      </div>
+      <ul class="rule-list">
+        <li>A puzzle must be won on its first finished attempt for its original score to count.</li>
+        <li>Revealing the solution or failing in Expert Mode makes later attempts practice for that puzzle, even if you switch modes.</li>
+        <li>Replays do not change the original result or add to Total Score.</li>
+        <li>Older wins from before the Total Score feature do not receive points retroactively.</li>
+      </ul>
+    </section>
+
+    <!-- SPECIAL WORDS -->
+    <section class="stats" style="margin-top:3rem;">
+      <div class="section-title" style="margin-bottom:1.5rem;">
+        <h2>Special Words</h2>
         <p>Some puzzles hide Special Words. Find one and its tiles flash gold.</p>
       </div>
       <div class="features-grid" style="gap:1.5rem;">
         <article class="feature-card hover">
           <span aria-hidden="true">🌟</span>
           <h3 class="trophy">+25 each</h3>
-          <p>Every Special Word you submit adds 25 points on top of your base score. There is no cap beyond the five
-            rows on the board, so a five-bonus board is worth 125 extra points.</p>
+          <p>Every Special Word you submit adds 25 points on top of your base score.</p>
         </article>
         <article class="feature-card hover">
           <span aria-hidden="true">🔁</span>
           <h3 class="trophy">Counted once</h3>
-          <p>The bonus is awarded per distinct word. Matching is case- and whitespace-insensitive, so a word can never
+          <p>The bonus is awarded per distinct Special Word. Matching is case- and whitespace-insensitive, so a word can never
             be double-counted.</p>
         </article>
         <article class="feature-card hover">
           <span aria-hidden="true">🙈</span>
           <h3 class="trophy">Never hinted</h3>
           <p>A hint will never prefill a Special Word — not as its first choice and not as a fallback. Any puzzle
-            that hides one ships with enough non-special answers to guarantee it. Bonus points have to be earned.</p>
+            that hides one ships with enough non-special answers to guarantee it. Special Word points have to be earned.</p>
         </article>
       </div>
     </section>
@@ -346,11 +357,11 @@
         <p>The card on the win screen shows the same components the score was built from — never a re-estimate.</p>
       </div>
       <div class="score-card" role="img"
-        aria-label="Example score card: 5 Words 100 points, Solve Bonus 20 points, 1 Bonus Words plus 25 points, 1 Hints minus 10 points, Score 135 points, Solve Time 04 minutes 12 seconds.">
+        aria-label="Example score card: 5 Words 100 points, Solve Bonus 20 points, 1 Special Word plus 25 points, 1 Hint minus 10 points, Score 135 points, Solve Time 04 minutes 12 seconds.">
         <div class="row"><span>5 Words:</span> <span>100 points</span></div>
         <div class="row"><span>Solve Bonus:</span> <span>20 points</span></div>
-        <div class="row"><span>1 Bonus Words:</span> <span>25 points</span></div>
-        <div class="row"><span>1 Hints:</span> <span class="neg">-10 points</span></div>
+        <div class="row"><span>1 Special Word:</span> <span>25 points</span></div>
+        <div class="row"><span>1 Hint:</span> <span class="neg">-10 points</span></div>
         <div class="row grand"><span>Score:</span> <span>135 points!</span></div>
         <div class="row time"><span>Solve Time:</span> <span>04m12s</span></div>
       </div>
@@ -365,7 +376,7 @@
             Mode.</span>
         </div>
         <div class="stat">
-          <strong>Hints / Bonus lines</strong>
+          <strong>Hints / Special Word lines</strong>
           <span>Only appear when the count is above zero, so a clean card stays short.</span>
         </div>
         <div class="stat">
@@ -415,12 +426,12 @@
         <p>Reset a solved puzzle and play it again as many times as you like — the original result is immutable.</p>
       </div>
       <ul class="rule-list">
-        <li>Your first legitimate completion freezes a permanent record: score, mode, hint count, bonus words, invalid
+        <li>Your first legitimate completion freezes a permanent record: score, mode, hint count, Special Words, invalid
           guesses and solve time.</li>
         <li>Finishing a replay in the same sitting shows a temporary card labelled <strong>Replayed</strong>, so you
           can see how the fresh run went.</li>
         <li>Leave the screen and come back and the original saved result is what you see again.</li>
-        <li>Replays are never added to your lifetime score, win count, win rate, streak or solve times.</li>
+        <li>Replays are never added to Total Score, win count, win rate, streak, or solve times.</li>
         <li>Resetting a puzzle you never legitimately solved does not resurrect it as a win — but it also cannot damage
           a result that was already frozen.</li>
       </ul>
@@ -483,11 +494,11 @@
         </div>
         <div class="stat">
           <strong>Game Center</strong>
-          <span>Fastest hint-free win, longest daily streak, total wins, and total hint-free wins.</span>
+          <span>Compare supported results through Game Center when available.</span>
         </div>
         <div class="stat">
           <strong>Sync</strong>
-          <span>Results, badges and stats follow the same Apple ID across your devices.</span>
+          <span>Supported progress can sync through iCloud across devices using the same Apple ID when available.</span>
         </div>
       </div>
     </section>
