@@ -282,46 +282,97 @@ a.appleDownload {
 }
 
 .version3-callout {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
+  gap: 1.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid var(--neon-teal);
-  border-left-width: 5px;
-  border-radius: var(--radius-lg);
-  background: var(--site-glass);
-  box-shadow: 0 0 30px rgba(46, 242, 208, 0.12);
 }
 
-.version3-callout > div {
-  flex: 1 1 16rem;
+.version3-callout-copy {
   min-width: 0;
 }
 
 .version3-callout h2 {
   margin: 0;
-  color: var(--neon-teal);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--site-text);
+  font-size: clamp(1.8rem, 3.2vw, 2.65rem);
   font-weight: 800;
-  line-height: 1.2;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.version3-callout h2 span {
+  color: var(--neon-teal);
+  background: linear-gradient(100deg, var(--neon-teal), #b6f9ee 55%, #ffb0df);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .version3-callout p {
-  margin: 0.5rem 0 0;
-  font-size: 1.1rem;
+  margin: 0.65rem 0 0;
+  color: var(--site-muted);
+  font-size: 1rem;
+}
+
+.version3-callout .version3-callout-label {
+  margin: 0 0 0.75rem;
+  color: var(--neon-teal);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.version3-callout-tiles {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.75rem 0;
+}
+
+.version3-callout-tiles span {
+  display: grid;
+  place-items: center;
+  width: clamp(2.2rem, 3.6vw, 3rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(46, 242, 208, 0.45);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(145deg, rgba(46, 242, 208, 0.22), rgba(46, 242, 208, 0.05));
+  color: var(--neon-teal);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  font-size: 1.25rem;
+  font-weight: 800;
+  transform: translateY(-5px) rotate(-8deg);
+}
+
+.version3-callout-tiles span:nth-child(even) {
+  transform: translateY(5px) rotate(8deg);
+}
+
+.version3-callout-tiles span:nth-last-child(-n + 2) {
+  border-color: rgba(255, 79, 184, 0.45);
+  background: linear-gradient(145deg, rgba(255, 79, 184, 0.22), rgba(255, 79, 184, 0.05));
+  color: #ffb0df;
 }
 
 .version3-callout .btn-primary {
+  flex-shrink: 0;
+  gap: 0.8rem;
   background: var(--neon-teal);
-  color: #000;
-  box-shadow: 0 10px 30px rgba(46, 242, 208, 0.2);
+  color: var(--site-bg);
+  box-shadow: 0 8px 24px rgba(46, 242, 208, 0.15);
 }
 
 @media (max-width: 700px) {
+  .version3-callout-tiles {
+    order: -1;
+    flex-basis: 100%;
+  }
+
   .version3-callout .btn {
     width: 100%;
   }
@@ -1761,18 +1812,32 @@ a.appleDownload {
   }
 }
 
-/* "What kind of word game" panel: phone art lives at its right edge. */
+/* Match the Expert Mode artwork sizing on the Version 3 page. */
 .content-block.intro {
-  min-height: 360px;
-  padding-right: min(38%, 440px);
-  overflow: hidden;
-  background:
-    url("../images/marketing/viisi-expert-mode.png") right 1.5rem center / auto calc(100% - 1.5rem) no-repeat,
-    var(--site-glass);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
 }
 
-.content-block.intro h2 {
-  margin-top: 0;
+.intro-art {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+
+.intro-art img {
+  width: min(340px, 75%);
+  max-height: 660px;
+  object-fit: cover;
+  border: 1px solid var(--site-line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5);
+  transform: rotate(-4deg);
+}
+
+.intro-copy {
+  min-width: 0;
 }
 
 @media (max-width: 900px) {
@@ -1790,11 +1855,11 @@ a.appleDownload {
 
 @media (max-width: 700px) {
   .content-block.intro {
-    min-height: 0;
-    padding-right: clamp(1.5rem, 3vw, 2.25rem);
-    padding-bottom: 215px;
-    background-position: center bottom 0.5rem, 0 0;
-    background-size: auto 195px, auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .intro-art img {
+    width: min(280px, 67%);
   }
 
   .features-grid {

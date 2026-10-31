@@ -68,7 +68,7 @@
   </script>
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261030-release" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261031-home" />
   <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
   <script defer src="assets/js/screenshot-carousel.js?v=20261014-pause"></script>
   <script defer src="assets/js/daily-letters.js?v=20261019-schedule"></script>
@@ -115,10 +115,15 @@
 
   <main id="main-content" tabindex="-1">
     <section class="version3-callout container" aria-labelledby="version3-callout-title">
-      <div>
-        <h2 id="version3-callout-title">Viisi Reimagined</h2>
-        <p>Version 3 is out now!</p>
+      <div class="version3-callout-copy">
+        <p class="version3-callout-label">Version 3 · Out now</p>
+        <h2 id="version3-callout-title">Viisi <span>Reimagined.</span></h2>
+        <p>Your daily word ritual. A whole new feeling.</p>
       </div>
+      <div class="version3-callout-tiles" aria-hidden="true">
+        <span>V</span><span>I</span><span>I</span><span>S</span><span>I</span>
+      </div>
+      <a class="btn btn-primary" href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">See what’s new <span aria-hidden="true">↗</span></a>
     </section>
 
     <section class="hero container">
@@ -205,19 +210,24 @@
       </a>
     </section>
 
-    <section class="content-block intro container">
-  <h2>What kind of word game is Viisi?</h2>
-  <p>
-    Viisi is a daily anagram word game for iPhone. Each puzzle starts with one shared set of five letters,
-    and your goal is to find five valid words from those letters. It is designed for players who enjoy
-    daily word games, vocabulary puzzles, and Wordle-style challenges but want a slightly deeper format.
-  </p>
-  <p>
-    Unlike many mobile word games, Viisi is fast to open, works offline, does not require an account,
-    and keeps the experience focused on the puzzle itself. Players can track streaks, unlock hints,
-    and revisit past puzzles in the archive.
-  </p>
-</section>
+    <section class="content-block intro container" aria-labelledby="intro-title">
+      <div class="intro-art">
+        <img src="assets/images/marketing/viisi-expert-mode.png" alt="Viisi Expert Mode with a three-strike challenge" width="1179" height="2556" loading="lazy" decoding="async" />
+      </div>
+      <div class="intro-copy">
+        <h2 id="intro-title">What kind of word game is Viisi?</h2>
+        <p>
+          Viisi is a daily anagram word game for iPhone. Each puzzle starts with one shared set of five letters,
+          and your goal is to find five valid words from those letters. It is designed for players who enjoy
+          daily word games, vocabulary puzzles, and Wordle-style challenges but want a slightly deeper format.
+        </p>
+        <p>
+          Unlike many mobile word games, Viisi is fast to open, works offline, does not require an account,
+          and keeps the experience focused on the puzzle itself. Players can track streaks, unlock hints,
+          and revisit past puzzles in the archive.
+        </p>
+      </div>
+    </section>
 
     <section id="features" class="container" style="padding:2.25rem 0 0.5rem;">
       
