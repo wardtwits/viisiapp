@@ -63,9 +63,9 @@
   </script>
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261031-brief" >
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261102-images" >
   <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
-  <script defer src="assets/js/screenshot-carousel.js?v=20261014-pause"></script>
+  <script defer src="assets/js/screenshot-carousel.js?v=20261102-deferred"></script>
   <script defer src="assets/js/daily-letters.js?v=20261019-schedule"></script>
 </head>
 
@@ -134,7 +134,7 @@
         </h1>
         <p class="challenge">
           Viisi is a daily anagram word game. Solve one new word puzzle each day by making five valid words from the same five letters.
-    Viisi is a clean, fast Wordle alternative for players who want a deeper daily word challenge.
+    Viisi is a clean, fast <a href="wordle-alternative/">Wordle alternative</a> for players who want a deeper daily word challenge.
         </p>
         <div class="hero-cta apple">
           <a href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8" class="appleDownload">
@@ -165,21 +165,28 @@
         <div class="screenshot-stage">
           <div class="screenshot-frame" aria-hidden="true">
             <div class="screenshot-screen">
+              <!-- Picture sources load the first slide only for its visible theme. -->
               <div class="screenshot-set screenshot-set-light" data-screenshot-set>
-                <img class="is-active" src="assets/images/screenshots/light1.jpg" alt="" width="1170" height="2391" decoding="async" >
-                <img src="assets/images/screenshots/light2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img src="assets/images/screenshots/light3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img src="assets/images/screenshots/light4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img src="assets/images/screenshots/light5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img class="screenshot-sheet" src="assets/images/screenshots/light6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <picture>
+                  <source media="(prefers-color-scheme: light)" srcset="assets/images/screenshots/light1.webp" >
+                  <img class="is-active" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" width="1170" height="2391" decoding="async" >
+                </picture>
+                <img data-src="assets/images/screenshots/light2.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img data-src="assets/images/screenshots/light3.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img data-src="assets/images/screenshots/light4.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img data-src="assets/images/screenshots/light5.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img class="screenshot-sheet" data-src="assets/images/screenshots/light6.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
               </div>
               <div class="screenshot-set screenshot-set-dark" data-screenshot-set>
-                <img class="is-active" src="assets/images/screenshots/dark1.jpg" alt="" width="1170" height="2391" decoding="async" >
-                <img src="assets/images/screenshots/dark2.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img src="assets/images/screenshots/dark3.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img src="assets/images/screenshots/dark4.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img src="assets/images/screenshots/dark5.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
-                <img class="screenshot-sheet" src="assets/images/screenshots/dark6.jpg" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <picture>
+                  <source media="(prefers-color-scheme: dark)" srcset="assets/images/screenshots/dark1.webp" >
+                  <img class="is-active" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" width="1170" height="2391" decoding="async" >
+                </picture>
+                <img data-src="assets/images/screenshots/dark2.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img data-src="assets/images/screenshots/dark3.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img data-src="assets/images/screenshots/dark4.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img data-src="assets/images/screenshots/dark5.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
+                <img class="screenshot-sheet" data-src="assets/images/screenshots/dark6.webp" alt="" width="1170" height="2391" decoding="async" loading="lazy" >
               </div>
             </div>
           </div>

@@ -56,3 +56,14 @@ then to keep daily letters available. Use an HTTP server for local development;
 fetching the JSON is not supported when opening `index.html` directly as a file.
 
 Run the focused daily-letter checks with `node --test tests/daily-letters.test.js`.
+
+## Marketing images
+
+The homepage and Version 3 carousel use WebP copies of the original screenshots.
+Each theme's first slide uses a `picture` source so only the matching theme
+downloads. Later slides use `data-src`; the carousel loads the next image before
+changing slides and keeps the current image visible if the download fails.
+The phone-frame WebP uses lossless compression to preserve the original artwork.
+
+Run all checks with `node --test tests/*.test.js`, including the carousel's loading,
+pause, reduced-motion, and theme-switching regression tests.

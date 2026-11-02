@@ -684,7 +684,7 @@ a.appleDownload {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../images/iphone-18-pro-frame.png") center / 100% 100% no-repeat;
+  background: url("../images/iphone-18-pro-frame.webp") center / 100% 100% no-repeat;
   pointer-events: none;
 }
 
@@ -1639,7 +1639,7 @@ a.appleDownload {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../images/iphone-18-pro-frame.png") center / 100% 100% no-repeat;
+  background: url("../images/iphone-18-pro-frame.webp") center / 100% 100% no-repeat;
   pointer-events: none;
 }
 

@@ -17,18 +17,48 @@
 
   let timer = null;
   let paused = false;
+  const loadingSets = new WeakSet();
 
   function advance() {
     sets.forEach((set) => {
       // The set hidden by the current color scheme stays put.
-      if (set.offsetParent === null) return;
+      if (set.offsetParent === null || loadingSets.has(set)) return;
       const images = set.querySelectorAll("img");
       if (images.length < 2) return;
       const current = set.querySelector("img.is-active");
       const index = Array.prototype.indexOf.call(images, current);
       const next = images[(index + 1) % images.length];
-      if (current) current.classList.remove("is-active");
-      next.classList.add("is-active");
+      const showNext = () => {
+        if (set.offsetParent === null || paused || (reduceMotionQuery && reduceMotionQuery.matches)) return;
+        if (current) current.classList.remove("is-active");
+        next.classList.add("is-active");
+      };
+
+      if (next.complete && next.naturalWidth > 0) {
+        showNext();
+        return;
+      }
+
+      // Keep the current slide visible while the next image downloads. Inactive
+      // slides have data-src so the browser does not fetch the whole carousel.
+      loadingSets.add(set);
+      const finishLoading = () => {
+        next.removeEventListener("load", onLoad);
+        next.removeEventListener("error", onError);
+        loadingSets.delete(set);
+      };
+      const onLoad = () => {
+        finishLoading();
+        showNext();
+      };
+      const onError = () => {
+        finishLoading();
+        console.error("Unable to load Viisi screenshot:", next.dataset.src || next.src);
+      };
+      next.addEventListener("load", onLoad);
+      next.addEventListener("error", onError);
+      next.loading = "eager";
+      if (next.dataset.src) next.src = next.dataset.src;
     });
   }
 
