@@ -23,88 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" />
   <link rel="stylesheet" href="assets/css/styles.css?v=20261102-fonts" />
+  <link rel="stylesheet" href="assets/css/how-to-play.css?v=20261102-guide" />
   <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
-  <style>
-    /* Compact layout for the guide: tighter panels, steps in two columns. */
-    .howto section.stats {
-      margin-top: 1.25rem;
-      padding: 1.25rem 1.5rem;
-    }
-
-    .howto .section-title {
-      margin-bottom: 1rem;
-    }
-
-    .howto .section-title h2 {
-      margin-bottom: 0.25rem;
-      font-size: clamp(1.5rem, 3vw, 1.9rem);
-    }
-
-    .howto .video-pill {
-      margin-bottom: 0.75rem;
-    }
-
-    .howto-steps {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.6rem 2.5rem;
-      margin: 0;
-      padding-left: 1.25rem;
-    }
-
-    .howto .compact-cards {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    @media (max-width: 1000px) {
-      .howto .compact-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .howto .compact-cards .feature-card {
-      padding: 1rem 1.1rem;
-    }
-
-    .howto .compact-cards .feature-card p {
-      margin: 0.4rem 0 0;
-      font-size: 0.95rem;
-    }
-
-    .howto .stats-grid {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
-      gap: 1rem 1.25rem;
-    }
-
-    .howto .stats-grid--three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .howto-note {
-      margin: 1rem 0 0;
-    }
-
-    .howto-subhead {
-      margin: 1.5rem 0 0.75rem;
-      font-size: 1.1rem;
-    }
-
-    @media (max-width: 700px) {
-      .howto section.stats {
-        padding: 1rem;
-      }
-
-      .howto-steps,
-      .howto .stats-grid--three {
-        grid-template-columns: 1fr;
-      }
-
-      .howto .compact-cards {
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -144,198 +64,185 @@
     </nav>
   </header>
 
-  <main id="main-content" tabindex="-1" class="container howto" style="padding-bottom:2.5rem;">
-    <section class="hero" style="grid-template-columns:1fr;">
-      <div>
-        <div class="badge">Master the daily challenge</div>
-        <h1 style="font-size:clamp(2.3rem,4vw,3.8rem);">
-          How to play Viisi
-        </h1>
-        <p class="challenge">
-          Viisi is a mindful daily puzzle. You receive five letters and must craft five different words using all of
-          them. Every player worldwide solves the same board each day, so your streak is part of a shared ritual.
-        </p>
-        
+  <main id="main-content" tabindex="-1">
+    <section class="guide-intro container" aria-labelledby="guide-title">
+      <p class="guide-kicker">Your first Viisi puzzle</p>
+      <h1 id="guide-title">How to play Viisi.
+        <span>Find your five.</span>
+      </h1>
+      <p>One set of letters. Five different words. Learn the essentials, then settle into your new daily word ritual.</p>
+      <div class="guide-actions">
+        <a class="btn btn-primary" href="demo.html">Try a puzzle <span aria-hidden="true">→</span></a>
+        <a class="guide-video" href="https://youtube.com/shorts/w7KIiffU7Uw?feature=share" target="_blank" rel="noopener">Watch the demo <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
-    <section class="stats cat-perch">
-      <img class="page-cat page-cat--guide" data-mascot src="assets/cat/puzzle-companion.webp" alt="" width="360" height="239" loading="lazy" decoding="async" />
-      <a class="video-pill" href="https://youtube.com/shorts/w7KIiffU7Uw?feature=share" aria-label="Watch demo video" target="_blank" rel="noopener">
-        <span class="video-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M9 7.5v9l7-4.5-7-4.5Z" />
-          </svg>
-        </span>
-        <span>Watch Demo</span>
-      </a>
+    <div class="home-refresh guide-content">
+      <nav class="guide-jumps container" aria-label="Guide sections">
+        <a href="#basics"><span aria-hidden="true">01</span> The basics</a>
+        <a href="#tools"><span aria-hidden="true">02</span> Your options</a>
+        <a href="#progress"><span aria-hidden="true">03</span> Scores &amp; progress</a>
+      </nav>
 
-      <div class="section-title">
-        <h2>The Basics</h2>
-        <p>Simple rules keep Viisi approachable while still offering satisfying depth.</p>
-      </div>
-      <ol class="howto-steps">
-        <li>Open today’s puzzle and study the five letters.</li>
-        <li>Arrange <strong>all five letters</strong> to make a word. Each letter must be used exactly once.</li>
-        <li>Keep finding different accepted words. A word cannot count twice, and proper names or abbreviations are not accepted.</li>
-        <li>Find five words to win. Some puzzles also hide <strong>Special Words</strong> that turn gold and earn extra points.</li>
-        <li>A new puzzle unlocks every day at <strong>06:00 UTC</strong>, the same board for every player worldwide.</li>
-        <li>After you win, tap any completed word to see its definition.</li>
-      </ol>
-    </section>
+      <section id="basics" class="guide-section guide-basics container" aria-labelledby="basics-title">
+        <div>
+          <p class="eyebrow">01 / The basics</p>
+          <h2 id="basics-title">Same letters.<br>New possibilities.</h2>
+          <ol class="home-steps guide-steps">
+            <li>
+              <span aria-hidden="true">1</span>
+              <div><h3>Start with five letters.</h3><p>Open the daily puzzle and study your letters. Every player worldwide gets the same board.</p></div>
+            </li>
+            <li>
+              <span aria-hidden="true">2</span>
+              <div><h3>Rearrange every letter.</h3><p>Use all five letters exactly once per word. Words must be accepted by Viisi’s dictionary; proper names and abbreviations do not count.</p></div>
+            </li>
+            <li>
+              <span aria-hidden="true">3</span>
+              <div><h3>Find five different words.</h3><p>A word cannot count twice. There can be more than five answers, so any five different accepted words can complete the puzzle.</p></div>
+            </li>
+          </ol>
+          <p class="guide-after-win">After a win, tap any completed word to see its definition.</p>
+        </div>
+        <div class="guide-example">
+          <div class="word-example cat-perch" role="group" aria-labelledby="anagram-example-title">
+            <img class="page-cat page-cat--guide" data-mascot src="assets/cat/puzzle-companion.webp" alt="" width="360" height="239" loading="lazy" decoding="async" />
+            <h3 class="word-example-label" id="anagram-example-title">A five-letter anagram example</h3>
+            <p class="word-example-note">Anagrams are different words made by rearranging the same letters.</p>
+            <p class="sr-only">The example uses the letters A, E, L, R, and T.</p>
+            <div class="word-example-letters" aria-hidden="true">
+              <span>A</span><span>E</span><span>L</span><span>R</span><span>T</span>
+            </div>
+            <ul class="word-example-answers">
+              <li><span>ALERT</span><small>1 of 5</small></li>
+              <li><span>ALTER</span><small>2 of 5</small></li>
+              <li><span>LATER</span><small>3 of 5</small></li>
+            </ul>
+            <p class="word-example-note">Same letters, rearranged into three different words. Find two more accepted words to win. This illustrates the rules, not today’s puzzle.</p>
+          </div>
+        </div>
+      </section>
 
-    <section class="stats" aria-labelledby="anagram-example-title">
-      <div class="section-title">
-        <h2 id="anagram-example-title">A five-letter anagram example</h2>
-        <p>An anagram is a word made by rearranging the letters of another word. Viisi asks you to find several words from the same five letters.</p>
-      </div>
-      <p>Take the letters <strong>A, E, L, R, T</strong>. You can arrange them as <strong>ALERT</strong>, move the letters to make <strong>ALTER</strong>, then rearrange them again to make <strong>LATER</strong>. Each word uses every letter exactly once.</p>
-      <p>Those are three anagrams, so you would still need two more different accepted words to win. This is an illustration of the rules, not today’s puzzle. <a href="demo.html">Try the one-puzzle browser demo</a> to practice on a complete board.</p>
-      <h3 class="howto-subhead">Tips for finding more anagrams</h3>
-      <ul>
-        <li><strong>Move the vowels.</strong> Try placing them in different positions instead of keeping the same word shape.</li>
-        <li><strong>Try a different ending.</strong> If the letters allow it, look for endings such as <strong>-ER</strong> or <strong>-S</strong>, then rearrange the remaining letters.</li>
-        <li><strong>Check every letter.</strong> A familiar word only works if it uses all five supplied letters exactly once and is accepted by Viisi’s dictionary.</li>
-      </ul>
-    </section>
+      <aside class="guide-reset container" aria-labelledby="daily-reset-title">
+        <strong>06:00 UTC</strong>
+        <div>
+          <h3 id="daily-reset-title">A fresh challenge, every day.</h3>
+          <p>A new shared puzzle starts at 06:00 UTC. Your local time depends on your time zone and daylight saving time; the app shows a countdown.</p>
+        </div>
+      </aside>
 
-    <section class="stats">
-      <div class="section-title">
-        <h2>Helpful Tools</h2>
-        <p>Use these options if you feel stuck—your stats will note when hints are involved. Want more puzzles? The archive has every past day.</p>
-      </div>
-      <div class="features-grid compact-cards">
-        <article class="feature-card hover">
-          <span aria-hidden="true">▶️</span>
-          <h3 class="trophy">Tutorial</h3>
-          <p>Practice the board without affecting your results or statistics. Replay it any time from How to Play in the app.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">💡</span>
-          <h3 class="trophy">Hints</h3>
-          <p>After three words, a hint clears the current row and fills the first two letters of a solution. Two hints per puzzle, 10 points each, and never a Special Word.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🔍</span>
-          <h3 class="trophy">Reveal</h3>
-          <p>Shows the solution and ends the attempt without a win. There is no undo, and revealing today’s puzzle ends the current streak.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">♻️</span>
-          <h3 class="trophy">Reset / replay</h3>
-          <p>Replay a puzzle for practice. The original result and statistics do not change, and a replay does not add to Total Score.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🗂️</span>
-          <h3 class="trophy">Archive</h3>
-          <p>Play past puzzles you missed. A first-time archive win counts as a win, but it does not extend your daily streak.</p>
-        </article>
-      </div>
-    </section>
+      <section id="tools" class="guide-section container" aria-labelledby="tools-title">
+        <p class="eyebrow">02 / Your options</p>
+        <h2 id="tools-title">A little help.<br>Or an extra challenge.</h2>
+        <p class="guide-section-lede">Choose Classic or Expert before you start. Your mode locks once play begins and stays with that attempt.</p>
+        <div class="guide-modes">
+          <article class="guide-mode">
+            <p class="guide-mode-label">Room to explore</p>
+            <h3>Classic Mode</h3>
+            <p>Work through the puzzle with hints available after you find three words. You can use up to two, at 10 points each. Invalid submissions do not have Expert Mode’s three-attempt limit.</p>
+          </article>
+          <article class="guide-mode guide-mode-expert">
+            <p class="guide-mode-label">Raise the stakes</p>
+            <h3>Expert Mode</h3>
+            <p>No hints. Three invalid submissions end the attempt. Think before you submit, and earn 30 extra points when you complete the puzzle.</p>
+          </article>
+        </div>
+        <div class="faq-list guide-details">
+          <details>
+            <summary>How do hints work?</summary>
+            <p>In Classic Mode, hints unlock after three words. A hint clears the current row and fills the first two letters of a solution. You can use up to two hints, at 10 points each. Hints never reveal a Special Word, and your stats note when you use them.</p>
+          </details>
+          <details>
+            <summary>What happens if I reveal the solution?</summary>
+            <p>Reveal shows the solution and ends the attempt without a win. There is no undo. Revealing today’s puzzle also ends the current streak.</p>
+          </details>
+          <details>
+            <summary>Can I practice or replay a puzzle?</summary>
+            <p>The in-app Tutorial lets you practice without affecting your results or statistics. Replay it any time from How to Play in the app.</p>
+            <p>Reset / replay lets you play a finished puzzle for practice. Your original result, score, time, and statistics stay unchanged, and replays do not add to Total Score. You can also <a href="demo.html">try the one-puzzle browser demo</a>.</p>
+          </details>
+          <details>
+            <summary>Can I play a day I missed?</summary>
+            <p>Open the Archive to find past puzzles. A first-time archive win counts as a win, but it does not extend your daily streak.</p>
+          </details>
+          <details>
+            <summary>Any tips for finding more anagrams?</summary>
+            <ul>
+              <li><strong>Move the vowels.</strong> Try them in different positions instead of keeping the same word shape.</li>
+              <li><strong>Try a different ending.</strong> If the letters allow it, look for endings such as <strong>-ER</strong> or <strong>-S</strong>, then rearrange the remaining letters.</li>
+              <li><strong>Check every letter.</strong> A familiar word only works if it uses every supplied letter exactly once and is accepted by Viisi’s dictionary.</li>
+            </ul>
+          </details>
+        </div>
+      </section>
 
-    <section class="stats">
-      <div class="section-title">
-        <h2>Expert Mode</h2>
-        <p>Choose Expert Mode before starting a puzzle. Once play begins, the mode is locked for that attempt.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat">
-          <strong>⚡️ No hints</strong>
-          <span>Hints are switched off entirely. It is you, five letters, and the dictionary.</span>
+      <section id="progress" class="guide-section container" aria-labelledby="progress-title">
+        <p class="eyebrow">03 / Scores &amp; progress</p>
+        <h2 id="progress-title">Every solve adds up.</h2>
+        <p class="guide-section-lede">Earn points, keep your daily streak going, and celebrate the little milestones along the way.</p>
+        <div class="guide-progress">
+          <div class="guide-score">
+            <table>
+              <caption class="sr-only">How Viisi points are earned and deducted</caption>
+              <thead><tr><th scope="col">Action</th><th scope="col">Points</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Each accepted word</th><td>+20</td></tr>
+                <tr><th scope="row">Finish all five words</th><td>+20</td></tr>
+                <tr><th scope="row">Win in Expert Mode</th><td>+30</td></tr>
+                <tr><th scope="row">Each Special Word</th><td>+25</td></tr>
+                <tr><th scope="row">Each hint used</th><td>−10</td></tr>
+              </tbody>
+            </table>
+            <p class="guide-note">Special Words turn gold and earn bonus points. Hints will never hand you one. A completed puzzle starts at 120 points in Classic or 150 in Expert, before bonuses and hints.</p>
+            <a class="text-link" href="score.html">See the full scoring breakdown <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="guide-progress-copy">
+            <h3>Your progress, at a glance.</h3>
+            <p class="guide-note">Scores track each win. Badges mark your milestones. Supported progress can sync through iCloud across devices using the same Apple ID when available.</p>
+            <div class="faq-list guide-details">
+              <details>
+                <summary>Which points count toward Total Score?</summary>
+                <p>Points appear as you complete words, even before you finish. Points from an unsuccessful attempt may still be displayed, but they do not add to Total Score.</p>
+                <p>Only eligible original wins count, once per puzzle. Reveals, Expert fail-outs, and practice replays do not add to that total.</p>
+              </details>
+              <details>
+                <summary>What do my stats mean?</summary>
+                <dl>
+                  <dt>Wins</dt><dd>Total puzzles solved across daily and archive play.</dd>
+                  <dt>Win Rate</dt><dd>The share of puzzles you finished that ended in a solve.</dd>
+                  <dt>Streak</dt><dd>Consecutive daily wins. Archive catch-ups do not extend it.</dd>
+                  <dt>Performance</dt><dd>Classic and Expert breakdowns, fastest and average solve times, and hints used.</dd>
+                  <dt>Leaderboards</dt><dd>Compare supported results through Game Center when available.</dd>
+                </dl>
+              </details>
+              <details>
+                <summary>Which badges can I earn?</summary>
+                <dl>
+                  <dt>5 Streak</dt><dd>Solve five daily puzzles in five consecutive days. Archive wins do not count toward the streak.</dd>
+                  <dt>25 Wins</dt><dd>Reach twenty-five lifetime Viisi victories.</dd>
+                  <dt>Hint-Free</dt><dd>Win a puzzle without using a single hint.</dd>
+                  <dt>One Shot</dt><dd>Solve a puzzle on your very first attempt, without leaving the game board. No resets or reveals.</dd>
+                </dl>
+                <p><a class="text-link" href="badges.html">Explore the badges <span aria-hidden="true">→</span></a></p>
+              </details>
+            </div>
+          </div>
         </div>
-        <div class="stat">
-          <strong>❌ Three strikes</strong>
-          <span>Three invalid submissions end the game. Think before you lock in a word.</span>
-        </div>
-        <div class="stat">
-          <strong>🔒 Locked in</strong>
-          <span>A puzzle keeps the mode it started in, so switching the setting never changes a game in progress.</span>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="stats">
-      <div class="section-title">
-        <h2>Scoring</h2>
-        <p>Every win is scored. Your score drives your performance stats and the celebration screen breakdown. <a href="score.html">See the full scoring breakdown</a>.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat">
-          <strong>20 points per word</strong>
-          <span>Credited the moment you lock in a correct word—you don't have to finish to start earning.</span>
+      <section class="download-panel container" aria-labelledby="guide-play-title">
+        <div class="download-panel-copy">
+          <p class="eyebrow">You know the basics</p>
+          <h2 id="guide-play-title">Your first five<br>are waiting.</h2>
+          <p>Try one complete puzzle in your browser. It does not affect your results or statistics in the app.</p>
+          <div class="guide-actions">
+            <a class="btn btn-light" href="demo.html">Play the browser demo <span aria-hidden="true">→</span></a>
+            <a class="guide-download-link" href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&amp;ct=MySite&amp;mt=8">Get Viisi on the App Store <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
-        <div class="stat">
-          <strong>+20 for finishing</strong>
-          <span>All 5 words locked in adds a completion bonus. Expert Mode adds +30 more on top.</span>
-        </div>
-        <div class="stat">
-          <strong>+25 per Special Word</strong>
-          <span>Each Special Word you submit adds 25 points. Hints will never hand you one.</span>
-        </div>
-        <div class="stat">
-          <strong>-10 per hint</strong>
-          <span>Each hinted row costs 10 points. Skip both for a clean sheet.</span>
-        </div>
-      </div>
-      <p class="howto-note">Points from an unsuccessful attempt may still be displayed, but they do not add to Total Score. Only eligible original wins count toward that total.</p>
-    </section>
-
-    <section class="stats">
-      <div class="section-title">
-        <h2>Badges &amp; Stats</h2>
-        <p>Badges mark your milestones. Supported progress can sync through iCloud across devices using the same Apple ID when available.</p>
-      </div>
-      <div class="features-grid compact-cards">
-        <article class="feature-card hover">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="trophy lucide lucide-flame w-7 h-7 text-badge-text mb-1"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-          <h3 class="trophy">5 Streak</h3>
-          <p>Solve 5 daily puzzles in 5 consecutive days (archive doesn't count).</p>
-        </article>
-        <article class="feature-card hover">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="trophy lucide lucide-trophy w-7 h-7 text-badge-text mb-1"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
-          <h3 class="trophy">25 Wins</h3>
-          <p>Reach twenty-five lifetime Viisi victories.</p>
-        </article>
-        <article class="feature-card hover">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class=" trophy lucide lucide-target w-7 h-7 text-badge-text mb-1"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-          <h3 class="trophy">Hint-Free</h3>
-          <p>Win a puzzle without using a single hint.</p>
-        </article>
-        <article class="feature-card hover">
-       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="trophy lucide lucide-zap w-7 h-7 text-badge-text mb-1"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
-
-          <h3 class="trophy">One Shot</h3>
-          <p>Solve a puzzle on your very first attempt—without leaving the game board. No resets or reveals.</p>
-        </article>
-      </div>
-      <h3 class="howto-subhead">Your stats</h3>
-      <div class="stats-grid stats-grid--three">
-        <div class="stat">
-          <strong>Total Score</strong>
-          <span>Eligible original wins, counted once per puzzle. Reveals, Expert fail-outs, and replays do not add to it.</span>
-        </div>
-        <div class="stat">
-          <strong>Wins</strong>
-          <span>Total puzzles solved across daily and archive play.</span>
-        </div>
-        <div class="stat">
-          <strong>Win Rate</strong>
-          <span>Share of the puzzles you finished that ended in a solve.</span>
-        </div>
-        <div class="stat">
-          <strong>Streak</strong>
-          <span>Consecutive daily wins. Archive catch-ups don't extend it.</span>
-        </div>
-        <div class="stat">
-          <strong>Performance</strong>
-          <span>Classic and Expert breakdowns, fastest and average solve times, and hints used.</span>
-        </div>
-        <div class="stat">
-          <strong>Leaderboards</strong>
-          <span>Compare supported results through Game Center when available.</span>
-        </div>
-      </div>
-    </section>
+        <div class="download-tiles" aria-hidden="true"><span>V</span><span>I</span><span>I</span><span>S</span><span>I</span></div>
+      </section>
+    </div>
   </main>
 
 
