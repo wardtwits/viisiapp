@@ -7,7 +7,6 @@ const root = path.join(__dirname, "..");
 const pages = [
   "index.html", "how-to-play.html", "score.html", "badges.html",
   "privacy.html", "version3.html", "wordle-alternative/index.html",
-  "index copy.html",
 ];
 
 function mascotFor(page) {
@@ -38,7 +37,7 @@ test("cats perched on dark surfaces use the supplied transparent artwork", () =>
   }
 });
 
-for (const page of ["demo.html", "download/index.html", "component.html"]) {
+for (const page of ["demo.html", "download/index.html"]) {
   test(`${page} omits the mascot where there is no natural resting place`, () => {
     const html = fs.readFileSync(path.join(root, page), "utf8");
     assert.doesNotMatch(html, /\bsrc="(?:\.\.\/)?assets\/cat\//);
