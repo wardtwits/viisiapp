@@ -23,163 +23,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" />
   <link rel="stylesheet" href="assets/css/styles.css?v=20261102-fonts" />
+  <link rel="stylesheet" href="assets/css/how-to-play.css?v=20261102-guide" />
+  <link rel="stylesheet" href="assets/css/score.css?v=20261102-scoring" />
   <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
-  <style>
-    /* Scoped to the scoring page — reuses the site tokens, adds no new palette. */
-    .score-formula {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: stretch;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-    }
-
-    .score-formula .term {
-      flex: 1 1 150px;
-      background: var(--viisi-card);
-      border: 1px solid var(--viisi-border);
-      border-radius: var(--radius-sm);
-      padding: 1rem;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .score-formula .term b {
-      display: block;
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--viisi-green-dark);
-    }
-
-    .score-formula .term.minus b {
-      color: var(--viisi-red-dark);
-    }
-
-    .score-formula .term.result b {
-      color: var(--viisi-text);
-    }
-
-    .score-formula .term span {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--viisi-muted);
-      margin-top: 0.25rem;
-    }
-
-    .score-formula .op {
-      align-self: center;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--viisi-muted);
-    }
-
-    .score-table-wrap {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      border-radius: var(--radius-sm);
-    }
-
-    table.score-table {
-      width: 100%;
-      min-width: 520px;
-      border-collapse: collapse;
-      background: white;
-      color: var(--viisi-text);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-    }
-
-    table.score-table th,
-    table.score-table td {
-      text-align: left;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(10, 25, 46, 0.08);
-      font-size: 0.95rem;
-    }
-
-    table.score-table thead th {
-      background: var(--viisi-card);
-      font-weight: 800;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--viisi-muted);
-    }
-
-    table.score-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    table.score-table td.num {
-      font-variant-numeric: tabular-nums;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    table.score-table td.total {
-      color: var(--viisi-green-dark);
-      font-weight: 800;
-    }
-
-    .score-card {
-      max-width: 420px;
-      margin: 1.5rem auto 0;
-      background: white;
-      color: var(--viisi-text);
-      border-radius: var(--radius-sm);
-      padding: 1.25rem 1.5rem;
-      box-shadow: var(--shadow-soft);
-      text-align: left;
-    }
-
-    .score-card .row {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.4rem 0;
-      font-size: 0.98rem;
-    }
-
-    .score-card .row.grand {
-      border-top: 2px solid var(--viisi-border);
-      margin-top: 0.5rem;
-      padding-top: 0.75rem;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--viisi-green-dark);
-    }
-
-    .score-card .row .neg {
-      color: var(--viisi-red-dark);
-    }
-
-    .score-card .row.time {
-      color: var(--viisi-muted);
-      font-size: 0.9rem;
-    }
-
-    .score-note {
-      margin: 1.25rem 0 0;
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .score-note.on-light {
-      color: var(--viisi-muted);
-    }
-
-    .rule-list {
-      margin: 0;
-      padding-left: 1.25rem;
-      display: grid;
-      gap: 0.6rem;
-      text-align: left;
-    }
-  </style>
 </head>
 
-<body>
+<body class="scoring-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="container">
     <nav class="nav" aria-label="Primary">
@@ -213,300 +62,205 @@
     </nav>
   </header>
 
-  <main id="main-content" tabindex="-1" class="container" style="padding-bottom:4rem;">
-    <section class="hero" style="grid-template-columns:1fr;">
-      <div>
-        <div class="badge">Every point, explained</div>
-        <h1 style="font-size:clamp(2.3rem,4vw,3.8rem);">
-          How Viisi scoring works
-        </h1>
-        <p class="challenge">
-          Win a Viisi puzzle and the game freezes a single authoritative score for that day. This page is the full
-          rulebook behind that number — where the points come from, what takes them away, and how the result feeds your
-          streak, your stats, and the leaderboards.
-        </p>
+  <main id="main-content" tabindex="-1">
+    <section class="guide-intro container" aria-labelledby="scoring-title">
+      <p class="guide-kicker">The scoring guide</p>
+      <h1 id="scoring-title">Viisi scoring.
+        <span>Every point counts.</span>
+      </h1>
+      <p>See how words, bonuses, and hints add up—and which results contribute to your Total Score.</p>
+      <div class="guide-actions">
+        <a class="btn btn-primary" href="#formula">See the formula <span aria-hidden="true">↓</span></a>
+        <a class="guide-video" href="how-to-play.html">Learn how to play <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
-    <!-- THE FORMULA -->
-    <section class="stats" style="margin-top:0;">
-      <div class="section-title">
-        <h2>The Formula</h2>
-        <p>One rule scores every win, in both modes. Nothing else adds or subtracts points.</p>
-      </div>
-      <div class="score-formula">
-        <div class="term">
-          <b>20 pts</b>
-          <span>per word, credited as you go</span>
-        </div>
-        <div class="op" aria-hidden="true">+</div>
-        <div class="term">
-          <b>+20</b>
-          <span>for finishing all 5 (+30 more in Expert)</span>
-        </div>
-        <div class="op" aria-hidden="true">+</div>
-        <div class="term">
-          <b>+25</b>
-          <span>per Special Word found</span>
-        </div>
-        <div class="op" aria-hidden="true">−</div>
-        <div class="term minus">
-          <b>−10</b>
-          <span>per hinted row</span>
-        </div>
-        <div class="op" aria-hidden="true">=</div>
-        <div class="term result">
-          <b>Your score</b>
-          <span>never below 0</span>
-        </div>
-      </div>
-      <p class="score-note">
-        Points are progressive: a reveal or Expert failure does not erase the score shown for that attempt. You keep
-        points for completed words and Special Words, minus hints, but lose the completion bonus. Scores never fall
-        below zero. Points displayed for an unsuccessful attempt do not add to Total Score.
-      </p>
-    </section>
+    <div class="home-refresh guide-content">
+      <nav class="guide-jumps container" aria-label="Scoring sections">
+        <a href="#formula"><span aria-hidden="true">01</span> The essentials</a>
+        <a href="#examples"><span aria-hidden="true">02</span> A worked example</a>
+        <a href="#records"><span aria-hidden="true">03</span> Results &amp; records</a>
+      </nav>
 
-    <!-- WORDS & COMPLETION -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Words &amp; Completion</h2>
-        <p>How much your words are worth, whether you finish the puzzle or not. The mode is locked to the puzzle when
-          you start it, so changing the setting mid-game never changes what a word or a completion is worth.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat">
-          <strong>20 points per word</strong>
-          <span>Credited the instant you lock in a correct word — before you've finished the puzzle.</span>
+      <!-- THE FORMULA / WORDS & COMPLETION -->
+      <section id="formula" class="guide-section container" aria-labelledby="formula-title">
+        <p class="eyebrow">01 / The essentials</p>
+        <h2 id="formula-title">Find five.<br>Build your score.</h2>
+        <p class="guide-section-lede">The same formula scores both modes: word points + completion bonuses + Special Word bonuses − hint penalties. Scores never fall below zero.</p>
+        <div class="guide-progress score-foundations">
+          <div class="guide-score">
+            <table>
+              <caption class="sr-only">Viisi scoring formula: points for words, completion, Expert wins, Special Words, and hints</caption>
+              <thead><tr><th scope="col">Action</th><th scope="col">Points</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Each accepted word</th><td>+20</td></tr>
+                <tr><th scope="row">Finish all five words</th><td>+20</td></tr>
+                <tr><th scope="row">Win in Expert Mode</th><td>+30</td></tr>
+                <tr><th scope="row">Each distinct Special Word</th><td>+25</td></tr>
+                <tr><th scope="row">Each hint used</th><td>−10</td></tr>
+              </tbody>
+            </table>
+            <p class="guide-note">Word points appear as you go. Completion and Expert bonuses are awarded only when you finish all five words. Your mode locks when you start the puzzle; changing settings later does not change its scoring.</p>
+          </div>
+          <div class="score-base-wins">
+            <article class="guide-mode">
+              <p class="guide-mode-label">Classic win</p>
+              <h3><span class="sr-only">Classic win: </span><span class="score-base-total">120</span><span class="score-base-unit">points</span></h3>
+              <p>Five words × 20, plus 20 for finishing. Before Special Word bonuses and hint penalties.</p>
+            </article>
+            <article class="guide-mode guide-mode-expert">
+              <p class="guide-mode-label">Expert win</p>
+              <h3><span class="sr-only">Expert win: </span><span class="score-base-total">150</span><span class="score-base-unit">points</span></h3>
+              <p>The same 120, plus 30 for finishing in Expert. Before Special Word bonuses. Hints are unavailable.</p>
+            </article>
+          </div>
         </div>
-        <div class="stat">
-          <strong>120 points</strong>
-          <span>A full Classic win: five completed words (100) plus the +20 completion bonus.</span>
-        </div>
-        <div class="stat">
-          <strong>150 points</strong>
-          <span>A full Expert win: the same 120, plus an extra +30 for finishing in Expert Mode.</span>
-        </div>
-        <div class="stat">
-          <strong>Unsuccessful attempts</strong>
-          <span>Completed-word points may still be displayed after a reveal or Expert failure, but they do not add to Total Score.</span>
-        </div>
-      </div>
-    </section>
 
-    <!-- TOTAL SCORE -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>What Counts Toward Total Score</h2>
-        <p>Total Score counts eligible original wins once per puzzle. Practice attempts never rewrite it.</p>
-      </div>
-      <ul class="rule-list">
-        <li>A puzzle must be won on its first finished attempt for its original score to count.</li>
-        <li>Revealing the solution or failing in Expert Mode makes later attempts practice for that puzzle, even if you switch modes.</li>
-        <li>Replays do not change the original result or add to Total Score.</li>
-        <li>Older wins from before the Total Score feature do not receive points retroactively.</li>
-      </ul>
-    </section>
-
-    <!-- SPECIAL WORDS -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Special Words</h2>
-        <p>Some puzzles hide Special Words. Find one and its tiles flash gold.</p>
-      </div>
-      <div class="features-grid" style="gap:1.5rem;">
-        <article class="feature-card hover">
-          <span aria-hidden="true">🌟</span>
-          <h3 class="trophy">+25 each</h3>
-          <p>Every Special Word you submit adds 25 points on top of your base score.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🔁</span>
-          <h3 class="trophy">Counted once</h3>
-          <p>The bonus is awarded per distinct Special Word. Matching is case- and whitespace-insensitive, so a word can never
-            be double-counted.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🙈</span>
-          <h3 class="trophy">Never hinted</h3>
-          <p>A hint will never prefill a Special Word — not as its first choice and not as a fallback. Any puzzle
-            that hides one ships with enough non-special answers to guarantee it. Special Word points have to be earned.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- HINT PENALTY -->
-    <section class="stats cat-perch" style="margin-top:6rem;">
-      <img class="page-cat page-cat--scoring" data-mascot src="assets/cat/puzzle-companion.webp" alt="" width="360" height="239" loading="lazy" decoding="async" />
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Game Hints</h2>
-      </div>
-    <ul class="rule-list">
-        <li>After 3 valid words are found you have a hint available to use for the 4th and 5th word.</li>
-        <li>Each hint costs 10 points and it reveals the first 2 tiles (letters) of the new row.</li>
-        <li><strong>Two hints, maximum.</strong> The hint button only unlocks once three rows are locked in, which
-          leaves rows four and five — so a Classic game can lose at most 20 points to hints.</li>
-        <li>Hints are not available in <strong class="highlight"><span class="mint" aria-hidden="true">⚡️</span> Expert Mode</strong></li>
-        <li><strong>Hints cost you the Hint-Free badge</strong> and the hint-free leaderboards, but they do not cost you
-          the win, the streak, or a One Shot badge.</li>
-      </ul>
-    </section>
-
-
-    <!-- THE SCORE CARD -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Reading the Score Card</h2>
-        <p>The card on the win screen shows the same components the score was built from — never a re-estimate.</p>
-      </div>
-      <div class="score-card" role="img"
-        aria-label="Example score card: 5 Words 100 points, Solve Bonus 20 points, 1 Special Word plus 25 points, 1 Hint minus 10 points, Score 135 points, Solve Time 04 minutes 12 seconds.">
-        <div class="row"><span>5 Words:</span> <span>100 points</span></div>
-        <div class="row"><span>Solve Bonus:</span> <span>20 points</span></div>
-        <div class="row"><span>1 Special Word:</span> <span>25 points</span></div>
-        <div class="row"><span>1 Hint:</span> <span class="neg">-10 points</span></div>
-        <div class="row grand"><span>Score:</span> <span>135 points!</span></div>
-        <div class="row time"><span>Solve Time:</span> <span>04m12s</span></div>
-      </div>
-      <div class="stats-grid" style="margin-top:2rem;">
-        <div class="stat">
-          <strong>Words line</strong>
-          <span>Always shown — 20 points for every word you completed, whether or not you finished all five.</span>
+        <!-- SPECIAL WORDS / HINT PENALTY -->
+        <div class="faq-list guide-details">
+          <details>
+            <summary>How do Special Words add points?</summary>
+            <p>Some puzzles hide Special Words. Their tiles flash gold when found, and each one adds 25 points on top of the base score.</p>
+            <p>Each distinct Special Word earns its bonus once. Changing its capitalization or spacing cannot make it count twice.</p>
+            <p>Hints never prefill a Special Word, including as a fallback. Puzzles with Special Words have enough non-special answers for the hinted rows.</p>
+          </details>
+          <details>
+            <summary>What happens when I use a hint?</summary>
+            <p>Classic hints unlock after three valid words. Each hint reveals the first two letters of the next row and costs 10 points. You can use at most two, for rows four and five, so hints can deduct at most 20 points. Expert Mode has no hints.</p>
+            <p>Using a hint disqualifies that solve from the Hint-Free badge and hint-free leaderboards. It does not cost you the win, the streak, or a One Shot badge.</p>
+          </details>
+          <details>
+            <summary>What if I reveal the solution or fail in Expert?</summary>
+            <p>The displayed score keeps points for completed words and Special Words, minus hints, without a completion bonus. It never falls below zero.</p>
+            <p>Those displayed points do not add to Total Score. Revealing or failing makes later attempts practice for that puzzle, even if you switch modes.</p>
+          </details>
         </div>
-        <div class="stat">
-          <strong>Solve Bonus / Expert Win</strong>
-          <span>Appear only when you finish all 5 words: +20 for completing, plus +30 more if you finished in Expert
-            Mode.</span>
-        </div>
-        <div class="stat">
-          <strong>Hints / Special Word lines</strong>
-          <span>Only appear when the count is above zero, so a clean card stays short.</span>
-        </div>
-        <div class="stat">
-          <strong>Solve Time</strong>
-          <span>Displayed under the total for reference. It is never scored.</span>
-        </div>
-      </div>
-      <p class="score-note">
-        The breakdown is deliberately strict: it is only drawn when every line can be proven from the saved record
-        <em>and</em> the lines add up to the authoritative total. An older save that cannot account for its own score
-        shows the result without a breakdown rather than inventing a line.
-      </p>
-    </section>
+      </section>
 
-    <!-- SOLVE TIME -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Solve Time</h2>
-        <p>Timing is tracked separately from scoring — it never adds or removes a single point.</p>
-      </div>
-      <div class="features-grid" style="gap:1.5rem;">
-        <article class="feature-card hover">
-          <span aria-hidden="true">⏱️</span>
-          <h3 class="trophy">Active play only</h3>
-          <p>The clock runs while you are on the board and pauses the moment you leave the game or send the app to the
-            background. Walking away does not wreck your time.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🧊</span>
-          <h3 class="trophy">Frozen at the win</h3>
-          <p>Your time stops and locks when the fifth word lands, alongside the score. Shown as <code>04m12s</code>, or
-            <code>42s</code> for a sub-minute solve.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">📉</span>
-          <h3 class="trophy">Feeds your stats</h3>
-          <p>Every timed legitimate win contributes to your average solve time, split by Classic and Expert. Fastest Solve is one
-            lifetime record across both modes and counts hint-free wins only. Beat it and the win screen flags a new Fastest Solve.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- REPLAYS -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Replays Never Overwrite</h2>
-        <p>Reset a solved puzzle and play it again as many times as you like — the original result is immutable.</p>
-      </div>
-      <ul class="rule-list">
-        <li>Your first legitimate completion freezes a permanent record: score, mode, hint count, Special Words, invalid
-          guesses and solve time.</li>
-        <li>Finishing a replay in the same sitting shows a temporary card labelled <strong>Replayed</strong>, so you
-          can see how the fresh run went.</li>
-        <li>Leave the screen and come back and the original saved result is what you see again.</li>
-        <li>Replays are never added to Total Score, win count, win rate, streak, or solve times.</li>
-        <li>Resetting a puzzle you never legitimately solved does not resurrect it as a win — but it also cannot damage
-          a result that was already frozen.</li>
-      </ul>
-    </section>
-
-
-    <!-- ACHIEVEMENTS -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Win-Screen Achievements</h2>
-        <p>Called out on the result screen the moment you earn them.</p>
-      </div>
-      <div class="features-grid" style="gap:1.5rem;">
-        <article class="feature-card hover">
-          <span aria-hidden="true">★</span>
-          <h3 class="trophy">First Perfect Score</h3>
-          <p>Your first win that hits the maximum a board can give — full base plus every Special Word on it.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">⚡</span>
-          <h3 class="trophy">Fastest Solve</h3>
-          <p>A timed, hint-free win quicker than every earlier hint-free win, in either mode.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🔥</span>
-          <h3 class="trophy">New Longest Streak</h3>
-          <p>A daily streak that passes your previous personal best.</p>
-        </article>
-        <article class="feature-card hover">
-          <span aria-hidden="true">🎯</span>
-          <h3 class="trophy">One Shot</h3>
-          <p>Solved start to finish without leaving the board, backgrounding the app, resetting, or revealing. Hints do
-            not disqualify it — walking away does.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- BADGES & LEADERBOARDS -->
-    <section class="stats" style="margin-top:3rem;">
-      <div class="section-title" style="margin-bottom:1.5rem;">
-        <h2>Badges &amp; Leaderboards</h2>
-        <p>The milestones your results unlock, and where they get ranked.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat">
-          <strong>🔥 5 Streak</strong>
-          <span>Five daily puzzles solved on five consecutive days.</span>
+      <aside class="guide-reset container" aria-labelledby="time-note-title">
+        <strong>Your pace.</strong>
+        <div>
+          <h3 id="time-note-title">Time never changes your points.</h3>
+          <p>Solve Time is recorded separately. A faster or slower solve never adds or removes points.</p>
         </div>
-        <div class="stat">
-          <strong>🏆 25 Wins</strong>
-          <span>Twenty-five lifetime legitimate wins, daily or archive.</span>
-        </div>
-        <div class="stat">
-          <strong>⚡️ Hint-Free</strong>
-          <span>A win with zero hinted rows.</span>
-        </div>
-        <div class="stat">
-          <strong>🎯 One Shot</strong>
-          <span>A clean single-session solve — no reset, no reveal, no wandering off.</span>
-        </div>
-        <div class="stat">
-          <strong>Game Center</strong>
-          <span>Compare supported results through Game Center when available.</span>
-        </div>
-        <div class="stat">
-          <strong>Sync</strong>
-          <span>Supported progress can sync through iCloud across devices using the same Apple ID when available.</span>
-        </div>
-      </div>
-    </section>
+      </aside>
 
+      <!-- THE SCORE CARD -->
+      <section id="examples" class="guide-section container" aria-labelledby="examples-title">
+        <p class="eyebrow">02 / A worked example</p>
+        <h2 id="examples-title">One win.<br>Every point accounted for.</h2>
+        <p class="guide-section-lede">Here is a Classic win with one Special Word and one hint. The score card shows the components of the saved result.</p>
+        <div class="score-example-layout">
+          <ol class="home-steps guide-steps">
+            <li>
+              <span aria-hidden="true">1</span>
+              <div><h3>Start with a Classic win.</h3><p>Five words earn 100 points. Finishing adds 20 more, bringing the score to 120.</p></div>
+            </li>
+            <li>
+              <span aria-hidden="true">2</span>
+              <div><h3>Add one Special Word.</h3><p>Its 25-point bonus brings the score to 145.</p></div>
+            </li>
+            <li>
+              <span aria-hidden="true">3</span>
+              <div><h3>Subtract one hint.</h3><p>A 10-point hint penalty leaves a final score of 135. Solve time is shown for reference only.</p></div>
+            </li>
+          </ol>
+          <div class="score-receipt cat-perch" role="group" aria-labelledby="score-example-title">
+            <img class="page-cat page-cat--scoring" data-mascot src="assets/cat/puzzle-companion.webp" alt="" width="360" height="239" loading="lazy" decoding="async" />
+            <h3 id="score-example-title">Example score card</h3>
+            <p class="score-receipt-mode">Classic Mode · One completed puzzle</p>
+            <dl class="score-breakdown">
+              <div><dt>5 Words</dt><dd>100</dd></div>
+              <div><dt>Solve Bonus</dt><dd>+20</dd></div>
+              <div><dt>1 Special Word</dt><dd>+25</dd></div>
+              <div><dt>1 Hint</dt><dd class="score-deduction">−10</dd></div>
+              <div class="score-receipt-total"><dt>Your score</dt><dd>135 points</dd></div>
+            </dl>
+            <p class="score-receipt-time"><span>Solve Time</span><span>04m12s</span></p>
+          </div>
+        </div>
+        <div class="faq-list guide-details">
+          <details>
+            <summary>Why do some score cards show fewer lines?</summary>
+            <p>The Words line always shows 20 points for every completed word, even if you did not finish all five. Solve Bonus appears only on a completion, with an extra Expert Win line for an Expert completion.</p>
+            <p>Hint and Special Word lines appear only when their counts are above zero. Solve Time appears below the total and is never scored.</p>
+            <p>The breakdown appears only when the saved details can account for every line and add up to the saved total. Some older results therefore show their score without a breakdown; the app does not invent missing points.</p>
+          </details>
+        </div>
+      </section>
 
+      <!-- TOTAL SCORE / REPLAYS / SOLVE TIME / ACHIEVEMENTS -->
+      <section id="records" class="guide-section container" aria-labelledby="records-title">
+        <p class="eyebrow">03 / Results &amp; records</p>
+        <h2 id="records-title">One result.<br>Yours to keep.</h2>
+        <p class="guide-section-lede">A win locks in your original result. Total Score, personal records, and badges each follow their own rules.</p>
+        <div class="score-records-layout">
+          <aside class="guide-mode guide-mode-expert score-records-note" aria-labelledby="total-score-title">
+            <p class="guide-mode-label">The important distinction</p>
+            <h3 id="total-score-title">A puzzle score.<br>Your Total Score.</h3>
+            <p>The number on a puzzle describes that attempt. Total Score adds eligible original wins, once per puzzle. Practice replays never rewrite the original result.</p>
+            <a class="text-link" href="how-to-play.html#progress">Explore your progress <span aria-hidden="true">→</span></a>
+          </aside>
+          <div class="faq-list guide-details">
+            <details>
+              <summary>Which wins count toward Total Score?</summary>
+              <ul>
+                <li>A puzzle must be won on its first finished attempt for its original score to count.</li>
+                <li>Revealing the solution or failing in Expert Mode makes later attempts practice for that puzzle, even if you switch modes.</li>
+                <li>Replays do not change the original result or add to Total Score.</li>
+                <li>Older wins from before the Total Score feature do not receive points retroactively.</li>
+              </ul>
+            </details>
+            <details>
+              <summary>What happens when I replay a puzzle?</summary>
+              <p>Your first legitimate completion saves a permanent result: score, mode, hint count, Special Words, invalid guesses, and solve time.</p>
+              <p>Finish a replay in the same sitting and a temporary card labelled <strong>Replayed</strong> shows that run. Leave the screen and return, and you see the original saved result again.</p>
+              <p>Replays never add to Total Score, win count, win rate, streak, or solve times. Resetting a puzzle you never legitimately solved does not turn it into an eligible win, and cannot damage an already saved result.</p>
+            </details>
+            <details>
+              <summary>How are solve times recorded?</summary>
+              <p>The clock runs only while you are on the board. It pauses when you leave the game or put the app in the background, then stops and locks with the score when the fifth word lands.</p>
+              <p>Times appear as <code>04m12s</code>, or <code>42s</code> for a sub-minute solve. Every timed legitimate win contributes to average solve time, separately for Classic and Expert.</p>
+              <p>Fastest Solve is one lifetime record across both modes and counts hint-free wins only. Beat your previous best and the win screen calls out the new record.</p>
+            </details>
+            <details>
+              <summary>Which achievements appear after a win?</summary>
+              <dl>
+                <dt>First Perfect Score</dt><dd>Your first win that earns the maximum available on that board: the full base plus every Special Word bonus.</dd>
+                <dt>Fastest Solve</dt><dd>A timed, hint-free win quicker than every earlier hint-free win, in either mode.</dd>
+                <dt>New Longest Streak</dt><dd>A daily streak that passes your previous personal best.</dd>
+                <dt>One Shot</dt><dd>A start-to-finish solve without leaving the board, backgrounding the app, resetting, or revealing. Hints do not disqualify it.</dd>
+              </dl>
+            </details>
+            <!-- BADGES & LEADERBOARDS -->
+            <details>
+              <summary>How do badges and leaderboards work?</summary>
+              <dl>
+                <dt>5 Streak</dt><dd>Five daily puzzles solved on five consecutive days.</dd>
+                <dt>25 Wins</dt><dd>Twenty-five lifetime legitimate wins, daily or archive.</dd>
+                <dt>Hint-Free</dt><dd>A win with zero hinted rows.</dd>
+                <dt>One Shot</dt><dd>A single-session solve with no reset, no reveal, and no leaving the board.</dd>
+              </dl>
+              <p>Compare supported results through Game Center when available. Supported progress can sync through iCloud across devices using the same Apple ID when available.</p>
+              <p><a class="text-link" href="badges.html">Explore the badges <span aria-hidden="true">→</span></a></p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="download-panel container" aria-labelledby="scoring-play-title">
+        <div class="download-panel-copy">
+          <p class="eyebrow">Ready for your next little win?</p>
+          <h2 id="scoring-play-title">Put your words<br>to work.</h2>
+          <p>Try one complete puzzle in your browser. It does not affect your results or statistics in the app.</p>
+          <div class="guide-actions">
+            <a class="btn btn-light" href="demo.html">Play the demo <span aria-hidden="true">→</span></a>
+            <a class="guide-download-link" href="how-to-play.html">Read the playing guide <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="download-tiles" aria-hidden="true"><span>V</span><span>I</span><span>I</span><span>S</span><span>I</span></div>
+      </section>
+    </div>
   </main>
 
   <footer class="footer">

@@ -1,0 +1,183 @@
+.scoring-page .score-foundations {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+}
+
+.score-base-wins {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.score-base-wins .guide-mode {
+  padding-block: 1.5rem;
+}
+
+.score-base-wins .guide-mode-label {
+  margin-bottom: 0.6rem;
+}
+
+.score-base-wins h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-weight: 800;
+}
+
+.score-base-total {
+  font-size: clamp(2.75rem, 5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-base-unit {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.score-example-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 6rem);
+  margin-top: 2rem;
+}
+
+.score-example-layout .guide-steps {
+  margin-top: 0;
+}
+
+.score-receipt {
+  position: relative;
+  min-width: 0;
+  margin-top: 4rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--home-line);
+  border-radius: 2rem;
+  background: var(--home-paper);
+  box-shadow: 0 28px 80px rgba(45, 59, 108, 0.12);
+  transform: rotate(1.5deg);
+}
+
+.score-receipt .page-cat {
+  position: absolute;
+  bottom: calc(100% - 0.7rem);
+  right: 1.25rem;
+}
+
+.score-receipt h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.3rem;
+  letter-spacing: -0.025em;
+}
+
+.score-receipt-mode {
+  margin: 0;
+  color: var(--home-muted);
+  font-size: 0.9rem;
+}
+
+.score-breakdown {
+  margin: 1.5rem 0 0;
+}
+
+.score-breakdown > div,
+.score-receipt-time {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.score-breakdown > div {
+  padding-block: 0.75rem;
+}
+
+.score-breakdown dt {
+  color: var(--home-muted);
+}
+
+.score-breakdown dd {
+  margin: 0;
+  color: var(--home-ink);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.score-breakdown .score-deduction {
+  color: #9f1435;
+}
+
+.score-breakdown .score-receipt-total {
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--home-line);
+}
+
+.score-receipt-total dt {
+  color: var(--home-ink);
+  font-weight: 800;
+}
+
+.score-receipt-total dd {
+  color: #087c6b;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.score-receipt-time {
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--home-line);
+  color: var(--home-muted);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-records-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2rem, 6vw, 5rem);
+  margin-top: 2rem;
+}
+
+.score-records-layout .guide-details {
+  margin-top: 0;
+}
+
+.score-records-note .text-link {
+  margin-top: 1.5rem;
+  color: var(--neon-teal);
+  text-decoration-color: currentColor;
+}
+
+.guide-content .score-records-note a:focus-visible {
+  outline-color: var(--neon-teal);
+}
+
+@media (max-width: 800px) {
+  .scoring-page .score-foundations,
+  .score-example-layout,
+  .score-records-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .score-receipt {
+    width: min(100%, 500px);
+    margin: 3rem auto 0;
+    transform: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .score-breakdown > div {
+    gap: 0.75rem;
+  }
+
+  .score-receipt-total dd {
+    font-size: 1.5rem;
+  }
+}
