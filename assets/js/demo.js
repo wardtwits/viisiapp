@@ -1,1056 +1,842 @@
-(() => {
-  const STORAGE_KEY = "viisi.web.demo.v4";
-  const LEGACY_STORAGE_KEYS = ["viisi.web.demo.v1", "viisi.web.demo.v2", "viisi.web.demo.v3"];
-  const REQUIRED_WORDS = 5;
-  const POINTS_PER_WORD = 20;
-  const COMPLETION_BONUS = 20;
-  const HINT_PENALTY = 10;
-  const prefersReducedMotion = Boolean(
-    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-  const animationShell = document.querySelector(".phone-shell, .demo-shell");
-
-  const PUZZLE = {
-    letters: ["E", "A", "S", "T", "R"],
-    validWords: [
-      "STARE",
-      "TEARS",
-      "RATES",
-      "ASTER",
-      "TARES"
-    ],
+(async () => {
+  "use strict";
+  const STORAGE_KEY = "viisi.web.demo.v5";
+  const LEGACY_KEY = "viisi.web.demo.v4";
+  const $ = (id) => document.getElementById(id);
+  const board = document.querySelector(".phone-inner");
+  if (!board) return;
+  const reducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+  let game,
+    puzzleData,
+    storageFailure = false,
+    blockedKey,
+    generation = 0,
+    busy = false;
+  let boardVisible = true;
+  let selectedWord = null,
+    pendingAction = null,
+    returnFocus,
+    lastTick = Date.now();
+  let timerSave = Date.now(),
+    deleteDelay,
+    deleteRepeat;
+  const sounds = new Map();
+  const letterFlights = new Map();
+  const activeAnimations = new Set();
+  const keyButtons = [];
+  const entryTiles = [];
+  const dateText = (options) =>
+    game.puzzle.date
+      ? new Date(`${game.puzzle.date}T12:00:00`).toLocaleDateString(
+          "en-US",
+          options,
+        )
+      : "Practice Puzzle";
+  const timeText = () => {
+    const seconds = Math.floor(game.state.elapsedMs / 1000);
+    return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
   };
-
-  const validWordSet = new Set(PUZZLE.validWords);
-
-  const DEFINITIONS = {
-    STARE: "To look fixedly with the eyes wide open.",
-    TEARS: "(plural of Tear) Drops of salty fluid from the eyes.",
-    RATES: "(plural of Rate) Measures of speed or frequency.",
-    ASTER: "A plant with daisy-like flowers.",
-    TARES: "(plural of Tare) The weight of a container, deducted from the total."
-    };
-
-  const elements = {
-    board: document.getElementById("board"),
-    keyboard: document.getElementById("keyboard"),
-    message: document.getElementById("message"),
-    foundWords: document.getElementById("foundWords"),
-    foundCount: document.getElementById("foundCount"),
-    hintCount: document.getElementById("hintCount"),
-    hintBox: document.getElementById("hintBox"),
-    hintText: document.getElementById("hintText"),
-    wordBank: document.getElementById("wordBank"),
-    shuffleBtn: document.getElementById("shuffleBtn"),
-    deleteBtn: document.getElementById("deleteBtn"),
-    hintBtn: document.getElementById("hintBtn"),
-    resetButtons: document.querySelectorAll("[data-reset-button], #resetBtn"),
-    liveScore: document.getElementById("liveScore"),
+  const message = (text, tone = "normal") => {
+    $("message").textContent = text;
+    $("message").dataset.tone = tone;
   };
-
-  if (!elements.board || !elements.keyboard) {
-    return;
-  }
-
-  // Keep hint hidden on first paint even if markup/cache is stale.
-  if (elements.hintBtn) {
-
-        elements.hintBtn.classList.add("invisible");
-  
-    // elements.hintBtn.hidden = true;
-    // elements.hintBtn.style.display = "none";
-  }
-
-  const initialState = {
-    displayLetters: [...PUZZLE.letters],
-    completedWords: [],
-    currentWord: "",
-    currentIndices: [],
-    hintUses: 0,
-    hintRowsUsed: [],
-    hintMessage: "",
-    lastMessage: "Build a 5-letter word using each tile once.",
-    lastTone: "neutral",
-    isWon: false,
-    invalidFlash: false,
+  const notice = (text) => {
+    $("saveNotice").hidden = false;
+    $("saveNotice").textContent = text;
   };
-
-  let state = loadState();
-  let flashTimeoutId = null;
-  let submitTimeoutId = null;
-  let winDelayTimeoutId = null;
-  let pendingSubmit = false; // a full row is waiting for its tile to land before validating
-  let lockingRow = -1; // row that just locked in, so renderBoard can pop it once
-  const arrivingCells = new Set(); // "row:col" cells hidden while a tile flies in
-  const gameStartTime = Date.now();
-
-  function clearAllDemoStorage() {
+  function save() {
+    if (!game || storageFailure) return;
     try {
-      localStorage.removeItem(STORAGE_KEY);
-      for (const legacyKey of LEGACY_STORAGE_KEYS) {
-        localStorage.removeItem(legacyKey);
-      }
-
-      // Clear any future demo versions too.
-      const keysToRemove = [];
-      for (let i = 0; i < localStorage.length; i += 1) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith("viisi.web.demo.")) {
-          keysToRemove.push(key);
-        }
-      }
-      for (const key of keysToRemove) {
-        localStorage.removeItem(key);
-      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(game.toJSON()));
     } catch {
-      // Ignore storage failures and continue with in-memory reset.
-    }
-  }
-
-  function triggerWinAnimation() {
-    if (!animationShell) return;
-    animationShell.classList.remove("win");
-    void animationShell.offsetWidth; // restart animation
-    animationShell.classList.add("win");
-    setTimeout(() => animationShell.classList.remove("win"), 1300);
-  }
-
-  function normalizeLoadedState(parsed) {
-    const normalized = { ...initialState };
-
-    if (Array.isArray(parsed.displayLetters) && parsed.displayLetters.length === 5) {
-      normalized.displayLetters = parsed.displayLetters
-        .map((letter) => String(letter).slice(0, 1).toUpperCase())
-        .filter((letter) => /^[A-Z]$/.test(letter));
-      // Saved letters must be a shuffle of today's puzzle letters.
-      const sameLetters =
-        [...normalized.displayLetters].sort().join("") === [...PUZZLE.letters].sort().join("");
-      if (normalized.displayLetters.length !== 5 || !sameLetters) {
-        normalized.displayLetters = [...PUZZLE.letters];
-      }
-    }
-
-    if (Array.isArray(parsed.completedWords)) {
-      const uniqueValidWords = [];
-      for (const word of parsed.completedWords) {
-        const candidate = String(word).toUpperCase();
-        if (validWordSet.has(candidate) && !uniqueValidWords.includes(candidate)) {
-          uniqueValidWords.push(candidate);
-        }
-        if (uniqueValidWords.length === REQUIRED_WORDS) {
-          break;
-        }
-      }
-      normalized.completedWords = uniqueValidWords;
-    }
-
-    if (typeof parsed.currentWord === "string") {
-      const candidate = parsed.currentWord.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 5);
-      normalized.currentWord = candidate;
-    }
-
-    if (Array.isArray(parsed.currentIndices)) {
-      const candidate = parsed.currentIndices
-        .map((index) => Number(index))
-        .filter((index) => Number.isInteger(index) && index >= 0 && index < 5);
-      const unique = [...new Set(candidate)];
-      normalized.currentIndices = unique.slice(0, 5);
-    }
-
-    if (
-      normalized.currentWord.length !== normalized.currentIndices.length ||
-      normalized.currentWord.length + normalized.completedWords.length > REQUIRED_WORDS
-    ) {
-      normalized.currentWord = "";
-      normalized.currentIndices = [];
-    }
-
-    if (typeof parsed.hintUses === "number") {
-      normalized.hintUses = Math.max(0, Math.min(2, Math.floor(parsed.hintUses)));
-    }
-
-    if (Array.isArray(parsed.hintRowsUsed)) {
-      const uniqueRows = [];
-      for (const row of parsed.hintRowsUsed) {
-        const candidate = Number(row);
-        if (
-          Number.isInteger(candidate) &&
-          candidate >= 0 &&
-          candidate < REQUIRED_WORDS &&
-          !uniqueRows.includes(candidate)
-        ) {
-          uniqueRows.push(candidate);
-        }
-      }
-      normalized.hintRowsUsed = uniqueRows;
-    }
-
-    if (typeof parsed.hintMessage === "string") {
-      normalized.hintMessage = parsed.hintMessage.slice(0, 120);
-    }
-
-    if (typeof parsed.lastMessage === "string") {
-      normalized.lastMessage = parsed.lastMessage.slice(0, 160);
-    }
-
-    if (parsed.lastTone === "error" || parsed.lastTone === "success" || parsed.lastTone === "neutral") {
-      normalized.lastTone = parsed.lastTone;
-    }
-
-    normalized.isWon = normalized.completedWords.length >= REQUIRED_WORDS;
-    if (normalized.isWon) {
-      normalized.currentWord = "";
-      normalized.currentIndices = [];
-    }
-
-    return normalized;
-  }
-
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return { ...initialState };
-      const parsed = JSON.parse(raw);
-      const normalized = normalizeLoadedState(parsed);
-      return { ...normalized, invalidFlash: false };
-    } catch {
-      return { ...initialState };
-    }
-  }
-
-  function persistState() {
-    const save = {
-      displayLetters: state.displayLetters,
-      completedWords: state.completedWords,
-      currentWord: state.currentWord,
-      currentIndices: state.currentIndices,
-      hintUses: state.hintUses,
-      hintRowsUsed: state.hintRowsUsed,
-      hintMessage: state.hintMessage,
-      lastMessage: state.lastMessage,
-      lastTone: state.lastTone,
-      isWon: state.isWon,
-    };
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(save));
-    } catch {
-      // Ignore storage write failures (private browsing/storage limits).
-    }
-  }
-
-  function setMessage(text, tone = "neutral") {
-    state.lastMessage = text;
-    state.lastTone = tone;
-  }
-
-  function formatElapsedTime(milliseconds) {
-    const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
-    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
-    const seconds = String(totalSeconds % 60).padStart(2, "0");
-    return `${minutes}:${seconds}`;
-  }
-
-  function currentScore() {
-    const base = state.completedWords.length * POINTS_PER_WORD + (state.isWon ? COMPLETION_BONUS : 0);
-    return Math.max(0, base - state.hintUses * HINT_PENALTY);
-  }
-
-  function currentRowIndex() {
-    return Math.min(state.completedWords.length, REQUIRED_WORDS - 1);
-  }
-
-  function rowWord(row) {
-    if (row < state.completedWords.length) {
-      return state.completedWords[row];
-    }
-    if (row === state.completedWords.length && !state.isWon) {
-      return state.currentWord;
-    }
-    return "";
-  }
-
-  function renderBoard() {
-    elements.board.innerHTML = "";
-    const body = document.createElement("tbody");
-
-    for (let row = 0; row < REQUIRED_WORDS; row += 1) {
-      const word = rowWord(row);
-      const boardRow = document.createElement("tr");
-      boardRow.className = "demo-row";
-      const rowStatus = row < state.completedWords.length ? "accepted" : "not yet completed";
-      boardRow.setAttribute("aria-label", `Word ${row + 1}: ${word || "empty"}, ${rowStatus}`);
-      for (let col = 0; col < 5; col += 1) {
-        const cell = document.createElement("td");
-        cell.className = "demo-cell";
-        cell.setAttribute("aria-label", `Letter ${col + 1}: ${word[col] || "empty"}`);
-        cell.textContent = word[col] ?? "";
-
-        if (row < state.completedWords.length) {
-          cell.classList.add("is-complete");
-        }
-
-        if (row === state.completedWords.length && !state.isWon) {
-          cell.classList.add("is-active");
-        }
-
-        if (state.invalidFlash && row === currentRowIndex()) {
-          cell.classList.add("is-invalid");
-        }
-
-        if (row === lockingRow) {
-          cell.classList.add("is-locking");
-          cell.style.animationDelay = `${col * 70}ms`;
-        }
-
-        if (arrivingCells.has(`${row}:${col}`)) {
-          cell.classList.add("is-arriving");
-        }
-
-        boardRow.appendChild(cell);
-      }
-      body.appendChild(boardRow);
-    }
-    elements.board.appendChild(body);
-    lockingRow = -1;
-  }
-
-  function canUseIndex(index) {
-    return (
-      !state.currentIndices.includes(index) &&
-      state.currentWord.length < 5 &&
-      !state.isWon &&
-      !state.invalidFlash &&
-      !pendingSubmit
-    );
-  }
-
-  function renderKeyboard() {
-    if (!elements.keyboard) return;
-
-    state.displayLetters.forEach((letter, index) => {
-      let key = elements.keyboard.children[index];
-      if (!key) {
-        key = document.createElement("button");
-        key.type = "button";
-        key.className = "demo-key";
-        key.addEventListener("click", () => addLetter(index));
-        elements.keyboard.appendChild(key);
-      }
-      key.textContent = letter;
-      key.setAttribute("aria-disabled", String(!canUseIndex(index)));
-    });
-
-    if (elements.deleteBtn) {
-      elements.deleteBtn.disabled =
-        state.currentWord.length === 0 || state.isWon || state.invalidFlash || pendingSubmit;
-    }
-    if (elements.shuffleBtn) {
-      elements.shuffleBtn.disabled = state.isWon || state.invalidFlash || pendingSubmit;
-    }
-    if (elements.hintBtn) {
-      const showHintButton = state.completedWords.length >= 3 && !state.isWon && state.hintUses < 2;
-      const hintAvailable = canUseHint() && !state.invalidFlash && !pendingSubmit;
-      if (showHintButton) {
-        elements.hintBtn.classList.remove("invisible");
-      } else {
-        elements.hintBtn.classList.add("invisible");
-      }
-      elements.hintBtn.classList.toggle("is-disabled", showHintButton && !hintAvailable);
-      elements.hintBtn.setAttribute("aria-disabled", String(showHintButton && !hintAvailable));
-    }
-  }
-
-  function renderMeta() {
-    if (elements.foundCount) {
-      elements.foundCount.textContent = `${state.completedWords.length} / ${REQUIRED_WORDS}`;
-    }
-    if (elements.hintCount) {
-      elements.hintCount.textContent = String(state.hintUses);
-    }
-
-    if (elements.foundWords) {
-      elements.foundWords.innerHTML = "";
-      state.completedWords.forEach((word) => {
-        const chip = document.createElement("span");
-        chip.className = "found-word";
-        chip.textContent = word;
-        elements.foundWords.appendChild(chip);
-      });
-    }
-
-    if (elements.liveScore) {
-      elements.liveScore.textContent = String(currentScore());
-    }
-
-    if (elements.message) {
-      elements.message.textContent = state.lastMessage;
-      elements.message.classList.remove("is-error", "is-success");
-      if (state.lastTone === "error") {
-        elements.message.classList.add("is-error");
-      } else if (state.lastTone === "success") {
-        elements.message.classList.add("is-success");
-      }
-    }
-
-    if (elements.hintBox && elements.hintText) {
-      if (state.hintMessage) {
-        elements.hintBox.hidden = false;
-        elements.hintText.textContent = state.hintMessage;
-      } else {
-        elements.hintBox.hidden = true;
-        elements.hintText.textContent = "";
-      }
-    }
-  }
-
-  function renderWordBank() {
-    if (elements.wordBank) {
-      elements.wordBank.textContent = PUZZLE.validWords.join(" · ");
-    }
-  }
-
-  function render() {
-    renderBoard();
-    renderKeyboard();
-    renderMeta();
-    persistState();
-  }
-
-  function flyTile(fromRect, row, col, letter) {
-    const key = `${row}:${col}`;
-    const finish = () => {
-      arrivingCells.delete(key);
-      const cell = elements.board.querySelectorAll(".demo-cell")[row * 5 + col];
-      if (cell) {
-        cell.classList.remove("is-arriving");
-        cell.classList.add("is-landed");
-      }
-    };
-    const cell = elements.board.querySelectorAll(".demo-cell")[row * 5 + col];
-    if (!cell || typeof cell.animate !== "function") {
-      finish();
-      return;
-    }
-
-    const to = cell.getBoundingClientRect();
-    const tile = document.createElement("div");
-    tile.className = "flying-tile";
-    tile.setAttribute("aria-hidden", "true");
-    tile.textContent = letter;
-    tile.style.left = `${fromRect.left}px`;
-    tile.style.top = `${fromRect.top}px`;
-    tile.style.width = `${fromRect.width}px`;
-    tile.style.height = `${fromRect.height}px`;
-    document.body.appendChild(tile);
-
-    const dx = to.left - fromRect.left;
-    const dy = to.top - fromRect.top;
-    const sx = to.width / fromRect.width;
-    const sy = to.height / fromRect.height;
-    const animation = tile.animate(
-      [
-        { transform: "translate(0, 0) scale(1, 1)" },
-        {
-          transform: `translate(${dx * 0.5}px, ${dy * 0.5 - 18}px) scale(${(1 + sx) / 2}, ${(1 + sy) / 2})`,
-          offset: 0.5,
-        },
-        { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
-      ],
-      { duration: 260, easing: "cubic-bezier(0.3, 0.7, 0.3, 1)", fill: "forwards" }
-    );
-    const done = () => {
-      tile.remove();
-      finish();
-    };
-    animation.addEventListener("finish", done, { once: true });
-    animation.addEventListener("cancel", done, { once: true });
-  }
-
-  function addLetter(index) {
-    if (!canUseIndex(index)) return;
-
-    const row = state.completedWords.length;
-    const col = state.currentWord.length;
-    const letter = state.displayLetters[index];
-    const keyEl = elements.keyboard.children[index];
-    const fromRect = keyEl ? keyEl.getBoundingClientRect() : null;
-    const animate = !prefersReducedMotion && Boolean(fromRect);
-
-    state.currentWord += letter;
-    state.currentIndices.push(index);
-    setMessage(`Current word: ${state.currentWord}.`);
-
-    const isFull = state.currentWord.length === 5;
-    if (isFull) pendingSubmit = true;
-    if (animate) arrivingCells.add(`${row}:${col}`);
-    render();
-    if (animate) flyTile(fromRect, row, col, letter);
-
-    if (isFull) {
-      clearTimeout(submitTimeoutId);
-      submitTimeoutId = window.setTimeout(
-        () => {
-          pendingSubmit = false;
-          validateAttempt();
-        },
-        prefersReducedMotion ? 0 : 340
+      storageFailure = true;
+      notice(
+        "Your browser could not save this demo. You can keep playing, but this run may not survive a reload.",
       );
     }
   }
-
-  function clearCurrentAttempt() {
-    state.currentWord = "";
-    state.currentIndices = [];
+  function tick() {
+    const now = Date.now();
+    if (
+      game &&
+      !document.hidden &&
+      boardVisible &&
+      !document.querySelector("dialog[open]")
+    )
+      game.tick(Math.max(0, now - lastTick));
+    lastTick = now;
+    if (game) $("runTimer").textContent = timeText();
   }
-
-  function remapCurrentIndicesToShuffledLetters() {
-    if (state.currentWord.length === 0) return true;
-
-    const nextIndices = [];
-    for (const letter of state.currentWord) {
-      let nextIndex = null;
-      for (let i = 0; i < state.displayLetters.length; i += 1) {
-        if (state.displayLetters[i] === letter && !nextIndices.includes(i)) {
-          nextIndex = i;
-          break;
-        }
+  function playSound(name) {
+    if (!game.settings.sound) return;
+    if (!sounds.has(name))
+      sounds.set(name, new Audio(`assets/demo/${name}.m4a`));
+    const sound = sounds.get(name);
+    sound.currentTime = 0;
+    sound
+      .play()
+      .catch(() =>
+        notice(
+          "Sound could not play in this browser. Check your browser's audio permissions or turn sound off in Game settings.",
+        ),
+      );
+  }
+  function appearance() {
+    const preference = game.settings.appearance;
+    board.dataset.theme =
+      preference === "system"
+        ? systemTheme.matches
+          ? "dark"
+          : "light"
+        : preference;
+    board.dataset.contrast = game.settings.highContrast ? "high" : "native";
+  }
+  function tileWord(word, className = "found-word", hints = []) {
+    const wordElement = document.createElement("button");
+    wordElement.type = "button";
+    wordElement.className = className;
+    wordElement.setAttribute("aria-label", `Definition of ${word}`);
+    [...word].forEach((letter, column) => {
+      const tile = document.createElement("span");
+      tile.textContent = letter;
+      tile.setAttribute("aria-hidden", "true");
+      if (hints.includes(column)) tile.className = "hint-supplied";
+      wordElement.append(tile);
+    });
+    return wordElement;
+  }
+  function renderWords() {
+    const state = game.state;
+    const focusedWord = document.activeElement?.dataset.word;
+    $("discoveredWords").replaceChildren();
+    [...state.words, ...state.revealedWords].forEach((word, row) => {
+      const revealed = row >= state.words.length;
+      const item = document.createElement("li");
+      const button = tileWord(
+        word,
+        `found-word${revealed ? " revealed" : game.puzzle.specialWords.includes(word) ? " special" : ""}`,
+        state.wordHints[row] || [],
+      );
+      button.dataset.word = word;
+      button.disabled = state.status === "playing";
+      button.setAttribute("aria-pressed", String(word === selectedWord));
+      button.addEventListener("click", () => showDefinition(word));
+      item.append(button);
+      if (state.hintedRows.includes(row)) {
+        const hint = document.createElement("img");
+        hint.src = "assets/demo/hint-bulb.webp";
+        hint.alt = "Hint used";
+        hint.className = "found-hint";
+        item.append(hint);
       }
-      if (nextIndex === null) {
-        return false;
+      $("discoveredWords").append(item);
+      if (focusedWord === word) button.focus({ preventScroll: true });
+    });
+  }
+  function renderEntry(word = game.state.entry, hints = game.state.entryHints) {
+    entryTiles.forEach((tile, column) => {
+      tile.textContent = word[column] || "";
+      tile.className = `entry-tile${word[column] ? " filled" : ""}${hints.includes(column) ? " hint-supplied" : ""}${letterFlights.has(column) ? " arriving" : ""}`;
+    });
+    $("entryRow").setAttribute(
+      "aria-label",
+      `Current word: ${word || "empty"}`,
+    );
+    $("endActionBtn").disabled = busy;
+    $("hintBtn").disabled = busy || !game.canHint;
+    $("shuffleBtn").disabled = busy || game.state.status !== "playing";
+    $("deleteBtn").disabled =
+      busy || game.state.status !== "playing" || !game.state.entry;
+    const used = game.usedIndices;
+    keyButtons.forEach((button, index) => {
+      button.textContent = game.state.letters[index];
+      button.setAttribute("aria-label", game.state.letters[index]);
+      button.setAttribute(
+        "aria-disabled",
+        String(used.includes(index) || game.state.status !== "playing" || busy),
+      );
+    });
+  }
+  function render() {
+    const state = game.state;
+    const terminal = state.status !== "playing";
+    board.dataset.status = state.status;
+    board.dataset.mode = state.mode;
+    board.dataset.hints =
+      state.mode === "classic" && state.words.length >= 3
+        ? "available"
+        : "none";
+    appearance();
+    $("gameMode").dataset.practice = String(
+      !game.puzzle.date && !state.words.length,
+    );
+    $("soundBtn").disabled = false;
+    $("soundBtn").setAttribute("aria-pressed", String(game.settings.sound));
+    $("soundBtn").title = game.settings.sound
+      ? "Mute sound effects"
+      : "Enable sound effects";
+    $("soundIcon").className =
+      `app-icon icon-sound-${game.settings.sound ? "on" : "off"}`;
+    $("gameMode").textContent = state.words.length
+      ? `${state.mode === "expert" ? "Expert" : "Classic"} Mode`
+      : dateText({
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+        }).toUpperCase();
+    $("scoreCluster").hidden = state.words.length === 0;
+    $("liveScore").textContent = game.score;
+    $("runTimer").hidden = !game.settings.showTimer || !state.timeKnown;
+    $("runTimer").textContent = timeText();
+    $("gameMascot").src =
+      `assets/demo/cat-${state.status === "won" ? "winning" : state.words.length + state.revealedWords.length >= 3 ? "lying" : "sitting"}.webp`;
+    $("keyboard").hidden = terminal;
+    document.querySelector(".demo-controls").hidden = terminal;
+    document.querySelector(".game-feedback").hidden =
+      terminal && state.status !== "failed";
+    $("hintBtn").hidden =
+      terminal || state.mode !== "classic" || state.words.length < 3;
+    $("hintBtn").disabled = busy || !game.canHint;
+    $("expertStatus").hidden = state.mode !== "expert" || terminal;
+    $("expertStatus").textContent =
+      `${3 - state.invalidWords.length} invalid ${state.invalidWords.length === 2 ? "word" : "words"} remaining`;
+    $("shuffleBtn").disabled = terminal || busy;
+    $("deleteBtn").disabled = terminal || busy || !state.entry;
+    $("endActionBtn").disabled = false;
+    const reset = ["won", "revealed"].includes(state.status);
+    $("endActionBtn").setAttribute(
+      "aria-label",
+      reset ? "Reset game" : "Reveal solution",
+    );
+    $("endActionIcon").className =
+      `app-icon icon-${reset ? "reset" : "reveal"}`;
+    $("definitionPrompt").hidden =
+      !terminal || (!state.words.length && !state.revealedWords.length);
+    $("definitionPanel").hidden = !terminal || !selectedWord;
+    $("viewResultsBtn").hidden = state.status !== "won";
+    renderWords();
+    renderEntry();
+  }
+  function normalMessage() {
+    const state = game.state;
+    if (state.status === "failed")
+      return message(
+        "Three invalid words. Reveal the solution to explore the answers.",
+        "error",
+      );
+    if (state.status === "won") return message("Well done! Five words found.");
+    if (state.status === "revealed") return message("Solution revealed.");
+    const count = state.words.length;
+    message(
+      count === 0
+        ? "Find five words using all five letters."
+        : count === 4
+          ? "Cheers! · 1 more to go"
+          : count === 3
+            ? "Find 2 more words"
+            : `Nice job! ${count} of 5 words needed to win`,
+    );
+  }
+  const pause = (ms) =>
+    new Promise((resolve) => setTimeout(resolve, reducedMotion() ? 0 : ms));
+  function animate(element, frames, options) {
+    const animation = element.animate(frames, options);
+    activeAnimations.add(animation);
+    const done = animation.finished
+      .then(
+        () => true,
+        (error) => {
+          if (error.name !== "AbortError") throw error;
+          return false;
+        },
+      )
+      .finally(() => {
+        activeAnimations.delete(animation);
+        animation.cancel();
+      });
+    return { animation, done };
+  }
+  function cancelLetterFlights(column) {
+    for (const [index, flight] of letterFlights) {
+      if (column !== undefined && index !== column) continue;
+      flight.animation.cancel();
+      flight.element.remove();
+      letterFlights.delete(index);
+    }
+  }
+  function cancelVisuals() {
+    cancelLetterFlights();
+    activeAnimations.forEach((animation) => animation.cancel());
+    $("entryRow").classList.remove("accepted", "invalid", "special");
+  }
+  async function submit() {
+    if (busy || game.state.entry.length !== 5) return;
+    tick();
+    busy = true;
+    const token = generation;
+    const word = game.state.entry;
+    const hints = [...game.state.entryHints];
+    renderEntry();
+    // The final keyboard letter must land before validation and liquid fill.
+    await Promise.all([...letterFlights.values()].map((flight) => flight.done));
+    await pause(80);
+    if (token !== generation) return;
+    const result = game.submit();
+    save();
+    if (result.type === "accepted") {
+      playSound(result.won ? "win-sound" : "valid");
+      $("entryRow").classList.toggle(
+        "special",
+        game.puzzle.specialWords.includes(word),
+      );
+      $("entryRow").classList.add("accepted");
+      renderEntry(word, hints);
+      $("scoreFloat").textContent = `+${result.points}`;
+      $("scoreFloat").hidden = false;
+      await pause(640);
+      if (token !== generation) return;
+      const start = $("entryRow").getBoundingClientRect();
+      $("entryRow").classList.remove("accepted", "special");
+      render();
+      const newest = $("discoveredWords").lastElementChild;
+      if (newest && !reducedMotion()) {
+        const end = newest.getBoundingClientRect();
+        const movement = { duration: 420, easing: "cubic-bezier(.2,.8,.2,1)" };
+        // Keep glyphs at the entry font size while the large tiles shrink.
+        const entryFont = parseFloat(getComputedStyle(entryTiles[0]).fontSize);
+        const letters = [...newest.querySelectorAll("button > span")].map(
+          (tile) =>
+            animate(
+              tile,
+              [
+                { fontSize: `${(entryFont * end.height) / start.height}px` },
+                { fontSize: getComputedStyle(tile).fontSize },
+              ],
+              movement,
+            ).done,
+        );
+        const flight = animate(
+          newest,
+          [
+            {
+              transform: `translate(${start.left + start.width / 2 - end.left - end.width / 2}px, ${start.top + start.height / 2 - end.top - end.height / 2}px) scale(${start.width / end.width}, ${start.height / end.height})`,
+            },
+            { transform: "none" },
+          ],
+          movement,
+        ).done;
+        await Promise.all([flight, ...letters]);
       }
-      nextIndices.push(nextIndex);
-    }
-
-    state.currentIndices = nextIndices;
-    return true;
-  }
-
-  function deleteLetter() {
-    if (state.currentWord.length === 0 || state.isWon || state.invalidFlash || pendingSubmit) return;
-    state.currentWord = state.currentWord.slice(0, -1);
-    state.currentIndices.pop();
-    setMessage("Letter removed.");
-    render();
-  }
-
-  function getShuffledLettersAvoidingSolutions(letters) {
-    const original = [...letters];
-    const originalOrder = original.join("");
-    const maxAttempts = 40;
-
-    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      const candidate = [...original];
-      for (let i = candidate.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [candidate[i], candidate[j]] = [candidate[j], candidate[i]];
+      if (token !== generation) return;
+      busy = false;
+      render();
+      normalMessage();
+      setTimeout(() => {
+        if (token === generation) $("scoreFloat").hidden = true;
+      }, 1000);
+      if (result.won) {
+        burst();
+        setTimeout(
+          () => {
+            if (
+              token === generation &&
+              game.state.status === "won" &&
+              !document.querySelector("dialog[open]")
+            )
+              showResults();
+          },
+          reducedMotion() ? 100 : 1500,
+        );
       }
-
-      const candidateOrder = candidate.join("");
-      if (candidateOrder === originalOrder) continue;
-      if (validWordSet.has(candidateOrder)) continue;
-      return candidate;
-    }
-
-    // Deterministic fallback if random attempts were exhausted.
-    for (let shift = 1; shift < original.length; shift += 1) {
-      const candidate = original.slice(shift).concat(original.slice(0, shift));
-      const candidateOrder = candidate.join("");
-      if (candidateOrder === originalOrder) continue;
-      if (validWordSet.has(candidateOrder)) continue;
-      return candidate;
-    }
-
-    return original;
-  }
-
-  function shuffleLetters() {
-    if (state.isWon || state.invalidFlash || pendingSubmit) return;
-    const hasCurrentAttempt = state.currentWord.length > 0;
-    const shuffled = getShuffledLettersAvoidingSolutions(state.displayLetters);
-    const didChangeOrder = shuffled.join("") !== state.displayLetters.join("");
-    state.displayLetters = shuffled;
-
-    if (!remapCurrentIndicesToShuffledLetters()) {
-      clearCurrentAttempt();
-      setMessage("Letters shuffled. Current row was reset.", "error");
-      render();
-      return;
-    }
-
-    if (!didChangeOrder) {
-      setMessage("Letters could not be shuffled right now.", "error");
-      render();
-      return;
-    }
-
-    setMessage(hasCurrentAttempt ? "Letters shuffled. Keep building your word." : "Letters shuffled.");
-    render();
-  }
-
-  function validateAttempt() {
-    const guess = state.currentWord.toUpperCase();
-    if (guess.length !== 5) {
-      setMessage("Word must be 5 letters.", "error");
-      clearCurrentAttempt();
-      render();
-      return;
-    }
-
-    if (!validWordSet.has(guess)) {
-      state.invalidFlash = true;
-      setMessage(`"${guess}" is an invalid word.`, "error");
-      render();
-
-      clearTimeout(flashTimeoutId);
-      flashTimeoutId = window.setTimeout(() => {
-        state.invalidFlash = false;
-        clearCurrentAttempt();
-        render();
-      }, 500);
-      return;
-    }
-
-    if (state.completedWords.includes(guess)) {
-      setMessage(`"${guess}" was already found.`, "error");
-      clearCurrentAttempt();
-      render();
-      return;
-    }
-
-    state.completedWords.push(guess);
-    lockingRow = state.completedWords.length - 1;
-    clearCurrentAttempt();
-
-    if (state.completedWords.length >= REQUIRED_WORDS) {
-      state.isWon = true;
-      triggerWinAnimation();
-      setMessage("You solved the demo. Nice run.", "success");
-      const result = {
-        time: formatElapsedTime(Date.now() - gameStartTime),
-        score: currentScore(),
-        hints: state.hintUses,
-        words: [...state.completedWords],
-      };
-      clearTimeout(winDelayTimeoutId);
-      winDelayTimeoutId = window.setTimeout(() => showWin(result), prefersReducedMotion ? 0 : 750);
     } else {
-      setMessage(`${guess} accepted. ${REQUIRED_WORDS - state.completedWords.length} more to win.`, "success");
+      playSound("invalid");
+      renderEntry(word, hints);
+      $("entryRow").classList.add("invalid");
+      message(result.message, "error");
+      await pause(480);
+      if (token !== generation) return;
+      $("entryRow").classList.remove("invalid");
+      busy = false;
+      render();
+      if (game.state.status === "failed") normalMessage();
     }
-
+  }
+  function flyLetter(index, column) {
+    if (reducedMotion()) return;
+    const from = keyButtons[index].getBoundingClientRect();
+    const to = entryTiles[column].getBoundingClientRect();
+    const letter = document.createElement("span");
+    letter.className = "flight-letter";
+    letter.setAttribute("aria-hidden", "true");
+    letter.textContent = game.state.letters[index];
+    Object.assign(letter.style, {
+      left: `${from.left}px`,
+      top: `${from.top}px`,
+      width: `${from.width}px`,
+      height: `${from.height}px`,
+      color: getComputedStyle(board).getPropertyValue("--game-letter"),
+    });
+    document.body.append(letter);
+    const flight = animate(
+      letter,
+      [
+        { transform: "translate(0, 0) scale(1)", opacity: 1 },
+        {
+          transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${to.width / from.width}, ${to.height / from.height})`,
+          opacity: 1,
+        },
+      ],
+      { duration: 360, easing: "cubic-bezier(.2,.75,.3,1)" },
+    );
+    const record = { ...flight, element: letter };
+    letterFlights.set(column, record);
+    record.done = flight.done.then(() => {
+      letter.remove();
+      if (letterFlights.get(column) === record) {
+        letterFlights.delete(column);
+        renderEntry();
+      }
+    });
+  }
+  async function shuffle() {
+    if (!game || busy || game.state.status !== "playing") return;
+    const token = generation;
+    cancelLetterFlights();
+    busy = true;
+    render();
+    playSound("shuffle");
+    if (!reducedMotion()) {
+      await Promise.all(
+        keyButtons.map(
+          (key) =>
+            animate(
+              key,
+              [
+                { transform: "perspective(400px) rotateX(0deg)" },
+                { transform: "perspective(400px) rotateX(180deg)" },
+              ],
+              { duration: 170, easing: "ease-in", fill: "forwards" },
+            ).done,
+        ),
+      );
+      if (token !== generation) return;
+    }
+    game.shuffle();
+    renderEntry();
+    save();
+    if (!reducedMotion()) {
+      await Promise.all(
+        keyButtons.map(
+          (key) =>
+            animate(
+              key,
+              [
+                { transform: "perspective(400px) rotateX(180deg)" },
+                { transform: "perspective(400px) rotateX(360deg)" },
+              ],
+              { duration: 230, easing: "ease-out" },
+            ).done,
+        ),
+      );
+      if (token !== generation) return;
+    }
+    busy = false;
     render();
   }
-
-  function canUseHint() {
-    const row = currentRowIndex();
-    const rowSupportsHint = row >= 3 && row < REQUIRED_WORDS;
-    return rowSupportsHint && state.hintUses < 2 && !state.isWon && !state.hintRowsUsed.includes(row);
+  function addLetter(index) {
+    if (
+      !game ||
+      busy ||
+      document.querySelector("dialog[open]") ||
+      !game.addLetter(index)
+    )
+      return;
+    playSound("pop");
+    flyLetter(index, game.state.entry.length - 1);
+    renderEntry();
+    $("deleteBtn").disabled = false;
+    save();
+    if (game.state.entry.length === 5) submit();
   }
-
-  function useHint() {
-    if (pendingSubmit) return;
-    if (state.invalidFlash) {
-      setMessage("Finish the current row reset, then try hint again.", "error");
-      render();
-      return;
-    }
-
-    if (!canUseHint()) {
-      if (state.hintUses >= 2) {
-        setMessage("No hints remaining for this demo run.", "error");
-      } else if (state.completedWords.length < 3) {
-        setMessage("Hints unlock after you find 3 words.", "error");
-      } else if (state.hintRowsUsed.includes(currentRowIndex())) {
-        setMessage("Hint already used on this row.", "error");
-      } else {
-        setMessage("Hint is not available right now.", "error");
+  function deleteLetter() {
+    if (!game || busy || !game.deleteLetter()) return;
+    cancelLetterFlights(game.state.entry.length);
+    renderEntry();
+    $("deleteBtn").disabled = !game.state.entry;
+    save();
+  }
+  function openDialog(dialog) {
+    tick();
+    returnFocus = document.activeElement;
+    dialog.showModal();
+    lastTick = Date.now();
+  }
+  function closeDialog(dialog) {
+    dialog.close();
+  }
+  function showDefinition(word) {
+    if (game.state.status === "playing") return;
+    selectedWord = word;
+    const heading = document.createElement("h3");
+    heading.textContent = word;
+    const label = document.createElement("p");
+    label.className = "definition-label";
+    label.textContent = "Definition";
+    const paragraphs = (game.puzzle.definitions[word] || []).map(
+      (text, index) => {
+        const paragraph = document.createElement("p");
+        paragraph.textContent = index ? `Also: ${text}` : text;
+        return paragraph;
+      },
+    );
+    $("definitionPanel").replaceChildren(heading, label, ...paragraphs);
+    render();
+  }
+  function showResults() {
+    if (game.state.status !== "won") return;
+    $("winDate").textContent = game.puzzle.date
+      ? `Game Date: ${dateText({ month: "numeric", day: "numeric", year: "numeric" })}`
+      : "Practice Puzzle";
+    $("winScore").textContent = game.score;
+    $("winRunLabel").textContent = game.state.isReplay
+      ? "Replay · Browser Demo"
+      : "Browser Demo";
+    $("winTime").textContent = game.state.timeKnown
+      ? `Solved in ${timeText()}`
+      : "Solve time unavailable for this older demo";
+    $("winBreakdown").replaceChildren();
+    game.breakdown.forEach(({ label, points }) => {
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const value = document.createElement("dd");
+      value.dataset.negative = String(points < 0);
+      value.textContent = `${points >= 0 ? "+" : "−"}${Math.abs(points)}`;
+      $("winBreakdown").append(term, value);
+    });
+    $("winSolutions").textContent =
+      `You found 5 of ${game.puzzle.words.length} valid solutions`;
+    $("winWords").replaceChildren();
+    [
+      ...game.state.words,
+      ...game.puzzle.words.filter((word) => !game.state.words.includes(word)),
+    ].forEach((word) => {
+      const item = document.createElement("li");
+      const heading = document.createElement("div");
+      heading.className = "win-word-heading";
+      heading.setAttribute("aria-label", word);
+      for (const letter of word) {
+        const tile = document.createElement("span");
+        tile.textContent = letter;
+        tile.setAttribute("aria-hidden", "true");
+        heading.append(tile);
       }
-      render();
-      return;
-    }
-
-    const remaining = PUZZLE.validWords.filter((word) => !state.completedWords.includes(word));
-    if (remaining.length === 0) return;
-
-    const groupsByPrefix = new Map();
-    for (const word of remaining) {
-      const prefix = word.slice(0, 2);
-      if (!groupsByPrefix.has(prefix)) {
-        groupsByPrefix.set(prefix, []);
-      }
-      groupsByPrefix.get(prefix).push(word);
-    }
-
-    let bestPrefix = null;
-    let bestGroup = [];
-    for (const [prefix, words] of groupsByPrefix.entries()) {
-      if (words.length > bestGroup.length) {
-        bestPrefix = prefix;
-        bestGroup = words;
-      }
-    }
-    if (!bestPrefix || bestGroup.length === 0) return;
-
-    const prefixLength = 2;
-    const prefix = bestPrefix;
-    const nextIndices = [];
-
-    // Hint behavior mirrors Viisi: clear in-progress row before applying hint tiles.
-    clearCurrentAttempt();
-
-    for (let i = 0; i < prefix.length; i += 1) {
-      const letter = prefix[i];
-      let indexForLetter = null;
-      for (let keyIndex = 0; keyIndex < state.displayLetters.length; keyIndex += 1) {
-        if (state.displayLetters[keyIndex] === letter && !nextIndices.includes(keyIndex)) {
-          indexForLetter = keyIndex;
-          break;
-        }
-      }
-      if (indexForLetter === null) {
-        setMessage("Hint could not be applied. Try shuffling and retry.", "error");
-        render();
+      const text = document.createElement("p");
+      text.textContent = game.puzzle.definitions[word].join(" ");
+      item.append(heading, text);
+      $("winWords").append(item);
+    });
+    $("shareResultsBtn").disabled = true;
+    openDialog($("winDialog"));
+  }
+  function confirmAction(action) {
+    pendingAction = action;
+    $("confirmTitle").textContent =
+      action === "reveal" ? "Reveal Solution?" : "Reset Game?";
+    $("confirmText").textContent =
+      action === "reveal"
+        ? "This ends your run without a win and reveals the remaining answers. Your first result will be retained."
+        : "Start this practice puzzle again? Your first completed result is retained. Replays do not change it.";
+    $("confirmActionBtn").textContent =
+      action === "reveal" ? "Reveal solution" : "Reset game";
+    openDialog($("confirmDialog"));
+  }
+  function resetRun() {
+    tick();
+    generation++;
+    cancelVisuals();
+    busy = false;
+    selectedWord = null;
+    $("entryRow").classList.remove("accepted", "invalid");
+    $("scoreFloat").hidden = true;
+    game.reset();
+    render();
+    normalMessage();
+    save();
+    board.focus();
+  }
+  function burst() {
+    if (reducedMotion()) return;
+    const canvas = $("confettiLayer");
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    canvas.width = board.clientWidth;
+    canvas.height = board.clientHeight;
+    const token = generation;
+    const colors = ["#ff4056", "#26d1b2", "#ffd15a", "#8c7eff"];
+    const particles = Array.from({ length: 45 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -Math.random() * canvas.height,
+      speed: 2 + Math.random() * 3,
+      angle: Math.random() * 6,
+      color: colors[Math.floor(Math.random() * colors.length)],
+    }));
+    const started = performance.now();
+    function frame(now) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (token !== generation || now - started > 2200 || reducedMotion())
         return;
-      }
-      nextIndices.push(indexForLetter);
+      particles.forEach((particle) => {
+        particle.y += particle.speed;
+        particle.angle += 0.03;
+        ctx.save();
+        ctx.translate(particle.x, particle.y);
+        ctx.rotate(particle.angle);
+        ctx.fillStyle = particle.color;
+        ctx.fillRect(-3, -5, 6, 10);
+        ctx.restore();
+      });
+      requestAnimationFrame(frame);
     }
-
-    state.currentWord = prefix;
-    state.currentIndices = nextIndices;
-
-    const hintedRow = currentRowIndex();
-    if (!state.hintRowsUsed.includes(hintedRow)) {
-      state.hintRowsUsed.push(hintedRow);
-    }
-    state.hintUses += 1;
-    state.hintMessage = `Hint applied: ${prefix}${"_".repeat(5 - prefixLength)} (${bestGroup.length} possible word${bestGroup.length === 1 ? "" : "s"})`;
-    setMessage(`Hint ${state.hintUses} applied: ${prefix}. First two tiles filled.`, "success");
+    requestAnimationFrame(frame);
+  }
+  for (let index = 0; index < 5; index++) {
+    const tile = document.createElement("span");
+    tile.className = "entry-tile";
+    tile.setAttribute("aria-hidden", "true");
+    entryTiles.push(tile);
+    $("entryRow").append(tile);
+    const key = document.createElement("button");
+    key.type = "button";
+    key.className = "demo-key";
+    key.addEventListener("click", () => addLetter(index));
+    keyButtons.push(key);
+    $("keyboard").append(key);
+  }
+  $("hintBtn").addEventListener("click", () => {
+    if (busy) return;
+    const previousUses = game.state.hintUses;
+    if (!game.hint()) return;
+    cancelLetterFlights();
     render();
+    message(
+      game.state.hintUses === previousUses
+        ? "Hint restored · no additional points deducted"
+        : "Two letters supplied · −10 points",
+    );
+    save();
+    board.focus({ preventScroll: true });
+  });
+  $("shuffleBtn").addEventListener("click", shuffle);
+  $("deleteBtn").addEventListener("pointerdown", (event) => {
+    if (event.button !== 0 || event.currentTarget.disabled) return;
+    deleteLetter();
+    deleteDelay = setTimeout(() => {
+      deleteRepeat = setInterval(deleteLetter, 300);
+    }, 400);
+  });
+  function stopDelete() {
+    clearTimeout(deleteDelay);
+    clearInterval(deleteRepeat);
   }
-
-  function resetGame() {
-    clearTimeout(flashTimeoutId);
-    clearTimeout(submitTimeoutId);
-    clearTimeout(winDelayTimeoutId);
-    flashTimeoutId = null;
-    clearAllDemoStorage();
-
-    state = {
-      ...initialState,
-      displayLetters: [...PUZZLE.letters],
-    };
-    render();
-
-    // Hard-reset UX: always return to first-load state.
-    window.location.reload();
-  }
-
-  function firstUnusedIndexForLetter(letter) {
-    const target = letter.toUpperCase();
-    for (let i = 0; i < state.displayLetters.length; i += 1) {
-      if (state.displayLetters[i] === target && !state.currentIndices.includes(i)) {
-        return i;
-      }
-    }
-    return null;
-  }
-
-  function handleKeydown(event) {
-    if (event.defaultPrevented || state.isWon || state.invalidFlash || pendingSubmit) return;
-    if (event.ctrlKey || event.metaKey || event.altKey || event.isComposing) return;
-    if (!(event.target instanceof Element) || !event.target.closest(".phone-inner")) return;
-    if (event.target.closest("input, textarea, select, [contenteditable='true']")) return;
-    const key = event.key.toUpperCase();
-
-    if (key === "BACKSPACE") {
+  window.addEventListener("pointerup", stopDelete);
+  window.addEventListener("pointercancel", stopDelete);
+  window.addEventListener("blur", stopDelete);
+  $("deleteBtn").addEventListener("click", (event) => {
+    if (event.detail === 0) deleteLetter();
+  });
+  board.addEventListener("keydown", (event) => {
+    if (
+      !game ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.altKey ||
+      document.querySelector("dialog[open]")
+    )
+      return;
+    if (/^[a-z]$/i.test(event.key)) {
+      event.preventDefault();
+      const used = game.usedIndices;
+      const index = game.state.letters.findIndex(
+        (letter, i) => letter === event.key.toUpperCase() && !used.includes(i),
+      );
+      if (index >= 0) addLetter(index);
+    } else if (event.key === "Backspace") {
       event.preventDefault();
       deleteLetter();
-      return;
-    }
-
-    if (key === " ") {
-      // Keep native Space activation for buttons, links, and disclosure controls.
-      if (event.target.closest("button, a, summary, [role='button']")) return;
+    } else if (event.key === " " && event.target === board) {
       event.preventDefault();
-      shuffleLetters();
-      return;
-    }
-
-    if (!/^[A-Z]$/.test(key)) return;
-
-    const index = firstUnusedIndexForLetter(key);
-    if (index !== null) {
-      event.preventDefault();
-      addLetter(index);
-    }
-  }
-
-  if (elements.shuffleBtn) {
-    elements.shuffleBtn.addEventListener("click", shuffleLetters);
-  }
-  if (elements.deleteBtn) {
-    elements.deleteBtn.addEventListener("click", deleteLetter);
-  }
-  if (elements.hintBtn) {
-    elements.hintBtn.addEventListener("click", useHint);
-  }
-  for (const resetButton of elements.resetButtons) {
-    resetButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      resetGame();
-    });
-  }
-  document.addEventListener("keydown", handleKeydown);
-
-  const overlay = document.getElementById("winOverlay");
-  const confettiLayer = document.getElementById("confettiLayer");
-  const winTime = document.getElementById("winTime");
-  const winScore = document.getElementById("winScore");
-  const winScoreText = document.getElementById("winScoreText");
-  const winDate = document.getElementById("winDate");
-  const winWords = document.getElementById("winWords");
-  const winStreak = document.getElementById("winStreak");
-  const winCloseBtn = document.getElementById("winCloseBtn");
-  const winReplayBtn = document.getElementById("winReplayBtn");
-  let confettiBurstTimeoutId = null;
-
-  let scoreFrameId = 0;
-  let returnFocus = null;
-  const inertSiblings = new Map();
-
-  function animateScore(target) {
-    if (!winScore) return;
-    cancelAnimationFrame(scoreFrameId);
-    if (prefersReducedMotion) {
-      winScore.textContent = String(target);
-      return;
-    }
-
-    const startAt = performance.now() + 350;
-    const duration = 900;
-    winScore.textContent = "0";
-    const tick = (now) => {
-      const progress = Math.min(1, Math.max(0, (now - startAt) / duration));
-      winScore.textContent = String(Math.round(target * (1 - Math.pow(1 - progress, 3))));
-      if (progress < 1) scoreFrameId = requestAnimationFrame(tick);
-    };
-    scoreFrameId = requestAnimationFrame(tick);
-  }
-
-  function showWin({ time = "00:00", score = 0, hints = 0, words = [] } = {}) {
-    if (!overlay) return;
-    returnFocus = document.activeElement;
-    if (winScoreText) winScoreText.textContent = `: ${score}`;
-    if (winTime) winTime.textContent = time;
-    if (winStreak) {
-      winStreak.textContent = hints > 0 ? `-${hints * HINT_PENALTY}` : "0";
-      winStreak.classList.toggle("is-negative", hints > 0);
-    }
-    if (winDate) {
-      winDate.textContent = new Date()
-        .toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })
-        .toUpperCase();
-    }
-    if (winWords) {
-      winWords.innerHTML = "";
-      words.forEach((word) => {
-        const item = document.createElement("li");
-        const title = document.createElement("strong");
-        title.textContent = word;
-        const meaning = document.createElement("span");
-        meaning.textContent = DEFINITIONS[word] || "";
-        item.append(title, meaning);
-        winWords.appendChild(item);
-      });
-    }
-    animateScore(score);
-    const card = overlay.querySelector(".win-card");
-    if (card) card.scrollTop = 0;
-
-    overlay.hidden = false;
-    overlay.setAttribute("aria-hidden", "false");
-    overlay.classList.add("is-open");
-
-    // Keep the results dialog available while making everything behind it inert.
-    let branch = overlay;
-    while (branch.parentElement && branch !== document.body) {
-      for (const sibling of branch.parentElement.children) {
-        if (sibling !== branch) {
-          inertSiblings.set(sibling, sibling.inert);
-          sibling.inert = true;
-        }
-      }
-      branch = branch.parentElement;
-    }
-
-    // kick open animation
-    requestAnimationFrame(() => {
-      overlay.classList.add("win-open");
-      spawnConfetti(95);
-      // Scroll after opening so reduced-motion users see the final sheet position.
-      window.setTimeout(() => {
-        if (winCloseBtn && overlay.classList.contains("is-open") && document.activeElement === winCloseBtn) {
-          (card || winCloseBtn).scrollIntoView({ block: "start" });
-        }
-      }, prefersReducedMotion ? 0 : 450);
-    });
-    clearTimeout(confettiBurstTimeoutId);
-    confettiBurstTimeoutId = window.setTimeout(() => spawnConfetti(60), 220);
-
-    if (winCloseBtn) {
-      winCloseBtn.focus({ preventScroll: true });
-    }
-  }
-
-  function hideWin() {
-    if (!overlay) return;
-    overlay.classList.remove("win-open");
-    overlay.classList.remove("is-open");
-    overlay.setAttribute("aria-hidden", "true");
-    clearTimeout(confettiBurstTimeoutId);
-    confettiBurstTimeoutId = null;
-    for (const [element, wasInert] of inertSiblings) element.inert = wasInert;
-    inertSiblings.clear();
-    const canRestoreFocus = returnFocus instanceof HTMLElement && returnFocus.isConnected && returnFocus.tabIndex >= 0 &&
-      returnFocus.getClientRects().length > 0 && getComputedStyle(returnFocus).visibility !== "hidden" &&
-      !returnFocus.matches(":disabled, [aria-disabled='true']") && !returnFocus.closest("[inert]");
-    const fallback = Array.from(elements.resetButtons).find((button) =>
-      button.getClientRects().length > 0 && getComputedStyle(button).visibility !== "hidden" &&
-      !button.disabled && !button.closest("[inert]")
-    );
-    if (canRestoreFocus) returnFocus.focus();
-    if (!canRestoreFocus || document.activeElement !== returnFocus) {
-      fallback?.focus();
-    }
-    returnFocus = null;
-    // let transition finish
-    setTimeout(() => {
-      overlay.hidden = true;
-      if (confettiLayer) confettiLayer.innerHTML = "";
-    }, 220);
-  }
-
-  function replayWin() {
-    if (!overlay) return;
-    if (!confettiLayer) return;
-    confettiLayer.innerHTML = "";
-    overlay.classList.remove("win-open");
-    requestAnimationFrame(() => {
-      overlay.classList.add("win-open");
-      spawnConfetti(95);
-    });
-    clearTimeout(confettiBurstTimeoutId);
-    confettiBurstTimeoutId = window.setTimeout(() => spawnConfetti(60), 220);
-  }
-
-  document.addEventListener("keydown", (event) => {
-    if (!overlay || !overlay.classList.contains("is-open")) return;
-    if (event.key === "Escape") {
-      event.preventDefault();
-      hideWin();
-    } else if (event.key === "Tab") {
-      const controls = Array.from(overlay.querySelectorAll("button, a[href], [tabindex='0']"))
-        .filter((control) => !control.disabled && control.getClientRects().length > 0);
-      const first = controls[0];
-      const last = controls[controls.length - 1];
-      if (first && event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (last && !event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+      shuffle();
     }
   });
-
-  // Win animation
-
-  function spawnConfetti(count = 80) {
-    if (!confettiLayer) return;
-    const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    if (prefersReduced) return;
-
-    const colors = [
-      "#10b981", // emerald
-      "#f59e0b", // amber
-      "#f43f5e", // rose
-      "#3b82f6", // blue
-      "#a78bfa", // violet
-      "#22c55e"  // green
-    ];
-    const shapes = ["confetti--chip", "confetti--ribbon", "confetti--dot"];
-
-    const w = confettiLayer.clientWidth || 520;
-    const h = confettiLayer.clientHeight || 460;
-
-    for (let i = 0; i < count; i++) {
-      const el = document.createElement("div");
-      el.className = "confetti";
-      el.style.left = Math.random() * w + "px";
-      el.style.background = colors[(Math.random() * colors.length) | 0];
-      el.classList.add(shapes[(Math.random() * shapes.length) | 0]);
-
-      const width = (Math.random() * 8 + 6).toFixed(1) + "px";
-      const height = (Math.random() * 12 + 8).toFixed(1) + "px";
-      const radius = (Math.random() * 5 + 1).toFixed(1) + "px";
-
-      const x0 = (Math.random() * 70 - 35).toFixed(1) + "px";
-      const xBurst = (Math.random() * 240 - 120).toFixed(1) + "px";
-      const xMid = (Math.random() * 340 - 170).toFixed(1) + "px";
-      const x1 = (Math.random() * 460 - 230).toFixed(1) + "px";
-      const rise = `-${(Math.random() * 125 + 40).toFixed(1)}px`;
-      const drop = `${(h + Math.random() * 140 + 70).toFixed(1)}px`;
-      const sway = (Math.random() * 12 + 6).toFixed(1) + "px";
-      const rot = (Math.random() * 1320 - 660).toFixed(0) + "deg";
-      const dur = (Math.random() * 900 + 1000).toFixed(0) + "ms";
-      const swayDur = (Math.random() * 120 + 110).toFixed(0) + "ms";
-
-      el.style.setProperty("--w", width);
-      el.style.setProperty("--h", height);
-      el.style.setProperty("--radius", radius);
-      el.style.setProperty("--x0", x0);
-      el.style.setProperty("--xBurst", xBurst);
-      el.style.setProperty("--xMid", xMid);
-      el.style.setProperty("--x1", x1);
-      el.style.setProperty("--rise", rise);
-      el.style.setProperty("--drop", drop);
-      el.style.setProperty("--sway", sway);
-      el.style.setProperty("--rot", rot);
-      el.style.setProperty("--dur", dur);
-      el.style.setProperty("--swayDur", swayDur);
-
-      // stagger
-      const waveDelay = (i / Math.max(1, count)) * 220;
-      el.style.animationDelay = `${(Math.random() * 120 + waveDelay).toFixed(0)}ms, 0ms`;
-
-      confettiLayer.appendChild(el);
-
-      // cleanup
-      el.addEventListener("animationend", () => el.remove(), { once: true });
-    }
-  }
-
-  // Expose globally
-  window.showWin = showWin;
-  window.hideWin = hideWin;
-  window.replayWin = replayWin;
-
-  if (winCloseBtn) {
-    winCloseBtn.addEventListener("click", hideWin);
-  }
-  if (winReplayBtn) {
-    winReplayBtn.addEventListener("click", replayWin);
-  }
-  if (overlay) {
-    overlay.addEventListener("click", (event) => {
-      if (event.target === overlay || event.target.classList.contains("win-backdrop")) {
-        hideWin();
+  document
+    .querySelectorAll("[data-close-dialog]")
+    .forEach((button) =>
+      button.addEventListener("click", () =>
+        closeDialog(button.closest("dialog")),
+      ),
+    );
+  document.querySelectorAll("dialog").forEach((dialog) => {
+    dialog.addEventListener("close", () => {
+      lastTick = Date.now();
+      if (
+        returnFocus?.isConnected &&
+        !returnFocus.disabled &&
+        returnFocus.getClientRects().length
+      )
+        returnFocus.focus({ preventScroll: true });
+      else $("endActionBtn").focus({ preventScroll: true });
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        const rect = dialog.getBoundingClientRect();
+        if (
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        )
+          closeDialog(dialog);
       }
     });
+  });
+  $("soundBtn").addEventListener("click", () => {
+    game.settings.sound = !game.settings.sound;
+    if (game.settings.sound) playSound("pop");
+    else sounds.forEach((sound) => sound.pause());
+    $("soundBtn").setAttribute("aria-pressed", String(game.settings.sound));
+    $("soundBtn").title = game.settings.sound
+      ? "Mute sound effects"
+      : "Enable sound effects";
+    $("soundIcon").className =
+      `app-icon icon-sound-${game.settings.sound ? "on" : "off"}`;
+    save();
+  });
+  systemTheme.addEventListener("change", () => {
+    if (game) appearance();
+  });
+  $("endActionBtn").addEventListener("click", () =>
+    confirmAction(
+      ["won", "revealed"].includes(game.state.status) ? "reset" : "reveal",
+    ),
+  );
+  document.querySelectorAll("[data-reset-button]").forEach((button) =>
+    button.addEventListener("click", () => {
+      if (game) confirmAction("reset");
+    }),
+  );
+  $("confirmActionBtn").addEventListener("click", () => {
+    returnFocus = board;
+    closeDialog($("confirmDialog"));
+    if (pendingAction === "reset") resetRun();
+    else {
+      generation++;
+      cancelVisuals();
+      busy = false;
+      game.reveal();
+      render();
+      normalMessage();
+      save();
+      board.focus({ preventScroll: true });
+    }
+  });
+  $("viewResultsBtn").addEventListener("click", showResults);
+  $("definitionPrompt").addEventListener("click", () => {
+    const first = $("discoveredWords").querySelector("button");
+    if (first) {
+      showDefinition(first.dataset.word);
+      $("discoveredWords").querySelector("button").focus();
+    }
+  });
+  $("playAgainBtn").addEventListener("click", () => {
+    closeDialog($("winDialog"));
+    confirmAction("reset");
+  });
+  document.addEventListener("visibilitychange", () => {
+    // Time before backgrounding still belongs to the active run.
+    const now = Date.now();
+    if (game && document.hidden) {
+      if (boardVisible && !document.querySelector("dialog[open]"))
+        game.tick(Math.max(0, now - lastTick));
+      game.state.oneShot = false;
+      save();
+    }
+    lastTick = now;
+  });
+  window.addEventListener("pagehide", () => {
+    tick();
+    save();
+  });
+  async function load(fresh = false) {
+    $("loadError").hidden = true;
+    try {
+      if (!puzzleData) {
+        const response = await fetch("assets/demo/puzzles.json");
+        if (!response.ok)
+          throw new Error(
+            `Puzzle download failed (${response.status}). Please try again.`,
+          );
+        puzzleData = await response.json();
+      }
+      let saved = null,
+        legacy = null;
+      if (!fresh) {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          blockedKey = raw !== null ? STORAGE_KEY : LEGACY_KEY;
+          const legacyRaw =
+            raw === null ? localStorage.getItem(LEGACY_KEY) : null;
+          saved = raw === null ? null : JSON.parse(raw);
+          legacy = legacyRaw === null ? null : JSON.parse(legacyRaw);
+        } catch (error) {
+          if (error instanceof SyntaxError)
+            throw new Error(
+              "Your saved demo could not be read. It has not been overwritten.",
+            );
+          storageFailure = true;
+          notice(
+            "Browser storage is unavailable. This demo will work for this visit, but progress cannot be saved.",
+          );
+        }
+      }
+      game = new window.ViisiDemoGame(puzzleData, saved, legacy);
+      lastTick = Date.now();
+      render();
+      normalMessage();
+      save();
+      if (game.state.status === "playing" && game.state.entry.length === 5)
+        submit();
+    } catch (error) {
+      $("loadError").hidden = false;
+      $("loadErrorText").textContent = error.message;
+      $("freshStartBtn").hidden = !puzzleData || storageFailure;
+      message("The game could not load. See the message above.", "error");
+    }
   }
-
-  // win animation ends here
-  
-  renderWordBank();
-  render();
+  $("retryLoadBtn").addEventListener("click", () => load());
+  $("freshStartBtn").addEventListener("click", async () => {
+    try {
+      const raw = localStorage.getItem(blockedKey);
+      if (raw !== null)
+        localStorage.setItem(`${blockedKey}.backup.${Date.now()}`, raw);
+      await load(true);
+    } catch {
+      $("loadErrorText").textContent =
+        "The saved game could not be backed up, so it has not been replaced. Check your browser's storage settings and try again.";
+    }
+  });
+  new IntersectionObserver(([entry]) => {
+    tick();
+    boardVisible = entry.isIntersecting;
+    lastTick = Date.now();
+  }).observe(board);
+  setInterval(() => {
+    tick();
+    if (Date.now() - timerSave >= 10000) {
+      save();
+      timerSave = Date.now();
+    }
+  }, 1000);
+  await load();
 })();

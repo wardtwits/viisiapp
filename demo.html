@@ -1,286 +1,438 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Play Viisi Demo | Daily Anagram Word Game</title>
+    <meta
+      name="description"
+      content="Play a one-puzzle Viisi web demo in your browser. Viisi is a daily anagram word game on iOS where you find five words from five letters."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://viisi.app/demo.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Viisi" />
+    <meta
+      property="og:title"
+      content="Play Viisi Demo | Daily Anagram Puzzle Game (iOS)"
+    />
+    <meta
+      property="og:description"
+      content="Try the one-puzzle browser demo, then download Viisi on the App Store."
+    />
+    <meta property="og:url" content="https://viisi.app/demo.html" />
+    <meta
+      property="og:image"
+      content="https://viisi.app/assets/images/marketing/IMG_8682.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Play Viisi Demo | Daily Anagram Puzzle Game (iOS)"
+    />
+    <meta
+      name="twitter:description"
+      content="Try the Viisi anagram word puzzle demo in your browser."
+    />
+    <meta
+      name="twitter:image"
+      content="https://viisi.app/assets/images/marketing/IMG_8682.jpg"
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20261102-fonts" />
+    <link
+      rel="stylesheet"
+      href="assets/css/demo.css?v=20261102-demo-no-options"
+    />
+    <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
+    <script
+      defer
+      src="assets/js/demo-game.js?v=20261102-demo-no-options"
+    ></script>
+    <script defer src="assets/js/demo.js?v=20261102-demo-no-options"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Play Viisi Demo | Daily Anagram Word Game</title>
-  <meta name="description" content="Play a one-puzzle Viisi web demo in your browser. Viisi is a daily anagram word game on iOS where you find five words from five letters." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://viisi.app/demo.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Viisi" />
-  <meta property="og:title" content="Play Viisi Demo | Daily Anagram Puzzle Game (iOS)" />
-  <meta property="og:description" content="Try the one-puzzle browser demo, then download Viisi on the App Store." />
-  <meta property="og:url" content="https://viisi.app/demo.html" />
-  <meta property="og:image" content="https://viisi.app/assets/images/marketing/IMG_8682.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Play Viisi Demo | Daily Anagram Puzzle Game (iOS)" />
-  <meta name="twitter:description" content="Try the Viisi anagram word puzzle demo in your browser." />
-  <meta name="twitter:image" content="https://viisi.app/assets/images/marketing/IMG_8682.jpg" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261102-fonts" />
-  <link rel="stylesheet" href="assets/css/demo.css?v=20261102-frame" />
-  <script defer src="assets/js/main.js?v=20261013-accessibility"></script>
-  <script defer src="assets/js/demo.js?v=20261016-game-accessibility"></script>
-  <style>
-    .video-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.65rem 0.35rem 0.4rem;
-  border-radius: 999px;
-  background: #fffaf3;
-  color: #0a192e;
-  border: 1px solid rgba(251, 70, 85, 0.22);
-  box-shadow: 0 8px 22px rgba(251, 70, 85, 0.16);
-  font-family: "Nunito", system-ui, sans-serif;
-  font-weight: 800;
-  font-size: 0.85rem;
-  text-decoration: none;
-}
+  <body class="demo-page touch-manipulation">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-.video-icon {
-  width: 25px;
-  height: 25px;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  background: #fb4655;
-  color: white;
-  transform: rotate(-3deg);
-  box-shadow: inset 0 -3px rgba(0, 0, 0, 0.12);
-}
-
-.video-icon svg {
-  width: 15px;
-  height: 15px;
-  fill: currentColor;
-  margin-left: 1px;
-}
-
-.video-pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(251, 70, 85, 0.22);
-}
-  </style>
-</head>
-
-<body class="touch-manipulation">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-      
-      <header class="container">
-        <nav class="nav" aria-label="Primary">
-          <a class="logo" href="index.html">
-            <span class="logo-mark">V</span>
-            Viisi
-          </a>
-          <button class="btn demo-reset-nav" type="button" data-reset-button>
-            Reset
-          </button>
-          <button type="button" class="mobile-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-nav"
-            aria-label="Toggle navigation">
-            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          </button>
-          <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#features">Features</a>
-            <a href="how-to-play.html">How to play</a>
-            <a href="privacy.html">Privacy</a>
-          </div>
-          <a class="btn btn-primary"
-            href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8">Download</a>
-        </nav>
-        <nav class="mobile-nav-sheet" id="mobile-nav" data-mobile-nav data-open="false" aria-label="Mobile primary">
+    <header class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="logo" href="index.html">
+          <span class="logo-mark">V</span>
+          Viisi
+        </a>
+        <button
+          type="button"
+          class="mobile-menu-button"
+          data-menu-button
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <div class="nav-links">
           <a href="index.html">Home</a>
           <a href="index.html#features">Features</a>
           <a href="how-to-play.html">How to play</a>
           <a href="privacy.html">Privacy</a>
-        </nav>
-      </header>
-<div class="desktop">
-      <main id="main-content" tabindex="-1" class="container demo-main">
-        <section class="hero demo-hero">
-          <div>
-            <div class="badge">Web Demo (single puzzle)</div>
-            <h1>Play Viisi in your browser</h1>
-
-          </div>
-        </section>
-
-      
-          <div class="demo-header">
-            <p id="demo-instructions">
-              Build five-letter anagrams and find five distinct valid words to
-              win. <br><span class="tip">Tip: 2 Hints are available once you've found 3 valid words.</span>
-            </p>
-            <p id="keyboard-instructions" class="keyboard-instructions">Use the letter buttons, or focus the game to type letters. Backspace deletes; Space shuffles when a button is not focused. Five letters submit your word automatically.</p>
-          </div>
-
-          <br>
-
-          <div class="demo-meta ">
-            <div class="demo-stat hide">
-              <span class="demo-stat-label">Hints Used</span>
-              <strong id="hintCount">0</strong>
-            </div>
-          </div>
-
-
-          
-          <div class="phone-showcase">
-            <div class="phone-shell">
-              <div class="phone-notch"></div>
-              <div class="phone-inner" role="region" aria-label="Viisi Classic Mode demo" aria-describedby="keyboard-instructions" tabindex="0">
-                <div class="game-toolbar">
-                  <a class="game-back" href="index.html">Home</a>
-                  <h2 class="game-mode">Classic Mode</h2>
-                  <div class="phone-toolbar">
-                    <button id="resetBtn" class="btn" type="button" data-reset-button>Reset</button>
-                  </div>
-                </div>
-                <div class="game-progress">
-                  <span class="game-found"><strong id="foundCount">0 / 5</strong> words</span>
-                  <span class="demo-crown" title="Score">
-                    <span class="sr-only">Score: </span>
-                    <svg viewBox="0 0 24 16" width="22" height="15" aria-hidden="true"><path d="M1 15V3l6 5.5L12 1l5 7.5L23 3v12z" fill="currentColor"/></svg>
-                    <b id="liveScore">0</b>
-                  </span>
-                </div>
-                <table id="board" class="demo-board" aria-label="Puzzle board" aria-describedby="demo-instructions"></table>
-
-                <div class="game-feedback">
-                  <div id="message" class="demo-message" role="status" aria-live="polite" aria-atomic="true"></div>
-                  <button id="hintBtn" class="btn invisible" type="button">Hint</button>
-                </div>
-      
-
-                <div id="keyboard" class="demo-keys" role="group" aria-label="Letter keyboard"></div>
-        <div class="demo-controls">
-          
-                <!-- Shuffle Button -->
-                <div class="letter-tiles">
-                  <button class="shuffle" id="shuffleBtn" type="button" aria-label="Shuffle letters">
-                    <svg viewBox="0 0 24 24" class="w-6 h-6 shuffleIcon" width="20" height="20" aria-hidden="true">
-                      <path d="M16 4h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path d="M20 4l-5 5-2 2-1 1-3 3-3 3H4" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                      <path d="M16 20h4v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path d="M20 20l-5-5-1-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path d="M4 8h2l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    </svg></button>
-                  <!-- Delete button -->
-                  <button id="deleteBtn" class="delete" type="button" aria-label="Delete last letter">
-                    <svg viewBox="0 0 24 24" class="deleteIcon h-5 w-5" width="30" height="30" aria-hidden="true">
-                      <path
-                        d="M9.2 5H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9.2a2 2 0 0 1-1.6-.8L2.6 13a2 2 0 0 1 0-2l5-5.2A2 2 0 0 1 9.2 5Z"
-                        fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
-                      <path d="M12 9l6 6M18 9l-6 6" fill="none" stroke="currentColor" stroke-width="1"
-                        stroke-linecap="round" />
-                    </svg></button>
-                </div>
-
-              </div>
-
-              <section id="winOverlay" class="win-overlay" aria-hidden="true" hidden>
-                <div class="win-backdrop"></div>
-                <div class="win-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
-                  <h3 id="winTitle" class="win-title">Well Done!<span class="sr-only"> You found all five valid words.</span></h3>
-                  <button id="winCloseBtn" class="win-close" type="button" aria-label="Close results">
-                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
-                  </button>
-                  <div class="win-score-wrap" aria-hidden="true">
-                    <div id="winScore" class="win-score">0</div>
-                  </div>
-                  <p class="win-label">Score<span id="winScoreText" class="sr-only">: 0</span></p>
-                  <p id="winDate" class="win-date"></p>
-                  <div class="win-stats">
-                    <div class="win-stat">
-                      <span>Time</span>
-                      <strong id="winTime">00:00</strong>
-                    </div>
-                    <div class="win-stat">
-                      <span>Hints</span>
-                      <strong id="winStreak">0</strong>
-                    </div>
-                  </div>
-                  <p class="win-note">10 points off for each hint used</p>
-                  <h4 class="win-words-title">Words found</h4>
-                  <ul id="winWords" class="win-words"></ul>
-                </div>
-                <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
-              </section>
-            </div>
-    
-
-              <!-- end phone-inner -->
-            </div>
-            <!-- end phone-shell -->
-          </div>
-          <!-- end phone-showcase -->
-
-          <div class="hide">
-            <h3 class="demo-subtitle">Found Words</h3>
-            <div id="foundWords" class="found-words" aria-live="polite"></div>
-          </div>
-
-          <details class="demo-word-bank ">
-            <summary>Reveal the Solution</summary>
-            <p>Any of these words would be accepted:</p>
-            <p id="wordBank" class="word-bank-list"></p>
-          </details>
-      
-      </main>
-    </div><!-- end desktop -->
-
-
-
-  <footer class="footer">
-    <a class="footer-back-top" href="#">^ Back to Top</a>
-    <div class="container footer-content">
-      <div class="logo">
-        <span class="logo-mark">V</span>
-        Viisi
-      </div>
-      <nav class="footer-links" aria-label="Site pages">
+        </div>
+        <a
+          class="btn btn-primary"
+          href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&ct=MySite&mt=8"
+          >Download</a
+        >
+      </nav>
+      <nav
+        class="mobile-nav-sheet"
+        id="mobile-nav"
+        data-mobile-nav
+        data-open="false"
+        aria-label="Mobile primary"
+      >
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="how-to-play.html">How to play</a>
-        <a href="score.html">Scoring</a>
-        <a href="badges.html">Badges</a>
-        <a href="demo.html">Play Demo</a>
         <a href="privacy.html">Privacy</a>
-        <a href="wordle-alternative/index.html">Viisi vs Wordle</a>
       </nav>
-      <small>© <span id="year"></span> Viisi Games</small>
-      <p class="footer-legal">
-        Apple, the Apple logo, iPhone, and iPad are trademarks of Apple Inc., registered in the U.S. and other countries and regions.
-        App Store and iCloud are service marks of Apple Inc., registered in the U.S. and other countries and regions.
-        Other product and company names mentioned herein, such as Game Center and Wordle, may be trademarks of their respective owners.
+    </header>
+    <main id="main-content" class="container demo-main" tabindex="-1">
+      <section class="demo-hero" aria-labelledby="demo-title">
+        <p class="demo-eyebrow">A little wordplay, right here</p>
+        <h1 id="demo-title">Play Viisi in your browser.</h1>
+        <p>
+          Try one complete practice puzzle with the same rules as the iOS game.
+          Your app results and statistics stay separate.
+        </p>
+        <p id="keyboard-instructions">
+          Tap the letters, or focus the game and type. Five letters submit
+          automatically. Backspace deletes; Space shuffles when a button is not
+          focused.
+        </p>
+      </section>
+      <noscript
+        ><p class="load-error">
+          This interactive demo needs JavaScript. You can still
+          <a href="how-to-play.html">learn how to play Viisi</a>.
+        </p></noscript
+      >
+      <p id="saveNotice" class="save-notice" role="status" hidden></p>
+      <section id="loadError" class="load-error" role="alert" hidden>
+        <h2>Your saved game is safe.</h2>
+        <p id="loadErrorText"></p>
+        <button id="retryLoadBtn" type="button" class="btn btn-primary">
+          Try again
+        </button>
+        <button id="freshStartBtn" type="button" class="btn btn-ghost" hidden>
+          Start a new demo
+        </button>
+      </section>
+      <div class="phone-showcase">
+        <div class="phone-shell">
+          <div
+            class="phone-inner"
+            role="region"
+            aria-label="Viisi practice game"
+            aria-describedby="keyboard-instructions"
+            tabindex="0"
+            data-status="playing"
+          >
+            <div class="game-toolbar">
+              <a
+                class="game-back icon-button"
+                href="index.html"
+                aria-label="Back to Viisi home"
+                ><span class="app-icon icon-back" aria-hidden="true"></span
+              ></a>
+              <h2 id="gameMode" class="game-mode">SAT, OCT 24</h2>
+              <div class="phone-toolbar">
+                <button
+                  id="endActionBtn"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Reveal solution"
+                  disabled
+                >
+                  <span
+                    id="endActionIcon"
+                    class="app-icon icon-reveal"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+                <button
+                  id="soundBtn"
+                  class="icon-button sound-toggle"
+                  type="button"
+                  aria-label="Sound effects"
+                  aria-pressed="true"
+                  title="Mute sound effects"
+                  disabled
+                >
+                  <span
+                    id="soundIcon"
+                    class="app-icon icon-sound-on"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+            </div>
+            <div class="game-progress">
+              <span id="runTimer" class="run-timer" hidden></span>
+              <span id="scoreCluster" class="demo-crown" hidden
+                ><img
+                  src="assets/demo/crown.webp"
+                  alt=""
+                  width="70"
+                  height="64"
+                /><span class="sr-only">Score: </span
+                ><b id="liveScore">0</b></span
+              >
+            </div>
+            <div class="game-stage">
+              <ol
+                id="discoveredWords"
+                class="discovered-words"
+                aria-label="Accepted words"
+              ></ol>
+              <div class="mascot-box" aria-hidden="true">
+                <img
+                  id="gameMascot"
+                  src="assets/demo/cat-sitting.webp"
+                  alt=""
+                  width="540"
+                  height="540"
+                />
+              </div>
+              <div
+                id="entryRow"
+                class="entry-row"
+                role="group"
+                aria-label="Current word"
+              ></div>
+              <span
+                id="scoreFloat"
+                class="score-float"
+                aria-hidden="true"
+                hidden
+              ></span>
+            </div>
+            <div class="game-feedback">
+              <p id="expertStatus" class="expert-status" hidden></p>
+              <button id="hintBtn" class="hint-button" type="button" hidden>
+                <img
+                  src="assets/demo/hint-bulb.webp"
+                  width="24"
+                  height="28"
+                  alt=""
+                />Need a hint?
+              </button>
+              <p
+                id="message"
+                class="demo-message"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                Loading your puzzle…
+              </p>
+            </div>
+            <div
+              id="keyboard"
+              class="demo-keys"
+              role="group"
+              aria-label="Letter keyboard"
+            ></div>
+            <div class="demo-controls">
+              <button
+                id="shuffleBtn"
+                class="shuffle"
+                type="button"
+                aria-label="Shuffle letters"
+                disabled
+              >
+                <span class="app-icon icon-shuffle" aria-hidden="true"></span>
+              </button>
+              <button
+                id="deleteBtn"
+                class="delete"
+                type="button"
+                aria-label="Delete last letter"
+                aria-description="Touch and hold to keep deleting"
+                disabled
+              >
+                <span class="app-icon icon-delete" aria-hidden="true"></span>
+              </button>
+            </div>
+            <button
+              id="definitionPrompt"
+              class="definition-prompt"
+              type="button"
+              hidden
+            >
+              <span class="app-icon icon-book" aria-hidden="true"></span>Tap a
+              word to view its definition
+            </button>
+            <section
+              id="definitionPanel"
+              class="definition-panel"
+              aria-label="Word definition"
+              hidden
+            ></section>
+            <button
+              id="viewResultsBtn"
+              class="view-results"
+              type="button"
+              hidden
+            >
+              View results
+            </button>
+            <canvas
+              id="confettiLayer"
+              class="confetti-layer"
+              aria-hidden="true"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="demo-under-phone" role="group" aria-label="Demo controls">
+        <button class="btn" type="button" data-reset-button>Reset</button>
+      </div>
+      <p class="demo-footnote">
+        One fixed practice puzzle. Discover the daily puzzle and Archive in
+        <a
+          href="https://apps.apple.com/app/apple-store/id6755663622?pt=125209181&amp;ct=MySite&amp;mt=8"
+          >Viisi for iPhone and iPad</a
+        >.
       </p>
-    </div>
-  </footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+      <dialog
+        id="confirmDialog"
+        class="game-dialog confirm-dialog"
+        aria-labelledby="confirmTitle"
+        aria-describedby="confirmText"
+      >
+        <h2 id="confirmTitle"></h2>
+        <p id="confirmText"></p>
+        <div class="confirm-actions">
+          <button id="cancelActionBtn" type="button" data-close-dialog>
+            Cancel</button
+          ><button id="confirmActionBtn" type="button"></button>
+        </div>
+      </dialog>
+      <dialog
+        id="winDialog"
+        class="game-dialog win-card"
+        aria-labelledby="winTitle"
+      >
+        <button
+          id="winCloseBtn"
+          class="dialog-close icon-button"
+          type="button"
+          data-close-dialog
+          aria-label="Close results"
+        >
+          <span class="app-icon icon-close" aria-hidden="true"></span>
+        </button>
+        <button
+          class="dialog-back icon-button"
+          type="button"
+          data-close-dialog
+          aria-label="Back to game"
+        >
+          <span class="app-icon icon-back" aria-hidden="true"></span>
+        </button>
+        <div class="result-crest" aria-hidden="true">
+          <span></span><i class="app-icon icon-results-crown"></i><span></span>
+        </div>
+        <h2 id="winTitle">Solved</h2>
+        <p id="winDate" class="win-date"></p>
+        <p id="winScore" class="win-score" aria-label="Score">0</p>
+        <p id="winRunLabel" class="win-run-label">Browser Demo</p>
+        <p id="winTime" class="win-time"></p>
+        <dl id="winBreakdown" class="win-breakdown"></dl>
+        <button
+          id="shareResultsBtn"
+          class="share-results"
+          type="button"
+          disabled
+          aria-describedby="shareStatus"
+        >
+          Share results
+        </button>
+        <p id="shareStatus" class="share-status" role="status">
+          Sharing is disabled in the browser demo.
+        </p>
+        <p id="winSolutions" class="win-solutions"></p>
+        <ul id="winWords" class="win-words"></ul>
+        <button id="playAgainBtn" class="play-again" type="button">
+          Play again
+        </button>
+      </dialog>
+    </main>
 
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7b347e7bf73d4f4fab865ed241dbd8d1"}'></script><!-- End Cloudflare Web Analytics -->
+    <footer class="footer">
+      <a class="footer-back-top" href="#">^ Back to Top</a>
+      <div class="container footer-content">
+        <div class="logo">
+          <span class="logo-mark">V</span>
+          Viisi
+        </div>
+        <nav class="footer-links" aria-label="Site pages">
+          <a href="index.html">Home</a>
+          <a href="index.html#features">Features</a>
+          <a href="how-to-play.html">How to play</a>
+          <a href="score.html">Scoring</a>
+          <a href="badges.html">Badges</a>
+          <a href="demo.html">Play Demo</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="wordle-alternative/index.html">Viisi vs Wordle</a>
+        </nav>
+        <small>© <span id="year"></span> Viisi Games</small>
+        <p class="footer-legal">
+          Apple, the Apple logo, iPhone, and iPad are trademarks of Apple Inc.,
+          registered in the U.S. and other countries and regions. App Store and
+          iCloud are service marks of Apple Inc., registered in the U.S. and
+          other countries and regions. Other product and company names mentioned
+          herein, such as Game Center and Wordle, may be trademarks of their
+          respective owners.
+        </p>
+      </div>
+    </footer>
 
-    
-</body>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "7b347e7bf73d4f4fab865ed241dbd8d1"}'
+    ></script>
+    <!-- End Cloudflare Web Analytics -->
+  </body>
 </html>

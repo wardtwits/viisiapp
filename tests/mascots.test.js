@@ -38,7 +38,7 @@ test("cats perched on dark surfaces use the supplied transparent artwork", () =>
 });
 
 for (const page of ["demo.html", "download/index.html"]) {
-  test(`${page} omits the mascot where there is no natural resting place`, () => {
+  test(`${page} omits the marketing mascot`, () => {
     const html = fs.readFileSync(path.join(root, page), "utf8");
     assert.doesNotMatch(html, /\bsrc="(?:\.\.\/)?assets\/cat\//);
   });

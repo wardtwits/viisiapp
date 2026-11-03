@@ -1,67 +1,113 @@
-# Viisi demo visual and accessibility verification
+# Viisi native-style browser demo verification
 
-Reviewed October 16, 2026. Scope: the browser demo, targeting WCAG 2.2 A/AA, including WCAG 2.0 and 2.1 criteria. This is targeted verification, not a conformance certification.
+Latest follow-up: removed Game options, its dialog, associated handlers, and unused styles. Reset and the sound toggle passed browser smoke checks; no browser errors. All 63 repository tests, JavaScript syntax, formatting, HTML IDs/ARIA references, and `git diff --check` passed. Evidence: [Reset only](docs/demo-2026-11-02/refinements/reset-only.jpg). Physical-device/deployed parity remains unverified; no new risks or guidance conflicts. Earlier descriptions of Game options below are historical.
 
-**Visual evidence**
 
-- Source visual truth: [native light gameplay](assets/images/screenshots/light2.jpg) and [native dark gameplay](assets/images/screenshots/dark2.jpg), as used by `index.html`. The supplied backup video was unnecessary.
-- Implementation screenshots: the Demo light and Demo dark panels of [comparison.png](docs/accessibility/demo-2026-10-16/comparison.png). [preview.png](docs/accessibility/demo-2026-10-16/preview.png) contains the two implementation captures alone.
-- State: two accepted words, score 40, and T in the third row. The native screenshots use TAKES/SKATE; the demo retains its existing STARE/TEARS puzzle and rules.
-- Browser viewport: 390 × 844 CSS pixels, device scale factor 1. The scrollbar leaves 375 CSS pixels for content. Implementation game crops are 375 × 745 pixels, taken from full-page browser screenshots, excluding the website instructions and surrounding chrome.
-- Sources were normalized proportionally to 375 pixels wide: light 375 × 761, dark 375 × 759. Source and implementation are shown together at equal horizontal density; no vertical stretching. The source files are 1170 × 2374 and 1170 × 2368 pixels respectively.
-- Full-view comparison: all four panels in `comparison.png` were opened together. Focused comparison: board/letter crops from those same panels were enlarged together to inspect typography, dashed boundaries, and accepted states. The enlarged intermediate image is `/tmp/viisi-demo-checks/focused-comparison.png`; the retained comparison contains its source regions.
+## Follow-up refinement verification — November 2, 2026
 
-**Findings**
+This pass supersedes the original build notes below for header placement, controls, sound defaults, hint recall, sharing, and tile animation. Changes follow the user's explicit refinement request.
 
-No actionable P0/P1/P2 visual findings remain within this scope.
+- **Hint priority fix:** deleted or edited hints can be recalled on the same row without another deduction. This also works after both paid hints have been used. The selected prefix is derived from the same unchanged remaining-answer list; no duplicate score or hint state was introduced. Two new regression tests failed against the prior code (`false !== true`, `false !== 'HA'`) and passed after the fix. Current focused suite: **22 passed**; full repository suite: **63 passed, zero failures/skips**.
+- **Header/Reset:** reserved extra space below the actual desktop frame's Dynamic Island and moved the text Reset button below the phone. Game options moved beside Reset, retaining mode/theme/contrast controls. Narrow Practice Puzzle text has sufficient clearance from the right-side buttons. At a 320×800 viewport, the actual document width/scroll width were both 305px (15px scrollbar), Reset began 18px below the phone, and heading/actions had approximately 9.5px separation. After Reset confirmation, focus and the view return to the game; Cancel retains normal trigger focus.
+- **Sound:** new games default to sound effects enabled. The white circular ruby speaker control replaces the toolbar settings icon and toggles sound with an accessible pressed state; its mute choice is saved. Previously saved mute choices are preserved. Only short existing effects are played; nothing loops and no background music was added. The existing win effect is approximately 1.48 seconds. Real speaker output/volume remains a device check.
+- **Letter flight:** destination glyphs stay hidden while a visible tile travels from the tapped rack key to its entry box over 360ms. Submission waits for the final tile to land. Browser observation confirmed an active translated flight and an `arriving` entry tile.
+- **Valid word:** tiles visibly fill from bottom to top over 550ms before rising into the compact accepted-word list. Browser sampling measured an intermediate fill scale of about 0.477, followed by a translated/scaled accepted row. Glyph sizes are compensated during the shrink to avoid a font-size jump. Reset/reveal cancel outstanding visual work; a reset check finished with zero accepted words, empty entry, and zero flying-tile ghosts.
+- **Shuffle:** the native `DailyLetterBox.swift` uses a horizontal 360° flip; the browser now follows that axis. Rack letters change between the outgoing/incoming flip phases. Browser checks confirmed a non-identity X-axis 3D transform and preserved the partial/hinted entry and used-key mapping. Reduced-motion branches skip the effects; actual OS preference switching remains unverified.
+- **Share:** disabled in HTML and reasserted disabled on results render. The share/clipboard handler was removed. A two-hint completion scored **100** with `shareEnabled: false` and a visible explanation. No clipboard or external sharing action is available.
+- **Additional visible correction:** revealed answers now count toward the cat's lying pose, preventing the sitting cat from overlapping the five revealed rows.
 
-- Fonts and typography: retained the site's Nunito family, with lighter board letters, larger letter buttons, and a centered Classic Mode heading. The result follows the native rounded typography without introducing another font dependency.
-- Spacing and layout rhythm: score sits above the five-by-five board; the rack and shuffle/delete controls sit below it. Desktop retains the existing iPhone frame. Mobile uses the game surface, ordinary page scrolling, and a visible Reset button. Slightly larger tiles and wrapped feedback are intentional accessibility adaptations.
-- Colors and tokens: flat navy dark surface, pale decorated light surface, mint accepted words, coral rack, gold score. Dark tile lettering is intentional: coral/letter contrast is 4.66:1 and mint/letter contrast is 7.47:1. Future rows have stronger dashed boundaries than the native screenshots. Accepted state is also conveyed by solid boundaries, visible progress, accessible row labels, and status text.
-- Image quality and assets: reused the existing device frame, light-theme decoration, and existing crown/shuffle/delete icons. No new generated art, icons, packages, or assets were added to the runtime.
-- Copy and content: preserved demo words, automatic submission, hint rules, points, and completion bonus. Home/Reset remain real web controls in the game toolbar; native skip/settings controls are outside the demo's scope. Results now show Well Done! visibly.
+Current browser evidence in `docs/demo-2026-11-02/refinements/`:
 
-**Comparison and regression history**
+- `practice-header-reset.jpg`: complete desktop frame, readable Practice Puzzle heading below the island, circular sound toggle, and Reset/Game options underneath.
+- `letter-flight.jpg`: a rack tile in flight, with the destination not yet revealed.
+- `word-fill.jpg`: accepted tiles partly filled before rising.
+- `word-rising.jpg`: accepted row moving upward.
+- `shuffle-flip.jpg`: horizontal rack flip during a narrow-screen interaction.
+- `share-disabled.jpg`: completed game with an inactive Share control.
 
-1. Initial screenshot comparison identified the old gradient surface, small heavy lettering, solid empty slots, and inline score/header as the main mismatches. Reworked those surfaces and captured both themes again; final evidence is the retained comparison.
-2. At 320 pixels with 200% root text size and WCAG text-spacing overrides, the first implementation squeezed individual toolbar words and letter glyphs. Fluid gutters, bounded grid gaps, wrapping toolbar, and responsive letter sizes corrected this. Recheck: document scroll width equaled client width (305 pixels); letter buttons were approximately 52 × 72 pixels with no internal text overflow.
-3. Enlarged results exposed overly narrow title space and a wrapped three-digit score. Bounded dialog gutters, a fixed close-button allowance, adaptive statistic columns, and a smaller minimum score size corrected these. Recheck: score 120 stayed on one line; dialog client and scroll widths both measured 264 pixels; End scrolled the results from top to bottom (2110.5 pixels).
-4. The Hint-focused completion regression initially returned focus to BODY. Investigation confirmed that the browser can hide Hint before the dialog records focus, and that the first Reset in DOM order is a hidden navigation control. The final implementation rejects unusable return targets and selects a visible Reset fallback. Recheck: Escape focused `#resetBtn`, removed all inert backgrounds, and hid the dialog. Completion with game-region focus restored focus to that region.
+Checks: JavaScript syntax passed; Prettier 3.6.2 passed; HTML validation found 59 unique IDs with valid ARIA targets/assets, one external Reset button and a natively disabled Share button; `git diff --check` passed. Main browser error log was empty. No configured lint/typecheck/build commands exist. A result-dialog wait reached its default tooling deadline at the end of the longer completion animation; the immediately following state confirmed the open dialog, score 100, and disabled Share. It was not an application failure.
 
-**Commands and interaction checks**
+Remaining limits: physical iPhone/iPad, Safari/Firefox, OS audio output and reduced-motion switching, and deployed-site parity remain unverified. Native-palette contrast limits from the original review still apply; high-contrast mode remains available. No further guidance conflicts, commits, pushes, native source changes, or deployment.
 
-- `python3 -m http.server 4173`: served the unmodified application files. Real-page smoke test passed: keyboard STARE/TEARS followed by T produced 2 / 5 and score 40; desktop game client/scroll heights both measured 777 pixels, with no document overflow.
-- `node --check assets/js/demo.js`: passed.
-- Python HTMLParser check of `demo.html`: unique IDs, valid ARIA references, and existing local file references passed.
-- tinycss2 1.5.1 parse of `assets/css/demo.css`, including nested rules and declarations: passed.
+
+## Original build review
+
+
+Reviewed November 2, 2026. Scope: `demo.html`, one browser practice puzzle, and preservation of older browser saves. The iOS project was read-only. This supersedes the October 16 demo review; it is not a WCAG conformance certification.
+
+**Findings and accepted differences**
+
+No actionable P0/P1/P2 visual differences remain in the compared gameplay, definition, and result states within this scope.
+
+- Fonts/typography: Nunito is the native `AppFont` family. Accepted letters use a lighter weight and larger glyphs than the first implementation; entry letters are semibold. Definition text now follows the source's line breaks. Browser rasterization and the score's gold treatment remain slightly different from SwiftUI.
+- Spacing/layout: the fixed entry row, compact accepted-word stack, reserved score slot, cat, rack, and action row follow the reference composition. The definition panel and result hierarchy were revised after comparison. Desktop retains the site's actual iPhone frame; mobile shows app content without an invented OS status bar. Result dialogs scroll vertically; narrow definition panels scroll when required.
+- Colors/tokens: uses the source's navy, ruby, mint, and gold. Light decoration and result rays were exported from native SwiftUI drawing code. Default white letters on mint intentionally follow the supplied visual target, which conflicts with the older web demo's dark-letter contrast treatment. A working High-contrast letters setting and `prefers-contrast: more` adaptation retain the accessible dark-letter alternative. The default native palette is **not** claimed to meet WCAG AA for every foreground/background pair.
+- Assets/image quality: original sitting/lying cats, bulb, sound effects, and native-rendered crown/backgrounds are used. The winning cat uses the original eye masks, pupils, crown, and native gaze geometry. It is interactive gameplay, not a screenshot or video substitute. Phosphor MIT icons provide web equivalents for Apple's navigation symbols; their silhouettes are an accepted P3 difference. Native idle expression sequences and the complete crown-drop choreography are not reproduced.
+- Copy/content: the screenshot's October 24 practice puzzle has seven valid words and Special Word SELAH. The date is fixed and does not imply today's live puzzle. Results say Browser Demo and only say Replay for an actual replay. Solve times reflect the browser run; older saves with no recorded timer explicitly report time unavailable. Game Center/iCloud/daily account services are outside this demo. The extra View results control supports reopening the browser dialog.
+
+**Source and browser evidence**
+
+Source visual truth supplied by the user:
+
+- `/Users/ww1999/Downloads/IMG_8857.jpg`: empty Expert board, 1170 × 2404 pixels.
+- `IMG_8859.jpg` and `IMG_8860.jpg`: first word and partial entry.
+- `IMG_8861.jpg` and `IMG_8862.jpg`: four accepted words and HA entry, light/dark.
+- `IMG_8863.jpg`: 110-point results.
+- `IMG_8864.jpg` and `IMG_8865.jpg`: 110-point win and selected LEASH definition, light/dark.
+- The two supplied November 2 screen recordings were sampled into frame sheets to inspect entry, word acceptance, hints, completion, and layout transitions.
+
+The final four-word, win, and results reference images are 1170 × 2391 pixels, normalized proportionally to **390 × 797** pixels. Browser mobile captures use **390 × 797 CSS pixels**, exported at 390 × 797 pixels (1× output density), without website chrome or device bezel. No vertical stretching was used. Additional checks: 390 × 844, 320 × 800, and desktop 1200 × 1200.
+
+Browser-rendered implementation: [local demo](http://127.0.0.1:4175/demo.html). Evidence is in [docs/demo-2026-11-02](docs/demo-2026-11-02/).
+
+Full-view comparisons, with source on the left and implementation on the right, were composed and opened together:
+
+- [Dark hint comparison](docs/demo-2026-11-02/dark-comparison.jpg): HEALS, HALES, SHALE, LEASH, HA hint entry; score 70.
+- [Light hint comparison](docs/demo-2026-11-02/light-comparison.jpg): same geometry and words. The source shows score 80 with a transient −10 animation; implementation is the settled, already-deducted score 70. This state difference is recorded rather than treated as a scoring discrepancy.
+- [Light definition comparison](docs/demo-2026-11-02/light-definition-comparison.jpg): five words, 110 points, selected LEASH, same definition.
+- [Dark definition comparison](docs/demo-2026-11-02/definition-comparison.jpg): same content and selected word.
+- [Results comparison](docs/demo-2026-11-02/results-comparison.jpg): 110 points, +100 words, +20 completion, −10 hint. Source is a native replay solved in 0:28; implementation is the first browser result solved in 2:14. Run labels and elapsed times intentionally reflect the actual run.
+
+Focused comparisons were also composed and opened together: [accepted tiles and hinted letters](docs/demo-2026-11-02/tiles-comparison.jpg), [definition typography and line breaks](docs/demo-2026-11-02/definition-detail.jpg). These confirm details that are small in the full-view captures.
+
+**Comparison history**
+
+1. The initial browser render exposed inherited website phone padding/shadow and an invalid date for legacy saves. Removed those inherited frame properties on this page and used Practice Puzzle for undated legacy data. The corrected captures show a full-width mobile surface; legacy progress remains intact.
+2. [First hint comparison](docs/demo-2026-11-02/dark-comparison-first-pass.jpg) identified P2 differences in accepted-letter weight, tile spacing, toolbar size, and hint placement. Revised the font weight/size, row gaps, native toolbar colors, hint alignment, and vertical rack/control positions. Re-captured [dark hint](docs/demo-2026-11-02/dark-hint.jpg), compared at equal density in `dark-comparison.jpg`.
+3. Results initially had an oversized 3D crown, large outcome title, crowded score hierarchy, and rays centered too high. Replaced the result crown with a real flat library icon, followed the native 18-point title/124-point score hierarchy, revised spacing/breakdown/share treatment, and used native-colored rays with local scrolling. Final evidence: `results.jpg` / `results-comparison.jpg`.
+4. Definitions initially used too-large body text and a larger heading, changing source line breaks. Restored 15px body text, smaller heading, matching padding, native Definition/Also labels, and the native crown-directed gaze. Final evidence: light/dark definition comparisons and `definition-detail.jpg`.
+5. Narrow-screen screenshot immediately after resizing showed an old-width compositor frame. Settled DOM measurements and a fresh capture confirmed the 320px layout fits; no artificial clipping fix was added. [Narrow capture](docs/demo-2026-11-02/narrow-definition.jpg) records that check with high-contrast letters enabled.
+
+**Behavior and verification**
+
+- `node --test tests/*.test.js`: **60 passed, zero failed/skipped**. Includes 19 new domain tests for scoring, Special Words, Classic/Expert behavior, hint timing/provenance, repeat invalids, duplicates, reveal, replay immutability, repeated letters, migration, and invalid-save rejection. The focused domain suite was rerun after the legacy-time correction and passed.
+- `node --check assets/js/demo.js` and `node --check assets/js/demo-game.js`: passed.
+- Prettier 3.6.2 on changed HTML/CSS/JS/new test files: passed. This was a temporary formatting tool; no dependency or build system was added.
+- HTMLParser validation: unique IDs, existing ARIA targets, and local HTML asset references passed. Prettier parsed the CSS successfully.
 - `git diff --check`: passed.
-- Chrome UI tests: invalid EASTR rejected without points; duplicate STARE rejected without points; pointer letter entry; Backspace; shuffle preserving an entered S and its used-rack state; reset; reload persistence; Hint unlocked after three words; one hint deducted 10 points; hint-assisted completion scored 110; unassisted completion scored 120. Passed.
-- Keyboard scope regression: S while `#main-content` had focus left the board empty; focusing the named game region enabled letter shortcuts. Native Space still activated Hint. Passed.
-- Results accessibility: named dialog, Close receives focus, Tab/Shift+Tab containment, Escape dismissal, background inertness, visible focus restoration, keyboard scrolling of enlarged results. Passed.
-- Viewports: desktop 1200 × 1200 and normal desktop browser size; mobile 390 × 844; narrow 320 × 800 with 200% root font size plus line-height 1.5, letter-spacing .12em, word-spacing .16em, and paragraph spacing 2em. No horizontal document overflow in the checked states. At normal 390-pixel viewport, letter targets measured approximately 64 × 64 pixels; shuffle/delete are 50 × 50 and Reset/Hint/Close have at least 44-pixel heights.
-- axe-core 4.11.0, tags `wcag2a`, `wcag2aa`, `wcag21aa`, `wcag22aa`: zero violations in checked light/dark gameplay and results states; 24 passing rule groups for gameplay, 22 for results. `color-contrast` also reported incomplete nodes, so automated output alone does not establish full contrast coverage.
-- Manual WCAG luminance spot calculations: coral letters 4.66:1, mint letters 7.47:1, light normal text 9.72:1, light secondary text 5.90:1, light score 5.69:1, light empty-slot boundary 3.23:1, dark normal text 13.42:1, dark secondary text 8.79:1, dark empty-slot boundary 4.16:1.
-- Reduced-motion fixture: no flying tiles or confetti; results transition duration 0s and score immediately 120. Passed. This uses a temporary local fixture forcing the media-query result and matching CSS, rather than changing operating-system settings.
-- Browser error logs: no errors in the checked session.
-- No configured formatter, linter, typechecker, package manifest, or test runner exists in this static repository. `tmp-demo.spec.js` is an older animation script, not a test suite. These configured checks were skipped; no infrastructure was added.
-- Tooling interruptions: the first image composition command failed with `ModuleNotFoundError: No module named 'PIL'`; an isolated temporary environment resolved it. A Playwright locator press on the aria-disabled Hint timed out (`Playwright selector deadline exceeded`); native key presses completed the intended regression scenario. These were tooling failures, not unresolved application test failures.
+- No configured formatter/linter/typechecker/build manifest exists in this static repository. Configured lint/typecheck/build commands were therefore not available; no substitute infrastructure was added.
+- Chrome UI: five-letter auto-submit; 110-point hint-assisted win; correct accepted words and hinted-letter coloring; hint penalty; pointer/keyboard deletion; 1.15-second hold-to-delete; shuffle preserving HEA and used-key mapping; mode lock; Expert repeat-invalid deduplication and three distinct invalids ending the run; reveal confirmation; reset cancellation and confirmation; frozen original 110-point Classic result restored after an Expert replay/reveal; light/dark/high-contrast settings; results reopening; LEASH definitions. Passed.
+- Dialog keyboard checks: initial Close focus, Tab to the next result control, Escape dismissal, native modal background exclusion, and usable focus restoration. Passed in the checked flows; not a full assistive-technology audit.
+- Sharing: the browser rejected the automated share/clipboard request. The working fallback displayed selectable result text and the practice URL. No message was sent and no permission prompt was bypassed.
+- Layout: document client/scroll widths matched at 390 and 320px. Narrow result dialog client/scroll widths both measured 265px. At desktop, document client/scroll widths both measured 1185px; game client/scroll heights both measured 816px. No persistent controls were hidden by horizontal overflow.
+- Browser error log: **zero errors** in the main verification tab.
+- Tooling interruptions: `pressSequentially` did not support the non-editable game region; individual documented key presses completed the test. An ambiguous Reset locator was corrected by scoping to the confirmation dialog. A separate reload-during-submit browser attempt encountered an existing legacy puzzle at the test origin, so its expected HEALS locator timed out; that attempt is **not** counted as a passed timing regression. Production code resumes a saved five-letter entry on load, but that exact timing window still needs an isolated browser check. Early Swift export actor isolation and shell URL quoting issues were corrected; exports completed.
 
-Theme and accessibility fixtures were served separately on port 4174, with temporary dependencies under `/tmp/viisi-demo-checks`. They force the selected theme, inject axe, and optionally apply enlarged text/spacing/reduced motion. The project dependency structure and application assets were not changed for testing.
+**Not verified and follow-ups**
 
-**Not verified / follow-ups**
-
-- VoiceOver/NVDA speech, physical touch devices, Safari/Firefox, real operating-system reduced-motion switching, native forced-colors rendering, actual browser zoom at 400%, and deployed-site parity need manual validation.
-- The contrast calculations cover the changed primary game palette, not every composited pixel or every unchanged website element. Complete an assistive-technology and cross-browser audit before claiming full WCAG conformance.
-- P3: native crown rendering and platform-specific typography remain approximate. Home and Reset deliberately use labeled web controls.
-- Guidance conflicts: none. The existing static project was preserved instead of initializing a prototype starter, consistent with the user's scope and repository guidance. No commit, push, or deployment performed.
+- Physical iPhone/iPad touch, Safari/Firefox, VoiceOver/NVDA speech, real OS reduced-motion/forced-colors switching, actual 200%/400% browser zoom, successful OS share sheet/clipboard delivery, and deployed Cloudflare parity need real-world validation.
+- Reduced-motion branches are implemented in CSS and JavaScript; this run did not change the user's OS setting to validate them.
+- P3 fidelity: web icon silhouettes, SwiftUI's extruded gold-score rendering, decoration letters/seed, some cat idle/choreography details, and browser font rasterization differ slightly. Browser result gutters and explicit reopening control are intentional.
+- Guidance resolution: the user's native-fidelity request controls the palette; the earlier dark-letter treatment remains available through high-contrast mode. Existing static-site structure was preserved instead of creating a new prototype project. No other guidance conflicts were found.
+- No commit, push, deployment, or native source edits were performed. The local server and deliverable preview remain open.
 
 **Implementation checklist**
 
-- [x] Compare against real screenshots in both themes.
-- [x] Reuse existing assets and gameplay state.
-- [x] Check narrow reflow, enlarged text, status feedback, keyboard scope, results focus, and motion preference behavior.
-- [x] Save browser-rendered evidence and report verification limits.
-
-Reference: [W3C WCAG 2 quick reference](https://www.w3.org/WAI/WCAG22/quickref/).
+- [x] Inspect supplied screenshots, both videos, and native code.
+- [x] Use original native assets and one authoritative game state/score model.
+- [x] Preserve old saves and the first terminal result.
+- [x] Compare actual browser captures with the source at equal density, including focused details.
+- [x] Verify key interactions, responsive layouts, and repository tests.
+- [x] Record platform/contrast/timing limits without claiming untested native parity.
 
 final result: passed
