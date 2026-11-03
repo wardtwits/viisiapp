@@ -1,5 +1,8 @@
 # Viisi native-style browser demo verification
 
+Latest follow-up: removed the per-key flying red tiles and their destination-hiding/flight bookkeeping. Letters now appear directly in the entry boxes. Browser checks confirmed visible immediate entry with zero floating tiles, intermediate valid-word color fill, accepted-word placement, and active horizontal shuffle rotation. All 63 tests, JavaScript syntax, formatting, and `git diff --check` passed; browser error log was empty. [Direct-entry evidence](docs/demo-2026-11-02/refinements/direct-entry.jpg). Physical-device/deployed parity remains unverified; no new risks or guidance conflicts. Earlier flight descriptions below are historical.
+
+
 Latest follow-up: removed Game options, its dialog, associated handlers, and unused styles. Reset and the sound toggle passed browser smoke checks; no browser errors. All 63 repository tests, JavaScript syntax, formatting, HTML IDs/ARIA references, and `git diff --check` passed. Evidence: [Reset only](docs/demo-2026-11-02/refinements/reset-only.jpg). Physical-device/deployed parity remains unverified; no new risks or guidance conflicts. Earlier descriptions of Game options below are historical.
 
 

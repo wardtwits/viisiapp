@@ -23,7 +23,6 @@
     deleteDelay,
     deleteRepeat;
   const sounds = new Map();
-  const letterFlights = new Map();
   const activeAnimations = new Set();
   const keyButtons = [];
   const entryTiles = [];
@@ -138,7 +137,7 @@
   function renderEntry(word = game.state.entry, hints = game.state.entryHints) {
     entryTiles.forEach((tile, column) => {
       tile.textContent = word[column] || "";
-      tile.className = `entry-tile${word[column] ? " filled" : ""}${hints.includes(column) ? " hint-supplied" : ""}${letterFlights.has(column) ? " arriving" : ""}`;
+      tile.className = `entry-tile${word[column] ? " filled" : ""}${hints.includes(column) ? " hint-supplied" : ""}`;
     });
     $("entryRow").setAttribute(
       "aria-label",
@@ -258,16 +257,7 @@
       });
     return { animation, done };
   }
-  function cancelLetterFlights(column) {
-    for (const [index, flight] of letterFlights) {
-      if (column !== undefined && index !== column) continue;
-      flight.animation.cancel();
-      flight.element.remove();
-      letterFlights.delete(index);
-    }
-  }
   function cancelVisuals() {
-    cancelLetterFlights();
     activeAnimations.forEach((animation) => animation.cancel());
     $("entryRow").classList.remove("accepted", "invalid", "special");
   }
@@ -279,8 +269,6 @@
     const word = game.state.entry;
     const hints = [...game.state.entryHints];
     renderEntry();
-    // The final keyboard letter must land before validation and liquid fill.
-    await Promise.all([...letterFlights.values()].map((flight) => flight.done));
     await pause(80);
     if (token !== generation) return;
     const result = game.submit();
@@ -363,47 +351,9 @@
       if (game.state.status === "failed") normalMessage();
     }
   }
-  function flyLetter(index, column) {
-    if (reducedMotion()) return;
-    const from = keyButtons[index].getBoundingClientRect();
-    const to = entryTiles[column].getBoundingClientRect();
-    const letter = document.createElement("span");
-    letter.className = "flight-letter";
-    letter.setAttribute("aria-hidden", "true");
-    letter.textContent = game.state.letters[index];
-    Object.assign(letter.style, {
-      left: `${from.left}px`,
-      top: `${from.top}px`,
-      width: `${from.width}px`,
-      height: `${from.height}px`,
-      color: getComputedStyle(board).getPropertyValue("--game-letter"),
-    });
-    document.body.append(letter);
-    const flight = animate(
-      letter,
-      [
-        { transform: "translate(0, 0) scale(1)", opacity: 1 },
-        {
-          transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${to.width / from.width}, ${to.height / from.height})`,
-          opacity: 1,
-        },
-      ],
-      { duration: 360, easing: "cubic-bezier(.2,.75,.3,1)" },
-    );
-    const record = { ...flight, element: letter };
-    letterFlights.set(column, record);
-    record.done = flight.done.then(() => {
-      letter.remove();
-      if (letterFlights.get(column) === record) {
-        letterFlights.delete(column);
-        renderEntry();
-      }
-    });
-  }
   async function shuffle() {
     if (!game || busy || game.state.status !== "playing") return;
     const token = generation;
-    cancelLetterFlights();
     busy = true;
     render();
     playSound("shuffle");
@@ -454,7 +404,6 @@
     )
       return;
     playSound("pop");
-    flyLetter(index, game.state.entry.length - 1);
     renderEntry();
     $("deleteBtn").disabled = false;
     save();
@@ -462,7 +411,6 @@
   }
   function deleteLetter() {
     if (!game || busy || !game.deleteLetter()) return;
-    cancelLetterFlights(game.state.entry.length);
     renderEntry();
     $("deleteBtn").disabled = !game.state.entry;
     save();
@@ -618,7 +566,6 @@
     if (busy) return;
     const previousUses = game.state.hintUses;
     if (!game.hint()) return;
-    cancelLetterFlights();
     render();
     message(
       game.state.hintUses === previousUses

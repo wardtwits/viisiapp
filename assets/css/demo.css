@@ -931,20 +931,6 @@
   }
 }
 
-.flight-letter {
-  position: fixed;
-  display: grid;
-  place-items: center;
-  z-index: 6;
-  pointer-events: none;
-  background: #ff4056;
-  color: white;
-  font:
-    700 30px Nunito,
-    sans-serif;
-  border-radius: 12px;
-}
-
 /* Reserve room below the real device frame's Dynamic Island. */
 .game-mode[data-practice="true"] {
   font-size: 13px;
@@ -978,9 +964,6 @@
 .phone-toolbar .sound-toggle .app-icon {
   width: 28px;
   height: 28px;
-}
-.entry-tile.arriving {
-  color: transparent !important;
 }
 .entry-tile::before {
   content: "";
