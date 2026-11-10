@@ -244,7 +244,6 @@ main {
 .btn-primary {
   background: var(--viisi-red-dark);
   color: white;
-  box-shadow: 0 10px 30px rgba(251, 70, 85, 0.35);
 }
 
 .btn-primary:hover {
@@ -1087,6 +1086,117 @@ a.appleDownload {
   text-decoration: underline;
   text-decoration-color: rgba(114, 49, 75, 0.25);
   text-underline-offset: 4px;
+}
+
+/* Public beta (TestFlight) invite. Defaults suit the dark site chrome (demo
+   page); the cream home section overrides the tokens below. */
+.beta-panel {
+  --beta-surface: rgba(255, 255, 255, 0.04);
+  --beta-card: rgba(255, 255, 255, 0.06);
+  --beta-line: var(--site-line);
+  --beta-ink: var(--site-text);
+  --beta-muted: var(--site-muted);
+  --beta-eyebrow: var(--neon-teal);
+  --beta-btn-hover-bg: #ffffff;
+  --beta-btn-hover-ink: #000000;
+  margin-top: clamp(3rem, 8vw, 6rem);
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+  border-block: 1px solid var(--beta-line);
+  background: var(--beta-surface);
+  color: var(--beta-ink);
+}
+
+/* The band runs edge to edge; its content keeps the page's container width. */
+.beta-panel-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.home-refresh .beta-panel {
+  --beta-surface: #f6ecdd;
+  --beta-card: var(--home-paper);
+  --beta-line: var(--home-line);
+  --beta-ink: var(--home-ink);
+  --beta-muted: var(--home-muted);
+  --beta-eyebrow: #a31638;
+  --beta-btn-hover-bg: #000000;
+  --beta-btn-hover-ink: #ffffff;
+}
+
+/* Hover swaps colors instead of lifting: black on the light (cream) panel,
+   white on the dark panel. */
+.beta-panel .btn-primary {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.beta-panel .btn-primary:hover {
+  background: var(--beta-btn-hover-bg);
+  color: var(--beta-btn-hover-ink);
+  transform: none;
+}
+
+.beta-panel .eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--beta-eyebrow);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.beta-panel h2 {
+  margin: 0;
+  color: var(--beta-ink);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  overflow-wrap: normal;
+}
+
+.beta-panel-copy > p:not(.eyebrow) {
+  margin: 1rem 0 1.5rem;
+  color: var(--beta-muted);
+  font-size: 1.08rem;
+}
+
+.beta-panel-copy > p.beta-panel-fineprint {
+  max-width: 52ch;
+  margin: 1.25rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.beta-panel-note {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--beta-line);
+  border-radius: 1.5rem;
+  background: var(--beta-card);
+}
+
+.beta-panel-note p {
+  margin: 0;
+  color: var(--beta-muted);
+  line-height: 1.65;
+}
+
+.beta-panel-note strong {
+  color: var(--beta-ink);
+}
+
+@media (max-width: 900px) {
+  .beta-panel-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .beta-panel .btn {
+    width: 100%;
+    padding-inline: 1.25rem;
+    font-size: 1rem;
+  }
 }
 
 .home-footer-content {
@@ -2693,7 +2803,6 @@ a.appleDownload {
   background: var(--viisi-red-dark);
   color: white;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(251, 70, 85, 0.35);
 }
 
 .btn-youtube:hover {

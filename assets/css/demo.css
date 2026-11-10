@@ -754,7 +754,8 @@
   .demo-page > .header,
   .demo-page > header,
   .demo-page > .footer,
-  .demo-footnote {
+  .demo-footnote,
+  .demo-page > .beta-panel {
     display: none;
   }
   .demo-main.container {
