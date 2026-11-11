@@ -147,7 +147,7 @@
   color: white;
   font-size: 1.35rem;
   font-weight: 900;
-  box-shadow: 0 6px 22px rgba(255, 68, 112, 0.3);
+  box-shadow: none;
 }
 
 .v3-hero-art {
